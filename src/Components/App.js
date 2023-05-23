@@ -16,10 +16,17 @@ useEffect(() => {
 }, [])
 
 const spotifyLogin = () => {
+  const API_KEY = "90cf07e1add84bc8a5376ebbf4fa784c"
   const redirectUri = "http://localhost:3000"
   const scopes = ['playlist-modify-public'];
-  const url = `https://accounts.spotify.com/authorize?client_id=${process.env.API_KEY}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}`;
+  const url = `https://accounts.spotify.com/authorize?client_id=${API_KEY}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}`;
+  //const url = `https://accounts.spotify.com/authorize?client_id=${process.env.API_KEY}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}`;
   window.location = url;
+};
+
+const spotifyLogout = () => {
+  window.localStorage.removeItem("token")
+  window.location = "http://localhost:3000"
 };
 
   return (
@@ -27,7 +34,10 @@ const spotifyLogin = () => {
       <header className="App-header">
       <h1>Spotify AI <BsSpotify /></h1>
                 {token ? 
-                  <ChatGpt />
+                <div>
+                  <h1>Hey</h1>
+                  <button onClick={spotifyLogout}>Log Out</button>
+                </div>
                 : <button onClick={spotifyLogin}>Login To Start</button>  }
       </header>
     </div>
