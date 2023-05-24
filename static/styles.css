@@ -1,17 +1,150 @@
-body {
-  font-family: verdana;
+body{
+  margin: 0, 1.5rem, 0, 1.5rem;
+  background-color: black;
 }
 
-form {
+.App {
+  background-color: black;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
   flex-direction: column;
 }
 
-form > * {
-  margin: 1rem;
+.title {
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-nav {
-  display: flex;
-  justify-content: space-around;
+.title svg {
+  margin-left: 0.5rem;
 }
+
+.StyledLoginButton {
+  background-color: green;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.StyledLogoutButton {
+  background-color: green;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* on the sides and top
+
+body{
+  margin: 0, 1.5rem, 0, 1.5rem;
+  background-color: black;
+}
+
+.App {
+  background-color: black;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title svg {
+  margin-left: 0.5rem;
+}
+
+.StyledLoginButton {
+  background-color: green;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.StyledLogoutButton {
+  background-color: green;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+*/

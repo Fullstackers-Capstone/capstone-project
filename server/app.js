@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     res.render(
       path.join(__dirname, '../static/index.html'),
       { client_id : process.env.client_id });
-  }); 
+  });
 
 app.use('/api/auth', require('./api/auth'));
 
