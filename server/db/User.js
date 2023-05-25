@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { STRING, UUID, UUIDV4, TEXT, BOOLEAN } = conn.Sequelize;
+const { STRING, UUID, UUIDV4, TEXT, BOOLEAN, INTEGER } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const JWT = process.env.JWT;
@@ -11,25 +11,20 @@ const User = conn.define('user', {
     primaryKey: true,
     defaultValue: UUIDV4
   },
-  username: {
+  spotifyId: {
     type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    },
     unique: true
   },
-  password: {
+  email: {
     type: STRING,
-    allowNull: false,
     validate: {
-      notEmpty: true
+      isEmail: true
     }
   },
-  isAdmin: {
+  discoverPlaylists: {
     type: BOOLEAN,
     allowNull: false,
-    defaultValue: false
+    defaultValue: true
   },
   avatar: {
     type: TEXT,
@@ -44,74 +39,15 @@ const User = conn.define('user', {
       }
       return `${prefix}${data}`;
     }
-  }
+  },
+  playlistCount: {
+    type: INTEGER
+  },
+  followerCount: {
+    type: INTEGER
+  },
 });
 
-User.prototype.createOrder = async function(){
-  const cart = await this.getCart();
-  cart.isCart = false;
-  await cart.save();
-  return cart;
-
-}
-
-User.prototype.getCart = async function(){
-  let cart = await conn.models.order.findOne({
-    where: {
-      userId: this.id,
-      isCart: true
-    }
-  });
-  if(!cart){
-    cart = await conn.models.order.create({
-      userId: this.id
-    });
-  }
-  cart = await conn.models.order.findByPk(
-    cart.id,
-    {
-      include: [
-        {
-          model: conn.models.lineItem,
-          include: [
-            conn.models.product
-          ]
-        }
-      ]
-    }
-  );
-  return cart;
-}
-
-User.prototype.addToCart = async function({ product, quantity}){
-  const cart = await this.getCart();
-  let lineItem = cart.lineItems.find( lineItem => {
-    return lineItem.productId === product.id; 
-  });
-  if(lineItem){
-    lineItem.quantity += quantity;
-    await lineItem.save();
-  }
-  else {
-    await conn.models.lineItem.create({ orderId: cart.id, productId: product.id, quantity });
-  }
-  return this.getCart();
-};
-
-User.prototype.removeFromCart = async function({ product, quantityToRemove}){
-  const cart = await this.getCart();
-  const lineItem = cart.lineItems.find( lineItem => {
-    return lineItem.productId === product.id; 
-  });
-  lineItem.quantity = lineItem.quantity - quantityToRemove;
-  if(lineItem.quantity > 0){
-    await lineItem.save();
-  }
-  else {
-    await lineItem.destroy();
-  }
-  return this.getCart();
-};
 
 
 User.addHook('beforeSave', async(user)=> {
