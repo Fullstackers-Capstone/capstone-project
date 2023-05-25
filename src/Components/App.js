@@ -1,8 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { BsSpotify } from 'react-icons/bs';
 import Home from './Home';
-import { Routes, Route } from 'react-router-dom';
+import Login from './Login';
+import { BsSpotify } from 'react-icons/bs';
+import { Routes, Route, Link } from 'react-router-dom';
+import { accessToken } from '/server/api/spotify.js';
 
+const App = () => {
+  //set a token and set token from our state
+  const [token, setToken] = useState(null);
+  
+  useEffect(() => {
+    //set the token once we receive an access token
+    setToken(accessToken);    
+  }, []);
+
+  return (
+    <div className="App">
+      <header className="App-header">
+      <h1 className="title">Serenade<BsSpotify/></h1>
+      <div className="header-content">
+      {!token ? 
+      <Login/>
+        :
+      <Home/>
+      }
+      </div>
+      </header>
+    </div>
+  );
+}
+export default App;
+
+/*
 const App = ()=> {
   const [token, setToken] = useState("");
   const redirectUri = "http://localhost:3000";
@@ -51,6 +80,7 @@ const spotifyLogout = () => {
 };
 
 export default App;
+*/
 
 /* Routes
   <Routes>

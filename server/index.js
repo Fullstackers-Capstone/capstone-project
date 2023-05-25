@@ -7,7 +7,6 @@ catch(ex){
   console.log(ex);
 }
 const app = require('./app');
-app.engine('html', require('ejs').renderFile);
 const { syncAndSeed } = require('./db');
 
 const init = async()=> {

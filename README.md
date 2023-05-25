@@ -1,5 +1,5 @@
 - npm i
 - npm run start:dev
 - npm i ejs
-- Create a env.js file at the root of your project and add your Spotify API Key and Secret as process.env.client_id = "your key" and process.env.client_secret = "you secret"
+- Create a env.js file at the root of your project and add your Spotify API Key and Secret as process.env.client_id = "your key" and process.env.client_secret = "you secret" and your redirect uri from the dev dashboard settings.
 - If you don't have a Spotify API Key nor a Secret please go to https://developer.spotify.com/ to create an account and an app where you'll be able to fetch your client key and client secret
