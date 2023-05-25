@@ -1,5 +1,9 @@
 const conn = require('./conn');
 const User = require('./User');
+const Playlist = require('./Playlist');
+
+Playlist.belongsTo(User); // sets up the foreign key for UserId
+User.hasMany(Playlist);
 
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
