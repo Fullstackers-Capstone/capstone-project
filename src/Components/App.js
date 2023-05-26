@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Home from './Home';
 import Login from './Login';
 import { BsSpotify } from 'react-icons/bs';
-import { Routes, Route, Link } from 'react-router-dom';
 import { accessToken } from '/server/api/spotify.js';
 
 const App = () => {

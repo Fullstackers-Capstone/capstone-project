@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
 import { getCurrentUserProfile } from '../../server/api/spotify';
+import TopArtists from './TopArtists';
 
 const Home = () => {
 
@@ -20,8 +21,11 @@ const Home = () => {
   console.log(window.localStorage);
 
   return(
+    <div>
+    <TopArtists/>
     <div className="logout-container">
       <button className="StyledLogoutButton" onClick={logout}>Log Out</button>
+    </div>
     </div>
   )
 };
