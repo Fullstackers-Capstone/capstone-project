@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Home from './Home';
 import Login from './Login';
 import { BsSpotify } from 'react-icons/bs';
-import { accessToken } from '/server/api/spotify.js';
+import { accessToken, logout } from '/server/api/spotify.js';
 
 const App = () => {
   //set a token and set token from our state
@@ -17,11 +17,11 @@ const App = () => {
     <div className="App">
       <header className="App-header">
       <h1 className="title">Serenade<BsSpotify/></h1>
-      <div className="header-content">
+      <div className="App">
       {!token ? 
       <Login/>
         :
-      <Home/>
+          <Home/>
       }
       </div>
       </header>

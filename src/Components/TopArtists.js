@@ -17,8 +17,14 @@ const TopArtists = () => {
     catchErrors(fetchData());
   }, []);
 
-  console.log(topArtists);
   return (
+    <div className='App'>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search..."
+        />
+      </div>
     <div className="top-artists">
       {topArtists ? (
         <ul className='grid-container'>
@@ -28,12 +34,13 @@ const TopArtists = () => {
                 <img src={item.images[0].url} alt={item.name} />
               </div>
             </li>
-       
           ))}
         </ul>
+
       ) : (
         <h1>no artists</h1>
       )}
+    </div>
     </div>
   );
 }
