@@ -1,10 +1,8 @@
 const conn = require('./conn');
 const User = require('./User');
 const Playlist = require('./Playlist');
-
 Playlist.belongsTo(User); // sets up the foreign key for UserId
 User.hasMany(Playlist);
-
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
   const [moe, lucy, larry, ethyl] = await Promise.all([
@@ -13,7 +11,6 @@ const syncAndSeed = async()=> {
     User.create({ username: 'larry', password: '123' }),
     User.create({ username: 'ethyl', password: '123' }),
   ]);
-
   return {
     users: {
       moe,
@@ -22,9 +19,8 @@ const syncAndSeed = async()=> {
     }
   };
 };
-
-
 module.exports = {
   syncAndSeed,
   User,
+  Playlist
 };
