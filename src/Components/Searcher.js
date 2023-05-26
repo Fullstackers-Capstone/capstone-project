@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { accessToken } from "../../server/api/spotify";
+import { catchErrors } from "../../server/api/utils";
 
 function Searcher() {
     const [searchKey, setSearchKey] = useState("")
@@ -8,34 +9,52 @@ function Searcher() {
     const [image, setImage] = useState([]);
         
     const searchArtist = async () => {
-        const { data } = await axios.get("https://api.spotify.com/v1/search", {
-          headers: {
-            'Content-Type': "application/json",
-            'Authorization': `Bearer ${accessToken}`
-          },
-          params: {
-            q: searchKey,
-            type: "artist"
-          }
-        });
+        if (!searchKey) {
+          // Empty search key, clear the results
+          setName([]);
+          setImage([]);
+          return;
+        }
       
-        const artists = data.artists.items.map(async (artist) => {
-          const artistID = artist.id;
-          const artistInfo = await axios.get(`https://api.spotify.com/v1/artists/${artistID}`, {
+        try {
+          const { data } = await axios.get("https://api.spotify.com/v1/search", {
             headers: {
-              Authorization: `Bearer ${accessToken}`
+              'Content-Type': "application/json",
+              'Authorization': `Bearer ${accessToken}`
+            },
+            params: {
+              q: searchKey,
+              type: "artist"
             }
           });
-          return {
-            name: artistInfo.data.name,
-            image: artistInfo.data.images[0].url
-          };
-        });
       
-        const artistData = await Promise.all(artists);
-        setName(artistData.map(artist => artist.name));
-        setImage(artistData.map(artist => artist.image));
+          const artists = data.artists.items.map(async (artist) => {
+            const artistID = artist.id;
+            const artistInfo = await axios.get(`https://api.spotify.com/v1/artists/${artistID}`, {
+              headers: {
+                Authorization: `Bearer ${accessToken}`
+              }
+            });
+            return {
+              name: artistInfo.data.name,
+              image: artistInfo.data.images.length ? artistInfo.data.images[0].url : null
+            };
+          });
+      
+          const artistData = await Promise.all(artists);
+          setName(artistData.map(artist => artist.name));
+          setImage(artistData.map(artist => artist.image));
+        } catch (error) {
+          console.error(error);
+        }
       }
+
+      useEffect(()=>{
+        const fetchData = async () => {
+        searchArtist();
+        }
+        catchErrors(fetchData());
+      },[searchKey])
 
     
       return (
