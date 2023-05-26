@@ -10,7 +10,6 @@ function Searcher() {
         
     const searchArtist = async () => {
         if (!searchKey) {
-          // Empty search key, clear the results
           setName([]);
           setImage([]);
           return;
@@ -23,7 +22,7 @@ function Searcher() {
               'Authorization': `Bearer ${accessToken}`
             },
             params: {
-              q: searchKey,
+              q: `artist:"${searchKey}"`,
               type: "artist"
             }
           });
@@ -44,6 +43,7 @@ function Searcher() {
           const artistData = await Promise.all(artists);
           setName(artistData.map(artist => artist.name));
           setImage(artistData.map(artist => artist.image));
+          console.log(name);
         } catch (error) {
           console.error(error);
         }
