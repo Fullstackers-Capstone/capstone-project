@@ -109,6 +109,7 @@ const spotifyAxios = axios.create({
   }
 });
 
+
 // axios.defaults.baseURL = 'https://api.spotify.com/v1';
 // //accesstoken in local storage
 // axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
@@ -136,6 +137,7 @@ export const getCurrentUserPlaylists = (limit = 20) => {
   export const getTopTracks = (time_range = 'short_term') => {
     return spotifyAxios.get(`/me/top/tracks?time_range=${time_range}`);
   };
+
 
 //get a Playlist
 //https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-playlist

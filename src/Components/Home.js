@@ -4,7 +4,8 @@ import { getCurrentUserPlaylists, logout } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
 import { getCurrentUserProfile } from '../../server/api/spotify';
 import { createUser } from '../store'
-import TopArtists from './TopArtists';
+import Artists from './Artists';
+import Searcher from './Searcher';
 
 const Home = () => {
 
@@ -43,8 +44,7 @@ const Home = () => {
     <div className="logout-container">
       <button className="StyledLogoutButton" onClick={logout}>Log Out</button>
     </div>
-      <TopArtists/>
-      
+    <Searcher/>
     </div>
   )
 };
