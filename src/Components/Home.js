@@ -21,7 +21,7 @@ const Home = () => {
   console.log(window.localStorage);
 
   return(
-    <div className='App'>
+    <div>
     <TopArtists/>
     <div className="logout-container">
       <button className="StyledLogoutButton" onClick={logout}>Log Out</button>

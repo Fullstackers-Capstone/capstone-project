@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { catchErrors } from '/server/api/utils.js';
 import { getTopArtists } from '/server/api/spotify.js';
-//import { SectionWrapper, ArtistsGrid, TimeRangeButtons, Loader } from '../Components';
 
 const TopArtists = () => {
 
@@ -20,7 +19,7 @@ const TopArtists = () => {
 
   console.log(topArtists);
   return (
-    <div className="test">
+    <div className="top-artists">
       {topArtists ? (
         <ul className='grid-container'>
           {topArtists.items.map((item, i) => (
@@ -29,6 +28,7 @@ const TopArtists = () => {
                 <img src={item.images[0].url} alt={item.name} />
               </div>
             </li>
+       
           ))}
         </ul>
       ) : (
