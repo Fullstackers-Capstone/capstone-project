@@ -123,32 +123,43 @@ const getAccessToken = () => {
 
 //spotify where we'll get all profile/user data from
 // https://developer.spotify.com/documentation/web-api/reference/get-current-users-profile
-axios.defaults.baseURL = 'https://api.spotify.com/v1';
-//accesstoken in local storage
-axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
-//spotity default
-axios.defaults.headers['Content-Type'] = 'application/json';
+
+const spotifyAxios = axios.create({
+  baseURL: 'https://api.spotify.com/v1',
+  timeout: 1000,
+  headers: {
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json'
+    //'Authorization': 'token <your-token-here> -- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token'
+  }
+});
+
+// axios.defaults.baseURL = 'https://api.spotify.com/v1';
+// //accesstoken in local storage
+// axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+// //spotity default
+// axios.defaults.headers['Content-Type'] = 'application/json';
 
 //since we set baseUrl globally, we dont need to spell out the link. we can export a function to grab the user profile 
 // now this goes to the App.js file
 
-export const getCurrentUserProfile = () =>  axios.get('/me');
+export const getCurrentUserProfile = () =>  spotifyAxios.get('/me');
 
 // we will add get current user playlist function that hits /me /playlsit spotify API endpoint
 //https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-list-of-current-users-playlists
 
 export const getCurrentUserPlaylists = (limit = 20) => {
-  return axios.get(`/me/playlists?limit=${limit}`);
+  return spotifyAxios.get(`/me/playlists?limit=${limit}`);
 };
 
 // we will add a get top artists function, pass in short term time range (4 weeks)
 //https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
   export const getTopArtists = (time_range = 'short_term') => {
-    return axios.get(`/me/top/artists?time_range=${time_range}`);
+    return spotifyAxios.get(`/me/top/artists?time_range=${time_range}`);
   };
 
   export const getTopTracks = (time_range = 'short_term') => {
-    return axios.get(`/me/top/tracks?time_range=${time_range}`);
+    return spotifyAxios.get(`/me/top/tracks?time_range=${time_range}`);
   };
 
 //get a Playlist
@@ -156,7 +167,7 @@ export const getCurrentUserPlaylists = (limit = 20) => {
 // playlist_id - The Spotify ID for the playlist.
 
 export const getPlaylistById = playlist_id => {
-  return axios.get(`/playlists/${playlist_id}`);
+  return spotifyAxios.get(`/playlists/${playlist_id}`);
 }
 
 //get audio features for tracks
@@ -164,5 +175,5 @@ export const getPlaylistById = playlist_id => {
 // {string} ids - A comma-separated list of the Spotify IDs for the tracks
 
 export const getAudioFeaturesForTracks = ids => {
-  return axios.get(`/audio-features?ids=${ids}`);
+  return spotifyAxios.get(`/audio-features?ids=${ids}`);
 };
