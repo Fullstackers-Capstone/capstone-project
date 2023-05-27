@@ -23,7 +23,6 @@ const User = conn.define('user', {
   },
   discoverPlaylists: {
     type: BOOLEAN,
-    allowNull: false,
     defaultValue: true
   }
 });
