@@ -1,19 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getCurrentUserPlaylists, logout } from '../../server/api/spotify';
-import { catchErrors } from '../../server/api/utils';
-import { getCurrentUserProfile } from '../../server/api/spotify';
+import { logout } from '../../server/api/spotify';
 import { createUser } from '../store'
-import Artists from './Artists';
 import Searcher from './Searcher';
 
 const Home = () => {
 
   const { users, auth } = useSelector(state => state);
-
-  const [profile, setProfile] = useState(null);
-  const [playlists, setPlaylists] = useState(null);
 
   const dispatch = useDispatch();
 
