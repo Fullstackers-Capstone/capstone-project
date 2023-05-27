@@ -11,6 +11,15 @@ app.get('/', async(req, res, next) => {
     }
 })
 
+app.get('/:id', async(req, res, next) => {
+  try{
+    res.send(await User.findByPk(req.params.id));
+  }
+  catch(err){
+    next(err);
+  }
+})
+
 app.post('/', async(req, res, next) => {
     try{
         console.log('hello');
