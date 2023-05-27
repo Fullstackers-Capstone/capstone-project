@@ -22,9 +22,7 @@ app.get('/:id', async(req, res, next) => {
 
 app.post('/', async(req, res, next) => {
     try{
-        console.log('hello');
-      const user = await User.create(req.body);
-      res.send(user);
+      res.send(await User.create(req.body));
     }
     catch(err) {
       next(err);
