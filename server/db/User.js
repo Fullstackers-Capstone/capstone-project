@@ -25,27 +25,7 @@ const User = conn.define('user', {
     type: BOOLEAN,
     allowNull: false,
     defaultValue: true
-  },
-  avatar: {
-    type: TEXT,
-    get: function(){
-      const prefix = 'data:image/png;base64,';
-      const data = this.getDataValue('avatar');
-      if(!data){
-        return data;
-      }
-      if(data.startsWith(prefix)){
-        return data;
-      }
-      return `${prefix}${data}`;
-    }
-  },
-  playlistCount: {
-    type: INTEGER
-  },
-  followerCount: {
-    type: INTEGER
-  },
+  }
 });
 
 
