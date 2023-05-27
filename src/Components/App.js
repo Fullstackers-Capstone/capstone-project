@@ -17,15 +17,21 @@ const App = () => {
   
   useEffect(() => {
     //set the token once we receive an access token
-    setToken(accessToken);    
-    dispatch(fetchUsers());
     dispatch(fetchSpotUser());
+    setTimeout(()=> {
+      setToken(accessToken);  
+    }, "100");  
+    setTimeout(()=> {
+      dispatch(fetchUsers());
+    }, "250");
+    // setToken(accessToken);
+    // dispatch(fetchUsers());
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-      <h1 className="title">Serenade<BsSpotify/></h1>
+      <h1 className="title"><Link to='/'>Serenade</Link><BsSpotify/></h1>
       <div className="App">
       {!token && (
         <Login/>

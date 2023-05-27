@@ -1,7 +1,25 @@
+:root{
+  --spotifyGreen: #1DB954;
+}
+
 body{
   margin: 0;
-  background-color: black;
+  background-color: #121212;
   color: white;
+  font-family: 'Montserrat';
+}
+
+a{
+  text-decoration: none;
+  color: var(--spotifyGreen);
+}
+
+a:hover{
+  color: white;
+}
+
+h1{
+  font-weight: 400;
 }
 
 .App {
@@ -40,7 +58,7 @@ body{
 }
 
 .StyledLoginButton {
-  background-color: green;
+  background-color: var(--spotifyGreen);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -57,11 +75,16 @@ body{
 }
 
 .StyledLogoutButton {
-  background-color: green;
+  background-color: var(--spotifyGreen);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   border: none;
+  cursor: pointer;
+}
+
+.StyledLogoutButton:hover{
+  background-color: #b3b3b3;
 }
 
 .login-container {
@@ -139,6 +162,12 @@ body{
   border: 5px solid green;
   box-sizing: border-box;
   pointer-events: none;
+}
+
+
+/* PROFILE COMPONENT */
+.prof-title{
+  color: var(--spotifyGreen);
 }
 
 
