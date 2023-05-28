@@ -16,7 +16,6 @@ const syncAndSeed = async()=> {
     User.create({ username: 'larry', password: '123' }),
     User.create({ username: 'ethyl', password: '123' }),
   ]);
-
   return {
     users: {
       moe,
@@ -25,8 +24,6 @@ const syncAndSeed = async()=> {
     }
   };
 };
-
-
 module.exports = {
   syncAndSeed,
   User,

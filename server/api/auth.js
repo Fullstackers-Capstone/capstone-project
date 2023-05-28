@@ -16,6 +16,7 @@ app.post('/', async(req, res, next)=> {
 
 app.post('/register', async(req, res, next)=> {
   try {
+    console.log(req.body);
     const user = await User.create(req.body);
     res.send(user.generateToken());
   }
@@ -23,6 +24,7 @@ app.post('/register', async(req, res, next)=> {
     next(ex);
   }
 });
+
 
 app.get('/', isLoggedIn, (req, res, next)=> {
   try {

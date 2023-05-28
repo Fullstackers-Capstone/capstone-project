@@ -1,6 +1,4 @@
-
 import axios from 'axios';
-
 // Map for localStorage keys. Helps us refer to keys for key/value pair of localstorage
 const LOCALSTORAGE_KEYS = {
     accessToken: 'spotify_access_token',
@@ -16,8 +14,6 @@ const LOCALSTORAGE_KEYS = {
     expireTime: window.localStorage.getItem(LOCALSTORAGE_KEYS.expireTime),
     timestamp: window.localStorage.getItem(LOCALSTORAGE_KEYS.timestamp),
   };
-
-
 // Clear out all localStorage items we've set and reload the page
 export const logout = () => {
     // Clear all localStorage items
@@ -27,10 +23,7 @@ export const logout = () => {
     // Navigate to login page
     window.location = window.location.origin;
   };
-
-
   // Use the refresh token in localStorage to hit the /refresh_token endpoint in our Node app, then update values in localStorage with data from response.
-
   const refreshToken = async () => {
     try {
       // Logout if there's no refresh token stored or we've managed to get into a reload infinite loop
@@ -56,27 +49,17 @@ export const logout = () => {
       console.error(e);
     }
   };
-
-
   // Checks if the amount of time that has elapsed between the timestamp in localStorage
-
-
   const hasTokenExpired = () => {
     const { accessToken, timestamp, expireTime } = LOCALSTORAGE_VALUES;
-
     if (!accessToken || !timestamp) {
       return false;
     }
     // and now is greater than the expiration time of 3600 seconds (1 hour).
-
     const millisecondsElapsed = Date.now() - Number(timestamp);
-
     // returns boolean Whether or not the access token in localStorage has expired
-
     return (millisecondsElapsed / 1000) > Number(expireTime);
   };
-
-
   //created the function below in order to grab the access token to use for our App.js file
 //update this to store tokens in local storage first time user logs in and opulls it next time theyre available
 const getAccessToken = () => {
@@ -114,49 +97,54 @@ const getAccessToken = () => {
     // we shouldnt get here really
     return false;
   };
-
   export const accessToken = getAccessToken();
 
+const spotifyAxios = axios.create({
+  baseURL: 'https://api.spotify.com/v1',
+  timeout: 1000,
+  headers: {
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json'
+    //'Authorization': 'token <your-token-here> -- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token'
+  }
+});
 
-//axios global req headers
-//https://github.com/axios/axios#global-axios-defaults
 
-//spotify where we'll get all profile/user data from
-// https://developer.spotify.com/documentation/web-api/reference/get-current-users-profile
-axios.defaults.baseURL = 'https://api.spotify.com/v1';
-//accesstoken in local storage
-axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
-//spotity default
-axios.defaults.headers['Content-Type'] = 'application/json';
+// axios.defaults.baseURL = 'https://api.spotify.com/v1';
+// //accesstoken in local storage
+// axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+// //spotity default
+// axios.defaults.headers['Content-Type'] = 'application/json';
 
 //since we set baseUrl globally, we dont need to spell out the link. we can export a function to grab the user profile 
 // now this goes to the App.js file
 
-export const getCurrentUserProfile = () =>  axios.get('/me');
+export const getCurrentUserProfile = () =>  spotifyAxios.get('/me');
 
 // we will add get current user playlist function that hits /me /playlsit spotify API endpoint
 //https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-list-of-current-users-playlists
 
 export const getCurrentUserPlaylists = (limit = 20) => {
-  return axios.get(`/me/playlists?limit=${limit}`);
+  return spotifyAxios.get(`/me/playlists?limit=${limit}`);
 };
 
 // we will add a get top artists function, pass in short term time range (4 weeks)
 //https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
   export const getTopArtists = (time_range = 'short_term') => {
-    return axios.get(`/me/top/artists?time_range=${time_range}`);
+    return spotifyAxios.get(`/me/top/artists?time_range=${time_range}`);
   };
 
   export const getTopTracks = (time_range = 'short_term') => {
-    return axios.get(`/me/top/tracks?time_range=${time_range}`);
+    return spotifyAxios.get(`/me/top/tracks?time_range=${time_range}`);
   };
+
 
 //get a Playlist
 //https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-playlist
 // playlist_id - The Spotify ID for the playlist.
 
 export const getPlaylistById = playlist_id => {
-  return axios.get(`/playlists/${playlist_id}`);
+  return spotifyAxios.get(`/playlists/${playlist_id}`);
 }
 
 //get audio features for tracks
@@ -164,5 +152,5 @@ export const getPlaylistById = playlist_id => {
 // {string} ids - A comma-separated list of the Spotify IDs for the tracks
 
 export const getAudioFeaturesForTracks = ids => {
-  return axios.get(`/audio-features?ids=${ids}`);
+  return spotifyAxios.get(`/audio-features?ids=${ids}`);
 };

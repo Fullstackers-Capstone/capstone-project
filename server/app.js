@@ -5,26 +5,23 @@ const path = require('path');
 const querystring = require('querystring');
 const axios = require('axios');
 const port = 8888;
-
 const client_id= process.env.client_id;
 const client_secret = process.env.client_secret;
 const redirect_uri = process.env.redirect_uri;
 const frontend_uri = process.env.frontend_uri;
-
 module.exports = app;
-
 app.use(express.json({limit: '50mb'}));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/static', express.static(path.join(__dirname, '../static')));
+app.use('/api/users', require('./api/users'));
+app.use('/api/prompt', require('./api/prompt'));
 
 app.get('/', (req, res) => {
     res.render(
       path.join(__dirname, '../static/index.html'),
       { client_id : process.env.client_id });
 });
-
 //app.use('/api/auth', require('./api/auth'));
-
 const generateRandomString = length => {
     let text = '';
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -57,8 +54,6 @@ const generateRandomString = length => {
   
     res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
   });
-
-
   app.get('/callback', (req, res) => {
     const code = req.query.code || null;
   
@@ -84,10 +79,8 @@ const generateRandomString = length => {
             refresh_token,
             expires_in
           });
-
           //redirect to react app
           res.redirect(`${frontend_uri}/?${queryParams}`);
-
         } else {
           //send an error, redirect to error query
           res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
@@ -97,8 +90,6 @@ const generateRandomString = length => {
         res.send(error);
       });
   });
-
-
   app.get('/refresh_token', (req, res) => {
     const { refresh_token } = req.query;
   
@@ -121,8 +112,6 @@ const generateRandomString = length => {
         res.send(error);
       });
   });
-
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
 })
-
