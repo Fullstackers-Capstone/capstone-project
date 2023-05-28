@@ -4,9 +4,6 @@ const users = (state = [], action) => {
     if(action.type === 'SET_USERS'){
         return action.users;
     }
-    if(action.type === 'CREATE_USER'){
-        return state = [...state, action.user];
-    }
     if(action.type === 'UPDATE_USER'){
         return state.map(user => {
             if(user.id === action.user.id) {
@@ -14,9 +11,11 @@ const users = (state = [], action) => {
             }
         })
     }
-
+    if(action.type === 'CREATE_USER'){
+        return state = [...state, action.user];
+    }
     return state;
-}
+};
 
 export const fetchUsers = () => {
     return async(dispatch) => {
