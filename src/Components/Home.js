@@ -13,14 +13,12 @@ const Home = () => {
   const user = users.find(user => user.spotifyId === auth.id);
 
   useEffect(() => {
-      if(!user){
+      if(!auth){
         const email = auth.email;
         const spotifyId = auth.id
         dispatch(createUser({ email, spotifyId }))   
-        }
+      }
   }, [auth])
-
-
 
   /* 5.28 Ryan's code
 
@@ -64,6 +62,7 @@ const Home = () => {
   if(!user){
       return null;
   }
+
 
   return(
     <div>

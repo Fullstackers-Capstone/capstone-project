@@ -59,7 +59,7 @@ const App = () => {
         </div>
       </header>
         <div>
-          {!token && <Login />}
+          {!token && <Login/>}
           {token && (
             <div>
               <Routes>

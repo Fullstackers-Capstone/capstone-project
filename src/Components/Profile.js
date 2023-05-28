@@ -6,7 +6,7 @@ import Switch from '@mui/material/Switch';
 
 const Profile = () => {
   const { auth, users, playlists } = useSelector((state) => state);
-  const [discover, setDiscover] = useState('');
+  const [discover, setDiscover] = useState("");
 
 /* 5.28 Ryan's code
   const [discover, setDiscover] = useState(null);
@@ -24,25 +24,6 @@ const Profile = () => {
     }
   }, [user]);
 
-/* 5.28 Ryan's code
-  useEffect(() => {
-    const user = users.find(user => user.spotifyId === auth.id);
-        setSelectedUser(user);
-        setDiscover(user.discoverPlaylists)
-    } 
-}, [users])
-
-    useEffect(() => {
-        if(selectedUser){
-        dispatch(updateUser({id: selectedUser.id, discoverPlaylists: discover}));   
-        }
-    }, [discover])
-
-      if (!selectedUser) {
-    return null;
-  }
-*/
-
   useEffect(() => {
     if (user && discover !== user.discoverPlaylists) {
       dispatch(updateUser({ id: user.id, discoverPlaylists: discover }));
@@ -56,6 +37,31 @@ const Profile = () => {
   if (!user) {
     return null;
   }
+
+  /* 5.28 Ryan's code
+useEffect(() => {
+        const user = users.find(user => user.spotifyId === auth.id);
+        if(user){
+            setSelectedUser(user);
+            setDiscover(user.discoverPlaylists)
+        } 
+    }, [users])
+
+    useEffect(() => {
+        if(selectedUser){
+        dispatch(updateUser({id: selectedUser.id, discoverPlaylists: discover}));   
+        }
+    }, [discover])
+
+    const discoverToggle = () => {
+        setDiscover((current) => !current);
+    }
+
+    if(!selectedUser){
+        return null;
+    }
+*/
+
 
   if (!playlists) {
     return null;
