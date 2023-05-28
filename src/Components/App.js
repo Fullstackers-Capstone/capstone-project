@@ -127,35 +127,3 @@ const spotifyLogout = () => {
 
 export default App;
 */
-
-/* Routes
-  <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/prompt" element={<Prompt />} />
-        <Route path="/create" element={<Create />} />
-        <Route path="/playlist:id" element={<Playlist />} />
-        <Route path="/singleartist" element={<SingleArtist />} />
-        <Route path="/multiartist" element={<MultiArtist />} />
-  </Routes>
-
-*/
-
-/* top set up
-
-<div className="App">
-  <header className="App-header">
-    <h1 className="title">Serenade<BsSpotify /></h1>
-      {token ? (
-        <div className="logout-container">
-          <button className="StyledLogoutButton" onClick={spotifyLogout}>Log Out</button>
-        </div>
-      ) : (
-        <div className="login-container">
-          <button className="StyledLoginButton" onClick={spotifyLogin}>Log In/Register</button>
-        </div>
-      )}
-  </header>
-</div>
-
-
-*/

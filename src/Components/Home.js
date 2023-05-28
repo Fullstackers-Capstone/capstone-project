@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../../server/api/spotify';
 import { createUser } from '../store'
 import Searcher from './Searcher';
 
@@ -9,10 +7,6 @@ const Home = () => {
 
   const { users, auth } = useSelector(state => state);
   const [selectedUser, setSelectedUser] = useState([]);
-
-  /* 5.28 Ryan's code
-  const [selectedUser, setSelectedUser] = useState([]);
-  */
 
   const dispatch = useDispatch();
 
@@ -26,6 +20,10 @@ const Home = () => {
         }
   }, [auth])
 
+
+
+  /* 5.28 Ryan's code
+
   // const user = users.find(user => user.spotifyId === auth.id);
 
   // useEffect(() => {
@@ -36,7 +34,6 @@ const Home = () => {
   //       }
   // }, [auth])
 
-  /* 5.28 Ryan's code
   useEffect(() => {
     const user = users.find(user => user.spotifyId === auth.id);
     if(user){
@@ -46,30 +43,11 @@ const Home = () => {
       const spotifyId = auth.id;
       dispatch(createUser({ email, spotifyId }));
     }},[users])
-  */
 
-  if(!user){
+     if(!selectedUser){
       return null;
-  }
 
-  /* 5.28 Ryan's code
-
-    if(!selectedUser){
-      return null;
-  }
-
-  */
-
-  return(
-    <div>
-    <Searcher/>
-    </div>
-  )
-
-
-  /* 5.28 Ryan's code
-  
-  return(
+        return(
     <div className='App'>
     <div className="logout-container">
       <Link to={`/users/${selectedUser.id}`}>Profile</Link>
@@ -80,7 +58,19 @@ const Home = () => {
     <Searcher/>
     </div>
   )
+  }
   */
+
+  if(!user){
+      return null;
+  }
+
+  return(
+    <div>
+    <Searcher/>
+    </div>
+  )
+
 
 };
 export default Home;

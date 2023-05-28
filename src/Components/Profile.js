@@ -31,6 +31,16 @@ const Profile = () => {
         setDiscover(user.discoverPlaylists)
     } 
 }, [users])
+
+    useEffect(() => {
+        if(selectedUser){
+        dispatch(updateUser({id: selectedUser.id, discoverPlaylists: discover}));   
+        }
+    }, [discover])
+
+      if (!selectedUser) {
+    return null;
+  }
 */
 
   useEffect(() => {
@@ -39,15 +49,6 @@ const Profile = () => {
     }
   }, [discover, dispatch, user]);
 
-/* 5.28 Ryan's code
-  useEffect(() => {
-    dispatch(updateUser({id, discoverPlaylists: discover}));   
-    if(selectedUser){
-    dispatch(updateUser({id: selectedUser.id, discoverPlaylists: discover}));   
-    }
-}, [discover])
-*/
-
   const discoverToggle = () => {
     setDiscover((current) => !current);
   };
@@ -55,12 +56,6 @@ const Profile = () => {
   if (!user) {
     return null;
   }
-
-/* 5.28 Ryan's code
-  if (!selectedUser) {
-    return null;
-  }
-*/
 
   if (!playlists) {
     return null;
