@@ -55,7 +55,6 @@ const Profile = () => {
             <h1><span className='prof-title'>Playlist Count</span>: { playlists.length }</h1>
             <h1><span className='prof-title'>Discover Playlists?</span> { user.discoverPlaylists.toString() } <button onClick={ () => discoverToggle() }>{(discover === true) ? 'Toggle off' : 'Toggle on'}</button></h1>
             <img src={ image }/>
-        
         </div>
     )
 }

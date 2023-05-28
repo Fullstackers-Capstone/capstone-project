@@ -139,6 +139,35 @@ export const getCurrentUserPlaylists = (limit = 20) => {
   };
 
 
+  //Search endpoint (diff than the one we're creating)
+  //https://developer.spotify.com/documentation/web-api/reference/search
+  export const searchArtists = async (searchKey) => {
+    try {
+      const response = await spotifyAxios.get('/search', {
+        params: {
+          q: `artist:"${searchKey}"`,
+          type: 'artist',
+        },
+      });
+  
+      return response.data.artists.items;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+  
+  //Artist information for search functionality matching
+  export const getArtistInfo = async (artistID) => {
+    try {
+      const response = await spotifyAxios.get(`/artists/${artistID}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
 //get a Playlist
 //https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-playlist
 // playlist_id - The Spotify ID for the playlist.
