@@ -118,18 +118,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { updateUser, fetchUsers, fetchSpotUser } from '../store';
 
+import Switch from '@mui/material/Switch';
+
 const Profile = () => {
 
     const { auth, users, playlists } = useSelector(state => state);
-    const { id } = useParams();
 
-    const [discover, setDiscover] = useState('');
+    const [discover, setDiscover] = useState(null);
+    const [selectedUser, setSelectedUser] = useState([]);
 
     const dispatch = useDispatch();
 
     const user = users.find(user => user.spotifyId === auth.id);
     
     useEffect(() => {
+        const user = users.find(user => user.spotifyId === auth.id);
         if(user){
             setDiscover(user.discoverPlaylists);
         }
@@ -148,12 +151,11 @@ const Profile = () => {
         }
       }, [discover, dispatch, user]);
 
-
     const discoverToggle = () => {
         setDiscover((current) => !current);
     }
 
-    if(!user){
+    if(!selectedUser){
         return null;
     }
 
@@ -176,7 +178,8 @@ const Profile = () => {
             <h1><span className='prof-title'>Email</span>: { spotEmail }</h1>
             <h1><span className='prof-title'>Follower Count</span>: { followerCount }</h1>
             <h1><span className='prof-title'>Playlist Count</span>: { playlists.length }</h1>
-            <h1><span className='prof-title'>Discover Playlists?</span> { user.discoverPlaylists.toString() } <button onClick={ () => discoverToggle() }>{(discover === true) ? 'Toggle off' : 'Toggle on'}</button></h1>
+            <h1><span className='prof-title'>Discover Playlists?</span> 
+            <Switch checked={discover} onClick={() => discoverToggle()}/></h1>
             <img src={ image }/>
         </div>
     )

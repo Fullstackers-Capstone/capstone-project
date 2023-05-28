@@ -24,8 +24,11 @@ const users = (state = [], action) => {
     if(action.type === 'CREATE_USER'){
         return state = [...state, action.user];
     }
+    if(action.type === 'CREATE_USER'){
+        return state = [...state, action.user];
+    }
     return state;
-}
+};
 
 export const fetchUsers = () => {
     return async(dispatch) => {
