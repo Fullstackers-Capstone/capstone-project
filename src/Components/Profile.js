@@ -13,7 +13,7 @@ const Profile = () => {
 
     const dispatch = useDispatch();
 
-    const user = users.find(user => user.spotifyId === auth.id);
+    const user = users.find(user => user.id === id);
 
     useEffect(() => {
         if(user){
