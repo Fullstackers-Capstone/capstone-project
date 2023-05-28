@@ -3,57 +3,81 @@ import Home from './Home';
 import Login from './Login';
 import { BsSpotify } from 'react-icons/bs';
 import { accessToken, logout } from '/server/api/spotify.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Routes, Route } from 'react-router-dom';
 import { fetchUsers, fetchSpotUser } from '../store';
 import Profile from './Profile';
+import Contact from './Contact';
 
 
 const App = () => {
 
-  //set a token and set token from our state
   const [token, setToken] = useState(null);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   
   useEffect(() => {
-    //set the token once we receive an access token
     dispatch(fetchSpotUser());
-    setTimeout(()=> {
-      setToken(accessToken);  
-    }, "100");  
-    setTimeout(()=> {
+    setTimeout(() => {
+      setToken(accessToken);
+    }, "100");
+    setTimeout(() => {
       dispatch(fetchUsers());
-    }, "250");
-    // setToken(accessToken);
-    // dispatch(fetchUsers());
-  }, []);
+    }, "250");    
+  }, [dispatch]);
+
+  const handleDropdownToggle = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
+  if (!auth) {
+    return null
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-      <h1 className="title"><Link to='/'>Serenade</Link><BsSpotify/></h1>
-      <div className="App">
-      {!token && (
-        <Login/>
-      )
-      }
-      
-      {token && (
-        <div>
-          <Routes>
-            <Route path ='/' element={<Home/>}/>
-            <Route path ='/users/:id' element={<Profile/>}/>
-          </Routes>
+      <header>
+        <div className="nav">
+          <h1 className="title">
+            <Link to="/">Serenade</Link>
+            <BsSpotify />
+          </h1>
+          {token && (
+            <div className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
+              <button className="dropdown-toggle" onClick={handleDropdownToggle}>
+                Navigation
+              </button>
+              <div className="dropdown-content">
+                <Link to="/">Home</Link>
+                <Link to={`/users/${auth.id}`}>Profile</Link> {/* Replace `:id` with `auth.id` */}
+                <Link to="/contact">Contact</Link>
+                <Link onClick={logout}>Logout</Link>
+              </div>
+            </div>
+          )}
         </div>
-      )}
-      </div>
       </header>
+        <div>
+          {!token && <Login />}
+          {token && (
+            <div>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/contact" element={<Contact/>}/>
+                <Route path="/users/:id" element={<Profile />}/>
+              </Routes>
+            </div>
+          )}
+        </div>
     </div>
   );
 }
+
 export default App;
 
 /*
+
 const App = ()=> {
   const [token, setToken] = useState("");
   const redirectUri = "http://localhost:3000";

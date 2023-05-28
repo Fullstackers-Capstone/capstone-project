@@ -39,7 +39,7 @@ const Searcher = () => {
   }, [searchKey]);
 
   return (
-    <div className="App">
+    <div>
       <div className="search-bar">
         <input
           className="Name"

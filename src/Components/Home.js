@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../../server/api/spotify';
@@ -9,14 +9,15 @@ const Home = () => {
 
   const { users, auth } = useSelector(state => state);
 
+  /* 5.28 Ryan's code
+  const [selectedUser, setSelectedUser] = useState([]);
+  */
+
   const dispatch = useDispatch();
 
   const user = users.find(user => user.spotifyId === auth.id);
 
-  console.log(auth);
-
   useEffect(() => {
-    // console.log(user);
       if(!user){
         const email = auth.email;
         const spotifyId = auth.id
@@ -24,18 +25,50 @@ const Home = () => {
         }
   }, [auth])
 
+  /* 5.28 Ryan's code
+  useEffect(() => {
+    const user = users.find(user => user.spotifyId === auth.id);
+    if(user){
+        setSelectedUser(user);
+    } else {
+      const email = auth.email;
+      const spotifyId = auth.id;
+      dispatch(createUser({ email, spotifyId }));
+    }},[users])
+  */
+
   if(!user){
-    return null;
+      return null;
   }
 
+  /* 5.28 Ryan's code
+
+    if(!selectedUser){
+      return null;
+  }
+
+  */
+
+  return(
+    <div>
+    <Searcher/>
+    </div>
+  )
+
+
+  /* 5.28 Ryan's code
+  
   return(
     <div className='App'>
     <div className="logout-container">
       <button className="StyledLogoutButton" onClick={logout}>Log Out</button>
       <Link to={`/users/${user.id}`}>Profile</Link>
+      <Link to={`/users/${selectedUser.id}`}>Profile</Link>
     </div>
     <Searcher/>
     </div>
   )
+  */
+
 };
 export default Home;

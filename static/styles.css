@@ -1,3 +1,11 @@
+/* Overarching CSS */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root{
   --spotifyGreen: #1DB954;
 }
@@ -23,6 +31,26 @@ h1{
 }
 
 .App {
+  /* Add the following property */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid blue;
+}
+
+header {
+  /* Add the following properties */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  border: 2px solid pink;
+}
+
+/*
+.App {
   background-color: black;
   height: 100vh;
   display: flex;
@@ -32,16 +60,7 @@ h1{
   width: 100%;
   border: 2px solid blue;
 }
-
-.App-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  width: 100%;
-  height: 100vh;
-  border: 2px solid pink;
-}
+*/
 
 .title {
   color: white;
@@ -171,3 +190,50 @@ h1{
 }
 
 
+.nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  width: inherit;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.dropdown-toggle {
+  background-color: var(--spotifyGreen);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  margin-left: 10px;
+  z-index: 1;
+}
+
+.dropdown.visible .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #1DB954;
+}
