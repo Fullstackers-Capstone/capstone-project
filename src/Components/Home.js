@@ -50,6 +50,49 @@ export default Home;
 
 
 
+/* 5.28 MT
+
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logout } from '../../server/api/spotify';
+import { createUser } from '../store'
+import Searcher from './Searcher';
+const Home = () => {
+
+  const { users, auth } = useSelector(state => state);
+
+  const dispatch = useDispatch();
+
+  const user = users.find(user => user.spotifyId === auth.id);
+
+  useEffect(() => {
+      if(!user){
+        const email = auth.email;
+        const spotifyId = auth.id
+        dispatch(createUser({ email, spotifyId }))   
+        }
+  }, [auth])
+
+
+
+  if(!user){
+      return null;
+  }
+
+  return(
+    <div>
+    <Searcher/>
+    </div>
+  )
+
+};
+export default Home;
+
+
+*/
+
+
 /*
 
 import React, { useState, useEffect } from 'react';
