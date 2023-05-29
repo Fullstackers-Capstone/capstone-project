@@ -24,26 +24,25 @@ app.get('/', async(req, res, next) => {
 
 app.post('/', async( req, res, next) => {    
     try{
-       const prompt = 'hi';
-        console.log(req.body, req.query, req.headers);
+       const {prompt} = req.body;
 
-    //     const openai = new OpenAIApi(configuration);
+        const openai = new OpenAIApi(configuration);
 
-    //     const response = await openai.createChatCompletion({
-    //         model: 'gpt-3.5-turbo',
-    //         messages: [{ role: "user", content: `${prompt}`}],
+        const response = await openai.createChatCompletion({
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: "user", content: `${prompt}`}],
 
-    //         max_tokens: 500,
-    //         temperature: 0.8,
-    //         top_p: 1.0,
-    //         frequency_penalty: 0.0,
-    //         presence_penalty: 0.0,
+            max_tokens: 500,
+            temperature: 0.8,
+            top_p: 1.0,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.0,
             
-    //     })
-    //     return res.status(200).json({
-    //         success: true,
-    //         data: response.data.choices[0].message.content
-    //     })
+        })
+        return res.status(200).json({
+            success: true,
+            data: response.data.choices[0].message.content
+        })
     }
     catch(error){
         return res.status(400).json({

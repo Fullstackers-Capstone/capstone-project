@@ -12,12 +12,13 @@ const prompt = (state = [], action) => {
 
 export const getResponse = (prompt)=> {
     return async(dispatch)=> {
-      const token = window.localStorage.getItem('token');
-      const response = await axios.put('/api/prompt', prompt, {
-        headers: {
-          authorization: token
-        }
-      });
+        const request = {prompt: prompt};
+    //   const token = window.localStorage.getItem('token');
+    //   const response = await axios.post('/api/prompt', prompt, {
+    //     headers: {
+    //       authorization: token
+    //     }
+        const response = await axios.post('/api/prompt', request);
       dispatch({ type: 'CREATE_PROMPT', prompt: response.data });
     };
   };

@@ -3,28 +3,49 @@ import Home from './Home';
 import Login from './Login';
 import { BsSpotify } from 'react-icons/bs';
 import { accessToken, logout } from '/server/api/spotify.js';
-import Prompt from './Prompt';
+import { useDispatch } from 'react-redux';
+import { Link, Routes, Route } from 'react-router-dom';
+import { fetchUsers, fetchSpotUser } from '../store';
+import Profile from './Profile';
+
 
 const App = () => {
+
   //set a token and set token from our state
   const [token, setToken] = useState(null);
+  const dispatch = useDispatch();
   
   useEffect(() => {
     //set the token once we receive an access token
-    setToken(accessToken);    
+    dispatch(fetchSpotUser());
+    setTimeout(()=> {
+      setToken(accessToken);  
+    }, "100");  
+    setTimeout(()=> {
+      dispatch(fetchUsers());
+    }, "250");
+    // setToken(accessToken);
+    // dispatch(fetchUsers());
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-      <h1 className="title">Serenade<BsSpotify/></h1>
+      <h1 className="title"><Link to='/'>Serenade</Link><BsSpotify/></h1>
       <div className="App">
-      {!token ? 
-      <Login/>
-        :
-        
-          <Home/>
+      {!token && (
+        <Login/>
+      )
       }
+      
+      {token && (
+        <div>
+          <Routes>
+            <Route path ='/' element={<Home/>}/>
+            <Route path ='/users/:id' element={<Profile/>}/>
+          </Routes>
+        </div>
+      )}
       </div>
       </header>
     </div>

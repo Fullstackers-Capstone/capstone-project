@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { attemptLogin } from '../store';
 import { useDispatch } from 'react-redux';
 
-const Login = () => {
-  return(
-    <div className="login-container">
-      <a className="StyledLoginButton" href={'http://localhost:3000/login'}>Log In/Register</a>
-    </div>
-  )
-}
+// const Login = () => {
+//   return(
+//     <div className="login-container">
+//       <a className="StyledLoginButton" href={'http://localhost:3000/login'}>Log In/Register</a>
+//     </div>
+//   )
+// }
 
-export default Login;
+// export default Login;
 
-/*
+
 const Login = ()=> {
   const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({
@@ -51,4 +51,4 @@ const Login = ()=> {
 };
 
 export default Login;
-*/
+

@@ -10,7 +10,7 @@ const client_secret = process.env.client_secret;
 const redirect_uri = process.env.redirect_uri;
 const frontend_uri = process.env.frontend_uri;
 module.exports = app;
-app.use(express.json({limit: '50mb'}));
+app.use(express.json());
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/static', express.static(path.join(__dirname, '../static')));
 app.use('/api/users', require('./api/users'));
