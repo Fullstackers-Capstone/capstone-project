@@ -38,11 +38,7 @@ const Home = () => {
 
   return(
     <div className='App'>
-    <div className="logout-container">
-      <button className="StyledLogoutButton" onClick={logout}>Log Out</button>
-      <Link to={`/users/${selectedUser.id}`}>Profile</Link>
-    </div>
-    <Searcher/>
+      <Searcher/>
     </div>
   )
 };

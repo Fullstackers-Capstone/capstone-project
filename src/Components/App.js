@@ -8,12 +8,12 @@ import { Link, Routes, Route } from 'react-router-dom';
 import { fetchUsers, fetchSpotUser } from '../store';
 import Profile from './Profile';
 import Contact from './Contact';
+import NavBar from './NavBar';
 
 
 const App = () => {
 
   const [token, setToken] = useState(null);
-  const [dropdownVisible, setDropdownVisible] = useState(false);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   
@@ -26,10 +26,6 @@ const App = () => {
       dispatch(fetchUsers());
     }, "250");    
   }, [dispatch]);
-
-  const handleDropdownToggle = () => {
-    setDropdownVisible(!dropdownVisible);
-  };
 
   if (!auth) {
     return null
@@ -44,17 +40,7 @@ const App = () => {
             <BsSpotify />
           </h1>
           {token && (
-            <div className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
-              <button className="dropdown-toggle" onClick={handleDropdownToggle}>
-                Navigation
-              </button>
-              <div className="dropdown-content">
-                <Link to="/">Home</Link>
-                <Link to={`/users/${auth.id}`}>Profile</Link> {/* Replace `:id` with `auth.id` */}
-                <Link to="/contact">Contact</Link>
-                <Link onClick={logout}>Logout</Link>
-              </div>
-            </div>
+            <NavBar/>
           )}
         </div>
       </header>
