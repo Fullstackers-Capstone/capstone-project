@@ -7,31 +7,23 @@ import Searcher from './Searcher';
 import Prompt from './Prompt';
 const Home = () => {
 
+const Home = () => {
   const { users, auth } = useSelector(state => state);
-  const [selectedUser, setSelectedUser] = useState([]);
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     const user = users.find(user => user.spotifyId === auth.id);
-    if(user){
-        setSelectedUser(user);
-    } else {
+    if(!user && !isCreatingUser){
+      setIsCreatingUser(true);
       const email = auth.email;
       const spotifyId = auth.id;
       dispatch(createUser({ email, spotifyId }));
     }
-    }, [])
+  }, [users, auth.id, dispatch, isCreatingUser]);
 
-  // const user = users.find(user => user.spotifyId === auth.id);
-
-  // useEffect(() => {
-  //     if(!user){
-  //       const email = auth.email;
-  //       const spotifyId = auth.id
-  //       dispatch(createUser({ email, spotifyId }))   
-  //       }
-  // }, [auth])
+  const selectedUser = users.find(user => user.spotifyId === auth.id);
 
   if(!selectedUser){
     return null;
@@ -43,91 +35,8 @@ const Home = () => {
       <button className="StyledLogoutButton" onClick={logout}>Log Out</button>
       <Link to={`/users/${selectedUser.id}`}>Profile</Link>
     </div>
-    <Prompt/>
     </div>
   )
 };
+
 export default Home;
-
-
-
-/* 5.28 MT
-
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../../server/api/spotify';
-import { createUser } from '../store'
-import Searcher from './Searcher';
-const Home = () => {
-
-  const { users, auth } = useSelector(state => state);
-
-  const dispatch = useDispatch();
-
-  const user = users.find(user => user.spotifyId === auth.id);
-
-  useEffect(() => {
-      if(!user){
-        const email = auth.email;
-        const spotifyId = auth.id
-        dispatch(createUser({ email, spotifyId }))   
-        }
-  }, [auth])
-
-
-
-  if(!user){
-      return null;
-  }
-
-  return(
-    <div>
-    <Searcher/>
-    </div>
-  )
-
-};
-export default Home;
-
-
-*/
-
-
-/*
-
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { createUser } from '../store'
-import Searcher from './Searcher';
-
-const Home = () => {
-
-  const { users, auth } = useSelector(state => state);
-
-  const dispatch = useDispatch();
-
-  const user = users.find(user => user.spotifyId === auth.id);
-
-  useEffect(() => {
-      if(!user){
-        const email = auth.email;
-        const spotifyId = auth.id
-        dispatch(createUser({ email, spotifyId }))   
-        }
-  }, [user])
-
-  if(!user){
-      return null;
-  }
-
-  return(
-    <div>
-    <Searcher/>
-    </div>
-  )
-
-};
-export default Home;
-
-*/
