@@ -1,9 +1,12 @@
 const conn = require('./conn');
 const User = require('./User');
 const Playlist = require('./Playlist');
+const Prompt = require('./Prompt');
 
+Prompt.belongsTo(User);
 Playlist.belongsTo(User); // sets up the foreign key for UserId
 User.hasMany(Playlist);
+User.hasMany(Prompt);
 
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
@@ -23,5 +26,6 @@ const syncAndSeed = async()=> {
 module.exports = {
   syncAndSeed,
   User,
-  Playlist
+  Playlist,
+  Prompt
 };

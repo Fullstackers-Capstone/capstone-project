@@ -36,6 +36,7 @@ h1{
   flex-direction: column;
   align-items: center;
   border: 2px solid blue;
+  width: 100%;
 }
 
 header {
@@ -234,4 +235,50 @@ header {
 
 .dropdown-content a:hover {
   background-color: #1DB954;
+}
+
+.prompt-Container{
+  display:flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  flex-direction: column;
+  align-items:center;
+
+}
+
+.prompt-Element{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.messages{
+  display:flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  flex-direction: column;
+  align-items:center;
+}
+
+.chatgptMessage{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  color: black;
+  background-color: white;
+  border: 1px solid white;
+}
+
+.userMessage{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  background-color: blue;
+  border: 1px solid blue
+
 }

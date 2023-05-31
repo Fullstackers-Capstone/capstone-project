@@ -22,7 +22,8 @@ app.get('/:id', async(req, res, next) => {
 
 app.post('/', async(req, res, next) => {
     try{
-      res.send(await User.create(req.body));
+      // res.send(await User.create({spotifyToken: req.headers.authorization}));
+      res.send(await User.create());
     }
     catch(err) {
       next(err);
