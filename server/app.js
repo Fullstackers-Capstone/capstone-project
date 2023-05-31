@@ -14,6 +14,7 @@ app.use(express.json({limit: '50mb'}));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/static', express.static(path.join(__dirname, '../static')));
 app.use('/api/users', require('./api/users'));
+app.use('/api/prompt', require('./api/prompt'));
 
 app.get('/', (req, res) => {
     res.render(

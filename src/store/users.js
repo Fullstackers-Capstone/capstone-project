@@ -27,7 +27,13 @@ export const fetchUsers = () => {
 
 export const createUser = (user) => {
     return async(dispatch) => {
-        const response = await axios.post('/api/users', user);
+        // const response = await axios.post('/api/users', user);
+        const token = window.localStorage.getItem('spotify_access_token');
+        const response = await axios.post('/api/users', user, {
+            headers: {
+              authorization: token
+            }
+        });
         dispatch({ type: 'CREATE_USER', user: response.data});
     }
 }

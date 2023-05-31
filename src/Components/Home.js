@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../../server/api/spotify';
 import { createUser } from '../store'
 import Searcher from './Searcher';
+import Prompt from './Prompt';
 const Home = () => {
 
   const { users, auth } = useSelector(state => state);
@@ -20,7 +21,7 @@ const Home = () => {
       const spotifyId = auth.id;
       dispatch(createUser({ email, spotifyId }));
     }
-    }, [users])
+    }, [])
 
   // const user = users.find(user => user.spotifyId === auth.id);
 
@@ -42,7 +43,7 @@ const Home = () => {
       <button className="StyledLogoutButton" onClick={logout}>Log Out</button>
       <Link to={`/users/${selectedUser.id}`}>Profile</Link>
     </div>
-    <Searcher/>
+    <Prompt/>
     </div>
   )
 };
