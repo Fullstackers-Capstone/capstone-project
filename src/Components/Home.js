@@ -34,6 +34,7 @@ const Home = () => {
       <button className="StyledLogoutButton" onClick={logout}>Log Out</button>
       <Link to={`/users/${selectedUser.id}`}>Profile</Link>
     </div>
+      <Searcher/>
     </div>
   )
 };

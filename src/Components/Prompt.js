@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getResponse } from '../store';
 import Searcher from './Searcher';
 
-const Home = () => {
+const Prompt = () => {
   const dispatch= useDispatch();
   const { prompt } = useSelector(state => state);
   const [input,setInput] = useState('');
@@ -41,4 +41,4 @@ const Home = () => {
     </div>
   )
 };
-export default Home;
+export default Prompt;
