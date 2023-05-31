@@ -5,7 +5,6 @@ import { logout } from '../../server/api/spotify';
 import { createUser } from '../store'
 import Searcher from './Searcher';
 import Prompt from './Prompt';
-const Home = () => {
 
 const Home = () => {
   const { users, auth } = useSelector(state => state);
