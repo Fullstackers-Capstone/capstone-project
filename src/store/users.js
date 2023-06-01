@@ -17,20 +17,20 @@ const users = (state = [], action) => {
     return state;
 }
 
-export const fetchUsers = () => {
-    return async(dispatch) => {
-        const response = await axios.get('/api/users');
-        dispatch({ type: 'SET_USERS', users: response.data});
-    }
-}
+// export const fetchUsers = () => {
+//     return async(dispatch) => {
+//         const response = await axios.get('/api/users');
+//         dispatch({ type: 'SET_USERS', users: response.data});
+//     }
+// }
 
 
-export const createUser = (user) => {
-    return async(dispatch) => {
-        const response = await axios.post('/api/users', user);
-        dispatch({ type: 'CREATE_USER', user: response.data});
-    }
-}
+// export const createUser = (user) => {
+//     return async(dispatch) => {
+//         const response = await axios.post('/api/users', user);
+//         dispatch({ type: 'CREATE_USER', user: response.data});
+//     }
+// }
 
 export const updateUser = (user) => {
     return async (dispatch, getState) => {

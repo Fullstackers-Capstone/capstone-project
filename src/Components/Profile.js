@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { updateUser, fetchUsers, fetchSpotUser } from '../store';
+import { updateAuth } from '../store';
 import Switch from '@mui/material/Switch';
 
 const Profile = () => {
@@ -17,16 +17,16 @@ const Profile = () => {
         } 
     }, [auth])
 
-    // useEffect(() => {
-    //     if(auth){
-    //     dispatch(updateUser({id: selectedUser.id, discoverPlaylists: discover}));   
-    //     }
-    // }, [discover])
+    useEffect(() => {
+        if(auth){
+        dispatch(updateAuth({id: auth.id, discoverPlaylists: discover}));   
+        }
+    }, [discover])
 
 
-    // const discoverToggle = () => {
-    //     setDiscover((current) => !current);
-    // }
+    const discoverToggle = () => {
+        setDiscover((current) => !current);
+    }
 
     if(!playlists){
         return null;
