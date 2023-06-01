@@ -18,13 +18,15 @@ const App = () => {
   const auth = useSelector((state) => state.auth);
   
   useEffect(() => {
-    dispatch(fetchSpotUser());
-    setTimeout(() => {
-      setToken(accessToken);
-    }, "100");
-    setTimeout(() => {
-      dispatch(fetchUsers());
-    }, "250");    
+
+    const loginWithSpotify = async() => {
+      await dispatch(fetchSpotUser());
+      await setToken(accessToken);
+      await dispatch(fetchUsers());
+    }
+
+    loginWithSpotify();
+
   }, [dispatch]);
 
   if (!auth) {

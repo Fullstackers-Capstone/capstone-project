@@ -20,17 +20,7 @@ const Home = () => {
       const spotifyId = auth.id;
       dispatch(createUser({ email, spotifyId }));
     }
-    }, [users])
-
-  // const user = users.find(user => user.spotifyId === auth.id);
-
-  // useEffect(() => {
-  //     if(!user){
-  //       const email = auth.email;
-  //       const spotifyId = auth.id
-  //       dispatch(createUser({ email, spotifyId }))   
-  //       }
-  // }, [auth])
+    }, [auth])
 
   if(!selectedUser){
     return null;
