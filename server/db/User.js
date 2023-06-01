@@ -24,31 +24,8 @@ const User = conn.define('user', {
   discoverPlaylists: {
     type: BOOLEAN,
     defaultValue: true
-  },
-  spotifyToken: {
-    type: STRING,
-    unique: true
   }
 });
-
-User.findBySpotifyToken = async(token) => {
-  try{
-   const user = await User.findOne({
-    where: {
-      spotifyToken: token
-    }
-   });
-   if(user){
-    return user;
-   }
-   throw 'user not found';
-
-  }
-  catch{
-
-  }
-
-}
 
 
 
@@ -93,4 +70,3 @@ User.authenticate = async function({ username, password }){
 }
 
 module.exports = User;
-
