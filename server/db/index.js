@@ -6,7 +6,7 @@ Playlist.belongsTo(User); // sets up the foreign key for UserId
 User.hasMany(Playlist);
 
 const syncAndSeed = async()=> {
-  await conn.sync({ force: true });
+  await conn.sync({force: false});
   // const [moe, lucy, larry, ethyl] = await Promise.all([
   //   User.create({ username: 'moe', password: '123'}),
   //   User.create({ username: 'lucy', password: '123' }),

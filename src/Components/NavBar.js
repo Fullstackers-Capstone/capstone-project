@@ -18,7 +18,7 @@ const NavBar = () => {
         </button>
         <div className="dropdown-content">
           <Link to="/" onClick={handleDropdownToggle}>Home</Link>
-          <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link> {/* Replace `:id` with `auth.id` */}
+          <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link>
           <Link to="/contact" onClick={handleDropdownToggle}>Contact</Link>
           <Link onClick={logout}>Logout</Link>
         </div>

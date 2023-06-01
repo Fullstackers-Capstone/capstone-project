@@ -42,7 +42,7 @@ app.post('/', async(req, res, next) => {
   app.put('/:id', async(req, res, next) => {
     try{
       const user = await User.findByPk(req.params.id);
-      // console.log(user);
+      console.log(user);
       res.status(201).send(await user.update(req.body));
     }
     catch(err){
