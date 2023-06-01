@@ -6,34 +6,27 @@ import Switch from '@mui/material/Switch';
 
 const Profile = () => {
 
-    const { auth, users, playlists } = useSelector(state => state);
-    const [discover, setDiscover] = useState(null);
-    const [selectedUser, setSelectedUser] = useState([]);
+    const { auth, playlists } = useSelector(state => state);
+    const [discover, setDiscover] = useState(false);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const user = users.find(user => user.spotifyId === auth.id);
-        if(user){
-            setSelectedUser(user);
-            setDiscover(user.discoverPlaylists)
+        if(auth){
+            setDiscover(auth.discoverPlaylists);
         } 
-    }, [users])
+    }, [auth])
 
-    useEffect(() => {
-        if(selectedUser){
-        dispatch(updateUser({id: selectedUser.id, discoverPlaylists: discover}));   
-        }
-    }, [discover])
+    // useEffect(() => {
+    //     if(auth){
+    //     dispatch(updateUser({id: selectedUser.id, discoverPlaylists: discover}));   
+    //     }
+    // }, [discover])
 
 
-    const discoverToggle = () => {
-        setDiscover((current) => !current);
-    }
-
-    if(!selectedUser){
-        return null;
-    }
+    // const discoverToggle = () => {
+    //     setDiscover((current) => !current);
+    // }
 
     if(!playlists){
         return null;
@@ -41,20 +34,17 @@ const Profile = () => {
     if(!auth){
         return null;
     }
-    const spotUsername = auth.display_name;
-    const spotEmail = auth.email;
-    const image = auth.images[0].url;
-    const followerCount  = auth.followers.total;
     
     return(
         <div>
-            <h1><span className='prof-title'>Profile</span>: ({ spotUsername.toUpperCase() })</h1>
-            <h1><span className='prof-title'>Email</span>: { spotEmail }</h1>
-            <h1><span className='prof-title'>Follower Count</span>: { followerCount }</h1>
-            <h1><span className='prof-title'>Playlist Count</span>: { playlists.length }</h1>
+            <h1><span className='prof-title'>Profile</span>: ({ auth.display_name.toUpperCase() })</h1>
+            <h1><span className='prof-title'>Spotify User ID</span>: ({ auth.spotifyId.toUpperCase() })</h1>
+            <h1><span className='prof-title'>Email</span>: { auth.email }</h1>
+            <h1><span className='prof-title'>Spotify Follower Count</span>: { auth.followerCount }</h1>
+            <h1><span className='prof-title'>Serenade Playlist Count</span>: { auth.playlistCount }</h1>
             <h1><span className='prof-title'>Discover Playlists?</span> 
             <Switch checked={discover} onClick={() => discoverToggle()}/></h1>
-            <img src={ image }/>
+            <img src={ auth.image }/>
         </div>
     )
 }

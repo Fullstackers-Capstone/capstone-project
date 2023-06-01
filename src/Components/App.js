@@ -22,7 +22,6 @@ const App = () => {
     const loginWithSpotify = async() => {
       await dispatch(fetchSpotUser());
       await setToken(accessToken);
-      await dispatch(fetchUsers());
     }
 
     loginWithSpotify();
