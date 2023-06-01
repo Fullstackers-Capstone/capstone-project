@@ -6,23 +6,11 @@ import { createUser } from '../store'
 import Searcher from './Searcher';
 const Home = () => {
 
-  const { users, auth } = useSelector(state => state);
-  const [selectedUser, setSelectedUser] = useState([]);
+  const { auth } = useSelector(state => state);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const user = users.find(user => user.spotifyId === auth.id);
-    if(user){
-        setSelectedUser(user);
-    } else {
-      const email = auth.email;
-      const spotifyId = auth.id;
-      dispatch(createUser({ email, spotifyId }));
-    }
-    }, [auth])
-
-  if(!selectedUser){
+  if(!auth){
     return null;
   }
 
