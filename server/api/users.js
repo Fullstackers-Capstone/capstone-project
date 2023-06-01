@@ -22,7 +22,17 @@ app.get('/:id', async(req, res, next) => {
 
 app.post('/', async(req, res, next) => {
     try{
-      res.send(await User.create(req.body));
+      const user = await User.findOne({
+        where: {
+          email: req.body.email
+        }
+      });
+      if(user){
+        res.send(user);
+      } else {
+        res.send(await User.create(req.body));
+      }
+
     }
     catch(err) {
       next(err);

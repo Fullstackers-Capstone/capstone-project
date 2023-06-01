@@ -9,11 +9,14 @@ const client_id= process.env.client_id;
 const client_secret = process.env.client_secret;
 const redirect_uri = process.env.redirect_uri;
 const frontend_uri = process.env.frontend_uri;
+const { User } = require('./db');
 module.exports = app;
 app.use(express.json({limit: '50mb'}));
+
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/static', express.static(path.join(__dirname, '../static')));
 app.use('/api/users', require('./api/users'));
+app.use('/api/auth', require('./api/auth'));
 
 app.get('/', (req, res) => {
     res.render(
@@ -53,7 +56,8 @@ const generateRandomString = length => {
   
     res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
   });
-  app.get('/callback', (req, res) => {
+
+  app.get('/callback', async (req, res) => {
     const code = req.query.code || null;
   
     axios({
@@ -69,7 +73,7 @@ const generateRandomString = length => {
         Authorization: `Basic ${new Buffer.from(`${client_id}:${client_secret}`).toString('base64')}`,
       },
     })
-      .then(response => {
+      .then(async response => {
         if (response.status === 200) {
           const { access_token, refresh_token, expires_in } = response.data;
   
@@ -78,6 +82,33 @@ const generateRandomString = length => {
             refresh_token,
             expires_in
           });
+
+          const spotifyAxios = axios.create({
+            baseURL: 'https://api.spotify.com/v1',
+            timeout: 5000,
+            headers: {
+              'Authorization': `Bearer ${access_token}`,
+              'Content-Type': 'application/json'
+              //'Authorization': 'token <your-token-here> -- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token'
+            }
+          });
+
+          const spotUserData = await spotifyAxios.get('/me');
+
+          const user = await User.findOne({
+            where: {
+              spotifyId: spotUserData.data.id
+            }
+          });
+          console.log(user);
+          if(!user){
+            await User.create({email: spotUserData.data.email, spotifyId: spotUserData.data.id });
+          } else {
+            if(spotUserData.data.email !== user.email) await User.update({email: spotUserData.data.email})
+          }
+
+          // console.log(spotUserData);
+
           //redirect to react app
           res.redirect(`${frontend_uri}/?${queryParams}`);
         } else {

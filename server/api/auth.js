@@ -24,6 +24,23 @@ app.post('/register', async(req, res, next)=> {
   }
 });
 
+app.get('/:id', async(req, res, next) => {
+  try{
+    const id = req.params.id;
+
+    console.log(id);
+    console.log(await User.findOne({where: {
+      spotifyId: id
+    }}))
+    res.send(await User.findOne({where: {
+      spotifyId: id
+    }}))
+  }
+  catch(err){
+    next(err);
+  }
+})
+
 app.get('/', isLoggedIn, (req, res, next)=> {
   try {
     res.send(req.user); 
