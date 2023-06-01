@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { updateUser, fetchUsers, fetchSpotUser } from '../store';
-
 import Switch from '@mui/material/Switch';
 
 const Profile = () => {
 
     const { auth, users, playlists } = useSelector(state => state);
-
-    const [discover, setDiscover] = useState(false);
+    const [discover, setDiscover] = useState(null);
     const [selectedUser, setSelectedUser] = useState([]);
 
     const dispatch = useDispatch();
@@ -29,6 +26,7 @@ const Profile = () => {
         }
     }, [discover])
 
+
     const discoverToggle = () => {
         setDiscover((current) => !current);
     }
@@ -40,11 +38,9 @@ const Profile = () => {
     if(!playlists){
         return null;
     }
-
     if(!auth){
         return null;
     }
-
     const spotUsername = auth.display_name;
     const spotEmail = auth.email;
     const image = auth.images[0].url;
@@ -62,5 +58,4 @@ const Profile = () => {
         </div>
     )
 }
-
 export default Profile;
