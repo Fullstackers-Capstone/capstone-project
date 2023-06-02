@@ -6,7 +6,7 @@ import { createUser } from '../store'
 import Searcher from './Searcher';
 import Prompt from './Prompt';
 import { catchErrors } from '../../server/api/utils';
-
+import PlaylistDiscoverToggle from './PlaylistDiscoverToggle';
 
 const Home = () => {
 
@@ -46,6 +46,7 @@ const Home = () => {
   console.log(playlists);
 
   return(
+
     <div id='content-body'>
       {/* <Searcher/> */}
       {playlists.map(playlist => {

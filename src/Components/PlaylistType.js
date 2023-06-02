@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PlaylistOptions() {
+const PlaylistType = () => {
   return (
     <div className="playlist-options">
       <h2 className="options-title">Choose Playlist Type</h2>
@@ -20,4 +20,4 @@ function PlaylistOptions() {
   );
 }
 
-export default PlaylistOptions;
+export default PlaylistType;
