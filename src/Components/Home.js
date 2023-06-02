@@ -5,6 +5,7 @@ import { logout } from '../../server/api/spotify';
 import { createUser } from '../store'
 import Searcher from './Searcher';
 import Prompt from './Prompt';
+import PlaylistDiscoverToggle from './PlaylistDiscoverToggle';
 const Home = () => {
 
   const { auth } = useSelector(state => state);
@@ -17,6 +18,7 @@ const Home = () => {
 
   return(
     <div className='App'>
+      <PlaylistDiscoverToggle />
       <Searcher/>
     </div>
   )
