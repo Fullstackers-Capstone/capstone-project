@@ -18,11 +18,10 @@ app.get('/', async(req, res, next) => {
 
 app.post('/', async( req, res, next) => {    
     try{
+      
+      console.log(req.body.prompt);
       const prompt = await Prompt.create({userPrompt: req.body.prompt});
-
-      // const user = await User.findBySpotifyToken(req.headers.authorization);
-      // prompt.userId = user.id;
-      // prompt.save();
+    
 
       await prompt.askChatGPT()
       res.send(prompt);

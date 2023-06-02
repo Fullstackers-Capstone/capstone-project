@@ -17,8 +17,9 @@ app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/static', express.static(path.join(__dirname, '../static')));
 app.use('/api/users', require('./api/users'));
 app.use('/api/auth', require('./api/auth'));
+//6/1 MT added playlists
 app.use('/api/playlists', require('./api/playlists'));
-
+app.use('/api/prompt', require('./api/prompt'))
 app.get('/', (req, res) => {
     res.render(
       path.join(__dirname, '../static/index.html'),
