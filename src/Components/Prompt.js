@@ -42,7 +42,7 @@ const Prompt = () => {
       <div className='messages'>
         {
            prompt.map(_prompt => {
-              return <div id={_prompt.id}>
+              return <div key={_prompt.id} id={_prompt.id}>
                     <div className='userMessage'> { _prompt.userPrompt}</div>
                      <div className='chatgptMessage'>{_prompt.response}</div>
                      </div>
