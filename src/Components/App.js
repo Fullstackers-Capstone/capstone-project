@@ -10,6 +10,8 @@ import Profile from './Profile';
 import Contact from './Contact';
 import NavBar from './NavBar';
 import Prompt from './Prompt';
+import PlaylistOptions from './PlaylistOptions';
+
 
 
 const App = () => {
@@ -55,6 +57,7 @@ const App = () => {
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/users/:id" element={<Profile />}/>
                 <Route path="/prompt" element={<Prompt />}/>
+                <Route path="/playlistoptions" element={<PlaylistOptions />}/>
               </Routes>
             </div>
           )}

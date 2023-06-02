@@ -282,3 +282,41 @@ header {
   border: 1px solid blue
 
 }
+
+/* PlaylistOptions Styling */
+
+.playlist-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.options-title {
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+.option {
+  background-color: #242424;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+  width: 80%;
+}
+
+.option:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(29, 185, 84, 0.3);
+}
+
+.option h3 {
+  margin-bottom: 10px;
+  color: var(--spotifyGreen);
+}
+
+.option p {
+  color: #B3B3B3;
+}
+
+/* PlaylistOptions Styling Ends here */

@@ -109,7 +109,7 @@ const generateRandomString = length => {
               await user.update({
                 display_name: spotUserData.data.display_name, 
                 email: spotUserData.data.email, followerCount: spotUserData.data.followers.total, 
-                image: spotUserData.data.images[0].url})
+                image: spotUserData.data.images[0].url || null})
             }
 
           }
