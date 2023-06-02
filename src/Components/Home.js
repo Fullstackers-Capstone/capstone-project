@@ -7,11 +7,14 @@ import Searcher from './Searcher';
 import Prompt from './Prompt';
 import { catchErrors } from '../../server/api/utils';
 import PlaylistDiscoverToggle from './PlaylistDiscoverToggle';
+import MyPlaylists from './MyPlaylists';
+import Discover from './Discover';
 
 const Home = () => {
 
   const { auth } = useSelector(state => state);
   const [playlists, setPlaylists] = useState([]);
+  const [selected, setSelected] = useState(true);
 
   useEffect(() => {
     const getLists = async() => {
@@ -48,47 +51,23 @@ const Home = () => {
   return(
 
     <div id='content-body'>
-      {/* <Searcher/> */}
-      {playlists.map(playlist => {
-        return(
-          <div id='pl-thumb' key={playlist.id}>
-            <div id='pl-thumb-name'>
-              {playlist.name}
-            </div>
-
-            <div id='pl-thumb-data-container'>
-
-              <div id='pl-thumb-img'>
-                <a href={playlist.href}>
-                  <img src={playlist.image}/>
-                </a>
-              </div>
-              <div id='pl-thumb-tracks'>
-                {playlist.tracks.data.items.map(_track => {
-                return(
-                  <div key={_track.id}><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name}</div>
-                )
-                })}
-              </div>
-            </div>
-
-            <div id='pl-thumb-stats-container'>
-              <div id='pl-thumb-user-container'>
-                  <div id='pl-thumb-user-img'>
-                    <img src={auth.image}/>
-                  </div>
-                  <div id='pl-thumb-user-name'>
-                    {auth.display_name.toUpperCase()}
-                  </div>
-              </div>
-              <div id='pl-thumb-elipses-container'>
-                    <button>...</button>
-              </div>
-
-            </div>
-          </div>
-        )
-      })}
+      <div id='pl-discover-toggle-container'>
+        <div className="toggle-button">
+          <button 
+            className={`toggle-option ${(selected) ? 'selected' : ''}`} 
+            onClick={() => setSelected(!selected)}
+          >
+            My Playlists
+          </button>
+          <button 
+            className={`toggle-option ${(!selected) ? 'selected' : ''}`} 
+            onClick={() => setSelected(!selected)}
+          >
+            Discover
+          </button>
+        </div>
+      </div>
+      {(selected) ? <MyPlaylists/> : <Discover/>}
     </div>
   )
 };
