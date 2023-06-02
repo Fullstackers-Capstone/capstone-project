@@ -82,4 +82,15 @@ User.authenticate = async function({ username, password }){
   throw error;
 }
 
+//6/1 MAURICIO
+
+User.prototype.getPlaylist =  async function(){
+  const getPlaylist = await conn.models.playlist.findAll({
+    where: {
+      userId: this.id
+    }
+  })
+  return getPlaylist
+}
+
 module.exports = User;

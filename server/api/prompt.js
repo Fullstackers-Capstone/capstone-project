@@ -7,7 +7,6 @@ const { Prompt, User } = require('../db');
 module.exports = app;
 
 
-
 app.get('/', async(req, res, next) => {
     try{
         res.send(await Prompt.findAll());
