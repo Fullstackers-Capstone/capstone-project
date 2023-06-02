@@ -33,6 +33,36 @@ app.post('/', async( req, res, next) => {
     }
 });
 
+app.post('/json', async( req, res, next) => {    
+  try{
+    console.log(req.headers);
+    const user = await User.findBySpotifyId(req.headers.spotifyid);
+
+    const userPrompt = `You are an assistant that only responds in JSON. 
+    Create a list of ${req.body.length} unique songs similar to the following 
+    playlist: "${req.body.spotifyData}". Include "id", "title", "artist", "album" 
+    in your response. An example response is: "
+    [
+      {
+          "id": 1,
+          "title": "Hey Jude",
+          "artist": "The Beatles",
+          "album": "The Beatles (White Album)",
+          "duration": "4:56"
+      }
+    ]".`
+
+    const prompt = await Prompt.create({userPrompt: userPrompt, userId: user.id});
+
+
+    await prompt.askChatGPT()
+    res.send(prompt);
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 
   app.get('/',  async(req, res, next)=> {
     try {
