@@ -284,7 +284,6 @@ header {
 }
 
 /* PlaylistOptions Styling */
-
 .playlist-options {
   display: flex;
   flex-direction: column;
@@ -318,5 +317,30 @@ header {
 .option p {
   color: #B3B3B3;
 }
-
 /* PlaylistOptions Styling Ends here */
+
+/* Playlist/Discover Toggle Styling */
+.toggle-button {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.toggle-option {
+  flex-grow: 1;
+  padding: 10px 20px;
+  border: none;
+  background-color: #242424;
+  color: #B3B3B3;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-option.selected {
+  background-color: #1DB954;
+  color: #FFFFFF;
+}
+
+/* Playlist/Discover Toggle Styling ends here */
