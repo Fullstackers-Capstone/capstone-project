@@ -41,6 +41,7 @@ export const logout = () => {
       // Update localStorage values
       window.localStorage.setItem(LOCALSTORAGE_KEYS.accessToken, data.access_token);
       window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
+
   
       // Reload the page for localStorage updates to be reflected
       window.location.reload();
@@ -65,6 +66,7 @@ export const logout = () => {
 const getAccessToken = () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+    console.log(urlParams);
     const queryParams = {
       [LOCALSTORAGE_KEYS.accessToken]: urlParams.get('access_token'),
       [LOCALSTORAGE_KEYS.refreshToken]: urlParams.get('refresh_token'),

@@ -64,6 +64,27 @@ User.findByToken = async function(token){
   }
 }
 
+User.findBySpotifyId = async function(id){
+  try {
+   console.log('spotifyid',id)
+    const user = await this.findOne({
+      where: {
+        spotifyId: id
+      }
+    });
+
+    if(user){
+      return user;
+    }
+    throw 'user not found';
+  }
+  catch(ex){
+    const error = new Error('bad credentials');
+    error.status = 401;
+    throw error;
+  }
+}
+
 User.prototype.generateToken = function(){
   return jwt.sign({ id: this.id }, JWT);
 };

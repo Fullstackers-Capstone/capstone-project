@@ -12,15 +12,28 @@ const prompt = (state = [], action) => {
 
 export const getResponse = (prompt)=> {
     return async(dispatch)=> {
-        const request = {prompt: prompt};
-      const token = window.localStorage.getItem('spotify_access_token');
+      const request = {prompt: prompt};
+      const spotifyId = window.localStorage.getItem('spotifyId');
       const response = await axios.post('/api/prompt', request, {
         headers: {
-          authorization: token
+          spotifyId: spotifyId
         }
     });
         //const response = await axios.post('/api/prompt', request);
       dispatch({ type: 'CREATE_PROMPT', prompt: response.data });
+    };
+  };
+
+  export const getAllPrompts = (prompt)=> {
+    return async(dispatch)=> {
+      const spotifyId = window.localStorage.getItem('spotifyId');
+      const response = await axios.get('/api/prompt',  {
+        headers: {
+          spotifyId: spotifyId
+        }
+    });
+        //const response = await axios.post('/api/prompt', request);
+      dispatch({ type: 'SET_PROMPT', prompt: response.data });
     };
   };
 
