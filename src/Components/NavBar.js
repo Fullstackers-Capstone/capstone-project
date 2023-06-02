@@ -20,6 +20,7 @@ const NavBar = () => {
           <Link to="/" onClick={handleDropdownToggle}>Home</Link>
           <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link>
           <Link to="/contact" onClick={handleDropdownToggle}>Contact</Link>
+          <Link to="/prompt" onClick={handleDropdownToggle}>Prompt</Link>
           <Link onClick={logout}>Logout</Link>
         </div>
       </div>

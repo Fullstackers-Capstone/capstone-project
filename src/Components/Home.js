@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../../server/api/spotify';
 import { createUser } from '../store'
 import Searcher from './Searcher';
+import Prompt from './Prompt';
 const Home = () => {
 
   const { auth } = useSelector(state => state);
