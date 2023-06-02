@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Configuration, OpenAIApi } = require('openai');
 const JWT = process.env.JWT;
+const User = require('./User');
 
 const configuration = new Configuration({
     apiKey: process.env.OPEN_AI_KEY,
@@ -29,26 +30,25 @@ const Prompt = conn.define('prompt', {
 
 });
 
-// Prompt.findAllByToken = async function(token){
-//   try {
-//     const { id } = jwt.verify(token, process.env.JWT);
-//     const user = await this.findByPk(id);
-//     if(user){
-//       return this.findAll({
-//         where:{
-//             userId: user.id
-//         }
-//       });
-//     }
+Prompt.findAllBySpotifyId = async function(id){
+  try {
+    const user = await User.findbySpotifyId(id);
+    if(user){
+      return this.findAll({
+        where:{
+            userId: user.id
+        }
+      });
+    }
       
-//     throw 'prompt not found';
-//   }
-//   catch(ex){
-//     const error = new Error('This user has no prompts');
-//     error.status = 401;
-//     throw error;
-//   }
-// }
+    throw 'prompt not found';
+  }
+  catch(ex){
+    const error = new Error('This user has no prompts');
+    error.status = 401;
+    throw error;
+  }
+}
 
 
 

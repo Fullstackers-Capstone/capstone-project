@@ -2,6 +2,7 @@ const express = require('express');
 const app = express.Router();
 const { isLoggedIn } = require('./middleware');
 const { Op } = require('sequelize');
+
 const { Prompt, User } = require('../db');
 
 module.exports = app;
@@ -18,10 +19,11 @@ app.get('/', async(req, res, next) => {
 
 app.post('/', async( req, res, next) => {    
     try{
-      
-      console.log(req.body.prompt);
-      const prompt = await Prompt.create({userPrompt: req.body.prompt});
-    
+      console.log(req.headers);
+      const user = await User.findBySpotifyId(req.headers.spotifyid);
+
+      const prompt = await Prompt.create({userPrompt: req.body.prompt, userId: user.id});
+
 
       await prompt.askChatGPT()
       res.send(prompt);
@@ -32,9 +34,9 @@ app.post('/', async( req, res, next) => {
 });
 
 
-  app.get('/', isLoggedIn, async(req, res, next)=> {
+  app.get('/',  async(req, res, next)=> {
     try {
-      res.send(Prompt.findAllByToken(req.user));
+      res.send(Prompt.findAllBySpotifyId(req.headers.spotifyid));
     }
     catch(ex){
       next(ex);

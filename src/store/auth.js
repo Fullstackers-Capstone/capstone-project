@@ -12,7 +12,7 @@ export const fetchSpotUser = () => {
   return async(dispatch) => {
     const user = await getCurrentUserProfile();
       const response = await axios.get(`/api/auth/${user.data.id}/`);
-      console.log(user.data);
+      localStorage.setItem("spotifyId",user.data.display_name);
       dispatch({ type: 'SET_AUTH', auth: response.data})
   }
 }
