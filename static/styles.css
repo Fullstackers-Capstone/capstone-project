@@ -356,17 +356,24 @@ header {
   align-items: center;
 }
 
+#pl-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#pl-discover-toggle-container{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 #pl-thumb{
   width: 70%;
   margin-bottom: 3rem;
   border-radius: 5px;
 }
 
-#pl-thumb:first-child{
-  margin-top: 3rem;
-}
-
-#pl-thumb-name{
+#pl-thumb-name, #disc-thumb-name{
   display: flex;
   justify-content: center;
   font-size: 2.5rem;
@@ -376,10 +383,21 @@ header {
   border-top-left-radius: 5px;
 }
 
+#disc-thumb-name{
+  background-color: gold;
+  color: black
+}
+
 #pl-thumb-data-container{
   display: flex;
   border-left: 1px solid var(--spotifyGreen);
   border-right: 1px solid var(--spotifyGreen);
+}
+
+#disc-thumb-data-container{
+  display: flex;
+  border-left: 1px solid gold;
+  border-right: 1px solid gold;
 }
 
 #pl-thumb-img{
@@ -403,11 +421,16 @@ header {
   margin-bottom: .25rem;
 }
 
-#pl-thumb-stats-container{
+#pl-thumb-stats-container, #disc-thumb-stats-container{
   display: flex;
   background-color: var(--spotifyGreen);
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+}
+
+#disc-thumb-stats-container{
+  background-color: gold;
+  color: black;
 }
 
 #pl-thumb-user-container{

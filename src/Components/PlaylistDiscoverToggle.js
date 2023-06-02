@@ -2,25 +2,19 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const PlaylistDiscoverToggle = () => {
-  const [selected, setSelected] = useState('playlists');
-  const navigate = useNavigate();
-
-  const handleClick = (path) => {
-    setSelected(path);
-    navigate(`/${path}`);
-  }
+  const [selected, setSelected] = useState(true);
 
   return (
     <div className="toggle-button">
       <button 
-        className={`toggle-option ${selected === 'playlists' ? 'selected' : ''}`} 
-        onClick={() => handleClick('playlists')}
+        className={`toggle-option ${(selected) ? 'selected' : ''}`} 
+        onClick={() => setSelected(!selected)}
       >
         My Playlists
       </button>
       <button 
-        className={`toggle-option ${selected === 'discover' ? 'selected' : ''}`} 
-        onClick={() => handleClick('discover')}
+        className={`toggle-option ${(!selected) ? 'selected' : ''}`} 
+        onClick={() => setSelected(!selected)}
       >
         Discover
       </button>
