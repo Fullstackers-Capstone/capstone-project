@@ -1,3 +1,4 @@
+
 const conn = require('./conn');
 const { JSON, UUID, UUIDV4, TEXT, STRING} = conn.Sequelize;
 const bcrypt = require('bcrypt');
@@ -5,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const { Configuration, OpenAIApi } = require('openai');
 const JWT = process.env.JWT;
 const User = require('./User');
+
 
 const configuration = new Configuration({
     apiKey: process.env.OPEN_AI_KEY,
