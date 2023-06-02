@@ -36,7 +36,7 @@ const App = () => {
   }
 
   return (
-    <div className="App">
+    <div>
       <header>
         <div className="nav">
           <h1 className="title">
