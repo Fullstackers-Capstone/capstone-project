@@ -8,7 +8,7 @@ const JWT = process.env.JWT;
 const configuration = new Configuration({
     apiKey: process.env.OPEN_AI_KEY,
 });
-const openai = new OpenAIApi(configuration);
+
 
 
 const Prompt = conn.define('prompt', {
@@ -19,43 +19,43 @@ const Prompt = conn.define('prompt', {
   },
   userPrompt: {
     type: TEXT,
-    unique:true
   },
   name: {
     type: STRING,
-    unique: true
   },
   response: {
     type: JSON
-  }
+  },
+
 });
 
-Prompt.findAllByToken = async function(token){
-  try {
-    const { id } = jwt.verify(token, process.env.JWT);
-    const user = await this.findByPk(id);
-    if(user){
-      return this.findAll({
-        where:{
-            userId: user.id
-        }
-      });
-    }
+// Prompt.findAllByToken = async function(token){
+//   try {
+//     const { id } = jwt.verify(token, process.env.JWT);
+//     const user = await this.findByPk(id);
+//     if(user){
+//       return this.findAll({
+//         where:{
+//             userId: user.id
+//         }
+//       });
+//     }
       
-    throw 'prompt not found';
-  }
-  catch(ex){
-    const error = new Error('This user has no prompts');
-    error.status = 401;
-    throw error;
-  }
-}
+//     throw 'prompt not found';
+//   }
+//   catch(ex){
+//     const error = new Error('This user has no prompts');
+//     error.status = 401;
+//     throw error;
+//   }
+// }
 
 
 
 Prompt.prototype.askChatGPT = async function(){
   try{
-   const prompt = this.userPrompt;
+    const openai = new OpenAIApi(configuration);
+    const prompt = this.userPrompt;
     const response = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
         messages: [{ role: "user", content: `${prompt}`}],
