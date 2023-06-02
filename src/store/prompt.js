@@ -24,6 +24,20 @@ export const getResponse = (prompt)=> {
     };
   };
 
+  export const getJSONResponse = (length, data)=> {
+    return async(dispatch)=> {
+      const request = {length: length, spotifyData: data};
+      const spotifyId = window.localStorage.getItem('spotifyId');
+      const response = await axios.post('/api/prompt/json', request, {
+        headers: {
+          spotifyId: spotifyId
+        }
+    });
+        //const response = await axios.post('/api/prompt', request);
+      dispatch({ type: 'CREATE_PROMPT', prompt: response.data });
+    };
+  };
+
   export const getAllPrompts = (prompt)=> {
     return async(dispatch)=> {
       const spotifyId = window.localStorage.getItem('spotifyId');
