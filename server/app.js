@@ -102,6 +102,7 @@ const generateRandomString = length => {
               spotifyId: spotUserData.data.id
             }
           });
+          
           if(!user){
             await User.create({email: spotUserData.data.email, spotifyId: spotUserData.data.id, display_name: spotUserData.data.display_name, followerCount: spotUserData.data.followers.total, image: spotUserData.data.images[0].url });
 

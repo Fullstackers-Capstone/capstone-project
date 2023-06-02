@@ -128,6 +128,10 @@ export const getCurrentUserPlaylists = (limit = 20) => {
   return spotifyAxios.get(`/me/playlists?limit=${limit}`);
 };
 
+// export const getPlaylistTracks = (playlist) => {
+//   return spotifyAxios.get(`/me/playlists/${playlist.id}/tracks`);
+// };
+
 // we will add a get top artists function, pass in short term time range (4 weeks)
 //https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
   export const getTopArtists = (time_range = 'short_term') => {
@@ -173,7 +177,11 @@ export const getCurrentUserPlaylists = (limit = 20) => {
 // playlist_id - The Spotify ID for the playlist.
 
 export const getPlaylistById = playlist_id => {
-  return spotifyAxios.get(`/playlists/${playlist_id}`);
+  return spotifyAxios.get(`/playlists/${playlist_id}/`);
+}
+
+export const getPlaylistTracks = playlist_id => {
+  return spotifyAxios.get(`/playlists/${playlist_id}/tracks?limit=8`);
 }
 
 //get audio features for tracks
