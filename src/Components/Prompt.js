@@ -9,7 +9,7 @@ const Prompt = () => {
   const { prompt, auth } = useSelector(state => state);
   const [input,setInput] = useState('');
   const [topTracks, setTopTracks] = useState(''); 
-  const [jsonTopTracks, setJsonTopTracks] = useState('');
+  const [stringTopTracks, setStringTopTracks] = useState('');
 
 
   useEffect(()=> {
@@ -26,12 +26,16 @@ const Prompt = () => {
     async function setJson(){
       if (await topTracks != ''){
         topTracks.then(function(result) {
-          const arr = [];
+          let str = '';
           result.data.items.forEach( track => {
-            arr.push({"id" : track.id,"title": track.name,"artist": track.artists[0].name,"album": track.album.name,"duration": track.duration_ms})
+            if (str.length < 5){
+              str += `"${track.name}" by ${track.artists[0].name}`;
+            }
+            else{
+              str += `, "${track.name}" by ${track.artists[0].name}`;
+            }
           })
-          console.log(arr);
-          setJsonTopTracks(arr);
+          setStringTopTracks(str);
         });
       }
     }
@@ -56,7 +60,7 @@ const Prompt = () => {
       <div className='prompt-Element'>
       <button onClick={()=> {dispatch(getResponse('Give me a playlist of ten random popular songs on spotify.'))}}>Generate Random Playlist</button>
       <button onClick={()=> {dispatch(getResponse('List ten random popular artists on spotify.'))}}>Find Artists</button>
-      <button onClick={()=> {dispatch(getJSONResponse(10, JSON.stringify(jsonTopTracks)))}}>Given JSON</button>
+      <button onClick={()=> {dispatch(getJSONResponse(10, stringTopTracks))}}>Given JSON</button>
       </div>
 
       <div className='messages'>
