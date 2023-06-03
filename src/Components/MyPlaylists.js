@@ -88,7 +88,7 @@ const MyPlaylists = () => {
                   </div>
               </div>
               <div className='pl-thumb-ellipsis-container'>
-                <a href={playlist.href} target='_blank'>Open in Spotify <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a href={`spotify:playlist:${playlist.id}`}>Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
             </div>
         </div>

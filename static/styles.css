@@ -503,7 +503,7 @@ header {
   font-size: .75rem;
 }
 
-.track-lineitem:nth-child(2){
+/* .track-lineitem:nth-child(2){
   opacity: 0.8;
 }
 
@@ -531,8 +531,10 @@ header {
 .track-lineitem:nth-child(9){
   opacity: 0.02;
   margin-bottom: -.15rem;
+
 } 
 */
+
 .track-list {
   display: flex;
   flex-direction: column;
@@ -552,3 +554,4 @@ header {
 .track-item span {
   color: white;
 }
+
