@@ -8,12 +8,17 @@ const MyPlaylists = () => {
   const { auth } = useSelector(state => state);
   const [playlists, setPlaylists] = useState([]);
 
-  function msConversion(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
+  const msConversion = (millis) => {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = ((millis % 60000) / 1000).toFixed(0);
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
 
+  const copier = (inp) => {
+    navigator.clipboard.writeText(inp).then(() => {
+        alert("Copied: " + inp);
+    })
+  }
 
   useEffect(() => {
     const getLists = async() => {
@@ -87,9 +92,26 @@ const MyPlaylists = () => {
                     {auth.display_name.toUpperCase()}
                   </div>
               </div>
-              <div className='pl-thumb-ellipsis-container'>
-                <a href={`spotify:playlist:${playlist.id}`}>Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
-              </div>
+
+            <div className='pl-thumb-ellipsis-container'>
+
+                <ul className='ellipsis-dropdown'>
+                    <button>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </button>
+                    <ul className='ellipsis-dropdown-content'>
+                        <li key='spotOpen'>
+                            <a href={`spotify:playlist:${playlist.id}`}>
+                                Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </li>
+                        <li key='copyLink' onClick={() => copier(playlist.href)}>Copy Link</li>
+                    </ul>
+                    
+                </ul>
+
+            </div>
+
             </div>
         </div>
         )
