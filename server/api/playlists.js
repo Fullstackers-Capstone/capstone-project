@@ -11,7 +11,7 @@ app.get('/', async (req, res, next) => {
     }
 })
 
-// 6/1 MT
+/*
 app.get('/:id', async (req, res, next) => {
     try{
         const id = req.params.id;
@@ -30,6 +30,7 @@ app.get('/:id', async (req, res, next) => {
         next(err);
     }
 })
+*/
 
 
 

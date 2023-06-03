@@ -15,7 +15,7 @@ const Prompt = () => {
     async function getUserTopTracks() {
       if (auth.id) {
         const response = await getTopTracks();
-        setTopTracks(response.data.items);
+        setTopTracks(response.data.items.map((track) => ({ ...track, selected: false })));
       }
     }
     getUserTopTracks();
@@ -38,13 +38,38 @@ const Prompt = () => {
     dispatch(getResponse(input));
   };
 
+  const handleTrackSelection = (index) => {
+    setTopTracks((prevTracks) => {
+      const updatedTracks = [...prevTracks];
+      updatedTracks[index].selected = !updatedTracks[index].selected;
+      return updatedTracks;
+    });
+  };
+
+  const parseResponseString = (responseString) => {
+    const regex = /"(.*?)" by (.*?)(?=,|$)/g;
+    const tracks = [];
+    let match;
+    while ((match = regex.exec(responseString))) {
+      tracks.push({ name: match[1], artists: [{ name: match[2] }], selected: false });
+    }
+    return tracks;
+  };
+
+  useEffect(() => {
+    if (stringTopTracks) {
+      const parsedTracks = parseResponseString(stringTopTracks);
+      setTopTracks(parsedTracks);
+    }
+  }, [stringTopTracks]);
+
   return (
-    <div className="prompt-Container">
+    <div className="prompt-container">
       <form onSubmit={submit}>
         <input onChange={(ev) => setInput(ev.target.value)}></input>
-        <button className="StyledLogoutButton">Test</button>
+        <button className="styled-logout-button">Test</button>
       </form>
-      <div className="prompt-Element">
+      <div className="prompt-element">
         <button
           onClick={() => {
             dispatch(
@@ -67,27 +92,46 @@ const Prompt = () => {
       </div>
 
       <div className="messages">
-      {prompt.map((_prompt) => {
-  return (
-    <div key={_prompt.id} id={_prompt.id}>
-      <div className="userMessage">{_prompt.userPrompt}</div>
-      {typeof _prompt.response === 'object' ? (
-        <div className="chatgptMessage">
-          <pre>{JSON.stringify(_prompt.response, null, 2)}</pre>
-        </div>
-      ) : (
-        <div className="chatgptMessage">{_prompt.response}</div>
-      )}
-    </div>
-  );
-})}
-
+        {prompt.map((_prompt) => {
+          return (
+            <div key={_prompt.id} id={_prompt.id}>
+              <div className="user-message">{_prompt.userPrompt}</div>
+              {typeof _prompt.response === 'object' ? (
+                <div>
+                  {Array.isArray(_prompt.response) ? (
+                    <ul className="track-list">
+                      {_prompt.response.map((track, index) => (
+                        <li key={index} className="track-item">
+                          <input
+                            type="checkbox"
+                            checked={track.selected}
+                            onChange={() => handleTrackSelection(index)}
+                          />
+                          <span>
+                            {track.name} by {track.artists[0].name}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <pre>{JSON.stringify(_prompt.response, null, 2)}</pre>
+                  )}
+                </div>
+              ) : (
+                <div className="chatgpt-message">{_prompt.response}</div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 };
 
 export default Prompt;
+
+
+
 
 
 
