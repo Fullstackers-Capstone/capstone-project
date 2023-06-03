@@ -8,6 +8,12 @@ const Discover = () => {
   const { auth } = useSelector(state => state);
   const [playlists, setPlaylists] = useState([]);
 
+  function msConversion(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
   useEffect(() => {
     const getLists = async() => {
 
@@ -40,38 +46,43 @@ const Discover = () => {
     <div id='pl-container'>
       {playlists.map(playlist => {
         return(
-          <div id='pl-thumb' key={playlist.id}>
-            <div id='disc-thumb-name'>
+          <div className='pl-thumb' key={playlist.id}>
+            <div className='disc-thumb-name'>
               {playlist.name}
             </div>
 
-            <div id='disc-thumb-data-container'>
+            <div className='disc-thumb-data-container'>
 
-              <div id='pl-thumb-img'>
-                <a href={playlist.href}>
-                  <img src={playlist.image}/>
-                </a>
-              </div>
-              <div id='pl-thumb-tracks'>
+                <div className='pl-thumb-img'>
+                    <a href={playlist.href}>
+                        <img src={playlist.image}/>
+                    </a>
+                </div>
+
+              <div className='pl-thumb-tracks'>
                 {playlist.tracks.data.items.map(_track => {
                 return(
-                  <div key={_track.id}><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name}</div>
+                  <div key={_track.id} className='track-lineitem'><span className='disc-track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                 )
                 })}
               </div>
             </div>
 
-            <div id='disc-thumb-stats-container'>
-              <div id='pl-thumb-user-container'>
-                  <div id='pl-thumb-user-img'>
+            <div className='disc-thumb-prompt-container'>
+                Prompt: this is where the prompt will go.
+            </div>
+
+            <div className='disc-thumb-stats-container'>
+              <div className='pl-thumb-user-container'>
+                  <div className='pl-thumb-user-img'>
                     <img src={auth.image}/>
                   </div>
-                  <div id='pl-thumb-user-name'>
+                  <div className='pl-thumb-user-name'>
                     {auth.display_name.toUpperCase()}
                   </div>
               </div>
-              <div id='pl-thumb-elipses-container'>
-                    <button>...</button>
+              <div className='dist-thumb-ellipsis-container'>
+                <a href={playlist.href} target='_blank'>Open in Spotify <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
 
             </div>

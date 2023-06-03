@@ -13,40 +13,11 @@ import Discover from './Discover';
 const Home = () => {
 
   const { auth } = useSelector(state => state);
-  const [playlists, setPlaylists] = useState([]);
   const [selected, setSelected] = useState(true);
-
-  useEffect(() => {
-    const getLists = async() => {
-
-    const lists = await getCurrentUserPlaylists(5);
-    console.log(lists);
-
-    const listsData = await Promise.all(
-      lists.data.items.map(async (_playlist) => {
-        const tracks = await getPlaylistTracks(_playlist.id)
-        return {
-          id: _playlist.id,
-          name: _playlist.name,
-          image: _playlist.images[0].url,
-          href: _playlist.external_urls.spotify,
-          tracks: tracks
-        };
-      })
-    );
-  
-      setPlaylists(listsData);
-    }
-    catchErrors(getLists());
-  }, []);
-
-  const dispatch = useDispatch();
 
   if(!auth){
     return null;
   }
-
-  console.log(playlists);
 
   return(
 
