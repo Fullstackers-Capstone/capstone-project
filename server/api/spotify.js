@@ -193,3 +193,29 @@ export const getPlaylistTracks = playlist_id => {
 export const getAudioFeaturesForTracks = ids => {
   return spotifyAxios.get(`/audio-features?ids=${ids}`);
 };
+
+
+export const createPlaylist = async (userId, name, description) => {
+  try {
+    const response = await spotifyAxios.post(`/users/${userId}/playlists`, {
+      name,
+      description,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const addTracksToPlaylist = async (playlistId, trackUris) => {
+  try {
+    const response = await spotifyAxios.post(`/playlists/${playlistId}/tracks`, {
+      uris: trackUris,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
