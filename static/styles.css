@@ -425,6 +425,9 @@ header {
   padding: 1rem;
   padding-top: 2rem;
   padding-left: 0;
+  -webkit-mask: linear-gradient(#000, #0000);
+  mask: linear-gradient(#000, #0000);
+  /* mix-blend-mode: hard-light; */
 }
 
 .pl-thumb-tracks div{
@@ -513,7 +516,7 @@ header {
   font-size: .75rem;
 }
 
-.track-lineitem:nth-child(2){
+/* .track-lineitem:nth-child(2){
   opacity: 0.8;
 }
 
@@ -541,4 +544,4 @@ header {
 .track-lineitem:nth-child(9){
   opacity: 0.02;
   margin-bottom: -.15rem;
-}
+} */
