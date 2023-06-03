@@ -8,6 +8,13 @@ const MyPlaylists = () => {
   const { auth } = useSelector(state => state);
   const [playlists, setPlaylists] = useState([]);
 
+  function msConversion(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
+
   useEffect(() => {
     const getLists = async() => {
 
@@ -16,6 +23,7 @@ const MyPlaylists = () => {
     const listsData = await Promise.all(
       lists.data.items.map(async (_playlist) => {
         const tracks = await getPlaylistTracks(_playlist.id)
+        console.log(tracks);
         return {
           id: _playlist.id,
           name: _playlist.name,
@@ -31,6 +39,9 @@ const MyPlaylists = () => {
     catchErrors(getLists());
   }, []);
 
+  console.log(playlists)
+
+
   if(!auth){
     return null;
   }
@@ -40,42 +51,47 @@ const MyPlaylists = () => {
     <div id='pl-container'>
       {playlists.map(playlist => {
         return(
-          <div id='pl-thumb' key={playlist.id}>
-            <div id='pl-thumb-name'>
+        <div className='pl-thumb' key={playlist.id}>
+            <div className='pl-thumb-name'>
               {playlist.name}
             </div>
 
-            <div id='pl-thumb-data-container'>
+            <div className='pl-thumb-data-container'>
 
-              <div id='pl-thumb-img'>
-                <a href={playlist.href}>
-                  <img src={playlist.image}/>
-                </a>
-              </div>
-              <div id='pl-thumb-tracks'>
+                <div className='pl-thumb-img'>
+                    <a href={playlist.href}>
+                        <img src={playlist.image}/>
+                    </a>
+                </div>
+
+
+            <div className='pl-thumb-tracks'>
                 {playlist.tracks.data.items.map(_track => {
                 return(
-                  <div key={_track.id}><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name}</div>
+                  <div key={_track.id} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                 )
                 })}
               </div>
             </div>
 
-            <div id='pl-thumb-stats-container'>
-              <div id='pl-thumb-user-container'>
-                  <div id='pl-thumb-user-img'>
+            <div className='pl-thumb-prompt-container'>
+                Prompt: this is where the prompt will go.
+            </div>
+
+            <div className='pl-thumb-stats-container'>
+              <div className='pl-thumb-user-container'>
+                  <div className='pl-thumb-user-img'>
                     <img src={auth.image}/>
                   </div>
-                  <div id='pl-thumb-user-name'>
+                  <div className='pl-thumb-user-name'>
                     {auth.display_name.toUpperCase()}
                   </div>
               </div>
-              <div id='pl-thumb-elipses-container'>
-                    <button>...</button>
+              <div className='pl-thumb-ellipsis-container'>
+                <a href={playlist.href} target='_blank'>Open in Spotify <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
-
             </div>
-          </div>
+        </div>
         )
       })}
     </div>

@@ -183,7 +183,7 @@ export const getPlaylistById = playlist_id => {
 }
 
 export const getPlaylistTracks = playlist_id => {
-  return spotifyAxios.get(`/playlists/${playlist_id}/tracks?limit=8`);
+  return spotifyAxios.get(`/playlists/${playlist_id}/tracks?limit=9`);
 }
 
 //get audio features for tracks
