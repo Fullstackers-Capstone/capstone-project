@@ -98,7 +98,7 @@ const MyPlaylists = () => {
 
                 <ul className='ellipsis-dropdown'>
                     <button>
-                        <i class="fa-solid fa-angle-down"></i>
+                        <i className="fa-solid fa-angle-down"></i>
                     </button>
                     <ul className='ellipsis-dropdown-content'>
                         <li key='spotOpen'>
