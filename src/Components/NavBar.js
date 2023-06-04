@@ -14,7 +14,7 @@ const NavBar = () => {
     return(
         <div className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
         <button className="dropdown-toggle" onClick={handleDropdownToggle}>
-          Navigation
+          <img className='navbar-avatar' src={auth.image}/>
         </button>
         <div className="dropdown-content">
           <Link to="/" onClick={handleDropdownToggle}>Home</Link>
