@@ -60,7 +60,7 @@ const Discover = () => {
           <div className='pl-thumb-data-container'>
 
               <div className='pl-thumb-img'>
-                  <a href={playlist.href}>
+                  <a href={playlist.href} target='_blank'>
                       <img src={playlist.image}/>
                   </a>
               </div>

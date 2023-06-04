@@ -60,7 +60,7 @@ const App = () => {
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/users/:id" element={<Profile />}/>
                 <Route path="/prompt" element={<Prompt />}/>
-                <Route path="/playlist-type" element={<PlaylistType />}/>
+                <Route path="/create" element={<PlaylistType />}/>
                 <Route path="/discover" element={<Discover />}/>
               </Routes>
             </div>
