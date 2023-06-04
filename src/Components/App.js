@@ -41,13 +41,14 @@ const App = () => {
     <div>
       <header>
         <div className="nav">
-          <h1 className="title">
-            <Link to="/">Serenade</Link>
-            <BsSpotify />
-          </h1>
-          {token && (
+        {token && (
             <NavBar/>
           )}
+          <h1 className="title">
+            <Link to="/">Serenade</Link>
+            <i className="fa-brands fa-spotify" id='spotify-logo'></i>
+            {/* <BsSpotify /> */}
+          </h1>
         </div>
       </header>
         <div>

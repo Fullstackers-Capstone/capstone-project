@@ -21,11 +21,11 @@ const NavBar = () => {
           <Hamburger toggled={hamburgerOpen} toggle={setHambugerOpen}/>
         </div>
         <div className="dropdown-content">
-          <Link to="/" onClick={handleDropdownToggle}>Home</Link>
-          <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link>
-          <Link to="/contact" onClick={handleDropdownToggle}>Contact</Link>
-          <Link to="/prompt" onClick={handleDropdownToggle}>Prompt</Link>
-          <Link onClick={logout}>Logout</Link>
+            <Link to="/" onClick={handleDropdownToggle}>Home</Link>
+            <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link>
+            <Link to="/prompt" onClick={handleDropdownToggle}>Prompt</Link>
+            <Link to="/contact" onClick={handleDropdownToggle}>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link>
+            <Link onClick={logout}>Logout</Link>
         </div>
       </div>
     )
