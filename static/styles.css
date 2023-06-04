@@ -201,7 +201,7 @@ header {
 }
 
 .dropdown-toggle {
-  background-color: var(--spotifyGreen);
+  /* background-color: var(--spotifyGreen); */
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -567,3 +567,5 @@ header {
 .track-item span {
   color: white;
 }
+
+
