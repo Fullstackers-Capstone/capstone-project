@@ -64,7 +64,7 @@ const MyPlaylists = () => {
             <div className='pl-thumb-data-container'>
 
                 <div className='pl-thumb-img'>
-                    <a href={playlist.href}>
+                    <a href={playlist.href} target='_blank'>
                         <img src={playlist.image}/>
                     </a>
                 </div>
@@ -100,14 +100,14 @@ const MyPlaylists = () => {
                     <button>
                         <i className="fa-solid fa-angle-down"></i>
                     </button>
-                    <ul className='ellipsis-dropdown-content'>
+                    <div className='ellipsis-dropdown-content'>
                         <li key='spotOpen'>
                             <a href={`spotify:playlist:${playlist.id}`}>
                                 Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
                             </a>
                         </li>
                         <li key='copyLink' onClick={() => copier(playlist.href)}>Copy Link</li>
-                    </ul>
+                    </div>
                     
                 </ul>
 

@@ -36,7 +36,9 @@ const Profile = () => {
     }
     
     return(
-        <div>
+        <div id='content-body'>
+            <div id='pl-container'>
+        <div className='prof-container'>
             <h1><span className='prof-title'>Profile</span>: ({ auth.display_name.toUpperCase() })</h1>
             <h1><span className='prof-title'>Spotify User ID</span>: ({ auth.spotifyId.toUpperCase() })</h1>
             <h1><span className='prof-title'>Email</span>: { auth.email }</h1>
@@ -45,6 +47,8 @@ const Profile = () => {
             {/* <h1><span className='prof-title'>Discover Playlists?</span> 
             <Switch checked={ discover } onClick={() => discoverToggle()}/></h1> */}
             <img src={ auth.image }/>
+        </div>
+        </div>
         </div>
     )
 }
