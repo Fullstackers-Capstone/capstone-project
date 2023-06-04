@@ -13,8 +13,6 @@ import Prompt from './Prompt';
 import Discover from './Discover';
 import PlaylistType from './PlaylistType';
 
-
-
 const App = () => {
 
   const [token, setToken] = useState(null);
