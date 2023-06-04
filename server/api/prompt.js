@@ -48,8 +48,6 @@ app.post('/json', async (req, res, next) => {
     });
 
     await prompt.askChatGPT();
-
-    // Attach the req.body.spotifyData to the response
     prompt.response = req.body.spotifyData;
     await prompt.save();
 
