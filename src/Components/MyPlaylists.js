@@ -69,7 +69,6 @@ const MyPlaylists = () => {
                     </a>
                 </div>
 
-
             <div className='pl-thumb-tracks'>
                 {playlist.tracks.data.items.map(_track => {
                 return(
@@ -80,7 +79,9 @@ const MyPlaylists = () => {
             </div>
 
             <div className='pl-thumb-prompt-container'>
+                <div className='pl-prompt'>
                 Prompt: this is where the prompt will go.
+                </div>
             </div>
 
             <div className='pl-thumb-stats-container'>
@@ -117,6 +118,7 @@ const MyPlaylists = () => {
         )
       })}
     </div>
+
   )
 };
 
