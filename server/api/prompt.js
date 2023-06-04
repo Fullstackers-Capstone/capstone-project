@@ -70,7 +70,6 @@ app.post('/json', async (req, res, next) => {
   }); 
   
   
-  
   app.delete('/', isLoggedIn, async(req, res, next)=> {
       try {
         const prompt = await Prompt.findById(req.prompt.id); 

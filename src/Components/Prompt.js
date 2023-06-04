@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getResponse, getJSONResponse, createPrompt } from '../store';
 import Searcher from './Searcher';
-import { getTopTracks } from '../../server/api/spotify';
-//import { createPlaylist, addTracksToPlaylist } from '../../server/api/spotifyService';
+import { getTopTracks, createPlaylist, addTracksToPlaylist } from '../../server/api/spotify';
 
 const Prompt = () => {
   const dispatch = useDispatch();
@@ -64,21 +63,24 @@ const Prompt = () => {
     }
   }, [stringTopTracks]);
 
-  const createPlaylist = async () => {
+
+  const createPlaylists = async () => {
+
     const selectedTracks = topTracks.filter((track) => track.selected);
     const trackURIs = selectedTracks.map((track) => track.uri);
 
     try {
-      const playlist = await createPlaylist(auth.id, 'My Playlist', 'Playlist created from selected tracks');
+      const playlist = await createPlaylist(auth.spotifyId, 'My Playlist', 'Playlist created from selected tracks');
       const playlistId = playlist.id;
-
+  
       await addTracksToPlaylist(playlistId, trackURIs);
-
+  
       console.log('Playlist created and tracks added');
     } catch (error) {
       console.error('Error creating playlist:', error);
     }
   };
+  
 
   return (
     <div className="prompt-container">
@@ -106,7 +108,7 @@ const Prompt = () => {
         <button onClick={() => dispatch(getJSONResponse(10, stringTopTracks))}>
           Given JSON
         </button>
-        <button onClick={createPlaylist}>Create Playlist</button> {/* Added createPlaylist button */}
+        <button onClick={createPlaylists}>Create Playlist</button> {/* Added createPlaylist button */}
       </div>
 
       <div className="messages">

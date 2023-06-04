@@ -176,6 +176,42 @@ export const getAudioFeaturesForTracks = (ids) => {
   return spotifyAxios.get(`/audio-features?ids=${ids}`);
 };
 
+// Function to create a playlist
+export const createPlaylist = async (user_id, name, description) => {
+  try {
+    const response = await spotifyAxios.post(
+      `/users/${user_id}/playlists`,
+      {
+        name,
+        description,
+        public: false,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+// Function to add tracks to a playlist
+export const addTracksToPlaylist = async (playlistId, trackURIs) => {
+  try {
+    const response = await spotifyAxios.post(
+      `/playlists/${playlistId}/tracks`,
+      {
+        uris: trackURIs,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+
+
 
 /* MT 6/4 updates
 
