@@ -45,7 +45,9 @@ const generateRandomString = length => {
     const scope = [
       'user-read-private',
       'user-read-email',
-      'user-top-read'
+      'user-top-read',
+      'playlist-modify-public',
+      'playlist-modify-private',
     ].join(" ")
   
     const queryParams = querystring.stringify({
