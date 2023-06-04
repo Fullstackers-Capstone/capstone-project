@@ -128,10 +128,13 @@ export const getTopArtists = (time_range = 'short_term') => {
   return spotifyAxios.get(`/me/top/artists?time_range=${time_range}`);
 };
 
-// Get the user's top tracks
+
 export const getTopTracks = (time_range = 'short_term') => {
   return spotifyAxios.get(`/me/top/tracks?time_range=${time_range}`);
 };
+
+
+
 
 // Search for artists
 export const searchArtists = async (searchKey) => {
@@ -176,17 +179,13 @@ export const getAudioFeaturesForTracks = (ids) => {
   return spotifyAxios.get(`/audio-features?ids=${ids}`);
 };
 
-// Function to create a playlist
-export const createPlaylist = async (user_id, name, description) => {
+
+export const createPlaylist = async (userId, name, description) => {
   try {
-    const response = await spotifyAxios.post(
-      `/users/${user_id}/playlists`,
-      {
-        name,
-        description,
-        public: false,
-      }
-    );
+    const response = await spotifyAxios.post(`/users/${userId}/playlists`, {
+      name,
+      description,
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -194,15 +193,11 @@ export const createPlaylist = async (user_id, name, description) => {
   }
 };
 
-// Function to add tracks to a playlist
-export const addTracksToPlaylist = async (playlistId, trackURIs) => {
+export const addTracksToPlaylist = async (playlistId, trackUris) => {
   try {
-    const response = await spotifyAxios.post(
-      `/playlists/${playlistId}/tracks`,
-      {
-        uris: trackURIs,
-      }
-    );
+    const response = await spotifyAxios.post(`/playlists/${playlistId}/tracks`, {
+      uris: trackUris,
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -211,9 +206,7 @@ export const addTracksToPlaylist = async (playlistId, trackURIs) => {
 };
 
 
-
-
-/* MT 6/4 updates
+/* PRE MT 6/4 UPDATES
 
 import axios from 'axios';
 // Map for localStorage keys. Helps us refer to keys for key/value pair of localstorage
@@ -411,31 +404,6 @@ export const getAudioFeaturesForTracks = ids => {
   return spotifyAxios.get(`/audio-features?ids=${ids}`);
 };
 
-
-export const createPlaylist = async (userId, name, description) => {
-  try {
-    const response = await spotifyAxios.post(`/users/${userId}/playlists`, {
-      name,
-      description,
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
-
-export const addTracksToPlaylist = async (playlistId, trackUris) => {
-  try {
-    const response = await spotifyAxios.post(`/playlists/${playlistId}/tracks`, {
-      uris: trackUris,
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
 
 
 */

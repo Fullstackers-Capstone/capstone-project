@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-// Action types
+
 const SET_PROMPT = 'SET_PROMPT';
 const CREATE_PROMPT = 'CREATE_PROMPT';
 
-// Reducer
 const initialState = [];
 
 const promptReducer = (state = initialState, action) => {
@@ -18,7 +17,7 @@ const promptReducer = (state = initialState, action) => {
   }
 };
 
-// Action creators
+
 export const setPrompt = (prompt) => ({
   type: SET_PROMPT,
   prompt
@@ -69,7 +68,7 @@ export const getAllPrompts = () => {
 
 export default promptReducer;
 
-/*
+/* PRE MT 6/4 UPDATES
 
 import axios from 'axios';
 
