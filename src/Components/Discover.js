@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentUserPlaylists, getPlaylistTracks } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
+import { useNavigate } from 'react-router-dom';
 
 const Discover = () => {
 
   const { auth } = useSelector(state => state);
   const [playlists, setPlaylists] = useState([]);
+
+  const navigate = useNavigate();
 
   const msConversion = (millis) => {
     const minutes = Math.floor(millis / 60000);
@@ -18,6 +21,10 @@ const Discover = () => {
     navigator.clipboard.writeText(inp).then(() => {
         alert("Copied: " + inp);
     })
+  }
+
+  const unlockPro = () => {
+    navigate('/unlock-pro');
   }
 
   useEffect(() => {
@@ -103,6 +110,8 @@ const Discover = () => {
                           </a>
                       </li>
                       <li key='copyLink' onClick={() => copier(playlist.href)}>Copy Link</li>
+
+                      <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>
                   </ul>
                   
               </ul>

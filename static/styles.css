@@ -596,6 +596,16 @@ header {
 .ellipsis-dropdown-content li:last-child{
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  color: red;
+}
+
+.ellipsis-dropdown-content a{
+  color: red;
+}
+
+.ellipsis-dropdown-content li:last-child:hover{
+  background-color: red;
+  color: black;
 }
 
 
