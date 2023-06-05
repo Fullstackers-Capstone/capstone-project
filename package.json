@@ -33,6 +33,7 @@
     "openai": "^3.2.1",
     "pg": "^8.8.0",
     "react-icons": "^4.8.0",
+    "react-ios-switch": "^0.1.19",
     "react-router": "^6.11.2",
     "sequelize": "^6.25.3",
     "stream-browserify": "^3.0.0",
