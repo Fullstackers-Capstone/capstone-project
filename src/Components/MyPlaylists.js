@@ -27,6 +27,14 @@ const MyPlaylists = () => {
     navigate('/unlock-pro');
   }
 
+  const dateify = (unicode) => {
+    return unicode.slice(0, 10);
+  }
+
+  const timeify = (unicode) => {
+    return unicode.slice(11, 16);
+  }
+
   useEffect(() => {
     const getLists = async() => {
 
@@ -35,24 +43,19 @@ const MyPlaylists = () => {
     const listsData = await Promise.all(
       lists.data.items.map(async (_playlist) => {
         const tracks = await getPlaylistTracks(_playlist.id)
-        console.log(tracks);
         return {
           id: _playlist.id,
           name: _playlist.name,
           image: _playlist.images[0].url,
           href: _playlist.external_urls.spotify,
-          tracks: tracks
+          tracks: tracks,
         };
       })
     );
-  
       setPlaylists(listsData);
     }
     catchErrors(getLists());
   }, []);
-
-  console.log(playlists)
-
 
   if(!auth){
     return null;
@@ -79,7 +82,7 @@ const MyPlaylists = () => {
             <div className='pl-thumb-tracks'>
                 {playlist.tracks.data.items.map(_track => {
                 return(
-                  <div key={_track.id} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
+                  <div key={_track.track.duration_ms} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                 )
                 })}
               </div>
@@ -96,8 +99,13 @@ const MyPlaylists = () => {
                   <div className='pl-thumb-user-img'>
                     <img src={auth.image}/>
                   </div>
-                  <div className='pl-thumb-user-name'>
-                    {auth.display_name.toUpperCase()}
+                  <div className='pl-thumb-user-name-container'>
+                    <div className='pl-thumb-user-name'>
+                        {auth.display_name.toUpperCase()}
+                    </div>
+                    <div className='pl-thumb-createdAt'>
+                        <span className='track-artist'>Created:</span> {dateify(auth.createdAt)} @ {timeify(auth.createdAt)}
+                    </div>
                   </div>
               </div>
 

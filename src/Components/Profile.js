@@ -57,20 +57,20 @@ const Profile = () => {
                 <div><span className='prof-title'>Spotify User ID:</span> { auth.spotifyId }</div>
                 <div><span className='prof-title'>Email:</span> { auth.email }</div>
 
-                <div className='prof-edit-info'>
+                {/* <div className='prof-edit-info'>
                     Visit your <a href=''>Spotify Profile <i className="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> to make changes to your user info.
-                </div>
+                </div> */}
 
-                <div style={{marginTop: '2rem'}}><span className='prof-title'>Serenade Playlist Count:</span> { auth.playlistCount }</div>
+                <div><span className='prof-title'>Serenade Playlist Count:</span> { auth.playlistCount }</div>
 
                 <div><span className='prof-title'>Account Status:</span> {(pro) ? <span className='prof-unlock-pro'>Pro</span> : <span>Free (<span className='prof-unlock-pro'><Link to='/unlock-pro'>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link></span>)</span>}</div>
 
             </div>
             
 
-                <div className='prof-img'>
+                {/* <div className='prof-img'>
                         <img src={auth.image}/>
-                </div>
+                </div> */}
 
             </div>
 
