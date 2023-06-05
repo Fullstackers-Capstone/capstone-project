@@ -2,11 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentUserPlaylists, getPlaylistTracks } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
+import { useNavigate } from 'react-router-dom';
 
 const MyPlaylists = () => {
 
   const { auth } = useSelector(state => state);
   const [playlists, setPlaylists] = useState([]);
+
+  const navigate = useNavigate();
+
+  const msConversion = (millis) => {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
+  const copier = (inp) => {
+    navigator.clipboard.writeText(inp).then(() => {
+        alert("Copied: " + inp);
+    })
+  }
+
+  const unlockPro = () => {
+    navigate('/unlock-pro');
+  }
 
   useEffect(() => {
     const getLists = async() => {
@@ -16,6 +35,7 @@ const MyPlaylists = () => {
     const listsData = await Promise.all(
       lists.data.items.map(async (_playlist) => {
         const tracks = await getPlaylistTracks(_playlist.id)
+        console.log(tracks);
         return {
           id: _playlist.id,
           name: _playlist.name,
@@ -31,6 +51,9 @@ const MyPlaylists = () => {
     catchErrors(getLists());
   }, []);
 
+  console.log(playlists)
+
+
   if(!auth){
     return null;
   }
@@ -40,45 +63,71 @@ const MyPlaylists = () => {
     <div id='pl-container'>
       {playlists.map(playlist => {
         return(
-          <div id='pl-thumb' key={playlist.id}>
-            <div id='pl-thumb-name'>
-              {playlist.name}
+        <div className='pl-thumb' key={playlist.id}>
+            <div className='pl-thumb-name'>
+                <a href={playlist.href} target='_blank'>{playlist.name}</a>
             </div>
 
-            <div id='pl-thumb-data-container'>
+            <div className='pl-thumb-data-container'>
 
-              <div id='pl-thumb-img'>
-                <a href={playlist.href}>
-                  <img src={playlist.image}/>
-                </a>
-              </div>
-              <div id='pl-thumb-tracks'>
+                <div className='pl-thumb-img'>
+                    <a href={playlist.href} target='_blank'>
+                        <img src={playlist.image}/>
+                    </a>
+                </div>
+
+            <div className='pl-thumb-tracks'>
                 {playlist.tracks.data.items.map(_track => {
                 return(
-                  <div key={_track.id}><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name}</div>
+                  <div key={_track.id} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                 )
                 })}
               </div>
             </div>
 
-            <div id='pl-thumb-stats-container'>
-              <div id='pl-thumb-user-container'>
-                  <div id='pl-thumb-user-img'>
+            <div className='pl-thumb-prompt-container'>
+                <div className='pl-prompt'>
+                Prompt: this is where the prompt will go.
+                </div>
+            </div>
+
+            <div className='pl-thumb-stats-container'>
+              <div className='pl-thumb-user-container'>
+                  <div className='pl-thumb-user-img'>
                     <img src={auth.image}/>
                   </div>
-                  <div id='pl-thumb-user-name'>
+                  <div className='pl-thumb-user-name'>
                     {auth.display_name.toUpperCase()}
                   </div>
               </div>
-              <div id='pl-thumb-elipses-container'>
-                    <button>...</button>
-              </div>
+
+            <div className='pl-thumb-ellipsis-container'>
+
+                <ul className='ellipsis-dropdown'>
+                    <button>
+                        <i className="fa-solid fa-angle-down"></i>
+                    </button>
+                    <div className='ellipsis-dropdown-content'>
+                        <li key='spotOpen'>
+                            <a href={`spotify:playlist:${playlist.id}`}>
+                                Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </li>
+                        <li key='copyLink' onClick={() => copier(playlist.href)}>Copy Link</li>
+
+                        <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>
+                    </div>
+                    
+                </ul>
 
             </div>
-          </div>
+
+            </div>
+        </div>
         )
       })}
     </div>
+
   )
 };
 

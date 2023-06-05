@@ -2,11 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentUserPlaylists, getPlaylistTracks } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
+import { useNavigate } from 'react-router-dom';
 
 const Discover = () => {
 
   const { auth } = useSelector(state => state);
   const [playlists, setPlaylists] = useState([]);
+
+  const navigate = useNavigate();
+
+  const msConversion = (millis) => {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
+  const copier = (inp) => {
+    navigator.clipboard.writeText(inp).then(() => {
+        alert("Copied: " + inp);
+    })
+  }
+
+  const unlockPro = () => {
+    navigate('/unlock-pro');
+  }
 
   useEffect(() => {
     const getLists = async() => {
@@ -38,47 +57,72 @@ const Discover = () => {
   return(
 
     <div id='pl-container'>
-      {playlists.map(playlist => {
-        return(
-          <div id='pl-thumb' key={playlist.id}>
-            <div id='disc-thumb-name'>
-              {playlist.name}
-            </div>
+    {playlists.map(playlist => {
+      return(
+      <div className='pl-thumb' key={playlist.id}>
+          <div className='disc-thumb-name'>
+            {playlist.name}
+          </div>
 
-            <div id='disc-thumb-data-container'>
+          <div className='pl-thumb-data-container'>
 
-              <div id='pl-thumb-img'>
-                <a href={playlist.href}>
-                  <img src={playlist.image}/>
-                </a>
-              </div>
-              <div id='pl-thumb-tracks'>
-                {playlist.tracks.data.items.map(_track => {
-                return(
-                  <div key={_track.id}><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name}</div>
-                )
-                })}
-              </div>
-            </div>
-
-            <div id='disc-thumb-stats-container'>
-              <div id='pl-thumb-user-container'>
-                  <div id='pl-thumb-user-img'>
-                    <img src={auth.image}/>
-                  </div>
-                  <div id='pl-thumb-user-name'>
-                    {auth.display_name.toUpperCase()}
-                  </div>
-              </div>
-              <div id='pl-thumb-elipses-container'>
-                    <button>...</button>
+              <div className='pl-thumb-img'>
+                  <a href={playlist.href} target='_blank'>
+                      <img src={playlist.image}/>
+                  </a>
               </div>
 
+          <div className='pl-thumb-tracks'>
+              {playlist.tracks.data.items.map(_track => {
+              return(
+                <div key={_track.id} className='track-lineitem'><span className='disc-track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
+              )
+              })}
             </div>
           </div>
-        )
-      })}
-    </div>
+
+          <div className='pl-thumb-prompt-container'>
+              <div className='pl-prompt'>
+              Prompt: this is where the prompt will go.
+              </div>
+          </div>
+
+          <div className='pl-thumb-stats-container'>
+            <div className='pl-thumb-user-container'>
+                <div className='pl-thumb-user-img'>
+                  <img src={auth.image}/>
+                </div>
+                <div className='pl-thumb-user-name'>
+                  {auth.display_name.toUpperCase()}
+                </div>
+            </div>
+
+          <div className='pl-thumb-ellipsis-container'>
+
+              <ul className='ellipsis-dropdown'>
+                  <button>
+                      <i className="fa-solid fa-angle-down"></i>
+                  </button>
+                  <ul className='ellipsis-dropdown-content'>
+                      <li key='spotOpen'>
+                          <a href={`spotify:playlist:${playlist.id}`}>
+                              Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                          </a>
+                      </li>
+                      <li key='copyLink' onClick={() => copier(playlist.href)}>Copy Link</li>
+
+                      <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>
+                  </ul>
+                  
+              </ul>
+
+          </div>
+
+          </div>
+      </div>
+      )
+    })}
+  </div>
   )
 };
 

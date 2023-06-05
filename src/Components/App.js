@@ -12,8 +12,7 @@ import NavBar from './NavBar';
 import Prompt from './Prompt';
 import Discover from './Discover';
 import PlaylistType from './PlaylistType';
-
-
+import UnlockPro from './UnlockPro';
 
 const App = () => {
 
@@ -41,13 +40,14 @@ const App = () => {
     <div>
       <header>
         <div className="nav">
-          <h1 className="title">
-            <Link to="/">Serenade</Link>
-            <BsSpotify />
-          </h1>
-          {token && (
+        {token && (
             <NavBar/>
           )}
+          <div className="title">
+            Serenade
+            <i className="fa-brands fa-spotify" id='spotify-logo'></i>
+            {/* <BsSpotify /> */}
+          </div>
         </div>
       </header>
         <div>
@@ -56,10 +56,10 @@ const App = () => {
             <div>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/contact" element={<Contact/>}/>
+                <Route path="/unlock-pro" element={<UnlockPro/>}/>
                 <Route path="/users/:id" element={<Profile />}/>
                 <Route path="/prompt" element={<Prompt />}/>
-                <Route path="/playlist-type" element={<PlaylistType />}/>
+                <Route path="/create" element={<PlaylistType />}/>
                 <Route path="/discover" element={<Discover />}/>
               </Routes>
             </div>
