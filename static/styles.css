@@ -833,6 +833,8 @@ header {
 
 /* Create Playlist Button */
 
+/* Single playlist CSS*/
+
 .playlist-button-container {
   position: fixed;
   bottom: 20px;
@@ -856,5 +858,112 @@ header {
 .playlist-button:hover {
   background-color: #1ED760;
 }
-
 /* Create Playlist Button end */
+
+/* Playlist Styling */
+.playlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #242424;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  padding: 30px;
+  width: 40vw;
+  height: 35vh;
+  margin-bottom: 1.5rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.playlist:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 15px rgba(29, 185, 84, 0.3);
+  cursor: pointer;
+}
+
+.playlist-art {
+  width: 170px;
+  height: 170px;
+  border-radius: 3px;
+  margin-bottom: 20px; /* Space between the art and the info */
+}
+
+.playlist-name {
+  color: white;
+  margin-bottom: .35rem;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 4px rgb(5, 5, 5);
+}
+
+.playlist-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Align vertically */
+  color: #B3B3B3;
+  font-size: .9rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3vh;
+}
+
+.user-name {
+  font-size: 18px;
+  margin-left: 10px; /* Space between the user profile picture and the user name */
+}
+
+.user-profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .playlist {
+    width: 80vw;
+    height: auto;
+  }
+
+  .playlist-art {
+    width: 120px;
+    height: 120px;
+  }
+
+  .playlist-name {
+    font-size: 1.2rem;
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+
+  .user-profile-pic {
+    width: 30px;
+    height: 30px;
+  }
+}
+/* Single playlist CSS end*/
+
+
+
+/* Home.js Playlist Grid*/
+
+.playlist-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .playlist-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+/* Home.js Playlist Grid end*/
