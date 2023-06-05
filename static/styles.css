@@ -314,7 +314,7 @@ header {
   border: 1px solid blue;
 }
 
-/* PlaylistOptions Styling */
+/* PlaylistType Styling */
 .playlist-options {
   display: flex;
   flex-direction: column;
@@ -353,9 +353,7 @@ header {
   color: #B3B3B3;
   font-size: .9rem;
 }
-
-
-/* PlaylistOptions Styling Ends here */
+/* PlaylistType Styling Ends here */
 
 /* Playlist/Discover Toggle Styling */
 .toggle-button {
@@ -380,11 +378,7 @@ header {
   background-color: #1DB954;
   color: #FFFFFF;
 }
-
 /* Playlist/Discover Toggle Styling ends here */
-
-/* PlaylistOptions Styling Ends here */
-
 
 /* PLAYLISTS COMPONENT ELEMENTS*/
 
@@ -759,3 +753,81 @@ header {
   border-bottom: 1px dotted var(--spotifyGreen)
 }
 
+/* Prompt input styles */
+.prompt-input {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #404040;
+  color: #fff;
+}
+
+.prompt-input:focus {
+  outline: none;
+  border: 1px solid var(--spotifyGreen);
+  box-shadow: 0 0 10px var(--spotifyGreen);
+}
+
+.prompt-container {
+  font-family: Arial, sans-serif;
+  background-color: #212121;
+  color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.prompt-form {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.prompt-input {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 5px;
+  outline-color: var(--spotifyGreen);
+}
+
+.prompt-element {
+  margin-bottom: 20px;
+}
+
+.styled-logout-button,
+.playlist-button {
+  background-color: transparent;
+  color: var(--spotifyGreen);
+  border: 1px solid var(--spotifyGreen);
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.styled-logout-button:hover,
+.playlist-button:hover {
+  background-color: var(--spotifyGreen);
+  color: #000;
+}
+
+.track-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.track-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.track-checkbox {
+  margin-right: 10px;
+}
+
+.track-info {
+  flex-grow: 1;
+}
+
+
+/* Prompt input styles end */
