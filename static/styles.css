@@ -829,5 +829,32 @@ header {
   flex-grow: 1;
 }
 
-
 /* Prompt input styles end */
+
+/* Create Playlist Button */
+
+.playlist-button-container {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.playlist-button {
+  padding: 10px 20px;
+  background-color: #1DB954; 
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 50px;
+  transition: background-color 0.5s ease;
+  width: 30vw;
+  text-align: center;
+}
+
+.playlist-button:hover {
+  background-color: #1ED760;
+}
+
+/* Create Playlist Button end */

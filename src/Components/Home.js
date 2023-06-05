@@ -9,6 +9,7 @@ import { catchErrors } from '../../server/api/utils';
 import PlaylistDiscoverToggle from './PlaylistDiscoverToggle';
 import MyPlaylists from './MyPlaylists';
 import Discover from './Discover';
+import CreatePlaylistButton from './CreatePlaylistButton';
 
 const Home = () => {
 
@@ -39,6 +40,7 @@ const Home = () => {
         </div>
       </div>
       {(selected) ? <MyPlaylists/> : <Discover/>}
+      <CreatePlaylistButton />
     </div>
   )
 };
