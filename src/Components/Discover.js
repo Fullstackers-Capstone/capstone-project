@@ -23,6 +23,14 @@ const Discover = () => {
     })
   }
 
+  const dateify = (unicode) => {
+    return unicode.slice(0, 10);
+  }
+
+  const timeify = (unicode) => {
+    return unicode.slice(11, 16);
+  }
+
   const unlockPro = () => {
     navigate('/unlock-pro');
   }
@@ -40,7 +48,8 @@ const Discover = () => {
           name: _playlist.name,
           image: _playlist.images[0].url,
           href: _playlist.external_urls.spotify,
-          tracks: tracks
+          tracks: tracks,
+          added_at: _playlist.added_at
         };
       })
     );
@@ -75,7 +84,7 @@ const Discover = () => {
           <div className='pl-thumb-tracks'>
               {playlist.tracks.data.items.map(_track => {
               return(
-                <div key={_track.id} className='track-lineitem'><span className='disc-track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
+                <div key={_track.track.duration_ms} className='track-lineitem'><span className='disc-track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
               )
               })}
             </div>
@@ -88,14 +97,19 @@ const Discover = () => {
           </div>
 
           <div className='pl-thumb-stats-container'>
-            <div className='pl-thumb-user-container'>
-                <div className='pl-thumb-user-img'>
-                  <img src={auth.image}/>
-                </div>
-                <div className='pl-thumb-user-name'>
-                  {auth.display_name.toUpperCase()}
-                </div>
-            </div>
+              <div className='pl-thumb-user-container'>
+                  <div className='pl-thumb-user-img'>
+                    <img src={auth.image}/>
+                  </div>
+                  <div className='pl-thumb-user-name-container'>
+                    <div className='pl-thumb-user-name'>
+                        {auth.display_name.toUpperCase()}
+                    </div>
+                    <div className='pl-thumb-createdAt'>
+                        <span className='disc-track-artist'>Created:</span> {dateify(auth.createdAt)} @ {timeify(auth.createdAt)}
+                    </div>
+                  </div>
+              </div>
 
           <div className='pl-thumb-ellipsis-container'>
 

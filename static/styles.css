@@ -518,20 +518,31 @@ header {
 
 .pl-thumb-user-img{
   padding: 1rem;
+  padding-left: 1.5rem;
+}
+
+.pl-thumb-user-name-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pl-thumb-createdAt{
+  font-size: .65rem;
 }
 
 .pl-thumb-user-name{
   display: flex;
   align-items: center;
-  font-size: 1.25rem;
+  font-size: 1rem;
   /* color: var(--spotifyGreen); */
   text-shadow: 1px 1px 3px rgb(0, 0, 0);
 }
 
 .pl-thumb-user-img img{
-  width: 50px;
+  width: 40px;
   border-radius: 50px;
-  box-shadow: 0 0 0.25em 0.25em rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 .5rem .5rem rgba(0, 0, 0, 0.15);
 }
 
 .track-artist{
@@ -652,6 +663,7 @@ header {
   border-top-left-radius: 5px;
   background-color: #121212;
   padding: 1rem;
+  padding-bottom: .5rem;
 }
 
 .profstats div{
@@ -660,7 +672,7 @@ header {
 
 .prof-img{
   display: flex;
-  flex: 1;
+  flex: .8;
   /* padding-left: 2rem;
   padding-right: 2rem;
   padding-top: 2rem;
@@ -683,7 +695,7 @@ header {
   justify-content: center;
   align-items: center;
   background-color: #242424;
-  height: 5px;
+  height: .4rem;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -695,8 +707,8 @@ header {
 
 .discoverable-title{
   display: flex;
-  align-items: flex-end;
-  font-size: 1.5rem;
+  align-items: center;
+  font-size: 1rem;
   font-weight: 400;
   color: white;
   /* text-shadow: 1px 1px 1px rgb(27, 111, 51); */
