@@ -58,7 +58,7 @@ const MyPlaylists = () => {
         return(
         <div className='pl-thumb' key={playlist.id}>
             <div className='pl-thumb-name'>
-              {playlist.name}
+                <a href={playlist.href} target='_blank'>{playlist.name}</a>
             </div>
 
             <div className='pl-thumb-data-container'>
