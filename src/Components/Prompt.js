@@ -75,40 +75,40 @@ const Prompt = () => {
 
   return (
     <div className="prompt-container">
-      <form onSubmit={submit}>
-        <input onChange={(ev) => setInput(ev.target.value)}></input>
+      <form className="prompt-form" onSubmit={submit}>
+        <input className="prompt-input" onChange={(ev) => setInput(ev.target.value)}></input>
         <button className="styled-logout-button">Test</button>
       </form>
       <div className="prompt-element">
-        </div>
-
-        <div className="messages">
-          {prompt.map((_prompt) => {
-            return (
-              <div key={_prompt.id} id={_prompt.id}>
-              </div>
-            );
-          })}
-        </div>
-  
-        <ul className="track-list">
-          {topTracks.map((track, index) => (
-            <li key={index} className="track-item">
-              <input
-                type="checkbox"
-                checked={track.selected}
-                onChange={() => handleTrackSelection(index)}
-              />
-              <span>
-                {track.name} by {track.artists[0].name}
-              </span>
-            </li>
-          ))}
-        </ul>
-  
-        <button onClick={createPlaylists}>Create Playlist</button>
       </div>
-    );
+      <div className="messages">
+        {prompt.map((_prompt) => {
+          return (
+            <div key={_prompt.id} id={_prompt.id}>
+            </div>
+          );
+        })}
+      </div>
+  
+      <ul className="track-list">
+        {topTracks.map((track, index) => (
+          <li key={index} className="track-item">
+            <input
+              type="checkbox"
+              checked={track.selected}
+              onChange={() => handleTrackSelection(index)}
+              className="track-checkbox"
+            />
+            <span className="track-info">
+              {track.name} by {track.artists[0].name}
+            </span>
+          </li>
+        ))}
+      </ul>
+  
+      <button className="playlist-button" onClick={createPlaylists}>Create Playlist</button>
+    </div>
+  );
   };
   
   export default Prompt;
