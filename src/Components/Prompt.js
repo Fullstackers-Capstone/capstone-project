@@ -20,6 +20,7 @@ const Prompt = () => {
     getUserTopTracks();
   }, [auth]);
 
+
   const submit = (ev) => {
     ev.preventDefault();
     dispatch(getResponse(input));
@@ -86,6 +87,13 @@ const Prompt = () => {
           {prompt.map((_prompt) => {
             return (
               <div key={_prompt.id} id={_prompt.id}>
+                {
+                  <ul>
+                    <li>
+                      {_prompt.response}
+                    </li>
+                  </ul>
+                }
               </div>
             );
           })}
