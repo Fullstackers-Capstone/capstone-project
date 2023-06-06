@@ -343,7 +343,7 @@ header {
 
 .option:hover {
   transform: scale(1.01);
-  /* box-shadow: 0 0 15px rgba(29, 185, 84, 0.3); */
+  box-shadow: 0 0 15px rgba(29, 185, 84, 0.3);
   cursor: pointer;
 }
 
