@@ -137,16 +137,20 @@ export const getTopTracks = (time_range = 'short_term') => {
 
 
 // Search for artists
-export const searchArtists = async (searchKey) => {
+// We will need to loop through each track to add more than one
+export const searchFunctionality = async (searchKey) => {
+  const track_uris = [];
   try {
     const response = await spotifyAxios.get('/search', {
       params: {
-        q: `artist:"${searchKey}"`,
-        type: 'artist',
+        q: `${encodeURIComponent(searchKey.title)}album:${encodeURIComponent(searchKey.album)}artist:${encodeURIComponent(searchKey.artist)}`,
+        type: 'track',
       },
     });
-
-    return response.data.artists.items;
+    // https://api.spotify.com/v1/search?q=name:${encodeURIComponent(song.title)}album:${encodeURIComponent(song.album)}artist:${encodeURIComponent(song.artist)}&type=track`,
+    const track_uri = await response.data.tracks.items[0].uri;
+    track_uris.push(track_uri);
+    console.log('track uris check hereeeeeeeeeeeeeeeeeeeeeee',track_uris);
   } catch (error) {
     console.error(error);
     throw error;
@@ -193,10 +197,10 @@ export const createPlaylist = async (userId, name, description) => {
   }
 };
 
-export const addTracksToPlaylist = async (playlistId, trackUris) => {
+export const addTracksToPlaylist = async (playlistId, track_uris) => {
   try {
     const response = await spotifyAxios.post(`/playlists/${playlistId}/tracks`, {
-      uris: trackUris,
+      uris: track_uris,
     });
     return response.data;
   } catch (error) {

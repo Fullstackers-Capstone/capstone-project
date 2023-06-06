@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { searchArtists, getArtistInfo } from '../../server/api/spotify';
+//import { searchArtists, getArtistInfo } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
 
 const Searcher = () => {
