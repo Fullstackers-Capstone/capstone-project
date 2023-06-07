@@ -317,7 +317,7 @@ header {
   border: 1px solid blue;
 }
 
-/* PlaylistType Styling */
+/* PlaylistType & AI Prompt Styling */
 .playlist-options {
   display: flex;
   flex-direction: column;
@@ -341,7 +341,22 @@ header {
   box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
 }
 
+.options {
+  background-color: #242424;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  padding: 20px;
+  width: 75%;
+  box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
+}
+
 .option:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 15px rgba(29, 185, 84, 0.3);
+  cursor: pointer;
+}
+
+.options:hover {
   transform: scale(1.01);
   box-shadow: 0 0 15px rgba(29, 185, 84, 0.3);
   cursor: pointer;
@@ -356,7 +371,25 @@ header {
   color: #B3B3B3;
   font-size: .9rem;
 }
-/* PlaylistType Styling Ends here */
+
+.options.with-arrow {
+  position: relative;
+}
+
+.with-arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid white;
+}
+
+/* PlaylistType & AI Prompt Styling Ends here */
 
 /* Playlist/Discover Toggle Styling */
 .toggle-button {
@@ -985,5 +1018,59 @@ header {
   }
 }
 
-
 /* Home.js Playlist Grid end*/
+
+
+/* Loader.js Component */
+
+/* CSS for the loader container */
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 50vh;
+}
+
+/* CSS for the bars container */
+.bars {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+  width: 100px;
+  min-width: 100px;
+  height: 50px;
+  margin: 0 auto;
+  z-index: 2;
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+/* CSS for each bar */
+.bar {
+  width: 10px;
+  height: 5px;
+  margin: 0 2px;
+  background-color: white;
+  animation-name: dance;
+  animation-duration: 400ms;
+  animation-play-state: running;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Define keyframes for the dance animation */
+@keyframes dance {
+  from {
+    height: 10px;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+
+/* Loader.js Component end */
