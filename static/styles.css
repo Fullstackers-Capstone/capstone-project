@@ -425,11 +425,22 @@ header {
   align-items: center;
 }
 
+#outer-pl-container{
+  border: 1px solid blue;
+}
+
 #pl-container{
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 75%;
+}
+
+#new-pl-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 #pl-discover-toggle-container{
@@ -1047,12 +1058,13 @@ header {
 }
 
 .bar {
-  width: 10px;
+  width: 15px;
   height: 5px;
   margin: 0 2px;
-  background-color: white;
+  background-color: var(--spotifyGreen);
+  border-top: 5px solid white;
   animation-name: dance;
-  animation-duration: 400ms;
+  animation-duration: 450ms;
   animation-play-state: running;
   animation-direction: alternate;
   animation-timing-function: linear;

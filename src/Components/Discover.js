@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getCurrentUserPlaylists, getPlaylistTracks } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
 import { useNavigate } from 'react-router-dom';
+import Loader from './Loader';
 
 const Discover = () => {
 
   const { auth } = useSelector(state => state);
   const [playlists, setPlaylists] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -38,6 +40,8 @@ const Discover = () => {
   useEffect(() => {
     const getLists = async() => {
 
+    setIsLoading(true);
+
     const lists = await getCurrentUserPlaylists(5);
 
     const listsData = await Promise.all(
@@ -55,6 +59,7 @@ const Discover = () => {
     );
   
       setPlaylists(listsData);
+      setIsLoading(false);
     }
     catchErrors(getLists());
   }, []);
@@ -64,8 +69,12 @@ const Discover = () => {
   }
 
   return(
+    <>
 
-    <div id='pl-container'>
+    {isLoading ? (
+            <Loader/>
+        ):(
+<div id='pl-container'>
     {playlists.map(playlist => {
       return(
       <div className='pl-thumb' key={playlist.id}>
@@ -137,6 +146,9 @@ const Discover = () => {
       )
     })}
   </div>
+        )}
+
+  </>
   )
 };
 
