@@ -79,12 +79,12 @@ const Discover = () => {
       return(
       <div className='pl-thumb' key={playlist.id}>
           <div className='disc-thumb-name'>
-            {playlist.name}
+                <a href={playlist.href} target='_blank'>{playlist.name}</a>
           </div>
 
           <div className='pl-thumb-data-container'>
 
-              <div className='pl-thumb-img'>
+              <div className='disc-thumb-img'>
                   <a href={playlist.href} target='_blank'>
                       <img src={playlist.image}/>
                   </a>
@@ -100,9 +100,15 @@ const Discover = () => {
           </div>
 
           <div className='pl-thumb-prompt-container'>
-              <div className='pl-prompt'>
-              Prompt: this is where the prompt will go.
-              </div>
+            <div className='pl-prompt'>
+            <div className='pl-thumb-prompt-content'>
+                            <span className='prompt-title' style={{color: 'gold'}}>Prompt:</span> <span className='prompt-content'>"Make me a playlist that sounds like X and features artists X, X & X"</span>
+                        </div>
+
+                        <div className='pl-thumb-createdAt'>
+                             {dateify(auth.createdAt)} @ {timeify(auth.createdAt)} UTC
+                        </div>
+          </div>
           </div>
 
           <div className='pl-thumb-stats-container'>
@@ -111,12 +117,9 @@ const Discover = () => {
                     <img src={auth.image}/>
                   </div>
                   <div className='pl-thumb-user-name-container'>
-                    <div className='pl-thumb-user-name'>
-                        {auth.display_name.toUpperCase()}
-                    </div>
-                    <div className='pl-thumb-createdAt'>
-                        <span className='disc-track-artist'>Created:</span> {dateify(auth.createdAt)} @ {timeify(auth.createdAt)}
-                    </div>
+                            <div className='disc-thumb-user-name'>
+                            <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
+                            </div>
                   </div>
               </div>
 
