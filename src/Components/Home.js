@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout, getCurrentUserPlaylists, getPlaylistTracks } from '../../server/api/spotify';
-import { createUser } from '../store'
-import Searcher from './Searcher';
-import Prompt from './Prompt';
-import { catchErrors } from '../../server/api/utils';
-import PlaylistDiscoverToggle from './PlaylistDiscoverToggle';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import MyPlaylists from './MyPlaylists';
 import Discover from './Discover';
 import CreatePlaylistButton from './CreatePlaylistButton';
