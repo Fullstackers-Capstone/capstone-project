@@ -141,14 +141,17 @@ export const searchFunctionality = async (searchKey) => {
   try {
     const response = await spotifyAxios.get('/search', {
       params: {
-        q: `${encodeURIComponent(searchKey.title)}album:${encodeURIComponent(searchKey.album)}artist:${encodeURIComponent(searchKey.artist)}`,
+        q: `name:${encodeURIComponent(searchKey.title)}album:${encodeURIComponent(searchKey.album)}artist:${encodeURIComponent(searchKey.artist)}`,
         type: 'track',
       },
     });
     // https://api.spotify.com/v1/search?q=name:${encodeURIComponent(song.title)}album:${encodeURIComponent(song.album)}artist:${encodeURIComponent(song.artist)}&type=track`,
-    const track_uri = await response.data.tracks.items[0].uri;
-    track_uris.push(track_uri);
-    console.log('track uris check hereeeeeeeeeeeeeeeeeeeeeee',track_uris);
+    if (await response.data.tracks.items[0]){
+      return await response.data.tracks.items[0].uri
+    }
+    else{
+      console.log(response.data, searchKey);
+    }
   } catch (error) {
     console.error(error);
     throw error;
