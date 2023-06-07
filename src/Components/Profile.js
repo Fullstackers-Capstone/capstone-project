@@ -47,7 +47,7 @@ const Profile = () => {
 
             <div className='pl-thumb' key={auth.id}>
             <div className='pl-thumb-name'>
-              {auth.display_name.toUpperCase()}
+              <a href={`https://open.spotify.com/user/${ auth.spotifyId }`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
             </div>
 
             <div className='profstats-container'>
@@ -84,7 +84,7 @@ const Profile = () => {
                     Make Playlists Discoverable?
                     </div>
                     <div className='discoverable-switch-container'>
-                    <Switch checked={discover} onChange={() => discoverToggle()} className='ios-switch'/>
+                    <Switch checked={discover} onColor={'#1DB954'} onChange={() => discoverToggle()} className='ios-switch'/>
                     </div>
                 </div>
                 </div>

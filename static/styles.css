@@ -18,7 +18,7 @@ body{
   background-attachment: fixed;
   background-color: #121212;
   color: white;
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
 }
 
 a{
@@ -69,7 +69,7 @@ header {
 
 
 .title {
-  font-family: 'Lobster';
+  font-family: 'Lobster', cursive;
   font-size: 4rem;
   color: white;
   display: flex;
@@ -482,6 +482,17 @@ header {
   color: gold;
 }
 
+.disc-thumb-name a{
+  color: gold;
+  border-bottom: 1px solid transparent
+}
+
+.disc-thumb-name a:hover{
+  color: white;
+  border-bottom: 1px dotted gold;
+  transition: 0.35s
+}
+
 .pl-thumb-data-container{
   display: flex;
   border-left: 4px solid #242424;
@@ -490,7 +501,7 @@ header {
   background: linear-gradient(180deg, rgba(36,36,36,1) 0%, rgba(18,18,18,1) 3%);
 }
 
-.pl-thumb-img{
+.pl-thumb-img, .disc-thumb-img{
   display: flex;
   flex: 1;
   padding-left: 2rem;
@@ -502,7 +513,7 @@ header {
   background-color: #121212;
 }
 
-.pl-thumb-img img{
+.pl-thumb-img img, .disc-thumb-img img{
   max-width: 100%;
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
@@ -575,16 +586,34 @@ header {
   justify-content: center;
 }
 
+.pl-thumb-prompt-content{
+  margin-bottom: .4rem;
+}
+
 .pl-thumb-createdAt{
   font-size: .65rem;
 }
 
-.pl-thumb-user-name{
+.pl-thumb-user-name, .disc-thumb-user-name{
   display: flex;
   align-items: center;
   font-size: 1rem;
   /* color: var(--spotifyGreen); */
   text-shadow: 1px 1px 3px rgb(0, 0, 0);
+}
+
+.pl-thumb-user-name a, .disc-thumb-user-name a{
+  color: white;
+  border-bottom: 1px solid transparent
+}
+
+.pl-thumb-user-name a:hover{
+  border-bottom: 1px dotted var(--spotifyGreen);
+  /* transition: 0.35s */
+}
+.disc-thumb-user-name a:hover{
+  border-bottom: 1px dotted gold;
+  /* transition: 0.35s */
 }
 
 .pl-thumb-user-img img{
@@ -599,6 +628,17 @@ header {
 
 .disc-track-artist{
   color: gold;
+}
+
+.prompt-title{
+  color: var(--spotifyGreen);
+  font-weight: 500;
+  margin-right: .25rem;
+}
+
+.prompt-content{
+  font-family: 'Montserrat Alternates';
+  font-style: italic;
 }
 
 .track-lineitem{

@@ -15,6 +15,7 @@ export const fetchSpotUser = () => {
       
       localStorage.setItem("spotifyId",response.data.spotifyId);
       dispatch({ type: 'SET_AUTH', auth: response.data})
+      console.log(user);
   }
 }
 
