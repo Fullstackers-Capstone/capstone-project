@@ -134,8 +134,6 @@ export const getTopTracks = (time_range = 'short_term') => {
 };
 
 
-
-
 // Search for artists
 // We will need to loop through each track to add more than one
 export const searchFunctionality = async (searchKey) => {
@@ -159,6 +157,7 @@ export const searchFunctionality = async (searchKey) => {
     throw error;
   }
 };
+
 
 // Get artist information
 export const getArtistInfo = async (artistID) => {

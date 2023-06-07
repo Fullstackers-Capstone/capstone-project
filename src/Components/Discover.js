@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getCurrentUserPlaylists, getPlaylistTracks } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
 import { useNavigate } from 'react-router-dom';
+import Loader from './Loader';
 
 const Discover = () => {
 
   const { auth } = useSelector(state => state);
   const [playlists, setPlaylists] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -38,6 +40,8 @@ const Discover = () => {
   useEffect(() => {
     const getLists = async() => {
 
+    setIsLoading(true);
+
     const lists = await getCurrentUserPlaylists(5);
 
     const listsData = await Promise.all(
@@ -55,6 +59,7 @@ const Discover = () => {
     );
   
       setPlaylists(listsData);
+      setIsLoading(false);
     }
     catchErrors(getLists());
   }, []);
@@ -64,18 +69,22 @@ const Discover = () => {
   }
 
   return(
+    <>
 
-    <div id='pl-container'>
+    {isLoading ? (
+            <Loader/>
+        ):(
+<div id='pl-container'>
     {playlists.map(playlist => {
       return(
       <div className='pl-thumb' key={playlist.id}>
           <div className='disc-thumb-name'>
-            {playlist.name}
+                <a href={playlist.href} target='_blank'>{playlist.name}</a>
           </div>
 
           <div className='pl-thumb-data-container'>
 
-              <div className='pl-thumb-img'>
+              <div className='disc-thumb-img'>
                   <a href={playlist.href} target='_blank'>
                       <img src={playlist.image}/>
                   </a>
@@ -91,9 +100,15 @@ const Discover = () => {
           </div>
 
           <div className='pl-thumb-prompt-container'>
-              <div className='pl-prompt'>
-              Prompt: this is where the prompt will go.
-              </div>
+            <div className='pl-prompt'>
+            <div className='pl-thumb-prompt-content'>
+                            <span className='prompt-title' style={{color: 'gold'}}>Prompt:</span> <span className='prompt-content'>"Make me a playlist that sounds like X and features artists X, X & X"</span>
+                        </div>
+
+                        <div className='pl-thumb-createdAt'>
+                             {dateify(auth.createdAt)} @ {timeify(auth.createdAt)} UTC
+                        </div>
+          </div>
           </div>
 
           <div className='pl-thumb-stats-container'>
@@ -102,12 +117,9 @@ const Discover = () => {
                     <img src={auth.image}/>
                   </div>
                   <div className='pl-thumb-user-name-container'>
-                    <div className='pl-thumb-user-name'>
-                        {auth.display_name.toUpperCase()}
-                    </div>
-                    <div className='pl-thumb-createdAt'>
-                        <span className='disc-track-artist'>Created:</span> {dateify(auth.createdAt)} @ {timeify(auth.createdAt)}
-                    </div>
+                            <div className='disc-thumb-user-name'>
+                            <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
+                            </div>
                   </div>
               </div>
 
@@ -137,6 +149,9 @@ const Discover = () => {
       )
     })}
   </div>
+        )}
+
+  </>
   )
 };
 
