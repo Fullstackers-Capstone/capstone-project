@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-
+import { searchFunctionality } from '../../server/api/spotify';
 const SET_PROMPT = 'SET_PROMPT';
 const CREATE_PROMPT = 'CREATE_PROMPT';
 
@@ -50,9 +49,24 @@ export const getJSONResponse = (length, data) => {
         spotifyId: spotifyId
       }
     });
-    dispatch(createPrompt(response.data));
+    dispatch(getSpotifyURIs(response.data));
   };
 };
+
+const getSpotifyURIs = (response) => {
+  return async (dispatch) => {
+    const jsonResponse = JSON.parse(response.response);
+    const URIResponse = await Promise.all(jsonResponse.map(async(element) => {
+      const uri = await searchFunctionality(element)
+      if (await uri){
+        return await uri;
+        
+      }
+    }));
+    response.uriList = URIResponse;
+    dispatch(createPrompt(response));
+  }
+}
 
 export const getAllPrompts = () => {
   return async (dispatch) => {
