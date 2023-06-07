@@ -3,12 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getResponse, getJSONResponse, createPrompt } from '../store';
 import Searcher from './Searcher';
 import { getTopTracks, createPlaylist, addTracksToPlaylist } from '../../server/api/spotify';
+import Loader from './Loader';
 
 const Prompt = () => {
   const dispatch = useDispatch();
   const { prompt, auth } = useSelector((state) => state);
   const [input, setInput] = useState('');
   const [topTracks, setTopTracks] = useState([]);
+  const [testClicked, setTestClicked] = useState(false);
+  const [showExamplePrompts, setShowExamplePrompts] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+
 
   useEffect(() => {
     async function getUserTopTracks() {
@@ -20,10 +26,18 @@ const Prompt = () => {
     getUserTopTracks();
   }, [auth]);
 
-
-  const submit = (ev) => {
+  const submit = async (ev) => {
     ev.preventDefault();
-    dispatch(getResponse(input));
+    setIsLoading(true);
+    await dispatch(getResponse(input));
+    setIsLoading(false);
+    setTestClicked(true);
+    setShowExamplePrompts(false);
+  };
+
+  const goBack = () => {
+    setShowExamplePrompts(true);
+    setTestClicked(false);
   };
 
   const handleTrackSelection = (index) => {
@@ -47,6 +61,7 @@ const Prompt = () => {
   useEffect(() => {
     if (prompt.length > 0) {
       const parsedTracks = parseResponseString(prompt[0].response);
+      console.log(parsedTracks);
       setTopTracks(parsedTracks);
     }
   }, [prompt]);
@@ -74,31 +89,68 @@ const Prompt = () => {
     }
   };
 
+  const selectPromptOption = (text) => {
+    setInput(text);
+  };
+
   return (
     <div className="prompt-container">
       <form onSubmit={submit}>
-        <input className="prompt-input" onChange={(ev) => setInput(ev.target.value)}></input>
+        <input className="prompt-input" value={input} onChange={(ev) => setInput(ev.target.value)}></input>
         <button className="styled-logout-button">Test</button>
       </form>
-      <div className="prompt-element">
-        </div>
 
-        <div className="messages">
-          {prompt.map((_prompt) => {
-            return (
-              <div key={_prompt.id} id={_prompt.id}>
-                {
-                  <ul>
-                    <li>
-                      {_prompt.response}
-                    </li>
-                  </ul>
-                }
+      {isLoading ? (
+        <Loader /> // Display the loader component while isLoading is true
+      ) : (
+        <>
+          {testClicked && (
+            <>
+              <div className="messages">
+                {prompt.length > 0 && (
+                  <div key={prompt[prompt.length - 1].id} id={prompt[prompt.length - 1].id}>
+                    <ul>
+                      <li>{prompt[prompt.length - 1].response}</li>
+                    </ul>
+                  </div>
+                )}
               </div>
-            );
-          })}
-        </div>
+              <button className="styled-logout-button" onClick={goBack}>←</button>
+            </>
+          )}
+
+          {showExamplePrompts && (
+            <>
+              <h2 className="options-title">Example Prompts</h2>
+              <div className="options with-arrow" onClick={() => selectPromptOption('Music for chill relaxing vibes')}>
+                <span className="pl-type-desc">Music for chill relaxing vibes</span>
+              </div>
+              <div className="options with-arrow" onClick={() => selectPromptOption('Top 10 artists from the 1990s')}>
+                <span className="pl-type-desc">Top 10 artists from the 1990s</span>
+              </div>
+              <div className="options with-arrow" onClick={() => selectPromptOption('Music for a beach party')}>
+                <span className="pl-type-desc">Music for a beach party</span>
+              </div>
+              <div className="options with-arrow" onClick={() => selectPromptOption('Dinner Party tunes')}>
+                <span className="pl-type-desc">Dinner Party tunes</span>
+              </div>
+              <div className="options with-arrow" onClick={() => selectPromptOption('Grad party playlist!')}>
+                <span className="pl-type-desc">Grad party playlist!</span>
+              </div>
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
+  };
   
+
+  export default Prompt;
+
+
+/* 
+
         <ul className="track-list">
           {topTracks.map((track, index) => (
             <li key={index} className="track-item">
@@ -113,13 +165,9 @@ const Prompt = () => {
             </li>
           ))}
         </ul>
-  
-        <button className='styled-logout-button' onClick={createPlaylists}>Create Playlist</button>
-      </div>
-    );
-  };
-  
-  export default Prompt;
+
+*/
+
 
 /* PROMPTS, ONLY PROBLEM IS URI NOT BEING SENT.
 
