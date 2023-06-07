@@ -101,7 +101,7 @@ const Prompt = () => {
       </form>
 
       {isLoading ? (
-        <Loader /> // Display the loader component while isLoading is true
+        <Loader /> 
       ) : (
         <>
           {testClicked && (

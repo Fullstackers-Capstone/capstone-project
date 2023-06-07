@@ -1023,7 +1023,6 @@ header {
 
 /* Loader.js Component */
 
-/* CSS for the loader container */
 .loader-container {
   display: flex;
   align-items: center;
@@ -1032,7 +1031,6 @@ header {
   min-height: 50vh;
 }
 
-/* CSS for the bars container */
 .bars {
   display: flex;
   justify-content: center;
@@ -1048,7 +1046,6 @@ header {
   right: 0;
 }
 
-/* CSS for each bar */
 .bar {
   width: 10px;
   height: 5px;
@@ -1062,7 +1059,6 @@ header {
   animation-iteration-count: infinite;
 }
 
-/* Define keyframes for the dance animation */
 @keyframes dance {
   from {
     height: 10px;
