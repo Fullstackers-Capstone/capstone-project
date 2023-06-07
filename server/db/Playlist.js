@@ -1,5 +1,5 @@
 const conn = require("./conn");
-const { STRING, UUID, UUIDV4, TEXT, JSON } = conn.Sequelize;
+const { STRING, UUID, UUIDV4, TEXT, JSON, BOOLEAN } = conn.Sequelize;
 
 const Playlist = conn.define("playlist", {
   id: {
@@ -24,6 +24,14 @@ const Playlist = conn.define("playlist", {
     validate: {
       notEmpty: true,
     },
+  },
+  image: {
+    type: STRING,
+    allowNull: true,  // Allow null if image is optional
+  },
+  discover: {
+    type: BOOLEAN,
+    allowNull: true,  // Allow null if discover is optional
   },
 });
 
