@@ -186,12 +186,17 @@ export const getAudioFeaturesForTracks = (ids) => {
 };
 
 
-export const createPlaylist = async (userId, name, description) => {
+export const createPlaylist = async ({userId, name, description}, prompt) => {
   try {
     const response = await spotifyAxios.post(`/users/${userId}/playlists`, {
       name,
       description,
     });
+
+    const unfiltered = prompt[0].uriList;
+    const filtered = unfiltered.filter(track => track !== undefined)
+    
+    addTracksToPlaylist(response.data.id, filtered)
     return response.data;
   } catch (error) {
     console.error(error);
