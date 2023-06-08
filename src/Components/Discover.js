@@ -47,10 +47,12 @@ const Discover = () => {
     const listsData = await Promise.all(
       lists.data.items.map(async (_playlist) => {
         const tracks = await getPlaylistTracks(_playlist.id)
+        let imageURL = _playlist.images && _playlist.images.length > 0 ? _playlist.images[0].url : 'https://images.unsplash.com/photo-1546188994-07c34f6e5e1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4MTU3OTM0NQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080';
+
         return {
           id: _playlist.id,
           name: _playlist.name,
-          image: _playlist.images[0].url,
+          image: imageURL,
           href: _playlist.external_urls.spotify,
           tracks: tracks,
           added_at: _playlist.added_at

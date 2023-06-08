@@ -22,8 +22,9 @@ export const fetchSpotUser = () => {
 export const updateAuth = (user)=> {
   return async(dispatch)=> {
     const response = await axios.put(`/api/users/${user.id}`, user);
-    return { type: 'SET_AUTH', auth: response.data };
+    dispatch({ type: 'SET_AUTH', auth: response.data });
   }
 }
+
 
 export default auth;
