@@ -152,6 +152,7 @@ export const searchFunctionality = async (searchKey) => {
     else{
       console.log(response.data, searchKey);
     }
+
   } catch (error) {
     console.error(error);
     throw error;
@@ -193,8 +194,8 @@ export const createPlaylist = async ({userId, name, description}, prompt) => {
       description,
     });
 
-    const unfiltered = prompt[0].uriList;
-    const filtered = unfiltered.filter(track => track !== undefined)
+    const unfiltered = prompt.at(-1).uriList;
+    const filtered = unfiltered.filter(track => (track));
     
     addTracksToPlaylist(response.data.id, filtered)
     return response.data;

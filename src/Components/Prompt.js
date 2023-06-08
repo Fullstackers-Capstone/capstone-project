@@ -13,8 +13,8 @@ const Prompt = () => {
   const [stringTopTracks, setStringTopTracks] = useState('');
 
   useEffect(() => {
+
     const playlistFunction = async() => {
-      console.log(auth.spotifyId)
       await createPlaylist({userId: auth.spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, prompt)
 
 
