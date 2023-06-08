@@ -21,14 +21,22 @@ const Profile = () => {
 
     useEffect(() => {
         if(auth){
-        dispatch(updateAuth({id: auth.id, discoverPlaylists: discover}));   
+            dispatch(updateAuth({id: auth.id, discoverPlaylists: discover}));   
         }
+        console.log("Discover state on load:", discover);
+        console.log("Auth state:", auth);
     }, [discover])
+    
 
 
     const discoverToggle = () => {
-        setDiscover((current) => !current);
+        setDiscover((current) => {
+            console.log("Current discover state:", current);
+            console.log("Toggling discover state to:", !current);
+            return !current;
+        });
     }
+    
 
     if(!playlists){
         return null;
