@@ -95,8 +95,6 @@ const configuration = new Configuration({
     apiKey: process.env.OPEN_AI_KEY,
 });
 
-
-
 const Prompt = conn.define('prompt', {
   id: {
     type: UUID,
@@ -113,9 +111,8 @@ const Prompt = conn.define('prompt', {
     type: JSON
   },
   uriList: {
-    type:STRING
+    type: ARRAY(STRING)  // changed this line
   }
-
 });
 
 Prompt.findAllBySpotifyId = async function(id){
@@ -137,8 +134,6 @@ Prompt.findAllBySpotifyId = async function(id){
     throw error;
   }
 }
-
-
 
 Prompt.prototype.askChatGPT = async function(){
   try{
@@ -167,4 +162,5 @@ Prompt.prototype.askChatGPT = async function(){
 }
 
 module.exports = Prompt;
+
 

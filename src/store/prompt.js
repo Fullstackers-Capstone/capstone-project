@@ -57,17 +57,24 @@ const getSpotifyURIs = (response) => {
   return async (dispatch) => {
     const jsonResponse = JSON.parse(response.response);
     const URIResponse = await Promise.all(jsonResponse.map(async(element) => {
+      // Log the element before it's passed into searchFunctionality
+      console.log("yooooooooo",element);
+      
       const uri = await searchFunctionality(element)
       if (await uri){
         return await uri;
-        
       }
     }));
-   
-    response.uriList = URIResponse.toString();
+
+    // Log the final URIResponse
+    console.log("final URI respinse", URIResponse);
+
+    // Make sure URIResponse is an array of strings before storing it
+    response.uriList = URIResponse;
     dispatch(savePrompt(response));
   }
 }
+
 
 export const savePrompt = (prompt) => {
   return async (dispatch) => {
