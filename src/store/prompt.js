@@ -2,6 +2,7 @@ import axios from 'axios';
 import { searchFunctionality } from '../../server/api/spotify';
 const SET_PROMPT = 'SET_PROMPT';
 const CREATE_PROMPT = 'CREATE_PROMPT';
+const DESTROY_PROMPT = 'DESTROY_PROMPT';
 
 const initialState = [];
 
@@ -28,6 +29,7 @@ export const createPrompt = (prompt) => ({
 });
 
 export const getResponse = (prompt) => {
+  
   return async (dispatch) => {
     const request = { prompt: prompt };
     const spotifyId = window.localStorage.getItem('spotifyId');
@@ -56,21 +58,28 @@ export const getJSONResponse = (prompt, length, data) => {
 const getSpotifyURIs = (response) => {
   return async (dispatch) => {
     const jsonResponse = JSON.parse(response.response);
+
     const URIResponse = await Promise.all(jsonResponse.map(async(element) => {
       // Log the element before it's passed into searchFunctionality
       console.log("yooooooooo",element);
-      
+   
       const uri = await searchFunctionality(element)
       if (await uri){
+        console.log('is this is URI??: ', uri);
         return await uri;
       }
+    
     }));
 
     // Log the final URIResponse
-    console.log("final URI respinse", URIResponse);
+    console.log("final URI response", URIResponse);
+
+    const filteredResponse = URIResponse.filter(uri => uri !== undefined)
+
+    console.log("FILTERED Final URI Response: ", filteredResponse);
 
     // Make sure URIResponse is an array of strings before storing it
-    response.uriList = URIResponse;
+    response.uriList = filteredResponse;
     dispatch(savePrompt(response));
   }
 }
