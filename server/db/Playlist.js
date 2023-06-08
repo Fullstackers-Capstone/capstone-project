@@ -29,10 +29,6 @@ const Playlist = conn.define("playlist", {
     type: STRING,
     allowNull: true,  // Allow null if image is optional
   },
-  discover: {
-    type: BOOLEAN,
-    allowNull: true,  // Allow null if discover is optional
-  },
 });
 
 module.exports = Playlist;
