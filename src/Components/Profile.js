@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { updateAuth } from '../store';
@@ -12,6 +12,8 @@ const Profile = () => {
 
     const dispatch = useDispatch();
 
+    const didMount = useRef(false); // Ref to track the component mount status
+
     useEffect(() => {
         if(auth){
             setDiscover(auth.discoverPlaylists);
@@ -20,23 +22,25 @@ const Profile = () => {
     }, [auth])
 
     useEffect(() => {
-        if(auth){
-            dispatch(updateAuth({id: auth.id, discoverPlaylists: discover}));   
+        if (didMount.current) {  // Avoid running on initial render
+            if(auth){
+                dispatch(updateAuth({id: auth.id, discoverPlaylists: discover}));
+            }
+        } else {
+            didMount.current = true;
         }
-        console.log("Discover state on load:", discover);
-        console.log("Auth state:", auth);
     }, [discover])
-    
-
 
     const discoverToggle = () => {
         setDiscover((current) => {
-            console.log("Current discover state:", current);
-            console.log("Toggling discover state to:", !current);
-            return !current;
+          console.log("Current discover state:", current);
+          console.log("Toggling discover state to:", !current);
+          const newDiscoverState = !current;
+          dispatch(updateAuth({id: auth.id, discoverPlaylists: newDiscoverState}));
+          return newDiscoverState;
         });
-    }
-    
+      }
+      
 
     if(!playlists){
         return null;
@@ -115,3 +119,4 @@ export default Profile;
             <Switch checked={ discover } onClick={() => discoverToggle()}/></h1>
             <img src={ auth.image }/>
         </div> */}
+
