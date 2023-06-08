@@ -12,8 +12,6 @@ const Prompt = () => {
   const [topTracks, setTopTracks] = useState(''); 
   const [stringTopTracks, setStringTopTracks] = useState('');
 
-  console.log('this is me trying to figure out how many prompts there are: ', prompt);
-
   useEffect(() => {
 
     const playlistFunction = async() => {

@@ -65,18 +65,16 @@ const getSpotifyURIs = (response) => {
    
       const uri = await searchFunctionality(element)
       if (await uri){
-        console.log('is this is URI??: ', uri);
         return await uri;
       }
     
     }));
 
     // Log the final URIResponse
-    console.log("final URI response", URIResponse);
 
     const filteredResponse = URIResponse.filter(uri => uri !== undefined)
 
-    console.log("FILTERED Final URI Response: ", filteredResponse);
+    console.log("final URI response", filteredResponse);
 
     // Make sure URIResponse is an array of strings before storing it
     response.uriList = filteredResponse;

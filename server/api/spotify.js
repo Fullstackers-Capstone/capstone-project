@@ -147,7 +147,6 @@ export const searchFunctionality = async (searchKey) => {
     });
     // https://api.spotify.com/v1/search?q=name:${encodeURIComponent(song.title)}album:${encodeURIComponent(song.album)}artist:${encodeURIComponent(song.artist)}&type=track`,
     if (await response.data.tracks.items[0]){
-      console.log('last step before uri: ', response.data.tracks.items[0]);
       return await response.data.tracks.items[0].uri
     }
     else{
@@ -194,8 +193,6 @@ export const createPlaylist = async ({userId, name, description}, prompt) => {
       name,
       description,
     });
-
-    console.log('promptsssssssss:', prompt)
 
     const unfiltered = prompt.at(-1).uriList;
     const filtered = unfiltered.filter(track => (track));
