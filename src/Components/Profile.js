@@ -12,8 +12,6 @@ const Profile = () => {
 
     const dispatch = useDispatch();
 
-    console.log(auth.discoverPlaylists);
-
     useEffect(() => {
         if(auth){
             setDiscover(auth.discoverPlaylists);
@@ -25,13 +23,11 @@ const Profile = () => {
         if(auth){
         dispatch(updateAuth({id: auth.id, discoverPlaylists: discover}));   
         }
-        console.log(auth.discoverPlaylists);
     }, [discover])
 
 
     const discoverToggle = () => {
         setDiscover((current) => !current);
-        console.log('toggling');
     }
 
     if(!playlists){

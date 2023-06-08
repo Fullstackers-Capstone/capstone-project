@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { createPlaylist } from '../../server/api/spotify';
 
 const playlists = (state = [], action) => {
   if (action.type === 'SET_PLAYLISTS') {
@@ -21,7 +22,7 @@ export const fetchPlaylists = () => {
   };
 };
 
-export const createPlaylist = (playlist) => {
+export const createDBPlaylist = (playlist) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/api/playlists', playlist);
@@ -31,6 +32,7 @@ export const createPlaylist = (playlist) => {
     }
   };
 };
+
 
 export default playlists;
 
