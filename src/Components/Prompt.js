@@ -14,7 +14,8 @@ const Prompt = () => {
 
   useEffect(() => {
     const playlistFunction = async() => {
-      await createPlaylist({userId: 'ryans-218', name: 'Anything We Want', description: 'Same with the description.'}, prompt)
+      console.log(auth.spotifyId)
+      await createPlaylist({userId: auth.spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, prompt)
 
 
     }

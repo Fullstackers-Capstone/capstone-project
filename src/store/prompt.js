@@ -65,7 +65,6 @@ const getSpotifyURIs = (response) => {
     }));
     response.uriList = URIResponse;
 
-    console.log('yooooooooooooooooooooooo', URIResponse);
     dispatch(createPrompt(response));
 
   }
