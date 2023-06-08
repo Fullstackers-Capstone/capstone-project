@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getResponse, getJSONResponse } from '../store';
 import Searcher from './Searcher';
-import {  getTopTracks } from '../../server/api/spotify';
+import { getTopTracks, createPlaylist } from '../../server/api/spotify';
 
 const Prompt = () => {
   const dispatch= useDispatch();
@@ -11,6 +11,16 @@ const Prompt = () => {
   const [input,setInput] = useState('');
   const [topTracks, setTopTracks] = useState(''); 
   const [stringTopTracks, setStringTopTracks] = useState('');
+
+  useEffect(() => {
+    const playlistFunction = async() => {
+      await createPlaylist({userId: 'ryans-218', name: 'Anything We Want', description: 'Same with the description.'}, prompt)
+
+
+    }
+    playlistFunction();
+
+  }, [prompt])
 
 
   useEffect(()=> {
