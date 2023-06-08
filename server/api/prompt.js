@@ -130,10 +130,11 @@ app.post('/', async( req, res, next) => {
 
 app.post('/json', async (req, res, next) => {
   try {
-    console.log(req.headers);
     const user = await User.findBySpotifyId(req.headers.spotifyid);
     const userPrompt = ` You are an assistant that can only responds in JSON. 
-    Include "id", "title", "artist", "album" in your response. Remember only respond in JSON. An example response is: "[{"id": 1,"title": "Hey Jude","artist": "The Beatles","album": "The Beatles (White Album)","duration": "4:56"}]". You must respond only in JSON. Create a list of ${req.body.length} unique songs similar to the following playlist: "${req.body.spotifyData}". `;
+    Include "id", "title", "artist", "album" in your response. 
+     An example response is: "[{"id": 1,"title": "Hey Jude","artist": "The Beatles","album": "The Beatles (White Album)","duration": "4:56"}]".
+      Create a list of ${req.body.length} ${req.body.prompt} "${req.body.spotifyData}". `;
 
     const prompt = await Prompt.create({
       userPrompt: userPrompt,
@@ -148,6 +149,23 @@ app.post('/json', async (req, res, next) => {
     next(ex);
   }
 });
+
+app.put('/', async (req, res, next) => {
+  try {
+   
+    const prompt =await Prompt.findByPk(req.body.prompt.id)
+    const uriList = req.body.prompt.uriList;   
+    prompt.uriList = uriList;
+    await prompt.update();
+
+
+    res.send(prompt);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+
 
 
   app.get('/',  async(req, res, next)=> {

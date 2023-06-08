@@ -72,7 +72,7 @@ const Prompt = () => {
       <div className='prompt-Element'>
       <button onClick={()=> {dispatch(getResponse('Give me a playlist of ten random popular songs on spotify.'))}}>Generate Random Playlist</button>
       <button onClick={()=> {dispatch(getResponse('List ten random popular artists on spotify.'))}}>Find Artists</button>
-      <button onClick={()=> {dispatch(getJSONResponse(10, stringTopTracks))}}>Given JSON</button>
+      <button onClick={()=> {dispatch(getJSONResponse('similar songs to the following playlist', 5, stringTopTracks))}}>Given JSON</button>
       </div>
 
       <div className='messages'>
