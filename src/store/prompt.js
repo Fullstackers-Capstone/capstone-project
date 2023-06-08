@@ -40,9 +40,9 @@ export const getResponse = (prompt) => {
   };
 };
 
-export const getJSONResponse = (length, data) => {
+export const getJSONResponse = (prompt, length, data) => {
   return async (dispatch) => {
-    const request = { length: length, spotifyData: data };
+    const request = {prompt: prompt,length: length, spotifyData: data};
     const spotifyId = window.localStorage.getItem('spotifyId');
     const response = await axios.post('/api/prompt/json', request, {
       headers: {
@@ -63,10 +63,24 @@ const getSpotifyURIs = (response) => {
         
       }
     }));
-    response.uriList = URIResponse;
-    dispatch(createPrompt(response));
+   
+    response.uriList = URIResponse.toString();
+    dispatch(savePrompt(response));
   }
 }
+
+export const savePrompt = (prompt) => {
+  return async (dispatch) => {
+    const request = { prompt: prompt };
+    const spotifyId = window.localStorage.getItem('spotifyId');
+    const response = await axios.put('/api/prompt', request, {
+      headers: {
+        spotifyId: spotifyId
+      }
+    });
+    dispatch(createPrompt(response.data));
+  };
+};
 
 export const getAllPrompts = () => {
   return async (dispatch) => {
