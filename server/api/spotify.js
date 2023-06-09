@@ -193,8 +193,7 @@ export const createPlaylist = async ({userId, name, description}, prompt) => {
       name,
       description,
     });
-
-    const unfiltered = prompt.at(-1).uriList;
+    const unfiltered = prompt;
     const filtered = unfiltered.filter(track => (track));
     
     addTracksToPlaylist(response.data.id, filtered)
@@ -210,6 +209,7 @@ export const addTracksToPlaylist = async (playlistId, track_uris) => {
     const response = await spotifyAxios.post(`/playlists/${playlistId}/tracks`, {
       uris: track_uris,
     });
+    console.log('playlist', response.data);
     return response.data;
   } catch (error) {
     console.error(error);

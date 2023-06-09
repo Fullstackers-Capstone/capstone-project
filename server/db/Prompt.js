@@ -83,7 +83,7 @@
 
 
 const conn = require('./conn');
-const { JSON, UUID, UUIDV4, TEXT, STRING, ARRAY} = conn.Sequelize;
+const { JSON, UUID, UUIDV4, TEXT, STRING, ARRAY, BOOLEAN} = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Configuration, OpenAIApi } = require('openai');
@@ -112,6 +112,10 @@ const Prompt = conn.define('prompt', {
   },
   uriList: {
     type: ARRAY(STRING)  // changed this line
+  },
+  isCreated: {
+    type: BOOLEAN,
+    defaultValue: false
   }
 });
 

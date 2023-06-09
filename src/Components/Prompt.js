@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getResponse, getJSONResponse } from '../store';
+import { getResponse, getJSONResponse, wasCreated } from '../store';
 import Searcher from './Searcher';
 import { getTopTracks, createPlaylist } from '../../server/api/spotify';
 
@@ -12,16 +12,14 @@ const Prompt = () => {
   const [topTracks, setTopTracks] = useState(''); 
   const [stringTopTracks, setStringTopTracks] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
+  //       const playlistFunction = async() => {
+  //         await createPlaylist({userId: auth.spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, prompt)
+  //       }
+  //       playlistFunction();
 
-    const playlistFunction = async() => {
-      await createPlaylist({userId: auth.spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, prompt)
 
-
-    }
-    playlistFunction();
-
-  }, [prompt])
+  // }, [prompt])
 
 
   useEffect(()=> {
@@ -72,7 +70,7 @@ const Prompt = () => {
       <div className='prompt-Element'>
       <button onClick={()=> {dispatch(getResponse('Give me a playlist of ten random popular songs on spotify.'))}}>Generate Random Playlist</button>
       <button onClick={()=> {dispatch(getResponse('List ten random popular artists on spotify.'))}}>Find Artists</button>
-      <button onClick={()=> {dispatch(getJSONResponse('similar songs to the following playlist', 5, stringTopTracks))}}>Given JSON</button>
+      <button onClick={async()=> {await dispatch(getJSONResponse('similar songs to the following playlist', 5, stringTopTracks)); }}>Given JSON</button>
       </div>
 
       <div className='messages'>

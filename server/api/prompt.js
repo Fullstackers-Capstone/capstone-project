@@ -165,6 +165,18 @@ app.put('/', async (req, res, next) => {
   }
 });
 
+app.put('/created', async (req, res, next) => {
+  try {
+   
+    const prompt =await Prompt.findByPk(req.body.prompt.id)
+    const isCreated = req.body.prompt.isCreated;   
+    prompt.isCreated = isCreated;
+    await prompt.update();
+    res.send(prompt);
+  } catch (ex) {
+    next(ex);
+  }
+});
 
 
 
