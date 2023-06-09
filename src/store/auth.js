@@ -18,8 +18,6 @@ export const fetchSpotUser = () => {
       createDbUser(response);
 
       dispatch({ type: 'SET_AUTH', auth: response.data})
-
-      console.log('userrrrrrrrrrr: ', user);
   }
 }
 
