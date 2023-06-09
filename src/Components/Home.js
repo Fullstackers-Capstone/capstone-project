@@ -11,8 +11,6 @@ const Home = () => {
 
   localStorage.setItem("newUserId",auth.id);
 
-  console.log('userId storageeeeeee: ', window.localStorage)
-
   if(!auth){
     return null;
   }

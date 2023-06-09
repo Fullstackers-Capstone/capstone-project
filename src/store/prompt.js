@@ -88,6 +88,7 @@ const getSpotifyURIs = (response) => {
 
     const filteredResponse = URIResponse.filter(uri => uri !== undefined)
     await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, filteredResponse)
+    
     console.log("final URI response", filteredResponse);
 
     // Make sure URIResponse is an array of strings before storing it
