@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getResponse, getJSONResponse, wasCreated } from '../store';
 import Searcher from './Searcher';
 import { getTopTracks, createPlaylist } from '../../server/api/spotify';
+import Loader from './Loader';
 
 const Prompt = () => {
   const dispatch= useDispatch();
@@ -11,6 +12,7 @@ const Prompt = () => {
   const [input,setInput] = useState('');
   const [topTracks, setTopTracks] = useState(''); 
   const [stringTopTracks, setStringTopTracks] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   // useEffect(() => {
   //       const playlistFunction = async() => {
@@ -56,8 +58,28 @@ const Prompt = () => {
 
 
   const submit = (ev) => {
+    setIsLoading(true);
     ev.preventDefault();
     dispatch(getResponse(input));
+    setIsLoading(false);
+  }
+
+  const submitRandomSongs = async() => {
+    setIsLoading(true);
+    await dispatch(getResponse('Give me a playlist of ten random popular songs on spotify.'));
+    setIsLoading(false);
+  }
+
+  const submitRandomArtists = async() => {
+    setIsLoading(true);
+    await dispatch(getResponse('List ten random popular artists on spotify.'));
+    setIsLoading(false);
+  }
+
+  const submitJSON = async() => {
+    setIsLoading(true);
+    await dispatch(getJSONResponse('similar songs to the following playlist', 5, stringTopTracks));
+    setIsLoading(false);
   }
 
 
@@ -68,12 +90,16 @@ const Prompt = () => {
         <button className="StyledLogoutButton" >Test</button>
       </form>
       <div className='prompt-Element'>
-      <button onClick={()=> {dispatch(getResponse('Give me a playlist of ten random popular songs on spotify.'))}}>Generate Random Playlist</button>
-      <button onClick={()=> {dispatch(getResponse('List ten random popular artists on spotify.'))}}>Find Artists</button>
-      <button onClick={async()=> {await dispatch(getJSONResponse('similar songs to the following playlist', 5, stringTopTracks)); }}>Given JSON</button>
+      <button onClick={()=> submitRandomSongs()}>Generate Random Playlist</button>
+      <button onClick={()=> submitRandomArtists()}>Find Artists</button>
+      <button onClick={()=> submitJSON()}>Given JSON</button>
       </div>
 
-      <div className='messages'>
+      {isLoading ? (
+        <Loader/>
+      ) : (
+
+        <div className='messages'>
         {
            prompt.map(_prompt => {
               return <div key={_prompt.id} id={_prompt.id}>
@@ -85,6 +111,7 @@ const Prompt = () => {
 
 
       </div>
+      )}
       
     </div>
   )
