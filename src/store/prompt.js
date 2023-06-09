@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { searchFunctionality } from '../../server/api/spotify';
+import { searchFunctionality, createPlaylist } from '../../server/api/spotify';
 const SET_PROMPT = 'SET_PROMPT';
 const CREATE_PROMPT = 'CREATE_PROMPT';
+const UPDATE_PROMPT = 'UPDATE_PROMPT';
 const DESTROY_PROMPT = 'DESTROY_PROMPT';
 
 const initialState = [];
@@ -12,6 +13,16 @@ const promptReducer = (state = initialState, action) => {
       return action.prompt;
     case CREATE_PROMPT:
       return [...state, action.prompt];
+    case UPDATE_PROMPT:
+      const prompt= state.map(_prompt => {
+       if ( _prompt.id === action.prompt.id){
+          return action.prompt;
+       }
+       else{
+        return _prompt;
+       }
+      });
+      return prompt;
     default:
       return state;
   }
@@ -27,6 +38,11 @@ export const createPrompt = (prompt) => ({
   type: CREATE_PROMPT,
   prompt
 });
+
+export const updatePrompt = (prompt) => ({
+  type: UPDATE_PROMPT,
+  prompt
+})
 
 export const getResponse = (prompt) => {
   
@@ -58,22 +74,20 @@ export const getJSONResponse = (prompt, length, data) => {
 const getSpotifyURIs = (response) => {
   return async (dispatch) => {
     const jsonResponse = JSON.parse(response.response);
-
+    const spotifyId = window.localStorage.getItem('spotifyId');
     const URIResponse = await Promise.all(jsonResponse.map(async(element) => {
-      // Log the element before it's passed into searchFunctionality
-      console.log("yooooooooo",element);
-   
       const uri = await searchFunctionality(element)
       if (await uri){
         return await uri;
+        
       }
     
     }));
-
+   
     // Log the final URIResponse
 
     const filteredResponse = URIResponse.filter(uri => uri !== undefined)
-
+    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, filteredResponse)
     console.log("final URI response", filteredResponse);
 
     // Make sure URIResponse is an array of strings before storing it
@@ -95,6 +109,7 @@ export const savePrompt = (prompt) => {
     dispatch(createPrompt(response.data));
   };
 };
+
 
 export const getAllPrompts = () => {
   return async (dispatch) => {
