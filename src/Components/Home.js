@@ -9,6 +9,10 @@ const Home = () => {
   const { auth } = useSelector(state => state);
   const [selected, setSelected] = useState(true);
 
+  localStorage.setItem("newUserId",auth.id);
+
+  console.log('userId storageeeeeee: ', window.localStorage)
+
   if(!auth){
     return null;
   }
