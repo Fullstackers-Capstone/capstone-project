@@ -27,9 +27,6 @@ const User = conn.define('user', {
   image: {
     type: STRING,
   },
-  followerCount: {
-    type: INTEGER,
-  },
   playlistCount: {
     type: INTEGER,
     defaultValue: 0

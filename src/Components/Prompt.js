@@ -23,6 +23,7 @@ const Prompt = () => {
 
   // }, [prompt])
 
+  console.log(window.localStorage);
 
   useEffect(()=> {
     async function getUserTopTracks() {

@@ -39,6 +39,16 @@ app.post('/', async(req, res, next) => {
     }
 })
 
+app.put('/:id', async(req, res, next) => {
+    try{
+        const playlist = await Playlist.findByPk(req.params.id);
+        res.status(201).send(await playlist.update(req.body));
+    }
+    catch(err){
+        next(err);
+    }
+})
+
 module.exports = app;
 
 

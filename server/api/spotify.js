@@ -191,12 +191,24 @@ export const createPlaylist = async ({userId, name, description}, prompt) => {
   try {
     const response = await spotifyAxios.post(`/users/${userId}/playlists`, {
       name,
-      description,
+      description
     });
+
     const unfiltered = prompt;
     const filtered = unfiltered.filter(track => (track));
     
     addTracksToPlaylist(response.data.id, filtered)
+    console.log('responseeeeeeee.data: ', response.data)
+
+    const newUserId = window.localStorage.getItem('newUserId');
+
+    await axios.post('/api/playlists', {
+      spotId: response.data.id,
+      title: name,
+      prompt: 'sample prompt',
+      userId: newUserId
+    })
+
     return response.data;
   } catch (error) {
     console.error(error);
@@ -209,7 +221,16 @@ export const addTracksToPlaylist = async (playlistId, track_uris) => {
     const response = await spotifyAxios.post(`/playlists/${playlistId}/tracks`, {
       uris: track_uris,
     });
+
+    console.log('Possible DB Response: ', response)
+
     console.log('playlist', response.data);
+
+    // 6/9 nopickles (further testing for db playlist)
+    // await axios.put(`/api/playlists/${playlistId}`, {
+    //   isDiscoverable: false
+    // });
+
     return response.data;
   } catch (error) {
     console.error(error);
