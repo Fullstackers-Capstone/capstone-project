@@ -65,6 +65,12 @@ const Prompt = () => {
   const selectPromptOption = (text) => {
     setInput(text);
   };
+
+  const submitJSON = async() => {
+    setIsLoading(true);
+    await dispatch(getJSONResponse('similar songs to the following playlist', 5, stringTopTracks));
+    setIsLoading(false);
+  }
   
   return(
     <div className='prompt-Container'>
@@ -118,7 +124,7 @@ const Prompt = () => {
               <div className="options with-arrow" onClick={()=> {dispatch(getResponse('List ten random popular artists on spotify.'))}}>
                 <span className="pl-type-desc">List ten random popular artists on spotify</span>
               </div>
-              <div className="options with-arrow" onClick={async()=> {await dispatch(getJSONResponse('similar songs to the following playlist', 5, stringTopTracks))}}>
+              <div className="options with-arrow" onClick={()=> submitJSON()}>
                 <span className="pl-type-desc">GIVEN JSON</span>
               </div>
             </>
