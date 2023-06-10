@@ -197,16 +197,7 @@ export const createPlaylist = async ({userId, name, description}, prompt) => {
     const unfiltered = prompt;
     const filtered = unfiltered.filter(track => (track));
     
-    addTracksToPlaylist(response.data.id, filtered)
-
-    const newUserId = window.localStorage.getItem('newUserId');
-
-    await axios.post('/api/playlists', {
-      spotId: response.data.id,
-      title: name,
-      prompt: 'sample prompt',
-      userId: newUserId
-    })
+    addTracksToPlaylist(response.data.id, filtered, name, description)
 
     return response.data;
   } catch (error) {
@@ -215,7 +206,7 @@ export const createPlaylist = async ({userId, name, description}, prompt) => {
   }
 };
 
-export const addTracksToPlaylist = async (playlistId, track_uris) => {
+export const addTracksToPlaylist = async (playlistId, track_uris, name, description) => {
   try {
     const response = await spotifyAxios.post(`/playlists/${playlistId}/tracks`, {
       uris: track_uris,
@@ -223,10 +214,20 @@ export const addTracksToPlaylist = async (playlistId, track_uris) => {
 
     console.log('playlist', response.data);
 
+    const newUserId = window.localStorage.getItem('newUserId');
+
+    const imgGetter = await getPlaylistById(playlistId);
+
+    await axios.post('/api/playlists', {
+      spotId: playlistId,
+      title: name,
+      prompt: description,
+      userId: newUserId,
+      tracks: track_uris,
+      image: imgGetter.data.images[0].url
+    })
+
     // 6/9 nopickles (further testing for db playlist)
-    // await axios.put(`/api/playlists/${playlistId}`, {
-    //   isDiscoverable: false
-    // });
 
     return response.data;
   } catch (error) {

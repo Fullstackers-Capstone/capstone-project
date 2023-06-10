@@ -18,7 +18,7 @@ const Playlist = conn.define('playlist', {
     type: TEXT
   },
   tracks: {
-    type: STRING
+    type: ARRAY(STRING),
     // allowNull: false,
     // validate: {
     //   notEmpty: true,
