@@ -16,8 +16,6 @@ import UnlockPro from './UnlockPro';
 
 const App = () => {
 
-  const { playlists } = useSelector(state => state);
-
   const [token, setToken] = useState(null);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);

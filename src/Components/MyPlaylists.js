@@ -14,11 +14,9 @@ const MyPlaylists = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPlaylists);
+      dispatch(fetchPlaylists);
 
   }, [playlists])
-
-  console.log('these are the playlists: ', playlists);
 
   const navigate = useNavigate();
 
@@ -49,27 +47,6 @@ const MyPlaylists = () => {
   const imageHook = (playlistImg) => {
     return playlistImg || 'http://www.google.com'
   }
-
-//   useEffect(() => {
-
-//     setIsLoading(true);
-//     const getLists = async() => {
-
-//   const listsData = await Promise.all(
-//     playlists.map(async (_playlist) => {
-//       const _tracks = await getPlaylistTracks(_playlist.data.id)
-//       return {
-//         tracks: _tracks,
-//       };
-//     })
-//   );
-//   // setTracks(listsData);
-//   setIsLoading(false);
-// }
-
-    
-//     catchErrors(getLists());
-//   }, []);
 
   if(!auth){
     return null;
