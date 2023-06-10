@@ -16,7 +16,7 @@ export const fetchPlaylists = () => {
     try {
       const response = await axios.get('/api/playlists');
 
-      console.log('response: ', response);
+      // console.log('response: ', response);
 
       const spotIdData = await Promise.all(response.data.map(async (response) => ({
         spotData: await getPlaylistById(Object.entries(response)[3][1]),
@@ -35,9 +35,6 @@ export const fetchPlaylists = () => {
 
       // const spotReturn = await Promise.all(spotIdData.map(async(spotId) => await getPlaylistById(spotId)
       // ));
-
-      console.log('lastReturn: ', spotIdData);
-
 
       dispatch({ type: 'SET_PLAYLISTS', playlists: spotIdData });
     } catch (error) {
