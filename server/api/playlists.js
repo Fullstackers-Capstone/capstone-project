@@ -4,7 +4,9 @@ const { Playlist, User } = require('../db');
 
 app.get('/', async (req, res, next) => {
     try{
-        res.send(await Playlist.findAll());
+        res.send(await Playlist.findAll({
+            order: [['createdAt', 'DESC']]
+        }));
     }
     catch(err){
         next(err);

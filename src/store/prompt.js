@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { searchFunctionality, createPlaylist } from '../../server/api/spotify';
+import { fetchPlaylists } from './playlists';
 const SET_PROMPT = 'SET_PROMPT';
 const CREATE_PROMPT = 'CREATE_PROMPT';
 const UPDATE_PROMPT = 'UPDATE_PROMPT';
@@ -88,8 +89,7 @@ const getSpotifyURIs = (response) => {
     }));
    //the above is fetching the uris for each track
     const filteredResponse = URIResponse.filter(uri => uri !== undefined)
-    console.log("first filtered response prompt store", filteredResponse);
-    //ensuring we dont grab undefined songs
+
     await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, filteredResponse)
 
     console.log("final URI response prompt store", filteredResponse);

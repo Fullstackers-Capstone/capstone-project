@@ -1,15 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getResponse, getJSONResponse, wasCreated } from '../store';
+import { getResponse, getJSONResponse, wasCreated, fetchPlaylists } from '../store';
 import Searcher from './Searcher';
 import { getTopTracks, createPlaylist } from '../../server/api/spotify';
 import Loader from './Loader';
 
 const Prompt = () => {
   const dispatch= useDispatch();
-  const { prompt, auth } = useSelector(state => state);
-  const [input, setInput] = useState('');
+  const { prompt, auth, playlists } = useSelector(state => state);
+  const [input,setInput] = useState('');
   const [topTracks, setTopTracks] = useState(''); 
   const [testClicked, setTestClicked] = useState(false);
   const [showExamplePrompts, setShowExamplePrompts] = useState(true);
