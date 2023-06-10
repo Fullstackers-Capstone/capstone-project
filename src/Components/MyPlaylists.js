@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { getCurrentUserPlaylists, getPlaylistTracks } from '../../server/api/spotify';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCurrentUserPlaylists, getPlaylistById, getPlaylistTracks } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
+import { fetchPlaylists } from '../store';
 
 const MyPlaylists = () => {
 
-  const { auth } = useSelector(state => state);
-  const [playlists, setPlaylists] = useState([]);
+  const { auth, playlists } = useSelector(state => state);
   const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPlaylists);
+
+  }, [playlists])
+
+  console.log('these are the playlists: ', playlists);
 
   const navigate = useNavigate();
 
@@ -37,35 +46,36 @@ const MyPlaylists = () => {
     return unicode.slice(11, 16);
   }
 
-  useEffect(() => {
+  const imageHook = (playlistImg) => {
+    return playlistImg || 'http://www.google.com'
+  }
 
-    setIsLoading(true);
-    const getLists = async() => {
+//   useEffect(() => {
 
-  const lists = await getCurrentUserPlaylists(5);
+//     setIsLoading(true);
+//     const getLists = async() => {
 
-  const listsData = await Promise.all(
-    lists.data.items.map(async (_playlist) => {
-      const tracks = await getPlaylistTracks(_playlist.id)
-      let imageURL = _playlist.images && _playlist.images.length > 0 ? _playlist.images[0].url : 'https://images.unsplash.com/photo-1546188994-07c34f6e5e1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4MTU3OTM0NQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080';
-      return {
-        id: _playlist.id,
-        name: _playlist.name,
-        image: imageURL,
-        href: _playlist.external_urls.spotify,
-        tracks: tracks,
-      };
-    })
-  );
-  setPlaylists(listsData);
-  setIsLoading(false);
-}
+//   const listsData = await Promise.all(
+//     playlists.map(async (_playlist) => {
+//       const _tracks = await getPlaylistTracks(_playlist.data.id)
+//       return {
+//         tracks: _tracks,
+//       };
+//     })
+//   );
+//   // setTracks(listsData);
+//   setIsLoading(false);
+// }
 
     
-    catchErrors(getLists());
-  }, []);
+//     catchErrors(getLists());
+//   }, []);
 
   if(!auth){
+    return null;
+  }
+
+  if(!playlists){
     return null;
   }
 
@@ -74,25 +84,26 @@ const MyPlaylists = () => {
     <>
         {isLoading ? (
             <Loader/>
-        ):(
+        ):( 
             <div id='pl-container'>
             {playlists.map(playlist => {
                 return(
-                <div className='pl-thumb' key={playlist.id}>
+                <div className='pl-thumb' key={playlist.spotData.data.id}>
                     <div className='pl-thumb-name'>
-                        <a href={playlist.href} target='_blank' title='Open in Spotify'>{playlist.name}</a>
+                        <a href={`https://open.spotify.com/playlist/${playlist.spotData.data.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
                     </div>
         
                     <div className='pl-thumb-data-container'>
         
                         <div className='pl-thumb-img' title='Open in Spotify'>
-                            <a href={playlist.href} target='_blank'>
-                                <img src={playlist.image}/>
+                            <a href={`https://open.spotify.com/playlist/${playlist.spotData.data.id}`} target='_blank'>
+                                <img src={imageHook(playlist.spotData.data.images[0].url)}/>
                             </a>
                         </div>
         
                     <div className='pl-thumb-tracks'>
-                        {playlist.tracks.data.items.map(_track => {
+        
+                        {playlist.spotData.data.tracks.items.map(_track => {
                         return(
                           <div key={_track.track.duration_ms} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                         )
@@ -104,11 +115,11 @@ const MyPlaylists = () => {
                         <div className='pl-prompt'>
 
                         <div className='pl-thumb-prompt-content'>
-                            <span className='prompt-title'>Prompt:</span> <span className='prompt-content'>"Make me a playlist that sounds like X and features artists X, X & X"</span>
+                            <span className='prompt-title'>Prompt:</span> <span className='prompt-content'>{playlist.prompt}</span>
                         </div>
 
                         <div className='pl-thumb-createdAt'>
-                             {dateify(auth.createdAt)} @ {timeify(auth.createdAt)} UTC
+                             {dateify(playlist.createdAt)} @ {timeify(playlist.createdAt)} UTC
                         </div>
                         
                         </div>
@@ -134,11 +145,11 @@ const MyPlaylists = () => {
                             </button>
                             <div className='ellipsis-dropdown-content'>
                                 <li key='spotOpen'>
-                                    <a href={`spotify:playlist:${playlist.id}`}>
+                                    <a href={`spotify:playlist:${playlist.spotData.data.id}`}>
                                         Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
                                     </a>
                                 </li>
-                                <li key='copyLink' onClick={() => copier(playlist.href)}>Copy Link</li>
+                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.spotData.data.id}`)}>Copy Link</li>
         
                                 <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>
                             </div>

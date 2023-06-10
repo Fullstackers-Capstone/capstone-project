@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 // Map for localStorage keys. Helps us refer to keys for key/value pair of localstorage
 const LOCALSTORAGE_KEYS = {
@@ -106,7 +107,7 @@ const getAccessToken = () => {
 
 export const accessToken = getAccessToken();
 
-const spotifyAxios = axios.create({
+export const spotifyAxios = axios.create({
   baseURL: 'https://api.spotify.com/v1',
   timeout: 1000,
   headers: {
@@ -197,7 +198,7 @@ export const createPlaylist = async ({userId, name, description}, prompt) => {
     const unfiltered = prompt;
     const filtered = unfiltered.filter(track => (track));
     
-    addTracksToPlaylist(response.data.id, filtered, name, description)
+    addTracksToPlaylist(response.data.id, filtered, description)
 
     return response.data;
   } catch (error) {
@@ -206,7 +207,7 @@ export const createPlaylist = async ({userId, name, description}, prompt) => {
   }
 };
 
-export const addTracksToPlaylist = async (playlistId, track_uris, name, description) => {
+export const addTracksToPlaylist = async (playlistId, track_uris, description) => {
   try {
     const response = await spotifyAxios.post(`/playlists/${playlistId}/tracks`, {
       uris: track_uris,
@@ -216,20 +217,14 @@ export const addTracksToPlaylist = async (playlistId, track_uris, name, descript
 
     const newUserId = window.localStorage.getItem('newUserId');
 
-    const imgGetter = await getPlaylistById(playlistId);
-
     await axios.post('/api/playlists', {
       spotId: playlistId,
-      title: name,
       prompt: description,
       userId: newUserId,
-      tracks: track_uris,
-      image: imgGetter.data.images[0].url
-    })
-
-    // 6/9 nopickles (further testing for db playlist)
+    });
 
     return response.data;
+
   } catch (error) {
     console.error(error);
     throw error;

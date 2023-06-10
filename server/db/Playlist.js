@@ -7,26 +7,8 @@ const Playlist = conn.define('playlist', {
     primaryKey: true,
     defaultValue: UUIDV4,
   },
-  title: {
-    type: STRING,
-    // allowNull: false,
-    // validate: {
-    //   notEmpty: true,
-    // },
-  },
   prompt: {
     type: TEXT
-  },
-  tracks: {
-    type: ARRAY(STRING),
-    // allowNull: false,
-    // validate: {
-    //   notEmpty: true,
-    // },
-  },
-  image: {
-    type: STRING,
-    allowNull: true,  // Allow null if image is optional
   },
   isDiscoverable: {
     type: BOOLEAN,

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createPlaylist } from '../../server/api/spotify';
+import { createPlaylist, getPlaylistById } from '../../server/api/spotify';
 
 const playlists = (state = [], action) => {
   if (action.type === 'SET_PLAYLISTS') {
@@ -14,10 +14,32 @@ const playlists = (state = [], action) => {
 export const fetchPlaylists = () => {
   return async (dispatch) => {
     try {
-
-      console.log('is this being called?');
       const response = await axios.get('/api/playlists');
-      dispatch({ type: 'SET_PLAYLISTS', playlists: response.data });
+
+      console.log('response: ', response);
+
+      const spotIdData = await Promise.all(response.data.map(async (response) => ({
+        spotData: await getPlaylistById(Object.entries(response)[3][1]),
+        prompt: Object.entries(response)[1][1],
+        createdAt: Object.entries(response)[5][1]
+      })
+      ));
+
+      // const timeData = response.data.map(response => Object.entries(response)[5][1]);
+
+      // const promptData = response.data.map(response => Object.entries(response)[1][1]);
+
+      // console.log('timeData: ', timeData);
+
+      // console.log('promptData: ', promptData);
+
+      // const spotReturn = await Promise.all(spotIdData.map(async(spotId) => await getPlaylistById(spotId)
+      // ));
+
+      console.log('lastReturn: ', spotIdData);
+
+
+      dispatch({ type: 'SET_PLAYLISTS', playlists: spotIdData });
     } catch (error) {
       console.error(error);
     }
