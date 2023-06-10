@@ -14,6 +14,8 @@ const playlists = (state = [], action) => {
 export const fetchPlaylists = () => {
   return async (dispatch) => {
     try {
+
+      console.log('is this being called?');
       const response = await axios.get('/api/playlists');
       dispatch({ type: 'SET_PLAYLISTS', playlists: response.data });
     } catch (error) {

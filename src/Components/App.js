@@ -5,7 +5,7 @@ import { BsSpotify } from 'react-icons/bs';
 import { accessToken, logout } from '/server/api/spotify.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Routes, Route } from 'react-router-dom';
-import { fetchUsers, fetchSpotUser,getAllPrompts } from '../store';
+import { fetchUsers, fetchSpotUser,getAllPrompts, fetchPlaylists } from '../store';
 import Profile from './Profile';
 import Contact from './Contact';
 import NavBar from './NavBar';
@@ -26,6 +26,7 @@ const App = () => {
       await dispatch(fetchSpotUser());
       await setToken(accessToken);
       await dispatch(getAllPrompts());
+      await dispatch(fetchPlaylists);
     }
 
     loginWithSpotify();
