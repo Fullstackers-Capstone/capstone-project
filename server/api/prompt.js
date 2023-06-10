@@ -91,8 +91,6 @@
 
 // module.exports = app;
 
-
-
 const express = require('express');
 const app = express.Router();
 const { isLoggedIn } = require('./middleware');
@@ -114,7 +112,7 @@ app.get('/', async(req, res, next) => {
 
 app.post('/', async( req, res, next) => {    
     try{
-      console.log(req.headers);
+      //console.log(req.headers);
       const user = await User.findBySpotifyId(req.headers.spotifyid);
 
       const prompt = await Prompt.create({userPrompt: req.body.prompt, userId: user.id});
@@ -145,6 +143,7 @@ app.post('/json', async (req, res, next) => {
     await prompt.save();
 
     res.send(prompt);
+    //here we are creating the response using the prompt, and the response is the recommended songs
   } catch (ex) {
     next(ex);
   }
