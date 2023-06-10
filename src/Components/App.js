@@ -16,6 +16,8 @@ import UnlockPro from './UnlockPro';
 
 const App = () => {
 
+  const { playlists } = useSelector(state => state);
+
   const [token, setToken] = useState(null);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -26,7 +28,7 @@ const App = () => {
       await dispatch(fetchSpotUser());
       await setToken(accessToken);
       await dispatch(getAllPrompts());
-      await dispatch(fetchPlaylists);
+      await dispatch(fetchPlaylists());
     }
 
     loginWithSpotify();
