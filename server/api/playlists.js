@@ -13,6 +13,7 @@ app.get('/', async (req, res, next) => {
     }
 })
 
+
 app.get('/:id', async (req, res, next) => {
     try{
         const id = req.params.id;
@@ -57,7 +58,8 @@ module.exports = app;
 
 
 
-/* Pre 6/2 MT updates
+/*
+
 
 const express = require('express');
 const app = express.Router();
@@ -65,14 +67,15 @@ const { Playlist, User } = require('../db');
 
 app.get('/', async (req, res, next) => {
     try{
-        res.send(await Playlist.findAll());
+        res.send(await Playlist.findAll({
+            order: [['createdAt', 'DESC']]
+        }));
     }
     catch(err){
         next(err);
     }
 })
 
-// 6/1 MT
 app.get('/:id', async (req, res, next) => {
     try{
         const id = req.params.id;
@@ -92,11 +95,20 @@ app.get('/:id', async (req, res, next) => {
     }
 })
 
-
-
 app.post('/', async(req, res, next) => {
     try{
         res.send(await Playlist.create(req.body));
+    }
+    catch(err){
+        next(err);
+    }
+})
+
+app.put('/:id', async(req, res, next) => {
+    try{
+        const playlist = await Playlist.findByPk(req.params.id);
+        console.log(playlist);
+        res.status(201).send(await playlist.update(req.body));
     }
     catch(err){
         next(err);
