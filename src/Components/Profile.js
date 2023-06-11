@@ -122,4 +122,3 @@ export default Profile;
             <Switch checked={ discover } onClick={() => discoverToggle()}/></h1>
             <img src={ auth.image }/>
         </div> */}
-

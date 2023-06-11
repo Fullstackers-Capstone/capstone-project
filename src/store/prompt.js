@@ -5,8 +5,12 @@ const SET_PROMPT = 'SET_PROMPT';
 const CREATE_PROMPT = 'CREATE_PROMPT';
 const UPDATE_PROMPT = 'UPDATE_PROMPT';
 const DESTROY_PROMPT = 'DESTROY_PROMPT';
+const SET_JSON_RESPONSE = 'SET_JSON_RESPONSE';
 
-const initialState = [];
+const initialState = {
+  prompts: [],
+  jsonResponse: [], // Initialize as an empty array
+};
 
 const promptReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,15 +19,20 @@ const promptReducer = (state = initialState, action) => {
     case CREATE_PROMPT:
       return [...state, action.prompt];
     case UPDATE_PROMPT:
-      const prompt= state.map(_prompt => {
-       if ( _prompt.id === action.prompt.id){
+      const prompt = state.map((_prompt) => {
+        if (_prompt.id === action.prompt.id) {
           return action.prompt;
-       }
-       else{
-        return _prompt;
-       }
+        } else {
+          return _prompt;
+        }
       });
       return prompt;
+    case SET_JSON_RESPONSE:
+      console.log('Response data:', action.jsonResponse);
+      return {
+        ...state,
+        jsonResponse: action.jsonResponse,
+      };
     default:
       return state;
   }
@@ -45,6 +54,11 @@ export const updatePrompt = (prompt) => ({
   prompt
 })
 
+export const setJSONResponse = (jsonResponse) => ({
+  type: SET_JSON_RESPONSE,
+  jsonResponse,
+});
+
 
 export const getResponse = (prompt) => {
   return async (dispatch) => {
@@ -59,20 +73,17 @@ export const getResponse = (prompt) => {
   };
 };
 
-//we are getting the prompt length and the data (in this case the songs we're passing in)
 export const getJSONResponse = (prompt, length, data) => {
   return async (dispatch) => {
-    const request = {prompt: prompt,length: length, spotifyData: data};
-    console.log('request is thisrequest is thisrequest is thisrequest is thisrequest is this', request)
+    const request = { prompt: prompt, length: length, spotifyData: data };
     const spotifyId = window.localStorage.getItem('spotifyId');
     const response = await axios.post('/api/prompt/json', request, {
       headers: {
-        spotifyId: spotifyId
-      }
+        spotifyId: spotifyId,
+      },
     });
-    console.log("response we get from that prompt create", response.data);
-    //the uri list is null though so we need to pass this into the getSpotifyURIs 
-    dispatch(getSpotifyURIs(await response.data));
+    const parsed = JSON.parse(response.data.response)
+    dispatch(setJSONResponse(parsed));
   };
 };
 
@@ -90,7 +101,7 @@ const getSpotifyURIs = (response) => {
    //the above is fetching the uris for each track
     const filteredResponse = URIResponse.filter(uri => uri !== undefined)
 
-    // console.log('getting the description', response);
+    console.log('very filtered response here',filteredResponse);
 
     await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: response.userInput}, filteredResponse)
 
