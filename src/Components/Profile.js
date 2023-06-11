@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { updateAuth } from '../store';
+import { updateAuth, updatePlaylist } from '../store';
 import Switch from 'react-ios-switch';
 
 const Profile = () => {
@@ -25,6 +25,9 @@ const Profile = () => {
         if (didMount.current) {  // Avoid running on initial render
             if(auth){
                 dispatch(updateAuth({id: auth.id, discoverPlaylists: discover}));
+                _playlists.map(pl => {(
+                    dispatch(updatePlaylist({id: pl.id, isDiscoverable: discover}))
+                )})
             }
         } else {
             didMount.current = true;

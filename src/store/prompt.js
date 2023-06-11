@@ -90,7 +90,9 @@ const getSpotifyURIs = (response) => {
    //the above is fetching the uris for each track
     const filteredResponse = URIResponse.filter(uri => uri !== undefined)
 
-    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, filteredResponse)
+    // console.log('getting the description', response);
+
+    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: response.userInput}, filteredResponse)
 
     console.log("final URI response prompt store", filteredResponse);
 
