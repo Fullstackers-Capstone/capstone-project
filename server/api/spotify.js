@@ -194,6 +194,8 @@ export const getAudioFeaturesForTracks = (ids) => {
 
 export const createPlaylist = async ({userId, name, description}, prompt) => {
   try {
+
+    console.log('still getting the description: ', description)
     const response = await spotifyAxios.post(`/users/${userId}/playlists`, {
       name,
       description

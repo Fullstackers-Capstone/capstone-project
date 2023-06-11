@@ -45,7 +45,7 @@ const MyPlaylists = () => {
   }
 
   const imageHook = (playlistImg) => {
-    return playlistImg || 'http://www.google.com'
+    return playlistImg || '/static/default.jpeg'
   }
 
   if(!auth){

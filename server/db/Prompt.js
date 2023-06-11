@@ -116,6 +116,9 @@ const Prompt = conn.define('prompt', {
   isCreated: {
     type: BOOLEAN,
     defaultValue: false
+  },
+  userInput: {
+    type: TEXT
   }
 });
 

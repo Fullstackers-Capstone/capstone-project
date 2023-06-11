@@ -40,9 +40,12 @@ app.post('/json', async (req, res, next) => {
      An example response is: "[{"id": 1,"title": "Hey Jude","artist": "The Beatles","album": "The Beatles (White Album)","duration": "4:56"}]".
       Create a list of ${req.body.length} ${req.body.prompt} "${req.body.spotifyData}". `;
 
+    const userInput = req.body.spotifyData
+
     const prompt = await Prompt.create({
       userPrompt: userPrompt,
       userId: user.id,
+      userInput,
     });
 
     await prompt.askChatGPT();

@@ -78,6 +78,14 @@ const playlists = (state = [], action) => {
   if (action.type === 'CREATE_PLAYLIST') {
     return [...state, action.playlist];
   }
+  if(action.type === 'UPDATE_PLAYLIST'){
+    state = state.map(playlist => {
+        if(playlist.id === action.playlist.id){
+            return action.playlist;
+        }
+        return playlist;
+    })
+}
   return state;
 };
 
@@ -86,14 +94,18 @@ export const fetchPlaylists = () => {
     try {
       const response = await axios.get('/api/playlists');
 
-      // console.log('response: ', response);
+      console.log('response: ', response);
 
       const spotIdData = await Promise.all(response.data.map(async (response) => ({
         spotData: await getPlaylistById(Object.entries(response)[3][1]),
         prompt: Object.entries(response)[1][1],
-        createdAt: Object.entries(response)[5][1]
+        createdAt: Object.entries(response)[5][1],
+        userId: Object.entries(response)[6][1],
+        isDiscoverable: Object.entries(response)[2][1]
       })
       ));
+
+      console.log('spotIdData', spotIdData);
 
       // const timeData = response.data.map(response => Object.entries(response)[5][1]);
 
@@ -123,6 +135,13 @@ export const createDBPlaylist = (playlist) => {
     }
   };
 };
+
+export const updatePlaylist = (playlist) => {
+  return async(dispatch) => {
+    const response = await axios.put(`/api/playlists/${playlist.id}`, playlist)
+    dispatch({ type: 'UPDATE_PLAYLIST', playlist: response.data});
+  }
+}
 
 
 export default playlists;
