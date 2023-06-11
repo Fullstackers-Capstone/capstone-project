@@ -148,6 +148,7 @@ export const searchFunctionality = async (searchKey) => {
     });
     // https://api.spotify.com/v1/search?q=name:${encodeURIComponent(song.title)}album:${encodeURIComponent(song.album)}artist:${encodeURIComponent(song.artist)}&type=track`,
     //response is all the songs from spotify
+    console.log(response);
     if (await response.data.tracks.items[0]){
       return await response.data.tracks.items[0].uri
     }
