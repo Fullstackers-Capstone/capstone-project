@@ -35,9 +35,10 @@ app.post('/', async( req, res, next) => {
 app.post('/json', async (req, res, next) => {
   try {
     const user = await User.findBySpotifyId(req.headers.spotifyid);
-    const userPrompt = ` You are an assistant that can only responds in JSON. 
+    const userPrompt = ` You are an assistant that can only responds in JSON.
+    Do not respond with any text or response, just JSON. 
     Include "id", "title", "artist", "album" in your response.
-     An example response is: "[{"id": 1,"title": "Hey Jude","artist": "The Beatles","album": "The Beatles (White Album)","duration": "4:56"}]".
+     An example response is: [{"id": 1,"title": "Hey Jude","artist": "The Beatles","album": "The Beatles (White Album)","duration": "4:56"}].
       Create a list of ${req.body.length} ${req.body.prompt} "${req.body.spotifyData}". `;
 
     const userInput = req.body.spotifyData
