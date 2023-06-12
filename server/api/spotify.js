@@ -135,7 +135,7 @@ export const getTopTracks = (time_range = 'short_term') => {
 };
 
 
-// Search for artists
+// Search for tracks
 // We will need to loop through each track to add more than one
 export const searchFunctionality = async (searchKey) => {
   const track_uris = [];
@@ -148,7 +148,7 @@ export const searchFunctionality = async (searchKey) => {
     });
     // https://api.spotify.com/v1/search?q=name:${encodeURIComponent(song.title)}album:${encodeURIComponent(song.album)}artist:${encodeURIComponent(song.artist)}&type=track`,
     //response is all the songs from spotify
-    console.log(response);
+    console.log('searchFunctionality Response',response);
     if (await response.data.tracks.items[0]){
       return await response.data.tracks.items[0].uri
     }

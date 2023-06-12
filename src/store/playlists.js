@@ -52,6 +52,7 @@ export const createDBPlaylist = (playlist) => {
   };
 };
 
+/*
 export const createPlaylistTest = (playlist) => {
   return async (dispatch) => {
     try {
@@ -62,6 +63,9 @@ export const createPlaylistTest = (playlist) => {
     }
   };
 };
+*/
+
+
 
 export const updatePlaylist = (playlist) => {
 

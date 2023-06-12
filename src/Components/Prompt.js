@@ -6,15 +6,15 @@ import { getTopTracks, createPlaylist } from '../../server/api/spotify';
 import Loader from './Loader';
 
 const Prompt = () => {
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
   const { prompt, auth, playlists } = useSelector(state => state);
-  const [input,setInput] = useState('');
-  const [topTracks, setTopTracks] = useState(''); 
+  const { jsonResponse } = useSelector(state => state.prompt);
+  const [input, setInput] = useState('');
+  const [topTracks, setTopTracks] = useState('');
   const [testClicked, setTestClicked] = useState(false);
   const [showExamplePrompts, setShowExamplePrompts] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [stringTopTracks, setStringTopTracks] = useState('');
-  
 
   useEffect(() => {
     async function getUserTopTracks() {
@@ -34,10 +34,12 @@ const Prompt = () => {
     setTestClicked(true);
     setShowExamplePrompts(false);
   };
+
   const goBack = () => {
     setShowExamplePrompts(true);
     setTestClicked(false);
   };
+
   useEffect(() => {
     const setJson = async () => {
       if (topTracks && topTracks.length > 0) {
@@ -52,46 +54,44 @@ const Prompt = () => {
         setStringTopTracks(str);
       }
     };
-  
+
     setJson();
   }, [topTracks]);
-  
-  
+
   const selectPromptOption = (text) => {
     setInput(text);
   };
 
-  const submitTopSpotify = async() => {
-    setIsLoading(true);
-    await dispatch(getJSONResponse('similar songs to the following playlist', 5, stringTopTracks));
-    setIsLoading(false);
-  }
-
-  return(
-    <div className='prompt-Container'>
-      <form  onSubmit={submit}>
-        <input className="prompt-input" value = {input} onChange={ (ev) => { setInput(ev.target.value)}}></input>
-        <button className="StyledLogoutButton" >Test</button>
+  return (
+    <div className='prompt-container'>
+      <form onSubmit={submit}>
+        <input className="prompt-input" value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
+        <button className="StyledLogoutButton">Test</button>
       </form>
-      
+
       {isLoading ? (
-        <Loader /> 
+        <Loader />
       ) : (
         <>
-          {testClicked && (
-            <>
-              <div className="messages">
-                {prompt.length > 0 && (
-                  <div key={prompt[prompt.length - 1].id} id={prompt[prompt.length - 1].id}>
-                    <ul>
-                      <li>{prompt[prompt.length - 1].response}</li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-              <button className="styled-logout-button" onClick={goBack}>←</button>
-            </>
+          {testClicked && Array.isArray(jsonResponse) && jsonResponse.length > 0 && (
+            <div className="playlist-container">
+              <h2 className="playlist-header">Playlist</h2>
+              {jsonResponse.map((response, index) => (
+  <div className="playlist-item" key={index}>
+    <div className="playlist-item-info">
+      <div className="playlist-item-row">
+        <div className="playlist-item-title">{response.title}</div>
+        <div className="playlist-checkmark">✓</div>
+      </div>
+      <div className="playlist-item-artist">{response.artist}</div>
+    </div>
+  </div>
+))}
+
+              <button className="playlist-back-button" onClick={goBack}>← Back</button>
+            </div>
           )}
+
           {showExamplePrompts && (
             <>
               <h2 className="options-title">Example Prompts</h2>
@@ -117,7 +117,10 @@ const Prompt = () => {
     </div>
   )
 };
+
 export default Prompt;
+
+
 
 /* BEFORE 6/10 MT Updates
 
