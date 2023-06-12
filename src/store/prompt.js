@@ -87,12 +87,12 @@ export const getJSONResponse = (prompt, length, data) => {
   };
 };
 
-const getSpotifyURIs = (response) => {
+export const getSpotifyURIs = (response) => {
   return async (dispatch) => {
-    const jsonResponse = JSON.parse(response.response);
+    console.log(response);
     //this is making it so we can access items in the json object
     const spotifyId = window.localStorage.getItem('spotifyId');
-    const URIResponse = await Promise.all(jsonResponse.map(async(element) => {
+    const URIResponse = await Promise.all(response.map(async(element) => {
       const uri = await searchFunctionality(element)
       if (await uri){
         return await uri;
@@ -112,7 +112,6 @@ const getSpotifyURIs = (response) => {
     dispatch(savePrompt(response));
   }
 }
-
 
 export const savePrompt = (prompt) => {
   return async (dispatch) => {

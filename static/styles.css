@@ -1149,6 +1149,10 @@ header {
   margin-bottom: 10px;
 }
 
+.playlist-item-checkbox input[type="checkbox"] {
+  margin-right: 5px;
+}
+
 .playlist-item:hover {
   transform: scale(1.01);
   box-shadow: 0 0 15px rgba(29, 185, 84, 0.3);
@@ -1163,7 +1167,17 @@ header {
 
 .playlist-item-info {
   flex: 1;
+  display: flex;
+  justify-content: column;
 }
+
+.playlist-item-checkbox {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
 
 .playlist-item-row {
   display: flex;
@@ -1182,6 +1196,12 @@ header {
   margin-left: auto;
 }
 
+.playlist-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
 .playlist-back-button {
   background-color: #fff;
   color: #333;
@@ -1193,7 +1213,16 @@ header {
   cursor: pointer;
 }
 
-
+.playlist-generate-button {
+  background-color: #fff;
+  color: #333;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 /* Track List end */
 
