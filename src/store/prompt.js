@@ -85,11 +85,10 @@ export const getJSONResponse = (prompt, length, data, discoverPlaylists) => {
       },
     });
     
-//NP: resolving git conflict 6/11 @ 9:11PM... This is not my code so I am just commenting it out to be extra safe.
     
-    //console.log("response we get from that prompt create", response.data);
-    //the uri list is null though so we need to pass this into the getSpotifyURIs 
-    //dispatch(getSpotifyURIs(await response.data, discoverPlaylists));
+    console.log("response we get from that prompt create", response.data);
+    //the uri list is null though so we need to pass this into the getSpotifyURIs
+    dispatch(getSpotifyURIs(await response.data, discoverPlaylists));
 
     const parsed = JSON.parse(response.data.response)
     dispatch(setJSONResponse(parsed));
