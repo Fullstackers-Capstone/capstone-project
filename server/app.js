@@ -20,6 +20,7 @@ app.use('/api/auth', require('./api/auth'));
 //6/1 MT added playlists
 app.use('/api/playlists', require('./api/playlists'));
 app.use('/api/prompt', require('./api/prompt'))
+app.use('/api/stripe', require('./api/stripe'))
 app.get('/', (req, res) => {
     res.render(
       path.join(__dirname, '../static/index.html'),
