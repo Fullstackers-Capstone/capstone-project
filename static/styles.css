@@ -1226,3 +1226,19 @@ header {
 
 /* Track List end */
 
+
+/* Show one track in Prompt.js */
+
+.playlist-container .playlist-item {
+  display: none;
+}
+
+.playlist-container .playlist-item:nth-of-type(-n+3) {
+  display: block;
+}
+
+.playlist-container.show-all .playlist-item {
+  display: block;
+}
+
+/* Show one track in Prompt.js END */
