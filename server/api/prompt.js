@@ -62,7 +62,9 @@ app.put('/', async (req, res, next) => {
   try {
    
     const prompt =await Prompt.findByPk(req.body.prompt.id)
+    console.log('prompt api', prompt)
     const uriList = req.body.prompt.uriList;   
+    console.log('urilist prompt api', prompt)
     prompt.uriList = uriList;
     await prompt.update();
 

@@ -96,12 +96,43 @@ export const getJSONResponse = (prompt, length, data, discoverPlaylists) => {
   };
 };
 
-const getSpotifyURIs = (response, discoverPlaylists) => {
+
+/*
+
+export const getSpotifyURIs = (response) => {
   return async (dispatch) => {
-    const jsonResponse = JSON.parse(response.response);
+    console.log(response);
     //this is making it so we can access items in the json object
     const spotifyId = window.localStorage.getItem('spotifyId');
+    const URIResponse = await Promise.all(response.map(async(element) => {
+      const uri = await searchFunctionality(element)
+      if (await uri){
+        return await uri;
+      }
+    }));
+   //the above is fetching the uris for each track
+    const filteredResponse = URIResponse.filter(uri => uri !== undefined)
 
+    console.log('very filtered response here',filteredResponse);
+
+    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: response.userInput}, filteredResponse)
+
+    console.log("final URI response prompt store", filteredResponse);
+
+    // Make sure URIResponse is an array of strings before storing it
+    response.uriList = filteredResponse;
+    dispatch(savePrompt(response));
+  }
+}
+
+
+*/
+
+const getSpotifyURIs = (response, discoverPlaylists) => {
+  return async (dispatch) => {
+    console.log(response);
+    //this is making it so we can access items in the json object
+    const spotifyId = window.localStorage.getItem('spotifyId');
     const URIResponse = await Promise.all(jsonResponse.map(async(element) => {
       const uri = await searchFunctionality(element)
       if (await uri){
@@ -124,7 +155,6 @@ const getSpotifyURIs = (response, discoverPlaylists) => {
     dispatch(savePrompt(response));
   }
 }
-
 
 export const savePrompt = (prompt) => {
   return async (dispatch) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getResponse, getJSONResponse, wasCreated, fetchPlaylists } from '../store';
+import { getResponse, getJSONResponse, getSpotifyURIs, wasCreated, fetchPlaylists } from '../store';
 import Searcher from './Searcher';
 import { getTopTracks, createPlaylist } from '../../server/api/spotify';
 import Loader from './Loader';
@@ -15,6 +15,8 @@ const Prompt = () => {
   const [showExamplePrompts, setShowExamplePrompts] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [stringTopTracks, setStringTopTracks] = useState('');
+  const [selectedItems, setSelectedItems] = useState([]);
+
 
   useEffect(() => {
     async function getUserTopTracks() {
@@ -62,6 +64,22 @@ const Prompt = () => {
     setInput(text);
   };
 
+  const toggleItemSelection = (index) => {
+    setSelectedItems((prevSelectedItems) => {
+      if (prevSelectedItems.includes(index)) {
+        return prevSelectedItems.filter((item) => item !== index);
+      } else {
+        return [...prevSelectedItems, index];
+      }
+    });
+  };
+
+  const handleGeneratePlaylist = () => {
+    const selectedResponses = selectedItems.map((index) => jsonResponse[index]);
+    console.log(selectedResponses);
+    dispatch(getSpotifyURIs(selectedResponses));
+  };
+
   return (
     <div className='prompt-container'>
       <form onSubmit={submit}>
@@ -73,24 +91,41 @@ const Prompt = () => {
         <Loader />
       ) : (
         <>
-          {testClicked && Array.isArray(jsonResponse) && jsonResponse.length > 0 && (
-            <div className="playlist-container">
-              <h2 className="playlist-header">Playlist</h2>
-              {jsonResponse.map((response, index) => (
-  <div className="playlist-item" key={index}>
-    <div className="playlist-item-info">
-      <div className="playlist-item-row">
-        <div className="playlist-item-title">{response.title}</div>
-        <div className="playlist-checkmark">✓</div>
+
+{testClicked && Array.isArray(jsonResponse) && jsonResponse.length > 0 && (
+  <div className="playlist-container">
+    <h2 className="playlist-header">Playlist</h2>
+    {jsonResponse.map((response, index) => (
+      <div className="playlist-item" key={index}>
+        <div className="playlist-item-info">
+          <div className="playlist-item-row">
+            <div className="playlist-item-title">{response.title}</div>
+          </div>
+          <div className="playlist-item-artist">{response.artist}</div>
+          <div className="playlist-item-checkbox">
+            <input
+              type="checkbox"
+              checked={selectedItems.includes(index)}
+              onChange={() => toggleItemSelection(index)}
+            />
+          </div>
+        </div>
       </div>
-      <div className="playlist-item-artist">{response.artist}</div>
+    ))}
+    <div className="playlist-buttons-container">
+      <button className="playlist-back-button" onClick={goBack}>
+        Back
+      </button>
+      <button
+        className="playlist-generate-button"
+        onClick={() => handleGeneratePlaylist()}
+      >
+        Generate Playlist
+      </button>
     </div>
   </div>
-))}
+)}
 
-              <button className="playlist-back-button" onClick={goBack}>← Back</button>
-            </div>
-          )}
 
           {showExamplePrompts && (
             <>
