@@ -73,8 +73,6 @@ export const getResponse = (prompt) => {
   };
 };
 
-
-//we are getting the prompt length and the data (in this case the songs we're passing in)
 export const getJSONResponse = (prompt, length, data, discoverPlaylists) => {
   return async (dispatch) => {
     const request = { prompt: prompt, length: length, spotifyData: data };
@@ -97,40 +95,10 @@ export const getJSONResponse = (prompt, length, data, discoverPlaylists) => {
 };
 
 
-/*
-
-export const getSpotifyURIs = (response) => {
-  return async (dispatch) => {
-    console.log(response);
-    //this is making it so we can access items in the json object
-    const spotifyId = window.localStorage.getItem('spotifyId');
-    const URIResponse = await Promise.all(response.map(async(element) => {
-      const uri = await searchFunctionality(element)
-      if (await uri){
-        return await uri;
-      }
-    }));
-   //the above is fetching the uris for each track
-    const filteredResponse = URIResponse.filter(uri => uri !== undefined)
-
-    console.log('very filtered response here',filteredResponse);
-
-    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: response.userInput}, filteredResponse)
-
-    console.log("final URI response prompt store", filteredResponse);
-
-    // Make sure URIResponse is an array of strings before storing it
-    response.uriList = filteredResponse;
-    dispatch(savePrompt(response));
-  }
-}
-
-
-*/
-
 export const getSpotifyURIs = (response, discoverPlaylists) => {
   return async (dispatch) => {
     console.log(response);
+    const jsonResponse = JSON.parse(response.response);
     //this is making it so we can access items in the json object
     const spotifyId = window.localStorage.getItem('spotifyId');
     const URIResponse = await Promise.all(jsonResponse.map(async(element) => {
@@ -143,8 +111,6 @@ export const getSpotifyURIs = (response, discoverPlaylists) => {
     const filteredResponse = URIResponse.filter(uri => uri !== undefined)
 
     console.log('very filtered response here',filteredResponse);
-
-    console.log('discovering playlists????', discoverPlaylists);
 
     await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: response.userInput}, filteredResponse, discoverPlaylists)
 
