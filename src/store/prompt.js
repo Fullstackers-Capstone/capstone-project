@@ -128,7 +128,7 @@ export const getSpotifyURIs = (response) => {
 
 */
 
-const getSpotifyURIs = (response, discoverPlaylists) => {
+export const getSpotifyURIs = (response, discoverPlaylists) => {
   return async (dispatch) => {
     console.log(response);
     //this is making it so we can access items in the json object
