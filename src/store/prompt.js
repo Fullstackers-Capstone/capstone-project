@@ -98,10 +98,9 @@ export const getJSONResponse = (prompt, length, data, discoverPlaylists) => {
 export const getSpotifyURIs = (response, discoverPlaylists) => {
   return async (dispatch) => {
     console.log(response);
-    const jsonResponse = JSON.parse(response.response);
     //this is making it so we can access items in the json object
     const spotifyId = window.localStorage.getItem('spotifyId');
-    const URIResponse = await Promise.all(jsonResponse.map(async(element) => {
+    const URIResponse = await Promise.all(response.map(async(element) => {
       const uri = await searchFunctionality(element)
       if (await uri){
         return await uri;
