@@ -73,7 +73,9 @@ export const getResponse = (prompt) => {
   };
 };
 
-export const getJSONResponse = (prompt, length, data) => {
+
+//we are getting the prompt length and the data (in this case the songs we're passing in)
+export const getJSONResponse = (prompt, length, data, discoverPlaylists) => {
   return async (dispatch) => {
     const request = { prompt: prompt, length: length, spotifyData: data };
     const spotifyId = window.localStorage.getItem('spotifyId');
@@ -82,16 +84,25 @@ export const getJSONResponse = (prompt, length, data) => {
         spotifyId: spotifyId,
       },
     });
+    
+//NP: resolving git conflict 6/11 @ 9:11PM... This is not my code so I am just commenting it out to be extra safe.
+    
+    //console.log("response we get from that prompt create", response.data);
+    //the uri list is null though so we need to pass this into the getSpotifyURIs 
+    //dispatch(getSpotifyURIs(await response.data, discoverPlaylists));
+
     const parsed = JSON.parse(response.data.response)
     dispatch(setJSONResponse(parsed));
+
   };
 };
 
-const getSpotifyURIs = (response) => {
+const getSpotifyURIs = (response, discoverPlaylists) => {
   return async (dispatch) => {
     const jsonResponse = JSON.parse(response.response);
     //this is making it so we can access items in the json object
     const spotifyId = window.localStorage.getItem('spotifyId');
+
     const URIResponse = await Promise.all(jsonResponse.map(async(element) => {
       const uri = await searchFunctionality(element)
       if (await uri){
@@ -103,7 +114,9 @@ const getSpotifyURIs = (response) => {
 
     console.log('very filtered response here',filteredResponse);
 
-    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: response.userInput}, filteredResponse)
+    console.log('discovering playlists????', discoverPlaylists);
+
+    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: response.userInput}, filteredResponse, discoverPlaylists)
 
     console.log("final URI response prompt store", filteredResponse);
 
