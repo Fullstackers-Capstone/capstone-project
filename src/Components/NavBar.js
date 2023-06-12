@@ -25,7 +25,9 @@ const NavBar = () => {
             <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link>
             <Link to="/create" onClick={handleDropdownToggle}>Create Playlist</Link>
             <Link to="/prompt" onClick={handleDropdownToggle}>Prompt</Link>
-            <Link to="/unlock-pro" onClick={handleDropdownToggle}>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link>
+            {
+              auth.proUser ? <Link to="/unlock-pro" onClick={handleDropdownToggle}>Pro <i class="fa-solid fa-check"></i></Link> : <Link to="/unlock-pro" onClick={handleDropdownToggle}>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link>
+            }
             <Link onClick={logout}>Logout</Link>
         </div>
       </div>
