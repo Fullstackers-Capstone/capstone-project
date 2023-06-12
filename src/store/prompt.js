@@ -60,7 +60,7 @@ export const getResponse = (prompt) => {
 };
 
 //we are getting the prompt length and the data (in this case the songs we're passing in)
-export const getJSONResponse = (prompt, length, data) => {
+export const getJSONResponse = (prompt, length, data, discoverPlaylists) => {
   return async (dispatch) => {
     const request = {prompt: prompt,length: length, spotifyData: data};
     console.log('request is thisrequest is thisrequest is thisrequest is thisrequest is this', request)
@@ -72,15 +72,16 @@ export const getJSONResponse = (prompt, length, data) => {
     });
     console.log("response we get from that prompt create", response.data);
     //the uri list is null though so we need to pass this into the getSpotifyURIs 
-    dispatch(getSpotifyURIs(await response.data));
+    dispatch(getSpotifyURIs(await response.data, discoverPlaylists));
   };
 };
 
-const getSpotifyURIs = (response) => {
+const getSpotifyURIs = (response, discoverPlaylists) => {
   return async (dispatch) => {
     const jsonResponse = JSON.parse(response.response);
     //this is making it so we can access items in the json object
     const spotifyId = window.localStorage.getItem('spotifyId');
+
     const URIResponse = await Promise.all(jsonResponse.map(async(element) => {
       const uri = await searchFunctionality(element)
       if (await uri){
@@ -92,7 +93,9 @@ const getSpotifyURIs = (response) => {
 
     // console.log('getting the description', response);
 
-    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: response.userInput}, filteredResponse)
+    console.log('discovering playlists????', discoverPlaylists);
+
+    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: response.userInput}, filteredResponse, discoverPlaylists)
 
     console.log("final URI response prompt store", filteredResponse);
 

@@ -192,7 +192,7 @@ export const getAudioFeaturesForTracks = (ids) => {
 };
 
 
-export const createPlaylist = async ({userId, name, description}, prompt) => {
+export const createPlaylist = async ({userId, name, description}, prompt, discoverPlaylists) => {
   try {
 
     console.log('still getting the description: ', description)
@@ -206,7 +206,7 @@ export const createPlaylist = async ({userId, name, description}, prompt) => {
     console.log("filteredprompt spotify  before we add tracks", filtered);
     
 
-    addTracksToPlaylist(response.data.id, filtered, description)
+    addTracksToPlaylist(response.data.id, filtered, description, discoverPlaylists)
 
 
     return response.data;
@@ -216,13 +216,11 @@ export const createPlaylist = async ({userId, name, description}, prompt) => {
   }
 };
 
-export const addTracksToPlaylist = async (playlistId, track_uris, description) => {
+export const addTracksToPlaylist = async (playlistId, track_uris, description, discoverPlaylists) => {
   try {
     const response = await spotifyAxios.post(`/playlists/${playlistId}/tracks`, {
       uris: track_uris,
     });
-
-    //console.log('playlist', response.data);
 
     const newUserId = window.localStorage.getItem('newUserId');
 
@@ -230,6 +228,7 @@ export const addTracksToPlaylist = async (playlistId, track_uris, description) =
       spotId: playlistId,
       prompt: description,
       userId: newUserId,
+      isDiscoverable: discoverPlaylists
     });
 
     return response.data;
