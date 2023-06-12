@@ -25,13 +25,9 @@ const Discover = () => {
     }
   }, [auth]);
 
-  const _playlists = playlists.filter(pl => {
-    pl.userId !== auth.id
-  })
+  console.log('discoverable playlists: ', playlists.map(pl => pl).filter(pl => pl.isDiscoverable));
 
-  const filtered = (discover) => {
-    return (discover) ? playlists : _playlists
-  }
+  const discoverablePlaylists = playlists.map(pl => pl).filter(pl => pl.isDiscoverable)
 
   const navigate = useNavigate();
 
@@ -78,7 +74,7 @@ const Discover = () => {
             <Loader/>
         ):( 
             <div id='pl-container'>
-            {filtered(discover).map(playlist => {
+            {discoverablePlaylists.map(playlist => {
                 return(
                 <div className='pl-thumb' key={playlist.spotData.data.id}>
                     <div className='disc-thumb-name'>

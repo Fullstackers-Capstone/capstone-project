@@ -10,6 +10,7 @@ const Home = () => {
   const [selected, setSelected] = useState(true);
 
   localStorage.setItem("newUserId",auth.id);
+  localStorage.setItem("authDiscoverable", auth.discoverPlaylists);
 
   if(!auth){
     return null;

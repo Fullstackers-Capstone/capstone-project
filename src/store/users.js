@@ -42,6 +42,18 @@ export const updateUser = (user) => {
     };
   };
 
+  export const upgradeToPro = () => {
+    return async (dispatch) => {
+      const spotifyId = window.localStorage.getItem('spotifyId');
+        const response = await axios.put('/api/prompt',  {
+          headers: {
+            spotifyId: spotifyId
+          }
+        });
+        dispatch({ type: 'UPDATE_USER', user: response.data });
+    };
+  };
+
 
   export const fetchUser = (userId) => {
     return async (dispatch) => {

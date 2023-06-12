@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { updateAuth, updatePlaylist } from '../store';
+import { fetchPlaylists, updateAuth, updatePlaylist } from '../store';
 import Switch from 'react-ios-switch';
 
 const Profile = () => {
@@ -14,6 +14,10 @@ const Profile = () => {
 
     const didMount = useRef(false); // Ref to track the component mount status
 
+    const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id)
+
+    console.log('authPlaylists: ', authPlaylists);
+
     useEffect(() => {
         if(auth){
             setDiscover(auth.discoverPlaylists);
@@ -25,9 +29,6 @@ const Profile = () => {
         if (didMount.current) {  // Avoid running on initial render
             if(auth){
                 dispatch(updateAuth({id: auth.id, discoverPlaylists: discover}));
-                _playlists.map(pl => {(
-                    dispatch(updatePlaylist({id: pl.id, isDiscoverable: discover}))
-                )})
             }
         } else {
             didMount.current = true;
@@ -36,12 +37,23 @@ const Profile = () => {
 
     const discoverToggle = () => {
         setDiscover((current) => {
+
           console.log("Current discover state:", current);
           console.log("Toggling discover state to:", !current);
+
           const newDiscoverState = !current;
+
           dispatch(updateAuth({id: auth.id, discoverPlaylists: newDiscoverState}));
+
+          authPlaylists.forEach(pl => {
+            dispatch(updatePlaylist({id: pl.id, isDiscoverable: newDiscoverState}))
+        })
+
+            dispatch(fetchPlaylists())
+
           return newDiscoverState;
-        });
+        })
+        ;
       }
       
 
@@ -77,7 +89,6 @@ const Profile = () => {
                 <div><span className='prof-title'>Account Status:</span> {(pro) ? <span className='prof-unlock-pro'>Pro</span> : <span>Free (<span className='prof-unlock-pro'><Link to='/unlock-pro'>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link></span>)</span>}</div>
 
             </div>
-            
 
                 {/* <div className='prof-img'>
                         <img src={auth.image}/>

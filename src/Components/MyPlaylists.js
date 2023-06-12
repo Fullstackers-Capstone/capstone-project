@@ -18,6 +18,10 @@ const MyPlaylists = () => {
 
   }, [playlists])
 
+  const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id)
+
+  console.log('authyPlaylists', authPlaylists);
+
   const navigate = useNavigate();
 
   const msConversion = (millis) => {
@@ -63,7 +67,7 @@ const MyPlaylists = () => {
             <Loader/>
         ):( 
             <div id='pl-container'>
-            {playlists.map(playlist => {
+            {authPlaylists.map(playlist => {
                 return(
                 <div className='pl-thumb' key={playlist.spotData.data.id}>
                     <div className='pl-thumb-name'>
