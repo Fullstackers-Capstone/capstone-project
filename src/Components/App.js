@@ -15,6 +15,7 @@ import PlaylistType from './PlaylistType';
 import UnlockPro from './UnlockPro';
 import TopArtists from './TopArtists';
 import TopTracks from './TopTracks';
+import Playlist from './Playlist';
 
 const App = () => {
 
@@ -63,6 +64,7 @@ const App = () => {
                 <Route path="/users/:id" element={<Profile />}/>
                 <Route path="/prompt" element={<Prompt />}/>
                 <Route path="/create" element={<PlaylistType />}/>
+                <Route path="/playlist" element={<Playlist/>}/>
                 <Route path="/discover" element={<Discover />}/>
                 <Route path="/top-artists" element={<TopArtists />}/>
                 <Route path="/top-tracks" element={<TopTracks />}/>

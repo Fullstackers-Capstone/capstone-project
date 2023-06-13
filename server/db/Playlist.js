@@ -7,8 +7,8 @@ const Playlist = conn.define('playlist', {
     primaryKey: true,
     defaultValue: UUIDV4,
   },
-  prompt: {
-    type: TEXT
+  playlistJSON: {
+    type: JSON
   },
   isDiscoverable: {
     type: BOOLEAN,

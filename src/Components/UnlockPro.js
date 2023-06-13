@@ -58,7 +58,7 @@ const UnlockPro = () => {
         // Check to see if this is a redirect back from Checkout
         const query = getAllUrlParams(window.location.href);
         if (query.success){
-          console.log('success');
+      
           const upgrade = async() =>{
             await dispatch(upgradeToPro(auth.spotifyId));
           }

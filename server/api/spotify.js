@@ -71,7 +71,6 @@ const hasTokenExpired = () => {
 const getAccessToken = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  console.log(urlParams);
   const queryParams = {
     [LOCALSTORAGE_KEYS.accessToken]: urlParams.get('access_token'),
     [LOCALSTORAGE_KEYS.refreshToken]: urlParams.get('refresh_token'),
@@ -192,24 +191,18 @@ export const getAudioFeaturesForTracks = (ids) => {
 };
 
 
-export const createPlaylist = async ({userId, name, description}, prompt, discoverPlaylists) => {
+  export const createPlaylist = async ({userId, name, description}, prompt, discoverPlaylists) => {
   try {
 
-    console.log('still getting the description: ', description)
-    const response = await spotifyAxios.post(`/users/${userId}/playlists`, {
+    const playlist = await spotifyAxios.post(`/users/${userId}/playlists`, {
       name,
       description
     });
-    console.log("unfilteredprompt", prompt);
-    const unfiltered = prompt;
-    const filtered = unfiltered.filter(track => (track));
-    console.log("filteredprompt spotify  before we add tracks", filtered);
-    
-
-    addTracksToPlaylist(response.data.id, filtered, description, discoverPlaylists)
+ 
+    addTracksToPlaylist(playlist.data.id, prompt.uriList, description, discoverPlaylists)
 
 
-    return response.data;
+    return playlist.data;
   } catch (error) {
     console.error(error);
     throw error;
@@ -224,12 +217,12 @@ export const addTracksToPlaylist = async (playlistId, track_uris, description, d
 
     const newUserId = window.localStorage.getItem('newUserId');
 
-    await axios.post('/api/playlists', {
-      spotId: playlistId,
-      prompt: description,
-      userId: newUserId,
-      isDiscoverable: discoverPlaylists
-    });
+    // await axios.post('/api/playlists', {
+    //   spotId: playlistId,
+    //   prompt: description,
+    //   userId: newUserId,
+    //   isDiscoverable: discoverPlaylists
+    // });
 
     return response.data;
 
