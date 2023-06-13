@@ -45,7 +45,7 @@ export const fetchPlaylists = () => {
 export const createDBPlaylist = (auth, prompt, input) => {
   return async (dispatch) => {
       const playlist = await createPlaylist({userId: auth.spotifyId, name: 'Anything We Want', description: input}, prompt, auth.discoverPlaylist)
-      const request = {playlistJSON: JSON.stringify(playlist), isDiscoverable: auth.discoverPlaylists, spotId: auth.spotifyId}
+      const request = {playlistJSON: JSON.stringify(playlist), isDiscoverable: auth.discoverPlaylists, prompt: input, spotId: auth.spotifyId}
 
       const response = await axios.post('/api/playlists', request);
       dispatch({ type: 'CREATE_PLAYLIST', playlist: response.data });

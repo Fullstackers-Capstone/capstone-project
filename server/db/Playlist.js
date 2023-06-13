@@ -14,6 +14,9 @@ const Playlist = conn.define('playlist', {
     type: BOOLEAN,
     defaultValue: true
   },
+  prompt:{
+  type: TEXT
+  },
   spotId:{
     type: STRING
   },
