@@ -41,6 +41,11 @@ app.post('/json', async (req, res, next) => {
      An example response is: [{"id": 1,"title": "Hey Jude","artist": "The Beatles","album": "The Beatles (White Album)","duration": "4:56"}].
       Create a list of ${req.body.length} ${req.body.prompt} "${req.body.spotifyData}". `;
 
+    const namePrompt = `You are an assistant that can only responds in JSON
+    Create a unique playlist name based on the following prompt: ${req.body.prompt}. An example response is
+    '{ "playlistName": "playlist name"}'`
+  
+
     const userInput = req.body.spotifyData
 
     const prompt = await Prompt.create({
@@ -50,6 +55,7 @@ app.post('/json', async (req, res, next) => {
     });
 
     await prompt.askChatGPT();
+    await prompt.generateName(namePrompt);
     await prompt.save();
 
     res.send(prompt);

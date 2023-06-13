@@ -105,7 +105,7 @@ const Prompt = conn.define('prompt', {
     type: TEXT,
   },
   name: {
-    type: STRING,
+    type: JSON,
   },
   response: {
     type: JSON
@@ -158,6 +158,31 @@ Prompt.prototype.askChatGPT = async function(){
         
     })
     this.response = await response.data.choices[0].message.content;
+    return this;
+  }
+  catch(ex){
+    const error = new Error('An error occurred');
+    error.status = 401;
+    throw error;
+  }
+
+}
+Prompt.prototype.generateName = async function(namePrompt){
+  try{
+    const openai = new OpenAIApi(configuration);
+    const prompt = namePrompt;
+    const response = await openai.createChatCompletion({
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: "user", content: `${prompt}`}],
+
+        max_tokens: 1000,
+        temperature: 0.8,
+        top_p: 1.0,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+        
+    })
+    this.name = await response.data.choices[0].message.content;
     return this;
   }
   catch(ex){
