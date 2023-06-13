@@ -42,11 +42,11 @@ export const fetchPlaylists = () => {
   };
 };
 
-export const createDBPlaylist = (auth, prompt) => {
+export const createDBPlaylist = (auth, prompt, input) => {
   return async (dispatch) => {
-      const playlist = await createPlaylist({userId: auth.spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, prompt, auth.discoverPlaylist)
+      const playlist = await createPlaylist({userId: auth.spotifyId, name: 'Anything We Want', description: input}, prompt, auth.discoverPlaylist)
       const request = {playlistJSON: JSON.stringify(playlist), isDiscoverable: auth.discoverPlaylists, spotId: auth.spotifyId}
-      console.log(request);
+
       const response = await axios.post('/api/playlists', request);
       dispatch({ type: 'CREATE_PLAYLIST', playlist: response.data });
   };
