@@ -67,7 +67,6 @@ User.findByToken = async function(token){
 
 User.findBySpotifyId = async function(id){
   try {
-   console.log('spotifyid',id)
     const user = await this.findOne({
       where: {
         spotifyId: id

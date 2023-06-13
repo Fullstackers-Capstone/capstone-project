@@ -43,7 +43,6 @@ export const updateAuth = (user)=> {
 export const upgradeToPro = (user) => {
   return async (dispatch) => {
     const request = {spotifyId: user}
-    console.log(request);
       const response = await axios.put('/api/users/upgradeToPro', request);
       dispatch({ type: 'SET_AUTH', auth: response.data });
   };

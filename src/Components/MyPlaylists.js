@@ -20,7 +20,6 @@ const MyPlaylists = () => {
 
   const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id)
 
-  console.log('authyPlaylists', authPlaylists);
 
   const navigate = useNavigate();
 

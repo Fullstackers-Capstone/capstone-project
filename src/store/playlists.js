@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getPlaylistById } from '../../server/api/spotify';
+import { createPlaylist } from '../../server/api/spotify';
 
 const playlists = (state = [], action) => {
   if (action.type === 'SET_PLAYLISTS') {
@@ -41,14 +42,13 @@ export const fetchPlaylists = () => {
   };
 };
 
-export const createDBPlaylist = (playlist) => {
+export const createDBPlaylist = (auth, prompt) => {
   return async (dispatch) => {
-    try {
-      const response = await axios.post('/api/playlists', playlist);
+      const playlist = await createPlaylist({userId: auth.spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, prompt, auth.discoverPlaylist)
+      const request = {playlistJSON: JSON.stringify(playlist), isDiscoverable: auth.discoverPlaylists, spotId: auth.spotifyId}
+      console.log(request);
+      const response = await axios.post('/api/playlists', request);
       dispatch({ type: 'CREATE_PLAYLIST', playlist: response.data });
-    } catch (error) {
-      console.error(error);
-    }
   };
 };
 

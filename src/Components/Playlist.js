@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Playlist = () => {
-    const { auth } = useSelector(state => state);
+    const { auth, playlists } = useSelector(state => state);
 
     if(!auth){
         return null;
@@ -18,6 +18,12 @@ const Playlist = () => {
                     <div className="user-name">{auth.display_name}</div>
                 </div>
             </div>
+            {
+                playlists.map(_playlist => {
+                    const json = JSON.parse(_playlist.playlistJSON);
+                    return <div><a href={json.external_urls.spotify}>See on spotify  </a> </div>
+                })
+            }
         </div>
     );
 }

@@ -35,6 +35,7 @@ app.get('/:id', async (req, res, next) => {
 
 app.post('/', async(req, res, next) => {
     try{
+
         res.send(await Playlist.create(req.body));
     }
     catch(err){
