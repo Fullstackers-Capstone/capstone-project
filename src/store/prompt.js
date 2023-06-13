@@ -95,7 +95,7 @@ export const getJSONResponse = (prompt, length, data, discoverPlaylists) => {
 };
 
 
-export const getSpotifyURIs = (response, discoverPlaylists) => {
+export const getSpotifyURIs = (response, input, discoverPlaylists) => {
   return async (dispatch) => {
     console.log(response);
     //this is making it so we can access items in the json object
@@ -111,7 +111,7 @@ export const getSpotifyURIs = (response, discoverPlaylists) => {
 
     console.log('very filtered response here',filteredResponse);
 
-    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: response.userInput}, filteredResponse, discoverPlaylists)
+    await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: input}, filteredResponse, discoverPlaylists)
 
     console.log("final URI response prompt store", filteredResponse);
 
