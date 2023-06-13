@@ -156,6 +156,12 @@ const generateRandomString = length => {
         res.send(error);
       });
   });
+
+  app.use((err, req, res, next) => {
+    console.error(err.stack); // Logs error stack trace for better debugging
+    res.status(500).send({ error: 'An error occurred, please try again later.' });
+  });  
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
 })
