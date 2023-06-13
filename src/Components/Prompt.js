@@ -77,7 +77,7 @@ const Prompt = () => {
   const handleGeneratePlaylist = () => {
     const selectedResponses = selectedItems.map((index) => jsonResponse[index]);
     console.log(selectedResponses);
-    dispatch(getSpotifyURIs(selectedResponses));
+    dispatch(getSpotifyURIs(selectedResponses, input, auth.discoverPlaylists));
   };
 
   return (
