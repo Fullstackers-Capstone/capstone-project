@@ -52,8 +52,9 @@ const Prompt = () => {
     createPlaylist();
   };
 
+  //creates playlist and navigates to the component
   const createPlaylist = async () => {
-   await dispatch(createDBPlaylist(auth,currentPrompt));
+   await dispatch(createDBPlaylist(auth,currentPrompt, input));
    navigate('/playlist');
   };
 
