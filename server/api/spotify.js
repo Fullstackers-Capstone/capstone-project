@@ -215,7 +215,7 @@ export const addTracksToPlaylist = async (playlistId, track_uris, description, d
       uris: track_uris,
     });
 
-    const newUserId = window.localStorage.getItem('newUserId');
+    // const newUserId = window.localStorage.getItem('newUserId');
 
     // await axios.post('/api/playlists', {
     //   spotId: playlistId,
