@@ -18,31 +18,17 @@ const MyPlaylists = () => {
       dispatch(fetchPlaylists);
   }, [])
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try{
-  //       const spotIdData = await Promise.all(playlists.map(async (response) => ({
-  //         spotData: await getPlaylistById(response.spotId),
-  //         prompt: response.prompt,
-  //         createdAt: response.createdAt,
-  //         isDiscoverable: response.isDiscoverable,
-  //         userId: response.userId,
-  //         id: response.spotId
-  //       })
-  //       ));
+  // const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id);
 
-  //       setLocalPlaylists(spotIdData);
-  //     }
-  //     catch(error){
-  //       console.error(error)
-  //     }
-  //   })()
+  // console.log('authyPlaylists: ', authPlaylists);
 
-  // })
 
-  const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id);
+  const authPlaylists = playlists.map(pl => pl)
+  .filter(pl => pl.userId === auth.id)
+  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));  // sort by creation date
 
   console.log('authyPlaylists: ', authPlaylists);
+
 
   const navigate = useNavigate();
 
