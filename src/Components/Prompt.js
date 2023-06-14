@@ -92,8 +92,9 @@ const Prompt = () => {
           {testClicked && Array.isArray(jsonResponse) && jsonResponse.length > 0 && (
             <div className={`playlist-container ${showAllTracks ? 'show-all' : ''}`}>
               <h2 className="playlist-header">Playlist</h2>
+  
               {jsonResponse.map((response, index) => (
-                <div className="playlist-item" key={index}>
+                <div className="playlist-item" key={index} onClick={() => toggleItemSelection(index)}>
                   <div className="playlist-item-info">
                     <div className="playlist-item-row">
                       <div className="playlist-item-title">{response.title}</div>
@@ -103,12 +104,13 @@ const Prompt = () => {
                       <input
                         type="checkbox"
                         checked={selectedItems.includes(index)}
-                        onChange={() => toggleItemSelection(index)}
+                        readOnly
                       />
                     </div>
                   </div>
                 </div>
               ))}
+  
               {!showAllTracks && (
                 <button className='styled-logout-button' onClick={() => setShowAllTracks(true)}>Add More Tracks</button>
               )}
@@ -150,6 +152,7 @@ const Prompt = () => {
       )}
     </div>
   )
+  
   
 };
 
