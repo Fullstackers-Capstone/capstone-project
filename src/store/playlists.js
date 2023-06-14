@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getPlaylistById } from '../../server/api/spotify';
+import { addTracksToPlaylist, getPlaylistById } from '../../server/api/spotify';
 import { createPlaylist } from '../../server/api/spotify';
 
 const playlists = (state = [], action) => {
@@ -59,7 +59,9 @@ export const createDBPlaylist = (auth, prompt, input) => {
 
       const playlist = await createPlaylist({userId: auth.spotifyId, name: name.playlistName, description: input}, prompt, auth.discoverPlaylist)
 
-      const request = {isDiscoverable: auth.discoverPlaylists, prompt: userInput, spotId: playlist.id, userId: newUserId}
+      // const returnedPlaylist = await getPlaylistById(playlist.id)
+
+      const request = {isDiscoverable: auth.discoverPlaylists, prompt: userInput, spotId: playlist.id, name: playlist.name, userId: newUserId}
 
       const response = await axios.post('/api/playlists', request)
 

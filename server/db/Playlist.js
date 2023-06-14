@@ -10,6 +10,9 @@ const Playlist = conn.define('playlist', {
   prompt:{
     type: TEXT
     },
+  name: {
+    type: STRING
+  },
   isDiscoverable: {
     type: BOOLEAN,
     defaultValue: true

@@ -10,34 +10,39 @@ const MyPlaylists = () => {
 
   const { auth, playlists } = useSelector(state => state);
   const [isLoading, setIsLoading] = useState(false);
+  const [localPlaylists, setLocalPlaylists] = useState([]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
       dispatch(fetchPlaylists);
-
   }, [])
+
+  // useEffect(() => {
+  //   (async () => {
+  //     try{
+  //       const spotIdData = await Promise.all(playlists.map(async (response) => ({
+  //         spotData: await getPlaylistById(response.spotId),
+  //         prompt: response.prompt,
+  //         createdAt: response.createdAt,
+  //         isDiscoverable: response.isDiscoverable,
+  //         userId: response.userId,
+  //         id: response.spotId
+  //       })
+  //       ));
+
+  //       setLocalPlaylists(spotIdData);
+  //     }
+  //     catch(error){
+  //       console.error(error)
+  //     }
+  //   })()
+
+  // })
 
   const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id);
 
-//   const spotIdData = (authPlaylists) => {
-//     return async() => {
-//       try{
-//       return await Promise.all(authPlaylists.map(async (response) => ({
-//         spotData: await getPlaylistById(Object.entries(response)[3][1]),
-//         prompt: Object.entries(response)[1][1],
-//         createdAt: Object.entries(response)[5][1],
-//         isDiscoverable: Object.entries(response)[2][1],
-//         userId: Object.entries(response)[6][1],
-//         id: Object.entries(response)[0][1]
-//       })
-//       ))
-//     }
-//     catch(error){
-//       console.error(error);
-//     }
-//   }
-// }
+  console.log('authyPlaylists: ', authPlaylists);
 
   const navigate = useNavigate();
 
@@ -88,7 +93,7 @@ const MyPlaylists = () => {
                 return(
                 <div className='pl-thumb' key={playlist.spotId}>
                     <div className='pl-thumb-name'>
-                        <a href={`https://open.spotify.com/playlist/${playlist.spotId}`} target='_blank' title='Open in Spotify'>NP WORKING ON THIS (6/13)</a>
+                        <a href={`https://open.spotify.com/playlist/${playlist.spotId}`} target='_blank' title='Open in Spotify'>{playlist.name}</a>
                     </div>
         
                     <div className='pl-thumb-data-container'>
@@ -100,7 +105,7 @@ const MyPlaylists = () => {
                         </div> */}
 
                         <div className='pl-thumb-tracks'>
-                          NP WORKING ON THIS (6/13)
+                          NP WORKING ON THIS (6/14)
                           </div>
         
                     {/* <div className='pl-thumb-tracks'>
