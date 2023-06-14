@@ -21,7 +21,7 @@ const Playlist = () => {
             {
                 playlists.map(_playlist => {
                     const json = JSON.parse(_playlist.playlistJSON);
-                    return <div><a href={json.external_urls.spotify}>See on spotify  </a> </div>
+                    return <div><a href={json.external_urls.spotify} target="_blank">See on spotify  </a> </div>
                 })
             }
         </div>

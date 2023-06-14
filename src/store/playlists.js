@@ -4,7 +4,14 @@ import { createPlaylist } from '../../server/api/spotify';
 
 const playlists = (state = [], action) => {
   if (action.type === 'SET_PLAYLISTS') {
-    return action.playlists;
+    return action.playlists
+    // state = action.playlists;
+    // state.sort((a, b) => {
+    //   if(a.createdAt > b.createdAt){
+    //     return -1;
+    //   }
+    //   return 1
+    // })
   }
   if (action.type === 'CREATE_PLAYLIST') {
     return [...state, action.playlist];
@@ -23,19 +30,19 @@ const playlists = (state = [], action) => {
 export const fetchPlaylists = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get('/api/playlists');
 
-      const spotIdData = await Promise.all(response.data.map(async (response) => ({
-        spotData: await getPlaylistById(Object.entries(response)[3][1]),
-        prompt: Object.entries(response)[1][1],
-        createdAt: Object.entries(response)[5][1],
-        isDiscoverable: Object.entries(response)[2][1],
-        userId: Object.entries(response)[6][1],
-        id: Object.entries(response)[0][1]
-      })
-      ));
+      const response = await axios.get('/api/playlists')
+      
+      // .then(async (response) => await Promise.all(response.data.map(async (response) => ({
+      //   spotData: await getPlaylistById(Object.entries(response)[3][1]),
+      //   prompt: Object.entries(response)[1][1],
+      //   createdAt: Object.entries(response)[5][1],
+      //   isDiscoverable: Object.entries(response)[2][1],
+      //   userId: Object.entries(response)[6][1],
+      //   id: Object.entries(response)[0][1]
+      // }))))
 
-      dispatch({ type: 'SET_PLAYLISTS', playlists: spotIdData });
+      dispatch({ type: 'SET_PLAYLISTS', playlists: response.data });
     } catch (error) {
       console.error(error);
     }
@@ -45,10 +52,17 @@ export const fetchPlaylists = () => {
 export const createDBPlaylist = (auth, prompt, input) => {
   return async (dispatch) => {
       const name = JSON.parse(prompt.name)
-      const playlist = await createPlaylist({userId: auth.spotifyId, name: name.playlistName, description: input}, prompt, auth.discoverPlaylist)
-      const request = {playlistJSON: JSON.stringify(playlist), isDiscoverable: auth.discoverPlaylists, prompt: input, spotId: auth.spotifyId}
 
-      const response = await axios.post('/api/playlists', request);
+      const newUserId = window.localStorage.getItem('newUserId')
+
+      const userInput = prompt.userInput;
+
+      const playlist = await createPlaylist({userId: auth.spotifyId, name: name.playlistName, description: input}, prompt, auth.discoverPlaylist)
+
+      const request = {isDiscoverable: auth.discoverPlaylists, prompt: userInput, spotId: playlist.id, userId: newUserId}
+
+      const response = await axios.post('/api/playlists', request)
+
       dispatch({ type: 'CREATE_PLAYLIST', playlist: response.data });
   };
 };
