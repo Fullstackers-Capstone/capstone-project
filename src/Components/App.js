@@ -16,10 +16,18 @@ import UnlockPro from './UnlockPro';
 import TopArtists from './TopArtists';
 import TopTracks from './TopTracks';
 import Playlist from './Playlist';
+import Modal from './Modal';
 
 const App = () => {
 
   const [token, setToken] = useState(null);
+
+  const serverError = useSelector(state => state.serverError);
+
+  const handleCloseModal = () => {
+    dispatch({type: 'FIXED_SERVER_ERROR', payload: false})
+};
+
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   
@@ -69,6 +77,10 @@ const App = () => {
                 <Route path="/top-artists" element={<TopArtists />}/>
                 <Route path="/top-tracks" element={<TopTracks />}/>
               </Routes>
+              <div>
+             
+              {serverError.hasError && <Modal errorMessage={serverError.message ? serverError.message : "Something went wrong"} handleClose={handleCloseModal}/>}
+              </div>
             </div>
           )}
         </div>

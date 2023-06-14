@@ -32,19 +32,11 @@ export const fetchPlaylists = () => {
     try {
 
       const response = await axios.get('/api/playlists')
-      
-      // .then(async (response) => await Promise.all(response.data.map(async (response) => ({
-      //   spotData: await getPlaylistById(Object.entries(response)[3][1]),
-      //   prompt: Object.entries(response)[1][1],
-      //   createdAt: Object.entries(response)[5][1],
-      //   isDiscoverable: Object.entries(response)[2][1],
-      //   userId: Object.entries(response)[6][1],
-      //   id: Object.entries(response)[0][1]
-      // }))))
 
       dispatch({ type: 'SET_PLAYLISTS', playlists: response.data });
     } catch (error) {
       console.error(error);
+      dispatch({type: 'SERVER_ERROR', payload: "Error fetching playlists!"})
     }
   };
 };
