@@ -43,6 +43,7 @@ export const fetchPlaylists = () => {
 
 export const createDBPlaylist = (auth, prompt, input) => {
   return async (dispatch) => {
+    try {
       const name = JSON.parse(prompt.name)
 
       const newUserId = window.localStorage.getItem('newUserId')
@@ -51,15 +52,18 @@ export const createDBPlaylist = (auth, prompt, input) => {
 
       const playlist = await createPlaylist({userId: auth.spotifyId, name: name.playlistName, description: input}, prompt, auth.discoverPlaylist)
 
-      // const returnedPlaylist = await getPlaylistById(playlist.id)
-
       const request = {isDiscoverable: auth.discoverPlaylists, prompt: userInput, spotId: playlist.id, name: playlist.name, userId: newUserId}
 
       const response = await axios.post('/api/playlists', request)
 
       dispatch({ type: 'CREATE_PLAYLIST', playlist: response.data });
+    } catch (error) {
+      console.error(error);
+      dispatch({type: 'SERVER_ERROR', payload: "Error creating playlist in the database!"})
+    }
   };
 };
+
 
 export const createPlaylistTest = (playlist) => {
   return async (dispatch) => {
@@ -68,17 +72,23 @@ export const createPlaylistTest = (playlist) => {
       dispatch({ type: 'CREATE_PLAYLIST', playlist: response.data });
     } catch (error) {
       console.error(error);
+      dispatch({type: 'SERVER_ERROR', payload: "Error creating playlist!"});
     }
   };
 };
 
 export const updatePlaylist = (playlist) => {
-
   return async(dispatch) => {
-      const response = await axios.put(`/api/playlists/${playlist.id}`, playlist)
-      dispatch({ type: 'UPDATE_PLAYLIST', playlist: response.data})
-  }
-}
+    try {
+      const response = await axios.put(`/api/playlists/${playlist.id}`, playlist);
+      dispatch({ type: 'UPDATE_PLAYLIST', playlist: response.data});
+    } catch (error) {
+      console.error(error);
+      dispatch({type: 'SERVER_ERROR', payload: "Error updating playlist!"});
+    }
+  };
+};
+
 
 export default playlists;
 
