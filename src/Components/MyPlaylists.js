@@ -24,6 +24,8 @@ const MyPlaylists = () => {
 
   const navigate = useNavigate();
 
+  console.log("testing")
+
   const msConversion = (millis) => {
     const minutes = Math.floor(millis / 60000);
     const seconds = ((millis % 60000) / 1000).toFixed(0);
