@@ -7,15 +7,12 @@ const Playlist = conn.define('playlist', {
     primaryKey: true,
     defaultValue: UUIDV4,
   },
-  playlistJSON: {
-    type: JSON
-  },
+  prompt:{
+    type: TEXT
+    },
   isDiscoverable: {
     type: BOOLEAN,
     defaultValue: true
-  },
-  prompt:{
-  type: TEXT
   },
   spotId:{
     type: STRING

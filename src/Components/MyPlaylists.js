@@ -16,10 +16,28 @@ const MyPlaylists = () => {
   useEffect(() => {
       dispatch(fetchPlaylists);
 
-  }, [playlists])
+  }, [])
 
-  const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id)
+  const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id);
 
+//   const spotIdData = (authPlaylists) => {
+//     return async() => {
+//       try{
+//       return await Promise.all(authPlaylists.map(async (response) => ({
+//         spotData: await getPlaylistById(Object.entries(response)[3][1]),
+//         prompt: Object.entries(response)[1][1],
+//         createdAt: Object.entries(response)[5][1],
+//         isDiscoverable: Object.entries(response)[2][1],
+//         userId: Object.entries(response)[6][1],
+//         id: Object.entries(response)[0][1]
+//       })
+//       ))
+//     }
+//     catch(error){
+//       console.error(error);
+//     }
+//   }
+// }
 
   const navigate = useNavigate();
 
@@ -68,27 +86,31 @@ const MyPlaylists = () => {
             <div id='pl-container'>
             {authPlaylists.map(playlist => {
                 return(
-                <div className='pl-thumb' key={playlist.spotData.data.id}>
+                <div className='pl-thumb' key={playlist.spotId}>
                     <div className='pl-thumb-name'>
-                        <a href={`https://open.spotify.com/playlist/${playlist.spotData.data.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
+                        <a href={`https://open.spotify.com/playlist/${playlist.spotId}`} target='_blank' title='Open in Spotify'>NP WORKING ON THIS (6/13)</a>
                     </div>
         
                     <div className='pl-thumb-data-container'>
         
-                        <div className='pl-thumb-img' title='Open in Spotify'>
-                            <a href={`https://open.spotify.com/playlist/${playlist.spotData.data.id}`} target='_blank'>
+                        {/* <div className='pl-thumb-img' title='Open in Spotify'>
+                            <a href={`https://open.spotify.com/playlist/${playlist.spotId}`} target='_blank'>
                                 <img src={imageHook(playlist.spotData.data.images[0].url)}/>
                             </a>
-                        </div>
+                        </div> */}
+
+                        <div className='pl-thumb-tracks'>
+                          NP WORKING ON THIS (6/13)
+                          </div>
         
-                    <div className='pl-thumb-tracks'>
+                    {/* <div className='pl-thumb-tracks'>
         
                         {playlist.spotData.data.tracks.items.map(_track => {
                         return(
                           <div key={_track.track.duration_ms} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                         )
                         })}
-                      </div>
+                      </div> */}
                     </div>
         
                     <div className='pl-thumb-prompt-container'>
@@ -125,11 +147,11 @@ const MyPlaylists = () => {
                             </button>
                             <div className='ellipsis-dropdown-content'>
                                 <li key='spotOpen'>
-                                    <a href={`spotify:playlist:${playlist.spotData.data.id}`}>
+                                    <a href={`spotify:playlist:${playlist.spotId}`}>
                                         Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
                                     </a>
                                 </li>
-                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.spotData.data.id}`)}>Copy Link</li>
+                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.spotId}`)}>Copy Link</li>
         
                                 <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>
                             </div>
