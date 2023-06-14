@@ -78,77 +78,79 @@ const Prompt = () => {
     });
   };
 
-
   return (
     <div className='prompt-container'>
       <form onSubmit={submit}>
         <input className="prompt-input" value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
         <button className="StyledLogoutButton">Test</button>
       </form>
-
+  
       {isLoading ? (
         <Loader />
       ) : (
         <>
-        {testClicked && Array.isArray(jsonResponse) && jsonResponse.length > 0 && (
-          <div className={`playlist-container ${showAllTracks ? 'show-all' : ''}`}>
-            <h2 className="playlist-header">Playlist</h2>
-            {jsonResponse.map((response, index) => (
-              <div className="playlist-item" key={index}>
-                <div className="playlist-item-info">
-                  <div className="playlist-item-row">
-                    <div className="playlist-item-title">{response.title}</div>
-                  </div>
-                  <div className="playlist-item-artist">{response.artist}</div>
-                  <div className="playlist-item-checkbox">
-                    <input
-                      type="checkbox"
-                      checked={selectedItems.includes(index)}
-                      onChange={() => toggleItemSelection(index)}
-                    />
+          {testClicked && Array.isArray(jsonResponse) && jsonResponse.length > 0 && (
+            <div className={`playlist-container ${showAllTracks ? 'show-all' : ''}`}>
+              <h2 className="playlist-header">Playlist</h2>
+              {jsonResponse.map((response, index) => (
+                <div className="playlist-item" key={index}>
+                  <div className="playlist-item-info">
+                    <div className="playlist-item-row">
+                      <div className="playlist-item-title">{response.title}</div>
+                    </div>
+                    <div className="playlist-item-artist">{response.artist}</div>
+                    <div className="playlist-item-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedItems.includes(index)}
+                        onChange={() => toggleItemSelection(index)}
+                      />
+                    </div>
                   </div>
                 </div>
+              ))}
+              {!showAllTracks && (
+                <button className='styled-logout-button' onClick={() => setShowAllTracks(true)}>Add More Tracks</button>
+              )}
+              <div className="playlist-buttons-container">
+                <button className="playlist-back-button" onClick={goBack}>
+                  Back
+                </button>
+                <button
+                  className="playlist-generate-button"
+                  onClick={() => handleGeneratePlaylist()}
+                >
+                  Generate Playlist
+                </button>
               </div>
-            ))}
-            <button className='styled-logout-button' onClick={() => setShowAllTracks(true)}>Add More Tracks</button> {/* added */}
-            <div className="playlist-buttons-container">
-              <button className="playlist-back-button" onClick={goBack}>
-                Back
-              </button>
-              <button
-                className="playlist-generate-button"
-                onClick={() => handleGeneratePlaylist()}
-              >
-                Generate Playlist
-              </button>
             </div>
-          </div>
-        )}
-
-        {showExamplePrompts && (
-          <>
-            <h2 className="options-title">Example Prompts</h2>
-            <div className="options with-arrow" onClick={() => selectPromptOption('Music for chill relaxing vibes')}>
-              <span className="pl-type-desc">Music for chill relaxing vibes</span>
-            </div>
-            <div className="options with-arrow" onClick={() => selectPromptOption('Top 10 artists from the 1990s')}>
-              <span className="pl-type-desc">Top 10 artists from the 1990s</span>
-            </div>
-            <div className="options with-arrow" onClick={() => selectPromptOption('Music for a beach party')}>
-              <span className="pl-type-desc">Music for a beach party</span>
-            </div>
-            <div className="options with-arrow" onClick={() => selectPromptOption('Dinner Party tunes')}>
-              <span className="pl-type-desc">Dinner Party tunes</span>
-            </div>
-            <div className="options with-arrow" onClick={() => selectPromptOption('Grad party playlist!')}>
-              <span className="pl-type-desc">Grad party playlist!</span>
-            </div>
-          </>
-        )}
-      </>
-    )}
-  </div>
-)
+          )}
+  
+          {showExamplePrompts && (
+            <>
+              <h2 className="options-title">Example Prompts</h2>
+              <div className="options with-arrow" onClick={() => selectPromptOption('Music for chill relaxing vibes')}>
+                <span className="pl-type-desc">Music for chill relaxing vibes</span>
+              </div>
+              <div className="options with-arrow" onClick={() => selectPromptOption('Top 10 artists from the 1990s')}>
+                <span className="pl-type-desc">Top 10 artists from the 1990s</span>
+              </div>
+              <div className="options with-arrow" onClick={() => selectPromptOption('Music for a beach party')}>
+                <span className="pl-type-desc">Music for a beach party</span>
+              </div>
+              <div className="options with-arrow" onClick={() => selectPromptOption('Dinner Party tunes')}>
+                <span className="pl-type-desc">Dinner Party tunes</span>
+              </div>
+              <div className="options with-arrow" onClick={() => selectPromptOption('Grad party playlist!')}>
+                <span className="pl-type-desc">Grad party playlist!</span>
+              </div>
+            </>
+          )}
+        </>
+      )}
+    </div>
+  )
+  
 };
 
 export default Prompt;
