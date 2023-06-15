@@ -18,6 +18,7 @@ const MyPlaylists = () => {
       dispatch(fetchPlaylists());
   }, [])
 
+
     useEffect(() => {
     (async () => {
       try{
@@ -46,15 +47,13 @@ const MyPlaylists = () => {
 
   // console.log('authyPlaylists: ', authPlaylists);
 
-
   const authPlaylists = playlists.map(pl => pl)
   .filter(pl => pl.userId === auth.id)
-  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));  // sort by creation date
-
-  console.log('authyPlaylists: ', authPlaylists);
-
+  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));  // sort by playlist creation time
 
   const navigate = useNavigate();
+
+  console.log("testing")
 
   const msConversion = (millis) => {
     const minutes = Math.floor(millis / 60000);

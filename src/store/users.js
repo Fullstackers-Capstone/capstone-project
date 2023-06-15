@@ -33,33 +33,48 @@ const users = (state = [], action) => {
 // }
 
 export const updateUser = (user) => {
-    return async (dispatch, getState) => {
+  return async (dispatch, getState) => {
+    try {
       const existingUser = getState().users.find((u) => u.id === user.id);
       if (existingUser && JSON.stringify(existingUser) !== JSON.stringify(user)) {
         const response = await axios.put(`/api/users/${user.id}`, user);
         dispatch({ type: 'UPDATE_USER', user: response.data });
       }
-    };
+    } catch (error) {
+      console.error(error);
+      dispatch({type: 'SERVER_ERROR', payload: "Error updating user!"});
+    }
   };
+};
 
-  export const upgradeToPro = () => {
-    return async (dispatch) => {
+export const upgradeToPro = () => {
+  return async (dispatch) => {
+    try {
       const spotifyId = window.localStorage.getItem('spotifyId');
-        const response = await axios.put('/api/prompt',  {
-          headers: {
-            spotifyId: spotifyId
-          }
-        });
-        dispatch({ type: 'UPDATE_USER', user: response.data });
-    };
+      const response = await axios.put('/api/prompt',  {
+        headers: {
+          spotifyId: spotifyId
+        }
+      });
+      dispatch({ type: 'UPDATE_USER', user: response.data });
+    } catch (error) {
+      console.error(error);
+      dispatch({type: 'SERVER_ERROR', payload: "Error upgrading user to Pro!"});
+    }
   };
+};
 
 
-  export const fetchUser = (userId) => {
-    return async (dispatch) => {
+export const fetchUser = (userId) => {
+  return async (dispatch) => {
+    try {
       const response = await axios.get(`/api/users/${userId}`);
       dispatch(setUser(response.data));
-    };
+    } catch (error) {
+      console.error(error);
+      dispatch({type: 'SERVER_ERROR', payload: "Error fetching user!"});
+    }
   };
+};
 
 export default users;
