@@ -14,7 +14,7 @@ const playlists = (state = [], action) => {
     // })
   }
   if (action.type === 'CREATE_PLAYLIST') {
-    return [...state, action.playlist];
+    return [action.playlist, ...state];
   }
   if(action.type === 'UPDATE_PLAYLIST'){
     state = state.map(playlist => {

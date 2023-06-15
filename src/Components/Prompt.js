@@ -48,6 +48,9 @@ const Prompt = () => {
   //adds uriList to prompt after user selects songs
   const handleGeneratePlaylist = async() => {
     const selectedResponses = selectedItems.map((index) => jsonResponse[index]);
+
+    console.log('whats coming back from selectedResponse: ', selectedResponses);
+
     await dispatch(getSpotifyURIs(currentPrompt, selectedResponses))
     createPlaylist();
   };
@@ -55,7 +58,7 @@ const Prompt = () => {
   //creates playlist and navigates to the component
   const createPlaylist = async () => {
    await dispatch(createDBPlaylist(auth,currentPrompt, input));
-   navigate('/');
+  //  navigate('/');
   };
 
 

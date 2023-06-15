@@ -15,8 +15,32 @@ const MyPlaylists = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(fetchPlaylists);
+      dispatch(fetchPlaylists());
   }, [])
+
+    useEffect(() => {
+    (async () => {
+      try{
+        const spotIdData = await Promise.all(playlists.map(async (response) => ({
+          spotData: await getPlaylistById(response.spotId),
+          prompt: response.prompt,
+          createdAt: response.createdAt,
+          isDiscoverable: response.isDiscoverable,
+          userId: response.userId,
+          id: response.spotId
+        })
+        ));
+
+        setLocalPlaylists(spotIdData);
+
+      }
+      catch(error){
+        console.error(error)
+      }
+    })()
+  }, [playlists])
+
+  console.log('localPlaylists', localPlaylists)
 
   // const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id);
 
@@ -75,33 +99,33 @@ const MyPlaylists = () => {
             <Loader/>
         ):( 
             <div id='pl-container'>
-            {authPlaylists.map(playlist => {
+            {localPlaylists.map(playlist => {
                 return(
                 <div className='pl-thumb' key={playlist.spotId}>
                     <div className='pl-thumb-name'>
-                        <a href={`https://open.spotify.com/playlist/${playlist.spotId}`} target='_blank' title='Open in Spotify'>{playlist.name}</a>
+                        <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
                     </div>
         
                     <div className='pl-thumb-data-container'>
         
-                        {/* <div className='pl-thumb-img' title='Open in Spotify'>
-                            <a href={`https://open.spotify.com/playlist/${playlist.spotId}`} target='_blank'>
+                        <div className='pl-thumb-img' title='Open in Spotify'>
+                            <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank'>
                                 <img src={imageHook(playlist.spotData.data.images[0].url)}/>
                             </a>
-                        </div> */}
-
+                        </div>
+{/* 
                         <div className='pl-thumb-tracks'>
                           NP WORKING ON THIS (6/14)
-                          </div>
+                          </div> */}
         
-                    {/* <div className='pl-thumb-tracks'>
+                    <div className='pl-thumb-tracks'>
         
                         {playlist.spotData.data.tracks.items.map(_track => {
                         return(
                           <div key={_track.track.duration_ms} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                         )
                         })}
-                      </div> */}
+                      </div>
                     </div>
         
                     <div className='pl-thumb-prompt-container'>
@@ -138,11 +162,11 @@ const MyPlaylists = () => {
                             </button>
                             <div className='ellipsis-dropdown-content'>
                                 <li key='spotOpen'>
-                                    <a href={`spotify:playlist:${playlist.spotId}`}>
+                                    <a href={`spotify:playlist:${playlist.id}`}>
                                         Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
                                     </a>
                                 </li>
-                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.spotId}`)}>Copy Link</li>
+                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.id}`)}>Copy Link</li>
         
                                 <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>
                             </div>
