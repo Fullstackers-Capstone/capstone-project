@@ -6,18 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 import { fetchPlaylists } from '../store';
 
-const Discover = () => {
+const MyPlaylists = () => {
 
   const { auth, playlists } = useSelector(state => state);
   const [isLoading, setIsLoading] = useState(false);
+  const [localPlaylists, setLocalPlaylists] = useState([]);
   const [discover, setDiscover] = useState();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPlaylists);
-
-  }, [playlists])
+      dispatch(fetchPlaylists());
+  }, [])
 
   useEffect(() => {
     if(auth){
@@ -25,9 +25,33 @@ const Discover = () => {
     }
   }, [auth]);
 
-  console.log('discoverable playlists: ', playlists.map(pl => pl).filter(pl => pl.isDiscoverable));
 
-  const discoverablePlaylists = playlists.map(pl => pl).filter(pl => pl.isDiscoverable)
+    useEffect(() => {
+    (async () => {
+      try{
+        const spotIdData = await Promise.all(playlists.map(async (response) => ({
+          spotData: await getPlaylistById(response.spotId),
+          prompt: response.prompt,
+          createdAt: response.createdAt,
+          isDiscoverable: response.isDiscoverable,
+          userId: response.userId,
+          id: response.spotId
+        })
+        ));
+
+        setLocalPlaylists(spotIdData);
+
+      }
+      catch(error){
+        console.error(error)
+      }
+    })()
+  }, [playlists])
+
+
+  const discoverablePlaylists = localPlaylists.map(pl => pl)
+    .filter(pl => pl.isDiscoverable)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));  // sort by playlist creation time
 
   const navigate = useNavigate();
 
@@ -56,7 +80,7 @@ const Discover = () => {
   }
 
   const imageHook = (playlistImg) => {
-    return playlistImg || 'http://www.google.com'
+    return playlistImg || '/static/default.jpeg'
   }
 
   if(!auth){
@@ -76,15 +100,15 @@ const Discover = () => {
             <div id='pl-container'>
             {discoverablePlaylists.map(playlist => {
                 return(
-                <div className='pl-thumb' key={playlist.spotData.data.id}>
+                <div className='pl-thumb' key={playlist.id}>
                     <div className='disc-thumb-name'>
-                        <a href={`https://open.spotify.com/playlist/${playlist.spotData.data.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
+                        <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
                     </div>
         
                     <div className='pl-thumb-data-container'>
         
                         <div className='disc-thumb-img' title='Open in Spotify'>
-                            <a href={`https://open.spotify.com/playlist/${playlist.spotData.data.id}`} target='_blank'>
+                            <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank'>
                                 <img src={imageHook(playlist.spotData.data.images[0].url)}/>
                             </a>
                         </div>
@@ -93,7 +117,7 @@ const Discover = () => {
         
                         {playlist.spotData.data.tracks.items.map(_track => {
                         return(
-                          <div key={_track.track.duration_ms} className='track-lineitem'><span className='disc-track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
+                          <div key={_track.track.duration_ms} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                         )
                         })}
                       </div>
@@ -103,7 +127,7 @@ const Discover = () => {
                         <div className='pl-prompt'>
 
                         <div className='pl-thumb-prompt-content'>
-                        <span className='prompt-title' style={{color: 'gold'}}>Prompt:</span> <span className='prompt-content'>{playlist.prompt}</span>
+                            <span className='prompt-title' style={{color: 'gold'}}>Prompt:</span> <span className='prompt-content'>{playlist.prompt}</span>
                         </div>
 
                         <div className='pl-thumb-createdAt'>
@@ -133,11 +157,11 @@ const Discover = () => {
                             </button>
                             <div className='ellipsis-dropdown-content'>
                                 <li key='spotOpen'>
-                                    <a href={`spotify:playlist:${playlist.spotData.data.id}`}>
+                                    <a href={`spotify:playlist:${playlist.id}`}>
                                         Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
                                     </a>
                                 </li>
-                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.spotData.data.id}`)}>Copy Link</li>
+                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.id}`)}>Copy Link</li>
         
                                 <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>
                             </div>
@@ -158,4 +182,4 @@ const Discover = () => {
   )
 };
 
-export default Discover;
+export default MyPlaylists;

@@ -41,19 +41,12 @@ const MyPlaylists = () => {
     })()
   }, [playlists])
 
-  console.log('localPlaylists', localPlaylists)
 
-  // const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id);
-
-  // console.log('authyPlaylists: ', authPlaylists);
-
-  const authPlaylists = playlists.map(pl => pl)
+  const authPlaylists = localPlaylists.map(pl => pl)
   .filter(pl => pl.userId === auth.id)
   .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));  // sort by playlist creation time
 
   const navigate = useNavigate();
-
-  console.log("testing")
 
   const msConversion = (millis) => {
     const minutes = Math.floor(millis / 60000);
@@ -98,9 +91,9 @@ const MyPlaylists = () => {
             <Loader/>
         ):( 
             <div id='pl-container'>
-            {localPlaylists.map(playlist => {
+            {authPlaylists.map(playlist => {
                 return(
-                <div className='pl-thumb' key={playlist.spotId}>
+                <div className='pl-thumb' key={playlist.id}>
                     <div className='pl-thumb-name'>
                         <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
                     </div>
@@ -112,10 +105,6 @@ const MyPlaylists = () => {
                                 <img src={imageHook(playlist.spotData.data.images[0].url)}/>
                             </a>
                         </div>
-{/* 
-                        <div className='pl-thumb-tracks'>
-                          NP WORKING ON THIS (6/14)
-                          </div> */}
         
                     <div className='pl-thumb-tracks'>
         
