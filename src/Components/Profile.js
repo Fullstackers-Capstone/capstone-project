@@ -70,7 +70,7 @@ const Profile = () => {
 
             <div className='pl-thumb' key={auth.id}>
             <div className='pl-thumb-name'>
-              <a href={`https://open.spotify.com/user/${ auth.spotifyId }`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
+              <img className='prof-thumb-user-img' src={auth.image}></img><a href={`https://open.spotify.com/user/${ auth.spotifyId }`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
             </div>
 
             <div className='profstats-container'>
