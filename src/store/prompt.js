@@ -134,8 +134,6 @@ export const update = (prompt) => {
   };
 };
 
-console.log("hello")
-
 export const getAllPrompts = () => {
   return async (dispatch) => {
     try {
