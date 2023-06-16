@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 const Login = () => {
   return(
     <div className="login-container">
-      <a className="StyledLoginButton" href={'http://localhost:3000/login'}>Log In/Register</a>
+      <a className="StyledLoginButton" href={'/login'}>Log In/Register</a>
     </div>
   )
 }
