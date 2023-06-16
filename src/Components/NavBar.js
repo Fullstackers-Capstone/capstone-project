@@ -1,33 +1,44 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '/server/api/spotify.js';
 import { Squash as Hamburger } from 'hamburger-react';
+import { fetchPlaylists } from '../store';
 
 const NavBar = () => {
+
+  const { auth, playlists } = useSelector(state => state);
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [hamburgerOpen, setHambugerOpen] = useState(false);
 
-    const { auth } = useSelector(state => state);
+    const dispatch = useDispatch();
 
     const handleDropdownToggle = () => {
         setDropdownVisible(!dropdownVisible);
         setHambugerOpen(!hamburgerOpen);
       };
+
+    const authPlaylists = playlists.map(pl => pl)
+    .filter(pl => pl.userId === auth.id)
+
     return(
         <div className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
         <div className='dropdown-toggle' onClick={handleDropdownToggle}>
           <Hamburger toggled={hamburgerOpen} toggle={setHambugerOpen}/>
         </div>
         <div className="dropdown-content">
-            <Link to="/" onClick={handleDropdownToggle}>Home</Link>
-            <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link>
-            <Link to="/create" onClick={handleDropdownToggle}>Create Playlist</Link>
-            <Link to="/prompt" onClick={handleDropdownToggle}>Prompt</Link>
+
+            {auth.proUser ? <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile <span style={{color: 'gold', marginLeft: '.15rem'}}><i className="fa-solid fa-circle-check fa-xs"></i></span></Link> : <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link>}
+
+            <Link to="/" onClick={handleDropdownToggle}>My Playlists</Link>
+            
+            {authPlaylists.length > 4 && (!auth.proUser) ? <Link to="/unlock-pro" onClick={handleDropdownToggle}>Create Playlist</Link> : <Link to="/prompt" onClick={handleDropdownToggle}>Create Playlist</Link>}
+            
             {
-              auth.proUser ? <Link to="/unlock-pro" onClick={handleDropdownToggle}>Pro <i class="fa-solid fa-check"></i></Link> : <Link to="/unlock-pro" onClick={handleDropdownToggle}>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link>
+              auth.proUser ? "" : <Link to="/unlock-pro" onClick={handleDropdownToggle}>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem', color: 'gold'}}></i></Link>
             }
+
             <Link onClick={logout}>Logout</Link>
         </div>
       </div>

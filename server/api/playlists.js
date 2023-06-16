@@ -52,6 +52,19 @@ app.put('/:id', async(req, res, next) => {
     }
 })
 
+app.delete('/:id', async(req, res, next) => {
+    try{
+
+    const playlist = await Playlist.findByPk(req.params.id);
+
+    await playlist.destroy();
+    res.sendStatus(204);
+    }
+    catch(err){
+      next(err);
+    }
+  })
+
 module.exports = app;
 
 

@@ -6,11 +6,14 @@ import CreatePlaylistButton from './CreatePlaylistButton';
 
 const Home = () => {
 
-  const { auth } = useSelector(state => state);
+  const { auth, playlists } = useSelector(state => state);
   const [selected, setSelected] = useState(true);
 
   localStorage.setItem("newUserId",auth.id);
   localStorage.setItem("authDiscoverable", auth.discoverPlaylists);
+
+  const authPlaylists = playlists.map(pl => pl)
+  .filter(pl => pl.userId === auth.id)
 
   if(!auth){
     return null;
@@ -36,7 +39,7 @@ const Home = () => {
         </div>
       </div>
       {(selected) ? <MyPlaylists/> : <Discover/>}
-      <CreatePlaylistButton />
+      {authPlaylists.length > 4 && (!auth.proUser) ? "" : <CreatePlaylistButton />}
     </div>
   )
 };

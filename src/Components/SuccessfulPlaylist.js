@@ -50,7 +50,7 @@ const SuccessfulPlaylist = () => {
 //   const localPlaylists = localPlaylists[0]
 //   console.log('this is the current playlist', currentPl);
 
-console.log('this is with the spotify return', localPlaylists)
+// console.log('this is with the spotify return', localPlaylists)
 
   const navigate = useNavigate();
 
@@ -88,6 +88,7 @@ console.log('this is with the spotify return', localPlaylists)
         {(localPlaylists) && (
             <div id='content-body'>
 
+            {/* <div id='successful-alert'>Playlist creation successful!</div> */}
 
             <div id='successfulpl-container'>
 
@@ -106,7 +107,7 @@ console.log('this is with the spotify return', localPlaylists)
             
                 <div className='pl-thumb-tracks'>
             
-                    {localPlaylists.spotData.data.tracks.items.map(_track => {
+                    {localPlaylists.spotData.data.tracks.items.slice(0, 7).map(_track => {
                     return(
                       <div key={_track.track.duration_ms} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                     )
@@ -118,10 +119,11 @@ console.log('this is with the spotify return', localPlaylists)
                     <div className='pl-prompt'>
             
                     <div className='pl-thumb-prompt-content'>
-                        <span className='prompt-title'>Prompt:</span> <span className='prompt-content'>{localPlaylists.prompt}</span>
+                        <span className='prompt-title'>Prompt:</span> <span className='prompt-content'>"{localPlaylists.prompt}"</span>
                     </div>
             
                     <div className='pl-thumb-createdAt'>
+
                          {dateify(localPlaylists.createdAt)} @ {timeify(localPlaylists.createdAt)} UTC
                     </div>
                     
@@ -164,6 +166,9 @@ console.log('this is with the spotify return', localPlaylists)
                 </div>
             </div>
             
+            </div>
+            <div>
+                <button style={{width: '200px'}}onClick={() => navigate('/')}>View All Playlists</button>
             </div>
             </div>
         )}

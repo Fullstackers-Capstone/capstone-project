@@ -24,7 +24,10 @@ const playlists = (state = [], action) => {
         }
         return playlist;
     })
-}
+  }
+  if(action.type === 'DESTROY_PLAYLIST'){
+    return state.filter(_playlist => _playlist.id !== action.playlist.id)
+  }
   return state;
 };
 
@@ -92,6 +95,14 @@ export const updatePlaylist = (playlist) => {
     }
   };
 };
+
+export const destroyPlaylist = (playlist) => {
+  return async(dispatch) => {
+    console.log('getting here???', playlist)
+    await axios.delete(`/api/playlists/${playlist.id}`);
+    dispatch({ type: 'DESTROY_PLAYLIST', playlist })
+  }
+}
 
 
 export default playlists;

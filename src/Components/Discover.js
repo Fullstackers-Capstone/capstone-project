@@ -115,9 +115,9 @@ const MyPlaylists = () => {
         
                     <div className='pl-thumb-tracks'>
         
-                        {playlist.spotData.data.tracks.items.map(_track => {
+                        {playlist.spotData.data.tracks.items.slice(0, 7).map(_track => {
                         return(
-                          <div key={_track.track.duration_ms} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
+                          <div key={_track.track.duration_ms} className='track-lineitem'><span className='disc-track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                         )
                         })}
                       </div>
@@ -127,10 +127,10 @@ const MyPlaylists = () => {
                         <div className='pl-prompt'>
 
                         <div className='pl-thumb-prompt-content'>
-                            <span className='prompt-title' style={{color: 'gold'}}>Prompt:</span> <span className='prompt-content'>{playlist.prompt}</span>
+                            <span className='prompt-title' style={{color: 'gold'}}>Prompt:</span> <span className='prompt-content'>"{playlist.prompt}"</span>
                         </div>
 
-                        <div className='pl-thumb-createdAt'>
+                        <div className='pl-thumb-createdAt' style={{color: 'gold'}}>
                              {dateify(playlist.createdAt)} @ {timeify(playlist.createdAt)} UTC
                         </div>
                         
