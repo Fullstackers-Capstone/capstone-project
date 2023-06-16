@@ -35,7 +35,7 @@ const MyPlaylists = () => {
           createdAt: response.createdAt,
           isDiscoverable: response.isDiscoverable,
           userId: response.userId,
-          id: response.id
+          id: response.spotId
         })
         ));
 
