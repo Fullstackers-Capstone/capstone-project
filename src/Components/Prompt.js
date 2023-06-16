@@ -26,7 +26,7 @@ const Prompt = () => {
   const submit = async (ev) => {
     ev.preventDefault();
     setIsLoading(true);
-    await dispatch(getJSONResponse('songs that fit the following criteria', 10, input, auth.discoverPlaylists));
+    await dispatch(getJSONResponse('songs that fit the following criteria', 20, input, auth.discoverPlaylists));
     setIsLoading(false);
     setTestClicked(true);
     setShowExamplePrompts(false);
@@ -83,7 +83,7 @@ const Prompt = () => {
     <div className='prompt-container'>
       <form onSubmit={submit}>
         <input className="prompt-input" value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
-        <button className="StyledLogoutButton">Test</button>
+        <button className="StyledLogoutButton">Create Playlist</button>
       </form>
   
       {isLoading ? (

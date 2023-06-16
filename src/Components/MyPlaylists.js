@@ -35,7 +35,8 @@ const MyPlaylists = () => {
           createdAt: response.createdAt,
           isDiscoverable: response.isDiscoverable,
           userId: response.userId,
-          id: response.spotId
+          spotId: response.spotId,
+          id: response.id
         })
         ));
 
@@ -53,9 +54,9 @@ const MyPlaylists = () => {
   .filter(pl => pl.userId === auth.id)
   .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));  // sort by playlist creation time
 
-  // const _destroyPlaylist = (playlist) => {
-  //   dispatch(destroyPlaylist(playlist))
-  // }
+  const destroy = (playlist) => {
+    dispatch(destroyPlaylist(playlist))
+  }
 
   const navigate = useNavigate();
 
@@ -106,13 +107,13 @@ const MyPlaylists = () => {
                 return(
                 <div className='pl-thumb' key={playlist.id}>
                     <div className='pl-thumb-name'>
-                        <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
+                        <a href={`https://open.spotify.com/playlist/${playlist.spotId}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
                     </div>
         
                     <div className='pl-thumb-data-container'>
         
                         <div className='pl-thumb-img' title='Open in Spotify'>
-                            <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank'>
+                            <a href={`https://open.spotify.com/playlist/${playlist.spotId}`} target='_blank'>
                                 <img src={imageHook(playlist.spotData.data.images[0].url)}/>
                             </a>
                         </div>
@@ -161,13 +162,13 @@ const MyPlaylists = () => {
                             </button>
                             <div className='ellipsis-dropdown-content'>
                                 <li key='spotOpen'>
-                                    <a href={`spotify:playlist:${playlist.id}`}>
+                                    <a href={`spotify:playlist:${playlist.spotId}`}>
                                         Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square fa-xs" style={{marginLeft: '.15rem'}}></i>
                                     </a>
                                 </li>
-                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.id}`)}>Copy Link</li>
+                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.spotId}`)}>Copy Link</li>
         
-                                {(pro) ? <li key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
+                                {(pro) ? <li onClick={ev => destroy(playlist)} key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
                             </div>
                             
                         </ul>

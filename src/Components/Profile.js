@@ -88,7 +88,7 @@ const Profile = () => {
                     Visit your <a href=''>Spotify Profile <i className="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> to make changes to your user info.
                 </div> */}
 
-                <div><span className='prof-title'>Serenade Playlist Count:</span> { auth.playlistCount }</div>
+                <div><span className='prof-title'>Serenade Playlist Count:</span> { authPlaylists.length }</div>
 
                 <div><span className='prof-title'>Account Status:</span> {(pro) ? <span><span className='prof-unlock-pro'>Pro <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span> <span className='cancelSub' onClick={() => {dispatch(cancelSubscription)}}>(cancel subcription)</span></span> : <span>Free (<span className='prof-unlock-pro'><Link to='/unlock-pro'>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link></span>)</span>}</div>
 

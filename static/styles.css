@@ -508,12 +508,12 @@ header {
 }
 
 .disc-thumb-name a{
-  color: white;
+  color: gold
   /* border-bottom: 1px solid transparent */
 }
 
 .disc-thumb-name a:hover{
-  color: gold;
+  color: white;
   transition: 0.35s
 }
 
@@ -637,8 +637,8 @@ header {
   /* transition: 0.25s */
 }
 .disc-thumb-user-name a:hover{
-  color: gold;
-  transition: 0.25s
+  border-bottom: 1px dotted gold;
+  /* transition: 0.25s */
 }
 
 .pl-thumb-user-img img{
@@ -902,6 +902,7 @@ header {
 
 /* Prompt input styles */
 .prompt-input {
+  width: 300px;
   flex-grow: 1;
   margin-right: 10px;
   padding: 10px;
