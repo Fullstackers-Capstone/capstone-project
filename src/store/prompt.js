@@ -73,7 +73,8 @@ export const getJSONResponse = (prompt, length, data) => {
           spotifyId: spotifyId
         }
       });
-      dispatch(savePrompt(response.data));
+      // dispatch(savePrompt(response.data));
+      dispatch(getSpotifyURIs(response.data));
     } catch (error) {
       console.error(error);
       dispatch({type: 'SERVER_ERROR', payload: "Error getting JSON response!"});
@@ -81,26 +82,46 @@ export const getJSONResponse = (prompt, length, data) => {
   };
 };
 
-export const getSpotifyURIs = (prompt, playlist) => {
+export const getSpotifyURIs = (prompt) => {
   return async (dispatch) => {
     try {
+      const playlist = JSON.parse(prompt.response);
+      console.log('old playlist',playlist);
+      const newPlaylist = [];
       const URIResponse = await Promise.all(playlist.map(async(element) => {
         const uri = await searchFunctionality(element)
         if (await uri){
-          return await uri;
+          if (uri !== undefined){
+            newPlaylist.push({title: uri.name, artist: uri.artists[0].name, album: uri.album.name, uri: uri.uri});
+            return await uri.uri;
+          }
         }
       }));
-      // Log the final URIResponse
-      const filteredResponse = URIResponse.filter(uri => uri !== undefined)
-      //await createPlaylist({userId: spotifyId, name: 'Anything We Want', description: 'Same with the description.'}, filteredResponse)
-      prompt.uriList = filteredResponse;
-      dispatch(update(prompt));
+      prompt.uriList = URIResponse;
+      prompt.response = newPlaylist;
+      dispatch(savePrompt(prompt));
     } catch (error) {
       console.error(error);
       dispatch({type: 'SERVER_ERROR', payload: "Error getting Spotify URIs!"});
     }
   }
 }
+
+export const setSpotifyURIs = (prompt, playlist) => {
+  return async (dispatch) => {
+    try {
+      const uriList = playlist.map(track => track.uri);
+
+      prompt.uriList = uriList;
+      dispatch(updatePrompt(prompt));
+    } catch (error) {
+      console.error(error);
+      dispatch({type: 'SERVER_ERROR', payload: "Error getting Spotify URIs!"});
+    }
+  }
+}
+
+
 
 
 export const savePrompt = (prompt) => {

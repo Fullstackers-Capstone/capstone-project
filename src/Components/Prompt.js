@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { getResponse, getJSONResponse, getSpotifyURIs, createDBPlaylist} from '../store';
+import { getResponse, getJSONResponse, setSpotifyURIs, createDBPlaylist} from '../store';
 import Searcher from './Searcher';
 import { getTopTracks, createPlaylist,  } from '../../server/api/spotify';
 import Loader from './Loader';
@@ -38,7 +38,7 @@ const Prompt = () => {
     if (prompt.length > 0){
       setCurrentPrompt(prompt[prompt.length-1]);
       const currentPrompt = prompt[prompt.length-1];
-      setJsonResponse(JSON.parse(currentPrompt.response));
+      setJsonResponse(currentPrompt.response);
     } 
   }, [prompt])
 
@@ -48,8 +48,8 @@ const Prompt = () => {
   //adds uriList to prompt after user selects songs
   const handleGeneratePlaylist = async() => {
     const selectedResponses = selectedItems.map((index) => jsonResponse[index]);
-
-    await dispatch(getSpotifyURIs(currentPrompt, selectedResponses))
+    console.log(selectedResponses);
+    await dispatch(setSpotifyURIs(currentPrompt, selectedResponses))
     createPlaylist();
   };
 
