@@ -17,6 +17,7 @@ import TopArtists from './TopArtists';
 import TopTracks from './TopTracks';
 import Playlist from './Playlist';
 import Modal from './Modal';
+import SuccessfulPlaylist from './SuccessfulPlaylist';
 
 const App = () => {
 
@@ -76,6 +77,7 @@ const App = () => {
                 <Route path="/discover" element={<Discover />}/>
                 <Route path="/top-artists" element={<TopArtists />}/>
                 <Route path="/top-tracks" element={<TopTracks />}/>
+                <Route path='/playlists/:id' element={<SuccessfulPlaylist/>}/>
               </Routes>
               <div>
              

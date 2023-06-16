@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { addTracksToPlaylist, getPlaylistById } from '../../server/api/spotify';
 import { createPlaylist } from '../../server/api/spotify';
+import { useNavigate } from 'react-router-dom';
 
 const playlists = (state = [], action) => {
   if (action.type === 'SET_PLAYLISTS') {
@@ -41,7 +42,7 @@ export const fetchPlaylists = () => {
   };
 };
 
-export const createDBPlaylist = (auth, prompt, input) => {
+export const createDBPlaylist = (auth, prompt, input, navigate) => {
   return async (dispatch) => {
     try {
       const name = JSON.parse(prompt.name)
@@ -56,7 +57,10 @@ export const createDBPlaylist = (auth, prompt, input) => {
 
       const response = await axios.post('/api/playlists', request)
 
+      navigate(`/playlists/${response.data.id}`)
+
       dispatch({ type: 'CREATE_PLAYLIST', playlist: response.data });
+
     } catch (error) {
       console.error(error);
       dispatch({type: 'SERVER_ERROR', payload: "Error creating playlist in the database!"})

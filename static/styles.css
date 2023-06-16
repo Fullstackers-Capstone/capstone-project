@@ -436,6 +436,14 @@ header {
   width: 75%;
 }
 
+#successfulpl-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  margin-top: 3rem;
+}
+
 #new-pl-container{
   display: flex;
   flex-direction: column;
