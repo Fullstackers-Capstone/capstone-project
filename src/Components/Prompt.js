@@ -26,7 +26,7 @@ const Prompt = () => {
   const submit = async (ev) => {
     ev.preventDefault();
     setIsLoading(true);
-    await dispatch(getJSONResponse('songs that fit the following criteria', 5, input, auth.discoverPlaylists));
+    await dispatch(getJSONResponse('songs that fit the following criteria', 10, input, auth.discoverPlaylists));
     setIsLoading(false);
     setTestClicked(true);
     setShowExamplePrompts(false);
@@ -49,16 +49,14 @@ const Prompt = () => {
   const handleGeneratePlaylist = async() => {
     const selectedResponses = selectedItems.map((index) => jsonResponse[index]);
 
-    console.log('whats coming back from selectedResponse: ', selectedResponses);
-
     await dispatch(getSpotifyURIs(currentPrompt, selectedResponses))
     createPlaylist();
   };
 
   //creates playlist and navigates to the component
   const createPlaylist = async () => {
-   await dispatch(createDBPlaylist(auth,currentPrompt, input));
-  //  navigate('/');
+  await dispatch(createDBPlaylist(auth,currentPrompt, input, navigate))
+;
   };
 
 
