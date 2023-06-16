@@ -4,19 +4,26 @@ import { getCurrentUserPlaylists, getPlaylistById, getPlaylistTracks } from '../
 import { catchErrors } from '../../server/api/utils';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
-import { fetchPlaylists } from '../store';
+import { fetchPlaylists, destroyPlaylist } from '../store';
 
 const MyPlaylists = () => {
 
   const { auth, playlists } = useSelector(state => state);
   const [isLoading, setIsLoading] = useState(false);
   const [localPlaylists, setLocalPlaylists] = useState([]);
+  const [pro, setPro] = useState();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
       dispatch(fetchPlaylists());
   }, [])
+
+  useEffect(() => {
+    if(auth){
+        setPro(auth.proUser);
+    }
+}, [auth])
 
 
     useEffect(() => {
@@ -28,7 +35,7 @@ const MyPlaylists = () => {
           createdAt: response.createdAt,
           isDiscoverable: response.isDiscoverable,
           userId: response.userId,
-          id: response.spotId
+          id: response.id
         })
         ));
 
@@ -45,6 +52,10 @@ const MyPlaylists = () => {
   const authPlaylists = localPlaylists.map(pl => pl)
   .filter(pl => pl.userId === auth.id)
   .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));  // sort by playlist creation time
+
+  // const _destroyPlaylist = (playlist) => {
+  //   dispatch(destroyPlaylist(playlist))
+  // }
 
   const navigate = useNavigate();
 
@@ -108,7 +119,7 @@ const MyPlaylists = () => {
         
                     <div className='pl-thumb-tracks'>
         
-                        {playlist.spotData.data.tracks.items.map(_track => {
+                        {playlist.spotData.data.tracks.items.slice(0, 7).map(_track => {
                         return(
                           <div key={_track.track.duration_ms} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                         )
@@ -120,7 +131,7 @@ const MyPlaylists = () => {
                         <div className='pl-prompt'>
 
                         <div className='pl-thumb-prompt-content'>
-                            <span className='prompt-title'>Prompt:</span> <span className='prompt-content'>{playlist.prompt}</span>
+                            <span className='prompt-title'>Prompt:</span> <span className='prompt-content'>"{playlist.prompt}"</span>
                         </div>
 
                         <div className='pl-thumb-createdAt'>
@@ -151,12 +162,12 @@ const MyPlaylists = () => {
                             <div className='ellipsis-dropdown-content'>
                                 <li key='spotOpen'>
                                     <a href={`spotify:playlist:${playlist.id}`}>
-                                        Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                                        Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square fa-xs" style={{marginLeft: '.15rem'}}></i>
                                     </a>
                                 </li>
                                 <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.id}`)}>Copy Link</li>
         
-                                <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>
+                                {(pro) ? <li key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
                             </div>
                             
                         </ul>

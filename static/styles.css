@@ -264,13 +264,30 @@ header {
   color: white;
 }
 
+/* .ellipsis-dropdown-content a{
+  color: red;
+}
+
+.ellipsis-dropdown-content li:last-child:hover{
+  background-color: red;
+  color: black;
+} */
+
 .dropdown-content a:last-child{
+  color: red;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
 .dropdown-content a:hover {
   background-color: #1DB954;
+}
+
+.dropdown-content a:last-child:hover{
+  background-color: red;
+  color: black;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .prompt-container {
@@ -477,12 +494,12 @@ header {
 
 .pl-thumb-name a{
   color: var(--spotifyGreen);
-  border-bottom: 1px solid transparent
+  /* border-bottom: 1px solid transparent */
 }
 
 .pl-thumb-name a:hover{
   color: white;
-  border-bottom: 1px dotted var(--spotifyGreen);
+  /* border-bottom: 1px dotted var(--spotifyGreen); */
   transition: 0.35s
 }
 
@@ -491,13 +508,12 @@ header {
 }
 
 .disc-thumb-name a{
-  color: gold;
-  border-bottom: 1px solid transparent
+  color: white;
+  /* border-bottom: 1px solid transparent */
 }
 
 .disc-thumb-name a:hover{
-  color: white;
-  border-bottom: 1px dotted gold;
+  color: gold;
   transition: 0.35s
 }
 
@@ -532,7 +548,7 @@ header {
   padding: 1rem;
   padding-top: 2rem;
   padding-left: 0;
-  -webkit-mask: linear-gradient(#000 10%, #0000);
+  -webkit-mask: linear-gradient(#000 10%, #0000 85%);
   mask: linear-gradient(#000, #0000);
   background-color: 121212;
   border-top-right-radius: 5px;
@@ -548,7 +564,7 @@ header {
   background-color: #242424;
   border-left: 4px solid #242424;
   border-right: 4px solid #242424;
-  font-size: .75rem;
+  font-size: .8rem;
 }
 
 .pl-thumb-stats-container{
@@ -573,7 +589,7 @@ header {
 
 .pl-thumb-ellipsis-container{
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
   flex: 1;
   margin-right: 1.5rem;
@@ -616,12 +632,13 @@ header {
 }
 
 .pl-thumb-user-name a:hover{
+  /* color: var(--spotifyGreen); */
   border-bottom: 1px dotted var(--spotifyGreen);
-  /* transition: 0.35s */
+  /* transition: 0.25s */
 }
 .disc-thumb-user-name a:hover{
-  border-bottom: 1px dotted gold;
-  /* transition: 0.35s */
+  color: gold;
+  transition: 0.25s
 }
 
 .pl-thumb-user-img img{
@@ -659,6 +676,12 @@ header {
 .track-lineitem{
   font-size: .85rem;
 }
+
+/* .ellipsis-dropdown{
+  display: flex;
+  align-items: flex-start;
+  border: 2px solid blue;
+} */
 
 .ellipsis-dropdown > li {
   float: right;
@@ -831,6 +854,7 @@ header {
 .prof-unlock-pro{
   margin-left: .25rem;
   margin-right: .25rem;
+  color: gold;
 }
 
 .prof-unlock-pro a{
@@ -840,6 +864,14 @@ header {
 .prof-unlock-pro a:hover{
   color: white;
   border-bottom: 1px dotted gold;
+}
+
+.cancelSub{
+  font-size: .65rem;
+}
+
+.cancelSub:hover{
+  cursor: pointer;
 }
 
 .prof-prompt{
@@ -1064,6 +1096,17 @@ header {
     width: 30px;
     height: 30px;
   }
+}
+
+#successful-alert{
+  font-family: 'Lobster', cursive;
+  color: gold;
+  font-size: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: .5rem;
+  text-shadow: 1px 1px 4px rgb(5, 5, 5);
+  /* border-bottom: 1px dotted white; */
+
 }
 /* Single playlist CSS end*/
 
