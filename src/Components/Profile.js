@@ -74,7 +74,7 @@ const Profile = () => {
 
             <div className='pl-thumb' key={auth.id}>
             <div className='pl-thumb-name'>
-              <a href={`https://open.spotify.com/user/${ auth.spotifyId }`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()} <span className={`${(pro === true) ? 'prof-unlock-pro' : 'prof-free'}`}><i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span></a>
+              <a href={`https://open.spotify.com/user/${ auth.spotifyId }`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()} <span className={`${(pro === true) ? 'prof-unlock-pro' : 'prof-free'}`} title={`${(pro === true) ? 'Pro User' : 'Free User'}`}><i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span></a>
             </div>
 
             <div className='profstats-container'>

@@ -274,7 +274,7 @@ header {
 } */
 
 .dropdown-content a:last-child{
-  color: red;
+  color: white;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -284,8 +284,6 @@ header {
 }
 
 .dropdown-content a:last-child:hover{
-  background-color: red;
-  color: black;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
