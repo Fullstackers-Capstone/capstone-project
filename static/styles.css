@@ -1463,26 +1463,44 @@ header {
 }
 
 .playlist-back-button {
-  background-color: #fff;
-  color: #333;
+  background-color: var(--spotifyGreen);
+  color: white;
   border: none;
   padding: 10px 15px;
   font-size: 16px;
-  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.playlist-back-button:hover{
+  background-color: gold;
+  color: black;
+}
+
+.playlist-generate-button {
+  background-color: var(--spotifyGreen);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.playlist-generate-button {
-  background-color: #fff;
-  color: #333;
-  border: none;
-  padding: 10px 15px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
+.playlist-generate-button:hover{
+  background-color: gold;
+  color: black;
 }
+
+.music-icon {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.playlist-generate-button:hover .music-icon {
+  opacity: 1;
+}
+
 
 /* Track List end */
 
