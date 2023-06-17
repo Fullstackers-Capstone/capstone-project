@@ -94,10 +94,6 @@ const Profile = () => {
 
             </div>
 
-                {/* <div className='prof-img'>
-                        <img src={auth.image}/>
-                </div> */}
-
             </div>
 
             

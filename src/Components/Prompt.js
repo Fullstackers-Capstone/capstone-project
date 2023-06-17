@@ -80,13 +80,24 @@ const Prompt = () => {
   };
 
   return (
-    <div className='prompt-container'>
-      <form onSubmit={submit}>
-        <input className="prompt-input" value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
-        <button className="StyledLogoutButton">Create Playlist</button>
-      </form>
-  
-      {isLoading ? (
+    <div id='prompt-outer-container'>
+
+<div id='pl-container' style={{marginTop: '2rem'}}>
+
+            <div className='pl-thumb' key={auth.id}>
+            <div className='pl-thumb-name' id='prompt-input-container'>
+            <form onSubmit={submit}>
+              <input className="prompt-input" value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
+              <button className="StyledLogoutButton">Create Playlist</button>
+            </form>
+            </div>
+
+            <div className='prof-prompt-container'>
+                <div className='prof-prompt' id='create-example-prompts-window'>
+
+                <div className='discoverable-container' id='create-example-prompts-container'>
+                    <div className='discoverable-title' id='create-example-prompts'>
+                    {isLoading ? (
         <Loader />
       ) : (
         <>
@@ -131,26 +142,44 @@ const Prompt = () => {
   
           {showExamplePrompts && (
             <>
-              <h2 className="options-title">Example Prompts</h2>
-              <div className="options with-arrow" onClick={() => selectPromptOption('Music for chill relaxing vibes')}>
-                <span className="pl-type-desc">Music for chill relaxing vibes</span>
+
+            <div className='example-prompts-title-container'>
+
+            <div>
+                Example Prompts
+            </div>
+
+            </div>
+              <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Music for chill relaxing vibes')}>
+                Music for chill relaxing vibes
               </div>
-              <div className="options with-arrow" onClick={() => selectPromptOption('Top 10 artists from the 1990s')}>
-                <span className="pl-type-desc">Top 10 artists from the 1990s</span>
+              <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Top 10 artists from the 1990s')}>
+                Top 10 artists from the 1990s
               </div>
-              <div className="options with-arrow" onClick={() => selectPromptOption('Music for a beach party')}>
-                <span className="pl-type-desc">Music for a beach party</span>
+              <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Music for a beach party')}>
+                Music for a beach party
               </div>
-              <div className="options with-arrow" onClick={() => selectPromptOption('Dinner Party tunes')}>
-                <span className="pl-type-desc">Dinner Party tunes</span>
+              <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Dinner Party tunes')}>
+                Dinner Party tunes
               </div>
-              <div className="options with-arrow" onClick={() => selectPromptOption('Grad party playlist!')}>
-                <span className="pl-type-desc">Grad party playlist!</span>
+              <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Grad party playlist!')}>
+                Grad party playlist!
               </div>
             </>
           )}
         </>
       )}
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div className='prof-bottom-container'>
+              
+            </div>
+        </div>
+        
+        </div>
     </div>
   )
   
