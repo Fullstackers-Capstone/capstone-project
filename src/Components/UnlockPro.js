@@ -80,17 +80,17 @@ const UnlockPro = () => {
     <div id='content-body'>
     <div id='pl-container'>
     <div className="playlist-options">
-      <h2 className="options-title">Unlock a Pro-Level Subsrciption</h2>
-      <div className="option">
+      <h2 className="options-title">Unlock a <span className='prof-unlock-pro'>Pro <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span> Subsrciption</h2>
+      <div className="pro-option">
         <h3>Create Unlimited Playlists</h3>
-        <span className='pl-type-desc'>Free Users are allowed up to 5 unique playlists.</span>
+        <span className='pl-type-desc'>Free Users are only allowed up to 5 unique playlists.</span>
       </div>
-      <div className="option">
+      <div className="pro-option">
         <h3>Unlock Additional Icons & Themes</h3>
         <span className='pl-type-desc'>Break out from Dark Mode.</span>
       </div>
-      <div className="option">
-        <h3>Access Optimized AI Prompts</h3>
+      <div className="pro-option">
+        <h3>Access Optimized Prompts</h3>
         <span className='pl-type-desc'>Specially developed to improve AI model accuracy.</span>
       </div>
       {
@@ -99,8 +99,8 @@ const UnlockPro = () => {
          : 
          <section>
          <form action="/api/stripe/create-checkout-session" method="POST">
-           <button type="submit">
-             Checkout
+           <button className='playlist-button' id='subscribe-now' type="submit">
+             Subscribe Now
            </button>
          </form>
        </section>
