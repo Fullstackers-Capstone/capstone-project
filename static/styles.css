@@ -280,13 +280,13 @@ header {
   border-top-right-radius: 5px;
 }
 
-.dropdown-content a:nth-child(5){
+/* .dropdown-content a:nth-child(5){
   color: gold;
 }
 
 .dropdown-content a:nth-child(5):hover{
   color: white;
-}
+} */
 
 /* .ellipsis-dropdown-content a{
   color: red;
@@ -307,9 +307,19 @@ header {
   background-color: #1DB954;
 }
 
+.dropdown-content a:active{
+  background-color: gold;
+  color: black;
+}
+
 .dropdown-content a:last-child:hover{
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.dropdown-content a:last-child:active{
+  background-color: red;
+  color: black;
 }
 
 #prompt-outer-container{
@@ -374,10 +384,20 @@ header {
 }
 
 .options-title {
-  margin-top: .5rem;
+  margin-top: 1.75rem;
   margin-bottom: 2rem;
   font-size: 2rem;
   text-shadow: 1px 1px 10px rgb(5, 5, 5);
+}
+
+.pro-option {
+  background-color: #242424;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  padding: 20px;
+  width: 75%;
+  box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
+  font-size: .9rem;
 }
 
 .option {
@@ -410,7 +430,7 @@ header {
   cursor: pointer;
 }
 
-.option h3 {
+.option h3, .pro-option h3 {
   margin-bottom: .35rem;
   color: var(--spotifyGreen);
 }
@@ -907,6 +927,7 @@ header {
 .example-prompts-title-container{
   /* border: 1px solid blue; */
   width: 100%;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
@@ -1026,6 +1047,13 @@ header {
 
 .prof-edit-info a:hover{
   border-bottom: 1px dotted var(--spotifyGreen)
+}
+
+#prompt-input-container{
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Prompt input styles */
@@ -1160,14 +1188,20 @@ header {
   text-decoration: none;
   font-size: 20px;
   border-radius: 10px;
-  transition: background-color 0.5s ease;
+  /* transition: background-color 0.5s ease; */
   width: 400px;
   /* width: 30vw; */
   text-align: center;
+  border: 0;
 }
 
 .playlist-button:hover {
-  background-color: #1ED760;
+  background-color: gold;
+  border: 0;
+}
+
+.playlist-button:active{
+  background-color: white;
 }
 
 /* Create Playlist Button end */
@@ -1535,6 +1569,10 @@ header {
     width: 100%;
   }
 
+  .pro-option{
+    width: 65%
+  }
+
   .pl-thumb-name{
     font-size: 2rem;
   }
@@ -1567,19 +1605,39 @@ header {
     flex: 3
   }
 
+  .pro-option{
+    width: 70%;
+  }
+
 }
 
 @media screen and (max-width: 915px) {
   .pl-thumb{
     width: 85%;
   }
+
+  .pro-option{
+    width: 75%;
+  }
+
+  .options-title{
+    font-size: 1.75rem;
+  }
   
 }
 
 @media screen and (max-width: 800px) {
+
+  .pro-option {
+    font-size: .85rem;
+  }
   
   .pl-thumb-name{
     font-size: 2rem;
+  }
+  
+  .pro-option{
+    width: 80%;
   }
   
 }
@@ -1632,7 +1690,35 @@ header {
   .discoverable-title{
     font-size: .9rem;
   }
+
+  .example-prompts-title-container{
+    font-size: 1.25rem;
+  }
+
+  .prompt-options{
+    font-size: .8rem;
+  }
+
+  .pro-option{
+    width: 85%;
+  }
+
+  .options-title{
+    font-size: 1.5rem;
+  }
   
+}
+
+@media screen and (max-width: 600px) {
+
+.prompt-input {
+  width: 60%;
+}
+
+.create-playlist-button {
+  width: 33%;
+}
+
 }
 
 @media screen and (max-width: 570px) {
@@ -1652,6 +1738,14 @@ header {
   .discoverable-title{
     font-size: .8rem;
   }
+
+  .options-title{
+    font-size: 1.25rem;
+  }
+
+  .pro-option{
+    font-size: .75rem;
+  }
   
 }
 
@@ -1660,9 +1754,9 @@ header {
     font-size: 3.15rem;
   }
 
-  .pl-thumb-name{
+  /* .pl-thumb-name{
     font-size: 1.1rem;
-  }
+  } */
 
   .pl-thumb-tracks div{
     font-size: .7rem;
@@ -1679,6 +1773,10 @@ header {
 
   .discoverable-title{
     font-size: .7rem;
+  }
+
+  .prompt-options{
+    font-size: .65rem;
   }
   
 }

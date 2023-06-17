@@ -168,7 +168,7 @@ const MyPlaylists = () => {
                                 </li>
                                 <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.id}`)}>Copy Link</li>
 
-                                <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>
+                                {/* <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li> */}
                             </div>
                             
                         </ul>
