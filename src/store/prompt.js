@@ -87,6 +87,7 @@ export const getSpotifyURIs = (prompt) => {
     try {
       const playlist = JSON.parse(prompt.response);
       const newPlaylist = [];
+      const uniqueArray = [];
       const URIResponse = await Promise.all(playlist.map(async(element) => {
         const uri = await searchFunctionality(element)
         if (await uri){
@@ -97,12 +98,26 @@ export const getSpotifyURIs = (prompt) => {
         }
       }));
 
+      function areObjectsEqual(obj1, obj2) {
+        return JSON.stringify(obj1) === JSON.stringify(obj2);
+      }
 
-      let uniquePlaylist = [...new Set(newPlaylist)];
+      for (let i = 0; i < newPlaylist.length; i++) {
+        let isDuplicate = false;
+        for (let j = 0; j < uniqueArray.length; j++) {
+          if (areObjectsEqual(newPlaylist[i], uniqueArray[j])) {
+            isDuplicate = true;
+            break;
+          }
+        }
+        if (!isDuplicate) {
+          uniqueArray.push(newPlaylist[i]);
+        }
+      }
 
-      console.log(uniquePlaylist);
+
       prompt.uriList = URIResponse;
-      prompt.response = newPlaylist;
+      prompt.response = uniqueArray;
       dispatch(savePrompt(prompt));
     } catch (error) {
       console.error(error);
