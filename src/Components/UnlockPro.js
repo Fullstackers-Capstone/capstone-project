@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { upgradeToPro } from "../store";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
 const UnlockPro = () => {
+  const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const {auth} = useSelector(state => state);
   const dispatch = useDispatch();
@@ -61,6 +63,7 @@ const UnlockPro = () => {
       
           const upgrade = async() =>{
             await dispatch(upgradeToPro(auth.spotifyId));
+            navigate(`/users/${auth.id}`)
           }
           upgrade();
         }

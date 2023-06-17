@@ -86,17 +86,21 @@ export const getSpotifyURIs = (prompt) => {
   return async (dispatch) => {
     try {
       const playlist = JSON.parse(prompt.response);
-      console.log('old playlist',playlist);
       const newPlaylist = [];
       const URIResponse = await Promise.all(playlist.map(async(element) => {
         const uri = await searchFunctionality(element)
         if (await uri){
           if (uri !== undefined){
-            newPlaylist.push({title: uri.name, artist: uri.artists[0].name, album: uri.album.name, uri: uri.uri});
-            return await uri.uri;
+             newPlaylist.push({title: uri.name, artist: uri.artists[0].name, album: uri.album.name, uri: uri.uri});
+              return await uri.uri;
           }
         }
       }));
+
+
+      let uniquePlaylist = [...new Set(newPlaylist)];
+
+      console.log(uniquePlaylist);
       prompt.uriList = URIResponse;
       prompt.response = newPlaylist;
       dispatch(savePrompt(prompt));
