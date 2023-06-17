@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 :root{
@@ -17,8 +18,30 @@ body{
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-color: #121212;
-  color: white;
-  font-family: 'Montserrat', sans-serif;
+  color: white;.create-playlist-button {
+    display: inline-block;
+    white-space: normal;
+    background-color: var(--spotifyGreen);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    margin-left: .75rem;
+    margin-right: .75rem;
+    cursor: pointer;
+    width: 26%;
+    word-wrap: break-word;
+  }
+  
+  .create-playlist-button:hover{
+    background-color: gold;
+    color: black;
+  }
+  
+  .create-playlist-button:active{
+    background-color: white;
+  }
+
 }
 
 a{
@@ -998,6 +1021,13 @@ header {
   width: 100%;
 }
 
+#prompt-input-container{
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #create-example-prompts-window{
   background-color: #121212;
   border-top-left-radius: 5px;
@@ -1364,22 +1394,24 @@ header {
 }
 
 .playlist-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
   background-color: #242424;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  padding: 20px;
+  box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
+}
+
+.playlist-item.selected {
+  border: 5px solid green;
 }
 
 .playlist-item-checkbox input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.playlist-item:hover {
-  transform: scale(1.01);
-  box-shadow: 0 0 15px rgba(29, 185, 84, 0.3);
+.playlist-item-info:hover {
   cursor: pointer;
+  color: gold
 }
 
 .playlist-item-image {
@@ -1409,14 +1441,19 @@ header {
 
 .playlist-item-title {
   font-weight: bold;
+  font-size: 12px;
 }
 
 .playlist-item-artist {
+  display: flex;
   color: #777;
+  padding-left: 10px;
+  font-size: 12px;
 }
 
 .playlist-checkmark {
   margin-left: auto;
+  font-size: 12px;
 }
 
 .playlist-buttons-container {
