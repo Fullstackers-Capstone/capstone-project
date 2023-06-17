@@ -177,9 +177,9 @@ const Prompt = () => {
                   className="playlist-generate-button" disabled={selectedItems.length === 0}
                   onClick={() => handleGeneratePlaylist()}
                 >
-                  Generate Playlist
+                    <span class="music-icon">&#9835;</span> Generate Playlist <span class="music-icon">&#9835;</span>
                 </button>
-                <button className="styled-logout-button"onClick={toggleSelectAll}>
+                <button className="playlist-back-button"onClick={toggleSelectAll}>
         {selectAll ? 'Deselect All' : 'Select All'}
       </button>
               </div>
