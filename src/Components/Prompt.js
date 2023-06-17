@@ -87,9 +87,9 @@ const Prompt = () => {
 
             <div className='pl-thumb' key={auth.id}>
             <div className='pl-thumb-name' id='prompt-input-container'>
-            <form onSubmit={submit}>
+            <form style={{width: '100%'}} onSubmit={submit}>
               <input className="prompt-input" value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
-              <button className="StyledLogoutButton">Create Playlist</button>
+              <button className="create-playlist-button">Create Playlist</button>
             </form>
             </div>
 
