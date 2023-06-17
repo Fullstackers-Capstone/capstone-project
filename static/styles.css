@@ -257,13 +257,13 @@ header {
   border-top-right-radius: 5px;
 }
 
-.dropdown-content a:nth-child(5){
+/* .dropdown-content a:nth-child(5){
   color: gold;
 }
 
 .dropdown-content a:nth-child(5):hover{
   color: white;
-}
+} */
 
 /* .ellipsis-dropdown-content a{
   color: red;
@@ -284,9 +284,19 @@ header {
   background-color: #1DB954;
 }
 
+.dropdown-content a:active{
+  background-color: gold;
+  color: black;
+}
+
 .dropdown-content a:last-child:hover{
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.dropdown-content a:last-child:active{
+  background-color: red;
+  color: black;
 }
 
 #prompt-outer-container{
