@@ -28,14 +28,17 @@ const Prompt = () => {
   //creates the prompt when user selects an option, creates prompt no spotifyURIS
   const submit = async (ev) => {
     ev.preventDefault();
+    setTestClicked(true);
+    setSelectedItems([]);
+    setSelectAll(false);
+    setSelectAllLabel("Select All");
+    setShowAllTracks(false);
     setIsLoading(true);
     await dispatch(getJSONResponse('songs that fit the following criteria', 10, input, auth.discoverPlaylists));
     setIsLoading(false);
-    setTestClicked(true);
     setShowExamplePrompts(false);
     setInput("");
   };
-
 
 
   //get the current prompt after it is created
@@ -69,7 +72,6 @@ const Prompt = () => {
     setTestClicked(false);
     setSelectedItems([]);
     setShowAllTracks(false);
-    setTestClicked(false);
     setSelectAll(false);
     setSelectAllLabel("Select All");
   };
