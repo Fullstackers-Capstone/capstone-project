@@ -26,7 +26,7 @@ const Prompt = () => {
   const submit = async (ev) => {
     ev.preventDefault();
     setIsLoading(true);
-    await dispatch(getJSONResponse('songs that fit the following criteria', 20, input, auth.discoverPlaylists));
+    await dispatch(getJSONResponse('songs that fit the following criteria', 5, input, auth.discoverPlaylists));
     setIsLoading(false);
     setTestClicked(true);
     setShowExamplePrompts(false);

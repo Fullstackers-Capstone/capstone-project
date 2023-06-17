@@ -168,7 +168,7 @@ const MyPlaylists = () => {
                                 </li>
                                 <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.spotId}`)}>Copy Link</li>
         
-                                {(pro) ? <li onClick={ev => destroy(playlist)} key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
+                                {(pro) ? <li id='remove-pro' onClick={ev => destroy(playlist)} key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li id='remove-pro' key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
                             </div>
                             
                         </ul>
