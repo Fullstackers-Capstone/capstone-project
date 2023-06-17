@@ -8,7 +8,7 @@ const Modal = ({errorMessage, handleClose}) => {
                     <h1>Error</h1>
                 </div>
                 <p>{errorMessage}</p>
-                <button onClick={handleClose}>Close</button>
+                <button className='modal-button' onClick={handleClose}>Close</button>
             </div>
         </div>
     );

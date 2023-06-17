@@ -167,7 +167,7 @@ const SuccessfulPlaylist = () => {
             
             </div>
             <div>
-                <button style={{width: '200px'}}onClick={() => navigate('/')}>View All Playlists</button>
+                <button className='playlist-button'  onClick={() => navigate('/')}>View All Playlists</button>
             </div>
             </div>
         )}
