@@ -101,23 +101,27 @@ const MyPlaylists = () => {
             {discoverablePlaylists.map(playlist => {
                 return(
                 <div className='pl-thumb' key={playlist.id}>
-                    <div className='disc-thumb-name'>
-                        <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
+                    <div className='pl-thumb-name'>
+                        <a style={{color: 'gold'}} href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
                     </div>
         
                     <div className='pl-thumb-data-container'>
         
-                        <div className='disc-thumb-img' title='Open in Spotify'>
+                        <div className='pl-thumb-img' title='Open in Spotify'>
                             <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank'>
                                 <img src={imageHook(playlist.spotData.data.images[0].url)}/>
                             </a>
+                        </div>
+
+                        <div className='separator-container'>
+                          <div className='separator'></div>
                         </div>
         
                     <div className='pl-thumb-tracks'>
         
                         {playlist.spotData.data.tracks.items.slice(0, 7).map(_track => {
                         return(
-                          <div key={_track.track.duration_ms} className='track-lineitem'><span className='disc-track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
+                          <div key={_track.track.duration_ms} className='track-lineitem'><span className='track-artist' style={{color: 'gold'}}>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
                         )
                         })}
                       </div>
@@ -130,7 +134,7 @@ const MyPlaylists = () => {
                             <span className='prompt-title' style={{color: 'gold'}}>Prompt:</span> <span className='prompt-content'>"{playlist.prompt}"</span>
                         </div>
 
-                        <div className='pl-thumb-createdAt' style={{color: 'gold'}}>
+                        <div className='pl-thumb-createdAt'>
                              {dateify(playlist.createdAt)} @ {timeify(playlist.createdAt)} UTC
                         </div>
                         

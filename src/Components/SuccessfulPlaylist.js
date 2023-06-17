@@ -92,7 +92,7 @@ const SuccessfulPlaylist = () => {
 
             <div id='successfulpl-container'>
 
-            <div className='pl-thumb' key={localPlaylists.id}>
+            <div className='pl-thumb' id='successful-only' key={localPlaylists.id}>
                 <div className='pl-thumb-name'>
                     <a href={`https://open.spotify.com/playlist/${localPlaylists.id}`} target='_blank' title='Open in Spotify'>{localPlaylists.spotData.data.name}</a>
                 </div>
@@ -104,6 +104,10 @@ const SuccessfulPlaylist = () => {
                             <img src={localPlaylists.spotData.data.images[0].url || '/static/default.jpeg'}/>
                         </a>
                     </div>
+
+                    <div className='separator-container'>
+                          <div className='separator'></div>
+                        </div>
             
                 <div className='pl-thumb-tracks'>
             
@@ -167,7 +171,7 @@ const SuccessfulPlaylist = () => {
             
             </div>
             <div>
-                <button className='playlist-button'  onClick={() => navigate('/')}>View All Playlists</button>
+                <button className='playlist-button' id='view-all'  onClick={() => navigate('/')}>View All Playlists</button>
             </div>
             </div>
         )}

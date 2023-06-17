@@ -117,6 +117,10 @@ const MyPlaylists = () => {
                                 <img src={imageHook(playlist.spotData.data.images[0].url)}/>
                             </a>
                         </div>
+
+                        <div className='separator-container'>
+                          <div className='separator'></div>
+                        </div>
         
                     <div className='pl-thumb-tracks'>
         
