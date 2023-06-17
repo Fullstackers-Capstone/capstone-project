@@ -24,13 +24,13 @@ const Home = () => {
     <div id='content-body'>
       <div id='pl-discover-toggle-container'>
         <div className="toggle-button">
-          <button 
+          <button style={{borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px', borderRight: 0}}
             className={`toggle-option ${(selected) ? 'selected' : ''}`} 
             onClick={() => setSelected(!selected)}
           >
             My Playlists
           </button>
-          <button 
+          <button style={{borderTopRightRadius: '10px', borderBottomRightRadius: '10px', borderLeft: 0}}
             className={`toggle-option ${(!selected) ? 'selected' : ''}`} 
             onClick={() => setSelected(!selected)}
           >
