@@ -67,6 +67,11 @@ const Prompt = () => {
   const goBack = () => {
     setShowExamplePrompts(true);
     setTestClicked(false);
+    setSelectedItems([]);
+    setShowAllTracks(false);
+    setTestClicked(false);
+    setSelectAll(false);
+    setSelectAllLabel("Select All");
   };
 
   const selectPromptOption = (text) => {
