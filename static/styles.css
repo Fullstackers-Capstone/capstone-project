@@ -2190,3 +2190,56 @@ header {
 .section-content p {
   margin: 1rem 0;
 }
+
+/* Landing Page Styles */
+
+.landing {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 50px;
+}
+
+.landing-header{
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 50px 0;
+}
+
+.feature {
+  flex: 0 0 300px;
+  margin: 20px;
+}
+
+.feature h2 {
+  color: var(--spotifyGreen)
+}
+
+.about-section {
+  text-align: center;
+  padding: 50px;
+  color: white;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .features-section {
+    flex-direction: column;
+  }
+  .feature {
+    margin: 20px auto;
+  }
+}
+
+/* Landing Page Styles End */
