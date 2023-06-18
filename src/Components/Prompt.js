@@ -20,12 +20,11 @@ const Prompt = () => {
   const [currentPlaylist, setCurrentPlaylist] = useState('');
   const [stringTopTracks, setStringTopTracks] = useState('');
   const [selectedItems, setSelectedItems] = useState([]);
-  const [showAllTracks, setShowAllTracks] = useState(false); // added
   const [selectAll, setSelectAll] = useState(false);
   const [selectAllLabel, setSelectAllLabel] = useState('Select All');
   const [isPopupVisible, setPopupVisible] = useState(false);
-
-  
+  const [playlistName, setPlaylistName] = useState('');
+  const [useGeneratedName, setUseGeneratedName] = useState(true);
 
   //creates the prompt when user selects an option, creates prompt no spotifyURIS
   const submit = async (ev) => {
@@ -34,7 +33,6 @@ const Prompt = () => {
     setSelectedItems([]);
     setSelectAll(false);
     setSelectAllLabel("Select All");
-    setShowAllTracks(false);
     setIsLoading(true);
     await dispatch(getJSONResponse('songs that fit the following criteria', 10, input, auth.discoverPlaylists));
     setIsLoading(false);
@@ -58,7 +56,6 @@ const Prompt = () => {
   //adds uriList to prompt after user selects songs
   const handleGeneratePlaylist = async() => {
     const selectedResponses = selectedItems.map((index) => jsonResponse[index]);
-    console.log('look here motherfucker',selectedResponses);
     await dispatch(setSpotifyURIs(currentPrompt, selectedResponses))
     createPlaylist();
   };
@@ -66,14 +63,16 @@ const Prompt = () => {
   //creates playlist and navigates to the component
   const createPlaylist = async () => {
   await dispatch(createDBPlaylist(auth,currentPrompt, input, navigate))
-;
   };
+
+  const promptObject = JSON.parse(currentPrompt.name || '{}');
+const playlistNameTest = promptObject.playlistName;
+console.log(playlistNameTest)
 
   const goBack = () => {
     setShowExamplePrompts(true);
     setTestClicked(false);
     setSelectedItems([]);
-    setShowAllTracks(false);
     setSelectAll(false);
     setSelectAllLabel("Select All");
   };
@@ -134,9 +133,28 @@ const Prompt = () => {
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);
   };
+
+  const handlePlaylistNameChange = (event) => {
+    const newPlaylistName = event.target.value;
+  
+    setPlaylistName(newPlaylistName);
+  
+    // Update the playlist name in the promptObject
+    setCurrentPrompt((prevPrompt) => {
+      const newPrompt = { ...prevPrompt };
+      const promptObject = JSON.parse(newPrompt.name || '{}');
+      promptObject.playlistName = newPlaylistName;
+      newPrompt.name = JSON.stringify(promptObject);
+      return newPrompt;
+    });
+  };
   
 
-  
+  const handleToggleUseGeneratedName = () => {
+    setUseGeneratedName(!useGeneratedName);
+    setPlaylistName(''); // Clear the playlist name when toggling to use the generated name
+  };
+    
   return (
     <div id='prompt-outer-container'>
 
@@ -144,10 +162,10 @@ const Prompt = () => {
 
             <div className='pl-thumb' key={auth.id}>
             <div className='pl-thumb-name' id='prompt-input-container'>
-            <form style={{width: '100%'}} onSubmit={submit}>
-              <input className="prompt-input" placeholder="I.E: Playlist for a morning commute"value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
-              <button className="create-playlist-button">Create Playlist</button>
-            </form>
+              <form style={{width: '100%'}} onSubmit={submit}>
+                <input className="prompt-input" placeholder="I.E: Playlist for a morning commute"value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
+                <button className="create-playlist-button">Create Playlist</button>
+              </form>
             </div>
 
             <div className='prof-prompt-container'>
@@ -160,8 +178,35 @@ const Prompt = () => {
       ) : (
         <>
           {testClicked && Array.isArray(jsonResponse) && jsonResponse.length > 0 && (
-            <div className={`playlist-container ${showAllTracks ? 'show-all' : ''}`}>
-              <h2 className="playlist-header">Playlist</h2>
+            <div className='playlist-container'>
+              <div className="playlist-buttons-container">
+                <button className="playlist-back-button" onClick={goBack}>
+                  Back
+                </button>
+                {useGeneratedName ? (
+                              <h2 className="playlist-header">AI Generated Playlist Name</h2>
+                            ) : (
+                              <input
+                                className="playlist-header"
+                                type="text"
+                                value={playlistName}
+                                onChange={handlePlaylistNameChange}
+                                placeholder="Enter Playlist Name"
+                              />
+                            )}
+                <button className="playlist-back-button"onClick={toggleSelectAll}>
+        {selectAll ? 'Deselect All' : 'Select All'}
+      </button>
+      <div>
+                              <label htmlFor="useGeneratedName">Use Generated Name</label>
+                              <input
+                                id="useGeneratedName"
+                                type="checkbox"
+                                checked={useGeneratedName}
+                                onChange={handleToggleUseGeneratedName}
+                              />
+                            </div>
+              </div>
   
               {jsonResponse.map((response, index) => (
                 <div className={`playlist-item ${selectedItems.includes(index) ? 'selected' : ''}`} key={index} onClick={() => toggleItemSelection(index)}>
@@ -173,23 +218,13 @@ const Prompt = () => {
                   </div>
                 </div>
               ))}
-  
-              {!showAllTracks && (
-                <button className='styled-logout-button' onClick={() => setShowAllTracks(true)}>Add More Tracks</button>
-              )}
-              <div className="playlist-buttons-container">
-                <button className="playlist-back-button" onClick={goBack}>
-                  Back
-                </button>
+              <div className="playlist-generate-button-container">
                 <button
                   className="playlist-generate-button" disabled={selectedItems.length === 0}
                   onClick={() => handleGeneratePlaylist()}
                 >
-                    <span class="music-icon">&#9835;</span> Generate Playlist <span class="music-icon">&#9835;</span>
+                    <span className="music-icon">&#9835;</span> Generate Playlist <span class="music-icon">&#9835;</span>
                 </button>
-                <button className="playlist-back-button"onClick={toggleSelectAll}>
-        {selectAll ? 'Deselect All' : 'Select All'}
-      </button>
               </div>
             </div>
           )}
