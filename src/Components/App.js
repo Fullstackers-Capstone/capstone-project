@@ -18,6 +18,7 @@ import TopTracks from './TopTracks';
 import Playlist from './Playlist';
 import Modal from './Modal';
 import SuccessfulPlaylist from './SuccessfulPlaylist';
+import LandingPage from './LandingPage';
 
 const App = () => {
 
@@ -94,6 +95,7 @@ const toggleSection = (section) => {
                 <Route path="/top-artists" element={<TopArtists />}/>
                 <Route path="/top-tracks" element={<TopTracks />}/>
                 <Route path='/playlists/:id' element={<SuccessfulPlaylist/>}/>
+                <Route path="/landing" element={<LandingPage />}/>
               </Routes>
               <div>
              
