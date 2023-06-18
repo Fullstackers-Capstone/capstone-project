@@ -442,7 +442,7 @@ header {
   padding: 20px;
   width: 97.5%;
   color: #B3B3B3;
-  font-size: .9rem;
+  font-size: .8rem;
 }
 
 .prompt-options:last-child {
@@ -469,7 +469,8 @@ header {
   height: 0;
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
-  border-left: 6px solid white;
+  border-left: 6px solid #777777;
+  padding-right: .5rem;
 }
 
 /* PlaylistType & AI Prompt Styling Ends here */
@@ -873,7 +874,6 @@ header {
 /* PROFILE COMPONENTS*/
 
 .prof-container{
-  border: 1px solid blue;
   width: 75%;
 }
 
@@ -927,7 +927,7 @@ header {
 .example-prompts-title-container{
   /* border: 1px solid blue; */
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
@@ -940,13 +940,13 @@ header {
 }
 
 .info-icon-container {
-  margin-left: 1rem;
+  margin-right: 1.5rem;
   font-size: 20px;
   color: gold;
 }
 
 .info-icon-container:hover {
-  color: var(--spotifyGreen)
+  color: white;
 }
 
 #create-example-prompts-container{
@@ -958,6 +958,7 @@ header {
   flex-direction: column;
   width: 100%;
   background-color: #121212;
+  border-radius: 5px;
 }
 
 .prof-bottom-container{
@@ -1046,6 +1047,20 @@ header {
   background-color: #121212;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  /* border: 1px solid red; */
+  padding: 0;
+}
+
+.try-again{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #404040;
+  padding: 1rem;
+  font-size: .7rem;
+  font-style: italic;
 }
 
 .prof-prompt-container{
@@ -1076,7 +1091,7 @@ header {
   flex-grow: 1;
   padding: 10px;
   border-radius: 5px;
-  border: none;
+  border: 0;
   background-color: #404040;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
@@ -1085,7 +1100,7 @@ header {
 .prompt-input:focus {
   outline: none;
   border: 1px solid var(--spotifyGreen);
-  box-shadow: 0 0 10px var(--spotifyGreen);
+  /* box-shadow: 0 0 10px var(--spotifyGreen); */
 }
 
 .create-playlist-button {
@@ -1237,7 +1252,7 @@ header {
 }
 
 .playlist:hover {
-  transform: scale(1.01);
+  /* transform: scale(1.01); */
   box-shadow: 0 0 15px rgba(29, 185, 84, 0.3);
   cursor: pointer;
 }
@@ -1392,13 +1407,19 @@ header {
 
 
 /* Track list lay out in Prompt.js file */
+
+.outer-playlist-container{
+  width: 100%;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+}
+
 .playlist-container {
-  background-color: inherit;
-  padding: 20px;
-  width: 75%;
+  /* background-color: inherit; */
+  /* padding: 20px; */
+  width: 97.5%;
   margin-top: 20px;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 .playlist-header {
@@ -1412,18 +1433,18 @@ header {
   border-radius: 10px;
   margin-bottom: 0.5rem;
   padding: 20px;
-  box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
+  border: 2px solid transparent;
 }
 
 .playlist-item.selected {
-  border: 5px solid var(--spotifyGreen)
+  border: 2px solid var(--spotifyGreen)
 }
 
 .playlist-item-checkbox input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.playlist-item-info:hover {
+.playlist-item:hover {
   cursor: pointer;
   color: gold
 }
@@ -1438,6 +1459,7 @@ header {
   flex: 1;
   display: flex;
   justify-content: column;
+  border: 2px solid transparent;
 }
 
 .playlist-item-checkbox {
@@ -1449,20 +1471,23 @@ header {
 
 
 .playlist-item-row {
-  display: flex;
+  width: 100%;
   align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .playlist-item-title {
-  font-weight: bold;
+  font-weight: 500;
   font-size: 12px;
 }
 
 .playlist-item-artist {
-  display: flex;
   color: #777;
-  padding-left: 10px;
   font-size: 12px;
+  margin-right: .35rem;
 }
 
 .playlist-checkmark {

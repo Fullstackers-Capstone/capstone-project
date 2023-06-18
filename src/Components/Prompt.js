@@ -58,7 +58,6 @@ const Prompt = () => {
   //adds uriList to prompt after user selects songs
   const handleGeneratePlaylist = async() => {
     const selectedResponses = selectedItems.map((index) => jsonResponse[index]);
-    console.log('look here motherfucker',selectedResponses);
     await dispatch(setSpotifyURIs(currentPrompt, selectedResponses))
     createPlaylist();
   };
@@ -138,104 +137,142 @@ const Prompt = () => {
 
   
   return (
-    <div id='prompt-outer-container'>
 
-<div id='pl-container' style={{marginTop: '2rem'}}>
+    
+  <div id='prompt-outer-container'>
 
-            <div className='pl-thumb' key={auth.id}>
-            <div className='pl-thumb-name' id='prompt-input-container'>
+      <div id='pl-container' style={{marginTop: '2rem'}}>
+        <div className='pl-thumb' key={auth.id}>
+          <div className='pl-thumb-name' id='prompt-input-container'>
             <form style={{width: '100%'}} onSubmit={submit}>
-              <input className="prompt-input" placeholder="I.E: Playlist for a morning commute"value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
+              <input className="prompt-input" placeholder="e.g. Playlist for a morning commute"value={input} onChange={(ev) => { setInput(ev.target.value) }}>
+              </input>
               <button className="create-playlist-button">Create Playlist</button>
             </form>
+          </div>
+
+      {isLoading ? (
+        <div className='prof-prompt-container'>
+
+          <div className='prof-prompt' id='create-example-prompts-window'>
+
+            <div className='discoverable-container' id='create-example-prompts-container'>
+
+              <div className='discoverable-title' id='create-example-prompts'>
+                <Loader/>
+              </div>
             </div>
-
-            <div className='prof-prompt-container'>
-                <div className='prof-prompt' id='create-example-prompts-window'>
-
-                <div className='discoverable-container' id='create-example-prompts-container'>
-                    <div className='discoverable-title' id='create-example-prompts'>
-                    {isLoading ? (
-        <Loader />
+          </div>
+        </div>
       ) : (
         <>
-          {testClicked && Array.isArray(jsonResponse) && jsonResponse.length > 0 && (
-            <div className={`playlist-container ${showAllTracks ? 'show-all' : ''}`}>
-              <h2 className="playlist-header">Playlist</h2>
+
+        {testClicked && Array.isArray(jsonResponse) && jsonResponse.length > 0 && (
+
+          <div className='prof-prompt-container'>
   
-              {jsonResponse.map((response, index) => (
-                <div className={`playlist-item ${selectedItems.includes(index) ? 'selected' : ''}`} key={index} onClick={() => toggleItemSelection(index)}>
-                  <div className="playlist-item-info">
-                    <div className="playlist-item-row">
-                      <div className="playlist-item-title">{response.title}</div>
+            <div className='prof-prompt' id='create-example-prompts-window'>
+  
+              <div className='discoverable-container' id='create-example-prompts-container'>
+  
+                <div className='discoverable-title' id='create-example-prompts'>
+  
+                    <div className='try-again'>
+                    <i class="fa-solid fa-triangle-exclamation" style={{color: 'gold', marginRight: '.5rem'}}></i>Playlist not what you expected? Try again with slightly different language to see how you can improve your results!
                     </div>
-                    <div className="playlist-item-artist">{response.artist}</div>
+  
+                    <div className='outer-playlist-container'>
+  
+                    <div className='playlist-container show-all'>
+                    <h2 className="playlist-header">Playlist Name: </h2>
+  
+                    {jsonResponse.map((response, index) => (
+                      <div className={`playlist-item ${selectedItems.includes(index) ? 'selected' : ''}`} key={index} onClick={() => toggleItemSelection(index)}>
+  
+                        <div className="playlist-item-info">
+                            <div className="playlist-item-row">
+                              <span className='playlist-item-artist'>{response.artist}</span> 
+                              <span className='playlist-item-title'>{response.title}</span>
+                            </div>
+                        </div>
+  
+                      </div>
+                    ))}
+  
+                    {/* {!showAllTracks && (
+                      <button className='styled-logout-button' onClick={() => setShowAllTracks(true)}>Add More Tracks</button>
+                    )} */}
+  
+                    <div className="playlist-buttons-container">
+                      <button className="playlist-back-button" onClick={goBack}>
+                        Back
+                      </button>
+                      <button
+                        className="playlist-generate-button" disabled={selectedItems.length === 0}
+                        onClick={() => handleGeneratePlaylist()}
+                      >
+                        <span class="music-icon">&#9835;</span> Generate Playlist <span class="music-icon">&#9835;</span>
+                      </button>
+                      <button className="playlist-back-button"onClick={toggleSelectAll}>
+                      {selectAll ? 'Deselect All' : 'Select All'}
+                      </button>
+                    </div>
+                  </div>
+  
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            
+      )}
+
+{showExamplePrompts && (
+      <>
+        <div className='prof-prompt-container'>
+          <div className='prof-prompt' id='create-example-prompts-window'>
+            <div className='discoverable-container' id='create-example-prompts-container'>
+              <div className='discoverable-title' id='create-example-prompts'>
+
+                <div className='example-prompts-title-container'>
+                  <div>
+                    Example Prompts
                   </div>
                 </div>
-              ))}
-  
-              {!showAllTracks && (
-                <button className='styled-logout-button' onClick={() => setShowAllTracks(true)}>Add More Tracks</button>
-              )}
-              <div className="playlist-buttons-container">
-                <button className="playlist-back-button" onClick={goBack}>
-                  Back
-                </button>
-                <button
-                  className="playlist-generate-button" disabled={selectedItems.length === 0}
-                  onClick={() => handleGeneratePlaylist()}
-                >
-                    <span class="music-icon">&#9835;</span> Generate Playlist <span class="music-icon">&#9835;</span>
-                </button>
-                <button className="playlist-back-button"onClick={toggleSelectAll}>
-        {selectAll ? 'Deselect All' : 'Select All'}
-      </button>
+
+                <div className='outer-playlist-container'>
+
+                  <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Music for Chill Relaxing Vibes')}>
+                    Music for Chill Relaxing Vibes
+                  </div>
+                  <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Top 10 Artists from the 1990s')}>
+                    Top 10 Artists from the 1990s
+                  </div>
+                  <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Music for a Beach Party')}>
+                    Music for a Beach Party
+                  </div>
+                  <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Dinner Party Tunes')}>
+                    Dinner Party Tunes
+                  </div>
+                  <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Grad Party Playlist!')}>
+                    Grad Party Playlist!
+                  </div>
+                </div>  
               </div>
             </div>
-          )}
-  
-          {showExamplePrompts && (
-            <>
-
-<div className='example-prompts-title-container'>
-
-<div>
-    Example Prompts
-</div>
-          
-
-
-            </div>
-              <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Music for chill relaxing vibes')}>
-                Music for chill relaxing vibes
-              </div>
-              <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Top 10 artists from the 1990s')}>
-                Top 10 artists from the 1990s
-              </div>
-              <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Music for a beach party')}>
-                Music for a beach party
-              </div>
-              <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Dinner Party tunes')}>
-                Dinner Party tunes
-              </div>
-              <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Grad party playlist!')}>
-                Grad party playlist!
-              </div>
-            </>
-          )}
-        </>
-      )}
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <div className='prof-bottom-container'>
-              
-            </div>
-            </div>
+          </div>
         </div>
+      </>
+    )}
+
+    </>
+      )}
+          
+    <div className='prof-bottom-container'>
     </div>
+    </div>
+  </div>
+  </div>
   )
   
   

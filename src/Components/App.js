@@ -74,7 +74,7 @@ const toggleSection = (section) => {
         </div>
         <div className="info-icon-container">
     <span className="info-icon" onClick={togglePopup}>
-      &#9432;
+      <i class="fa-solid fa-circle-info"></i>
     </span>
   </div>
 
