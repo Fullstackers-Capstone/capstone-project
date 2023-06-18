@@ -2,6 +2,7 @@ import React from 'react';
 
 const Loader = () => {
     return (
+      <>
         <div className="loader-container">
         <div className="bars">
           <div className="bar" style={{ animationDelay: '250ms' }}></div>
@@ -11,6 +12,7 @@ const Loader = () => {
           <div className="bar" style={{ animationDelay: '190ms' }}></div>
         </div>
       </div>
+      </>
       );
 };
 

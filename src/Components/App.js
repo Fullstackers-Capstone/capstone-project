@@ -23,8 +23,8 @@ const App = () => {
 
   const [token, setToken] = useState(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
-  const [activeSection, setActiveSection] = useState(null);
-
+  const [activeSection, setActiveSection] = useState('');
+  
   const serverError = useSelector(state => state.serverError);
 
   const handleCloseModal = () => {
@@ -101,45 +101,55 @@ const toggleSection = (section) => {
               </div>
             </div>
           )}
-                 {isPopupVisible && (
+                {isPopupVisible && (
   <div className="popup-window">
     <div className="popup-content">
-      <h2 className="main-title">Welcome to Serenade</h2>
-      <div className="section" onClick={() => toggleSection('about')}>
-        <h3 className={activeSection === 'about' ? 'active' : ''}>About the App</h3>
-        {activeSection === 'about' && (
-          <div className="popup-section-content">
+      <div className="main-title-container">
+        <h2 className="main-title">Welcome to Serenade</h2>
+        <div className="title-separator"></div>
+      </div>
+      {activeSection === null ? (
+        <div>
+          <div className="section" onClick={() => toggleSection('about')}>
+            <h3>About the App</h3>
+          </div>
+          <div className="section" onClick={() => toggleSection('how')}>
+            <h3>How Does it Work?</h3>
+          </div>
+          <div className="section" onClick={() => toggleSection('examples')}>
+            <h3>Examples</h3>
+          </div>
+        </div>
+      ) : (
+        <div className="popup-section-content">
+          <h3 className="section-title">{activeSection}</h3>
+          {activeSection === 'about' && (
             <p>
               Serenade is an innovative app that harnesses the power of AI to create tailor-made playlists based on your mood. Whether you're embarking on a road trip or in need of a calming melody, Serenade enables you to effortlessly curate personalized playlists by simply describing your desired ambiance. Let Serenade be your musical companion, harmonizing your emotions and delivering the perfect playlist for any moment. Immerse yourself in a world of serenades and experience the magic of music like never before.
             </p>
-          </div>
-        )}
-      </div>
-      <div className="section" onClick={() => toggleSection('how')}>
-        <h3 className={activeSection === 'how' ? 'active' : ''}>How Does it Work?</h3>
-        {activeSection === 'how' && (
-          <div className="popup-section-content">
+          )}
+          {activeSection === 'how' && (
             <p>
               Using Serenade is as simple as typing in the text bar. Whether you have an upcoming road trip, a relaxing evening at home, or any other occasion in mind, you can effortlessly create a playlist that matches your desired mood. Just describe what you're looking for, such as "playlist for a long bike ride," and Serenade's powerful AI will curate a selection of tracks specifically tailored to your request.
             </p>
-          </div>
-        )}
-      </div>
-      <div className="section" onClick={() => toggleSection('examples')}>
-        <h3 className={activeSection === 'examples' ? 'active' : ''}>Examples</h3>
-        {activeSection === 'examples' && (
-          <div className="popup-section-content">
-            <div className="example-line">If looking for a playlist that sounds similar to a specific song? Try something like: "Songs similar to 'Sunday Morning' by Maroon 5"</div>
-            <div className="example-line">If looking for a playlist with songs from artists similar to those of a specific artist? Try something like: "Songs from artists like JLO. Only include songs by artists that are not JLO."</div>
-          </div>
-        )}
-      </div>
-      <div className="popup-close" onClick={togglePopup}>
-        Close
-      </div>
+          )}
+          {activeSection === 'examples' && (
+            <div>
+              <div className="example-line">If looking for a playlist that sounds similar to a specific song? Try something like: "Songs similar to 'Sunday Morning' by Maroon 5"</div>
+              <div className="example-line">If looking for a playlist with songs from artists similar to those of a specific artist? Try something like: "Songs from artists like JLO. Only include songs by artists that are not JLO."</div>
+            </div>
+          )}
+        </div>
+      )}
+      {activeSection !== null && (
+        <div className="popup-close" onClick={() => toggleSection(null)}>
+          Close
+        </div>
+      )}
     </div>
   </div>
 )}
+
 
         </div>
     </div>
