@@ -445,13 +445,13 @@ header {
   font-size: .8rem;
 }
 
-.prompt-options:last-child {
-  margin-bottom: .75rem;
-}
+/* .prompt-options:last-child {
+  margin-bottom: .25rem;
+} */
 
 .prompt-options:hover{
   cursor: pointer;
-  transform: scale(1.01);
+  /* transform: scale(1.01); */
   color: gold
 }
 
