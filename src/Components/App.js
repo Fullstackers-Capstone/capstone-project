@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Home from './Home';
 import Login from './Login';
 import { BsSpotify } from 'react-icons/bs';
@@ -24,7 +24,11 @@ const App = () => {
 
   const [token, setToken] = useState(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  //const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState(null);
+  const [showContent, setShowContent] = useState(false);
+  const [showBackButton, setShowBackButton] = useState(false);
+  const popupRef = useRef(null);
   
   const serverError = useSelector(state => state.serverError);
 
@@ -34,10 +38,25 @@ const App = () => {
 
 const togglePopup = () => {
   setPopupVisible(!isPopupVisible);
+  setActiveSection(null);
+  setShowContent(false);
+  setShowBackButton(false);
 };
+
+const closeOut = () => {
+  setPopupVisible(!isPopupVisible);
+}
 
 const toggleSection = (section) => {
   setActiveSection(activeSection === section ? null : section);
+  setShowContent(true);
+  setShowBackButton(true);
+};
+
+const handleClickOutside = (event) => {
+  if (popupRef.current && !popupRef.current.contains(event.target)) {
+    setPopupVisible(false);
+  }
 };
 
   const dispatch = useDispatch();
@@ -64,102 +83,100 @@ const toggleSection = (section) => {
     <div>
       <header>
         <div className="nav">
-        {token && (
-            <NavBar/>
-          )}
+          {token && <NavBar />}
           <div className="title">
             Serenade
-            <i className="fa-brands fa-spotify" id='spotify-logo'></i>
-            {/* <BsSpotify /> */}
+            <i className="fa-brands fa-spotify" id="spotify-logo"></i>
           </div>
         </div>
         <div className="info-icon-container">
-    <span className="info-icon" onClick={togglePopup}>
-      <i class="fa-solid fa-circle-info"></i>
-    </span>
-  </div>
-
+          <span className="info-icon" onClick={togglePopup}>
+            <i className="fa-solid fa-circle-info"></i>
+          </span>
+        </div>
       </header>
-        <div>
-          {!token && <Login/>}
-          {token && (
+      <div>
+        {!token && <Login />}
+        {token && (
+          <div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/unlock-pro" element={<UnlockPro />} />
+              <Route path="/users/:id" element={<Profile />} />
+              <Route path="/prompt" element={<Prompt />} />
+              <Route path="/create" element={<PlaylistType />} />
+              <Route path="/playlist" element={<Playlist />} />
+              <Route path="/discover" element={<Discover />} />
+              <Route path="/top-artists" element={<TopArtists />} />
+              <Route path="/top-tracks" element={<TopTracks />} />
+              <Route path="/playlists/:id" element={<SuccessfulPlaylist />} />
+              <Route path="/landing" element={<LandingPage />} />
+            </Routes>
             <div>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/unlock-pro" element={<UnlockPro/>}/>
-                <Route path="/users/:id" element={<Profile />}/>
-                <Route path="/prompt" element={<Prompt />}/>
-                <Route path="/create" element={<PlaylistType />}/>
-                <Route path="/playlist" element={<Playlist/>}/>
-                <Route path="/discover" element={<Discover />}/>
-                <Route path="/top-artists" element={<TopArtists />}/>
-                <Route path="/top-tracks" element={<TopTracks />}/>
-                <Route path='/playlists/:id' element={<SuccessfulPlaylist/>}/>
-                <Route path="/landing" element={<LandingPage />}/>
-              </Routes>
-              <div>
-             
-              {serverError.hasError && <Modal errorMessage={serverError.message ? serverError.message : "Something went wrong"} handleClose={handleCloseModal}/>}
+              {serverError.hasError && (
+                <Modal errorMessage={serverError.message ? serverError.message : "Something went wrong"} handleClose={handleCloseModal} />
+              )}
+            </div>
+          </div>
+        )}
+        {isPopupVisible && (
+          <div className="popup-window" ref={popupRef}>
+            <div className="popup-overlay" onClick={handleClickOutside}></div>
+            <div className="popup-content">
+              <div className="main-title-container">
+                <h2 className="main-title">Welcome to Serenade</h2>
+                <div className="title-separator"></div>
               </div>
+              {showContent ? (
+                <div className="popup-section-content">
+                  <h3 className="section-title">{activeSection}</h3>
+                  {activeSection === 'About' && (
+                    <div className="example-line">
+                      Serenade is an innovative app that harnesses the power of AI to create tailor-made playlists based on your mood. Whether you're embarking on a road trip or in need of a calming melody, Serenade enables you to effortlessly curate personalized playlists by simply describing your desired ambiance. Let Serenade be your musical companion, harmonizing your emotions and delivering the perfect playlist for any moment. Immerse yourself in a world of serenades and experience the magic of music like never before.
+                    </div>
+                  )}
+                  {activeSection === 'How Does It Work?' && (
+                    <div className="example-line">
+                      Using Serenade is as simple as typing in the text bar. Whether you have an upcoming road trip, a relaxing evening at home, or any other occasion in mind, you can effortlessly create a playlist that matches your desired mood. Just describe what you're looking for, such as "playlist for a long bike ride," and Serenade's powerful AI will curate a selection of tracks specifically tailored to your request.
+                    </div>
+                  )}
+                  {activeSection === 'Examples' && (
+                    <>
+                      <div className="example-line">If looking for a playlist that sounds similar to a specific song? Try something like: "Songs similar to 'Sunday Morning' by Maroon 5"</div>
+                      <div className="example-line">If looking for a playlist with songs from artists similar to those of a specific artist? Try something like: "Songs from artists like JLO. Only include songs by artists that are not JLO."</div>
+                    </>
+                  )}
+                  {showBackButton && (
+                    <div className="popup-back" onClick={() => setShowContent(false)}>
+                      Back
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <div className="section" onClick={() => toggleSection('About')}>
+                    <h3>About The App</h3>
+                  </div>
+                  <div className="section" onClick={() => toggleSection('How Does It Work?')}>
+                    <h3>How Does It Work?</h3>
+                  </div>
+                  <div className="section" onClick={() => toggleSection('Examples')}>
+                    <h3>Examples</h3>
+                  </div>
+                  <button onClick={()=>closeOut()}>Close Out</button>
+                </div>
+              )}
             </div>
-          )}
-                {isPopupVisible && (
-  <div className="popup-window">
-    <div className="popup-content">
-      <div className="main-title-container">
-        <h2 className="main-title">Welcome to Serenade</h2>
-        <div className="title-separator"></div>
+          </div>
+        )}
       </div>
-      {activeSection === null ? (
-        <div>
-          <div className="section" onClick={() => toggleSection('about')}>
-            <h3>About the App</h3>
-          </div>
-          <div className="section" onClick={() => toggleSection('how')}>
-            <h3>How Does it Work?</h3>
-          </div>
-          <div className="section" onClick={() => toggleSection('examples')}>
-            <h3>Examples</h3>
-          </div>
-        </div>
-      ) : (
-        <div className="popup-section-content">
-          <h3 className="section-title">{activeSection}</h3>
-          {activeSection === 'about' && (
-            <p>
-              Serenade is an innovative app that harnesses the power of AI to create tailor-made playlists based on your mood. Whether you're embarking on a road trip or in need of a calming melody, Serenade enables you to effortlessly curate personalized playlists by simply describing your desired ambiance. Let Serenade be your musical companion, harmonizing your emotions and delivering the perfect playlist for any moment. Immerse yourself in a world of serenades and experience the magic of music like never before.
-            </p>
-          )}
-          {activeSection === 'how' && (
-            <p>
-              Using Serenade is as simple as typing in the text bar. Whether you have an upcoming road trip, a relaxing evening at home, or any other occasion in mind, you can effortlessly create a playlist that matches your desired mood. Just describe what you're looking for, such as "playlist for a long bike ride," and Serenade's powerful AI will curate a selection of tracks specifically tailored to your request.
-            </p>
-          )}
-          {activeSection === 'examples' && (
-            <div>
-              <div className="example-line">If looking for a playlist that sounds similar to a specific song? Try something like: "Songs similar to 'Sunday Morning' by Maroon 5"</div>
-              <div className="example-line">If looking for a playlist with songs from artists similar to those of a specific artist? Try something like: "Songs from artists like JLO. Only include songs by artists that are not JLO."</div>
-            </div>
-          )}
-        </div>
-      )}
-      {activeSection !== null && (
-        <div className="popup-close" onClick={() => toggleSection(null)}>
-          Close
-        </div>
-      )}
-    </div>
-  </div>
-)}
-
-
-        </div>
     </div>
   );
 
 }
 
 export default App;
+
 
 /*
 

@@ -1358,6 +1358,7 @@ header {
 
 .loader-container {
   display: flex;
+  flex-direction: column; /* Added */
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -1377,6 +1378,12 @@ header {
   position: relative;
   left: 0;
   right: 0;
+  margin-bottom: 10px; /* Added */
+}
+
+.loading-text {
+  margin-top: 16px;
+  position: relative;
 }
 
 .bar {
@@ -1401,7 +1408,6 @@ header {
     height: 100%;
   }
 }
-
 
 /* Loader.js Component end */
 
@@ -1785,6 +1791,8 @@ header {
 .popup-section-content .section-title + p {
   display: block; /* Display the <p> element when its section is active */
 }
+
+
 
 /* Pop Up window styling end */
 
@@ -2172,9 +2180,21 @@ header {
 }
 
 
-.section p, .example-line {
+.section p {
   text-align: center;
   padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 1rem 0;
+}
+
+.example-line {
+  text-align: justify;
+  text-justify: inter-word;
+  max-width: 600px;
+  line-height: 1.5;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.1);
