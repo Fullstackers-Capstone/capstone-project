@@ -279,11 +279,3 @@ const Prompt = () => {
 };
 
 export default Prompt;
-
-
-/*
-
-SELECT ALL
-
-
-*/
