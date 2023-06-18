@@ -1498,7 +1498,24 @@ header {
 .playlist-buttons-container {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.playlist-generate-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 20px;
+}
+
+@keyframes wiggle {
+  0% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  100% { transform: translateX(-5px); }
+}
+
+.wiggle-animation {
+  animation: wiggle 0.5s ease-in-out infinite;
 }
 
 .playlist-back-button {
@@ -1509,6 +1526,7 @@ header {
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
+  width: auto;
 }
 
 .playlist-back-button:hover{
@@ -1539,26 +1557,6 @@ header {
 .playlist-generate-button:hover .music-icon {
   opacity: 1;
 }
-
-
-/* Track List end */
-
-
-/* Show one track in Prompt.js */
-
-.playlist-container .playlist-item {
-  display: none;
-}
-
-.playlist-container .playlist-item:nth-of-type(-n+3) {
-  display: block;
-}
-
-.playlist-container.show-all .playlist-item {
-  display: block;
-}
-
-/* Show one track in Prompt.js END */
 
 /* Error modal styling */
 
