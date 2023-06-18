@@ -5,6 +5,7 @@ import { getResponse, getJSONResponse, setSpotifyURIs, createDBPlaylist} from '.
 import Searcher from './Searcher';
 import { getTopTracks, createPlaylist,  } from '../../server/api/spotify';
 import Loader from './Loader';
+import { FaInfoCircle } from 'react-icons/fa';
 
 const Prompt = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Prompt = () => {
   const [showAllTracks, setShowAllTracks] = useState(false); // added
   const [selectAll, setSelectAll] = useState(false);
   const [selectAllLabel, setSelectAllLabel] = useState('Select All');
+  const [isPopupVisible, setPopupVisible] = useState(false);
 
   
 
@@ -129,6 +131,12 @@ const Prompt = () => {
     });
   };
 
+  const togglePopup = () => {
+    setPopupVisible(!isPopupVisible);
+  };
+  
+
+  
   return (
     <div id='prompt-outer-container'>
 
@@ -137,7 +145,7 @@ const Prompt = () => {
             <div className='pl-thumb' key={auth.id}>
             <div className='pl-thumb-name' id='prompt-input-container'>
             <form style={{width: '100%'}} onSubmit={submit}>
-              <input className="prompt-input" value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
+              <input className="prompt-input" placeholder="I.E: Playlist for a morning commute"value={input} onChange={(ev) => { setInput(ev.target.value) }}></input>
               <button className="create-playlist-button">Create Playlist</button>
             </form>
             </div>
@@ -189,11 +197,13 @@ const Prompt = () => {
           {showExamplePrompts && (
             <>
 
-            <div className='example-prompts-title-container'>
+<div className='example-prompts-title-container'>
 
-            <div>
-                Example Prompts
-            </div>
+<div>
+    Example Prompts
+</div>
+          
+
 
             </div>
               <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Music for chill relaxing vibes')}>
@@ -223,8 +233,7 @@ const Prompt = () => {
             <div className='prof-bottom-container'>
               
             </div>
-        </div>
-        
+            </div>
         </div>
     </div>
   )
