@@ -66,7 +66,7 @@ export const createDBPlaylist = (auth, prompt, input, navigate) => {
 
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error creating playlist in the database!"})
+      dispatch({type: 'SERVER_ERROR', payload: "Error creating playlist in the database! Please try your request again."})
     }
   };
 };
@@ -79,7 +79,7 @@ export const createPlaylistTest = (playlist) => {
       dispatch({ type: 'CREATE_PLAYLIST', playlist: response.data });
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error creating playlist!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error creating playlist! Please try your request again."});
     }
   };
 };
@@ -91,7 +91,7 @@ export const updatePlaylist = (playlist) => {
       dispatch({ type: 'UPDATE_PLAYLIST', playlist: response.data});
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error updating playlist!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error updating playlist! Please try your request again."});
     }
   };
 };

@@ -24,7 +24,7 @@ export const fetchSpotUser = () => {
       dispatch({ type: 'SET_AUTH', auth: response.data});
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error fetching Spotify user!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error fetching Spotify user! Please try your request again."});
     }
   }
 }
@@ -40,7 +40,7 @@ export const createDbUser = (response) => {
       })
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error creating user in the database!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error creating user in the database! Please try your request again."});
     }
   }
 }
@@ -52,7 +52,7 @@ export const updateAuth = (user)=> {
       dispatch({ type: 'SET_AUTH', auth: response.data });
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error updating auth!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error updating auth! Please try your request again."});
     }
   }
 }
@@ -65,7 +65,7 @@ export const upgradeToPro = (user) => {
       dispatch({ type: 'SET_AUTH', auth: response.data });
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error upgrading to pro!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error upgrading to pro! Please try your request again."});
     }
   };
 };

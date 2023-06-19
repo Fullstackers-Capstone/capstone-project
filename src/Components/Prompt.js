@@ -38,6 +38,7 @@ const Prompt = () => {
     setSelectAllLabel("Select All");
     setShowAllTracks(false);
     setIsLoading(true);
+    localStorage.setItem("trackCount", trackCount);
     await dispatch(getJSONResponse('songs that fit the following criteria', trackCount, input, auth.discoverPlaylists));
     setIsLoading(false);
     setShowExamplePrompts(false);

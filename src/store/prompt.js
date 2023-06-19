@@ -58,7 +58,7 @@ export const getResponse = (prompt) => {
       dispatch(setPrompt(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: SERVER_ERROR, payload: "Error getting response!"});
+      dispatch({type: SERVER_ERROR, payload: "Error getting response! Please try your request again."});
     }
   };
 };
@@ -77,7 +77,7 @@ export const getJSONResponse = (prompt, length, data) => {
       dispatch(getSpotifyURIs(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error getting JSON response!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error getting JSON response! Please try your request again."});
     }
   };
 };
@@ -121,7 +121,7 @@ export const getSpotifyURIs = (prompt) => {
       dispatch(savePrompt(prompt));
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error getting Spotify URIs!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error getting Spotify URIs! Please try your request again."});
     }
   }
 }
@@ -135,7 +135,7 @@ export const setSpotifyURIs = (prompt, playlist) => {
       dispatch(updatePrompt(prompt));
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error getting Spotify URIs!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error getting Spotify URIs! Please try your request again."});
     }
   }
 }
@@ -156,7 +156,7 @@ export const savePrompt = (prompt) => {
       dispatch(createPrompt(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: SERVER_ERROR, payload: "Error saving prompt!"});
+      dispatch({type: SERVER_ERROR, payload: "Error saving prompt! Please try your request again."});
     }
   };
 };
@@ -169,7 +169,7 @@ export const update = (prompt) => {
       dispatch(updatePrompt(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: SERVER_ERROR, payload: "Error updating prompt!"});
+      dispatch({type: SERVER_ERROR, payload: "Error updating prompt! Please try your request again."});
     }
   };
 };
@@ -186,7 +186,7 @@ export const getAllPrompts = () => {
       dispatch(setPrompt(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: SERVER_ERROR, payload: "Error fetching all prompts!"});
+      dispatch({type: SERVER_ERROR, payload: "Error fetching all prompts! Please try your request again."});
     }
   };
 };
