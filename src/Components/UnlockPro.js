@@ -87,11 +87,11 @@ const UnlockPro = () => {
       </div>
       <div className="pro-option">
         <h3>Unlock Additional Icons & Themes</h3>
-        <span className='pl-type-desc'>Break out from Dark Mode. <span style={{color: 'gold', fontSize: '.75rem'}}>(Future Development)</span></span>
+        <span className='pl-type-desc'>Break out from Dark Mode. <span style={{color: '#777777', fontSize: '.75rem'}}>(Future Development)</span></span>
       </div>
       <div className="pro-option">
         <h3>Access Optimized Prompts</h3>
-        <span className='pl-type-desc'>Specially developed to improve AI model accuracy. <span style={{color: 'gold', fontSize: '.75rem'}}>(Future Development)</span></span>
+        <span className='pl-type-desc'>Specially developed to improve AI model accuracy. <span style={{color: '#777777', fontSize: '.75rem'}}>(Future Development)</span></span>
       </div>
       {
         auth.proUser ? 

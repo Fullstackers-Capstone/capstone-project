@@ -1055,12 +1055,70 @@ header {
   width: 100%;
   display: flex;
   justify-content: center;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  background-color: #404040;
+  align-items: flex-start;
+  background-color: #242424;
   padding: 1rem;
+  padding-top: 0;
+  padding-left: 1.5rem;
+  padding-bottom: 2rem;
   font-size: .7rem;
   font-style: italic;
+  /* text-shadow: 1px 1px 1px rgb(5, 5, 5); */
+}
+
+.please-allow{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: .8rem;
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+  color: #777777;
+}
+
+.aiplaylist-name-container{
+  width: 100%;
+  padding: 1.5rem;
+  padding-right: 0;
+  background-color: gold;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: black;
+}
+
+.aitracklist-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: var(--spotifyGreen);
+}
+
+.aiplaylist-name-edit{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1.5rem;
+}
+
+.aiplaylist-name-save{
+  display: flex;
+  align-items: center;
+  padding-right: 1.5rem;
+}
+
+.playlist-new-button{
+  padding-left: .5rem;
+  padding-right: .5rem;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  margin-left: .5rem;
+  border: 0;
+  border-radius: 3px;
+  /* background-color: #fff9df */
 }
 
 .prof-prompt-container{
@@ -1080,6 +1138,8 @@ header {
 
 #prompt-input-container{
   padding: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1361,6 +1421,7 @@ header {
   flex-direction: column; /* Added */
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   width: 100%;
   min-height: 50vh;
 }
@@ -1374,7 +1435,7 @@ header {
   min-width: 100px;
   height: 50px;
   margin: 0 auto;
-  z-index: 2;
+  /* z-index: 2; */
   position: relative;
   left: 0;
   right: 0;
@@ -1417,7 +1478,7 @@ header {
 .outer-playlist-container{
   width: 100%;
   padding-left: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: .85rem;
 }
 
 .playlist-container {
@@ -1428,10 +1489,24 @@ header {
   border-radius: 10px;
 }
 
+.playlist-name-form{
+  display:inline;
+}
+
 .playlist-header {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  width: 50%;
+  height: 24px;
+  margin-left: .26rem;
+  margin-right: .5rem;
+  border: 0;
+  border-radius: 3px;
+  background-color: #fff9df;
+  font-size: 1rem;
+  padding-left: .25rem;
+}
+
+.playlist-header:focus{
+  outline: none;
 }
 
 .playlist-item {
@@ -1439,11 +1514,11 @@ header {
   border-radius: 10px;
   margin-bottom: 0.5rem;
   padding: 20px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
 }
 
 .playlist-item.selected {
-  border: 2px solid var(--spotifyGreen)
+  border: 1px solid var(--spotifyGreen)
 }
 
 .playlist-item-checkbox input[type="checkbox"] {
@@ -1452,7 +1527,8 @@ header {
 
 .playlist-item:hover {
   cursor: pointer;
-  color: gold
+  border: 1px solid var(--spotifyGreen)
+  /* color: gold */
 }
 
 .playlist-item-image {
@@ -1503,6 +1579,7 @@ header {
 
 .playlist-buttons-container {
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 20px;
 }
@@ -1511,7 +1588,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 @keyframes wiggle {
@@ -1541,7 +1619,7 @@ header {
 }
 
 .playlist-generate-button {
-  background-color: var(--spotifyGreen);
+  background-color: #777777;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -1550,14 +1628,14 @@ header {
   cursor: pointer;
 }
 
-.playlist-generate-button:hover{
-  background-color: gold;
+/* .playlist-generate-button:hover{
   color: black;
-}
+} */
 
 .music-icon {
   opacity: 0;
   transition: opacity 0.3s ease;
+  font-size: .75rem;
 }
 
 .playlist-generate-button:hover .music-icon {

@@ -14,6 +14,7 @@ const Loader = () => {
         <div className="loading-text">
         <em>Just a sec! We're working on this custom playlist for you...</em>
       </div>
+
       </div>
       </>
       );
