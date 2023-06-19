@@ -29,6 +29,7 @@ const App = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [showContent, setShowContent] = useState(false);
   const [showBackButton, setShowBackButton] = useState(false);
+  const [hide, setHide] = useState(true);
   const popupRef = useRef(null);
   
   const serverError = useSelector(state => state.serverError);
@@ -100,7 +101,13 @@ const handleClickOutside = (event) => {
 
   }, [dispatch]);
 
-  
+  // const delay = () => {
+  //   setTimeout(() => {
+  //   }, 1000);
+  //   return <LandingPage/>
+  // }
+
+  setTimeout(() => setHide(false), 350)
 
   if (!auth) {
     return null
@@ -123,7 +130,11 @@ const handleClickOutside = (event) => {
         </div>
       </header>
       <div>
-        {!token && <LandingPage />}
+        {!token && (
+          <>
+            {!hide ? <LandingPage/> : ''}
+          </>
+        )}
         {token && (
           <div>
             <Routes>

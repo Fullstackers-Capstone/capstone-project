@@ -4,8 +4,6 @@ const Loader = () => {
 
   const trackCount = window.localStorage.getItem('trackCount') * 1
 
-  console.log(typeof trackCount);
-
     return (
       <>
         <div className="loader-container">
@@ -21,7 +19,7 @@ const Loader = () => {
           {trackCount === 23 && '15+ tracks will take some time. Please allow up to 45 seconds for your custom playlist to be created.'}
 
           {trackCount === 18 && '10+ tracks will take some time. Please allow up to 30 seconds for your custom playlist to be created.'}
-          
+
           {trackCount === 10 && "Just a sec! We're working on this custom playlist for you..."}
 
         {/* <em>Just a sec! We're working on this custom playlist for you...</em> */}
