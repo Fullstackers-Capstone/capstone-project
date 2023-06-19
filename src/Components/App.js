@@ -96,7 +96,7 @@ const handleClickOutside = (event) => {
         </div>
       </header>
       <div>
-        {!token && <Login />}
+        {!token && <LandingPage />}
         {token && (
           <div>
             <Routes>
