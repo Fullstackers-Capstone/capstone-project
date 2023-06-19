@@ -80,7 +80,7 @@ const UnlockPro = () => {
     <div id='content-body'>
     <div id='pl-container'>
     <div className="playlist-options">
-      <h2 className="options-title">Unlock a <span className='prof-unlock-pro'>Pro <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span> Subsrciption</h2>
+      <div className="options-title">Unlock a <span className='prof-unlock-pro'>Pro <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span> Subsrciption</div>
       <div className="pro-option">
         <h3>Create Unlimited Playlists</h3>
         <span className='pl-type-desc'>Free Users are only allowed up to 5 unique playlists.</span>

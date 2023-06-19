@@ -173,7 +173,11 @@ const playlistNameTest = promptObject.playlistName;
     
   <div id='prompt-outer-container'>
 
+
       <div id='pl-container' style={{marginTop: '2rem'}}>
+      <div className='create-header'>
+            Create <span style={{color: 'white', marginLeft: '.5rem'}}>Playlist</span>
+          </div>
         <div className='pl-thumb' key={auth.id}>
           <div className='pl-thumb-name' id='prompt-input-container'>
 
