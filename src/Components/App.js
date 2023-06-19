@@ -101,12 +101,6 @@ const handleClickOutside = (event) => {
 
   }, [dispatch]);
 
-  // const delay = () => {
-  //   setTimeout(() => {
-  //   }, 1000);
-  //   return <LandingPage/>
-  // }
-
   setTimeout(() => setHide(false), 350)
 
   if (!auth) {
@@ -123,11 +117,11 @@ const handleClickOutside = (event) => {
             <i className="fa-brands fa-spotify" id="spotify-logo"></i>
           </div>
         </div>
-        <div className="info-icon-container">
+        {token && (<div className="info-icon-container">
           <span className="info-icon" onClick={togglePopup}>
             <i className="fa-solid fa-circle-info"></i>
           </span>
-        </div>
+        </div>)}
       </header>
       <div>
         {!token && (

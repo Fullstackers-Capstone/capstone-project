@@ -305,7 +305,7 @@ header {
   width: 100%;
   display: flex;
   justify-content: center;
-  /* margin-top: 1.75rem; */
+  border: 1px solid blue;
 }
 
 .prompt-container {
@@ -1170,7 +1170,7 @@ header {
 
 .prompt-input-left-title, .prompt-input-right-title{
   color: var(--spotifyGreen);
-  font-size: .75rem;
+  font-size: .85rem;
   margin-bottom: .25rem;
 }
 
@@ -2562,20 +2562,32 @@ header {
 /* Landing Page Styles */
 
 .landing {
-  background-color: black;
+  /* background-color: black; */
   color: white;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  padding-top: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+}
+
+.landing-left-container{
+  flex: 1;
+}
+
+.landing-right-container{
+  flex: 1;
 }
 
 .hero-section {
-  text-align: center;
-  padding: 50px;
+  padding: 3rem;
+  padding-top: 2rem;
+  text-shadow: 1px 1px 10px rgb(5, 5, 5);
 }
 
 .landing-header{
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 5rem;
+  line-height: .85;
 }
 
 .features-section {
@@ -2593,6 +2605,7 @@ header {
   width:30%;
   box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
   text-align: center;
+  border: 1px solid #777777;
 }
 
 .feature h2 {
@@ -2615,10 +2628,11 @@ header {
   width: 20vw;
   text-align: center;
   height: auto;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  font-weight: 500;
   transition: box-shadow 0.3s ease; 
   box-shadow: 0 0 15px rgba(5, 238, 87, 0.849);
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .get-started:hover {
@@ -2627,13 +2641,28 @@ header {
   box-shadow: 0 0 15px rgba(245, 246, 245, 0.974);
 }
 
+.how-it-works{
+  font-size: 2.5rem;
+  text-shadow: 1px 1px 10px rgb(5, 5, 5);
+  margin-bottom: 1rem;
+}
+
 .feature-header{
+  display: flex;
+  justify-content: flex-start;
   margin-bottom: 1vh;
-  font-size: 1.7rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-shadow: 1px 1px 5px rgb(5, 5, 5);
 }
 
 .p-landing{
-  font-size: 1.1rem;
+  text-align: left;
+  font-size: .8rem;
+  /* text-align: justify; */
+  color: rgb(206, 206, 206);
+  line-height: 1.35;
+  margin-top: .5rem;
 }
 
 
@@ -2649,9 +2678,18 @@ header {
 /* Landing Page Styles End */
 
 /* Footer Styling */
+
+.footer-container{
+
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
 .footer {
  
-  color: #fff;
+  color: #777;
+  font-size: .75rem;
   padding: 20px;
   text-align: center;
   width: 100%;
@@ -2663,23 +2701,30 @@ header {
 /* How It Works Section Styles */
 
 .how-it-works-section {
-  padding: 40px;
+  padding-right: 3rem;
   text-align: center;
   color: white;
 }
 
 .step {
-  background-color: #242424;
+  background-color: #171717;
+  /* border: 1px solid #777777; */
   border-radius: 10px;
-  margin: 5vh auto;
-  padding: 20px;
+  margin: 1rem auto;
+  padding: 2rem;
   width:100%;
   box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid transparent;
 }
 
 .step h3 {
   color: var(--spotifyGreen);
   margin-bottom: 10px;
+}
+
+.step:hover{
+  border: 1px solid var(--spotifyGreen);
+  cursor: default;
 }
 
 @media (max-width: 768px) {
