@@ -30,8 +30,8 @@ const LandingPage = () => {
       </section>
 
       <section className="about-section">
-        <h2 className="feature-header">About Seranade</h2>
-        <p className="p-landing">At Seranade, our mission is to redefine how you experience music. Our advanced AI technology learns your musical tastes and mood to create playlists that will serenade you in every moment. Dive into an immersive musical experience uniquely curated for you.</p>
+        <h2 className="feature-header">About Serenade</h2>
+        <p className="p-landing">At Serenade, our mission is to redefine how you experience music. Our advanced AI technology learns your musical tastes and mood to create playlists that will serenade you in every moment. Dive into an immersive musical experience uniquely curated for you.</p>
       </section>
       <section className="how-it-works-section">
   <h2 className="feature-header">How It Works</h2>
