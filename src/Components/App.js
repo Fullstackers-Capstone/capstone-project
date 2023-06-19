@@ -148,7 +148,7 @@ const handleClickOutside = (event) => {
                   )}
                   {showBackButton && (
                     <div className="popup-back" onClick={() => setShowContent(false)}>
-                      Back
+                      &larr;
                     </div>
                   )}
                 </div>
@@ -163,9 +163,12 @@ const handleClickOutside = (event) => {
                   <div className="section" onClick={() => toggleSection('Examples')}>
                     <h3>Examples</h3>
                   </div>
-                  <button onClick={()=>closeOut()}>Close Out</button>
+                  <div>
+
+                  </div>
                 </div>
               )}
+              <button className="create-playlist-button" onClick={()=>closeOut()}>Close</button>
             </div>
           </div>
         )}

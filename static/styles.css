@@ -1382,7 +1382,7 @@ header {
 }
 
 .loading-text {
-  margin-top: 16px;
+  margin-top: 50px;
   position: relative;
 }
 
@@ -1687,6 +1687,22 @@ header {
   align-items: center;
   width: 100%;
   overflow-y: auto;
+}
+
+.popup-back{
+  color: #fff; /* Text color */
+  padding: 6px 10px; /* Adjust the padding as needed */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer;
+  margin-bottom: 10px; /* Add margin to separate from other elements */
+  font-size: 18px; /* Adjust the font size as needed */
+  display: flex;
+  align-items: center;
+}
+
+
+.popup-back:hover{
+color: gold;
 }
 
 .popup-close {
