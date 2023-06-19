@@ -26,6 +26,7 @@ const Prompt = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [playlistName, setPlaylistName] = useState('');
   const [editNameToggle, setEditNameToggle] = useState(true);
+  const [trackCount, setTrackCount] = useState(10)
 
 
   //creates the prompt when user selects an option, creates prompt no spotifyURIS
@@ -37,7 +38,7 @@ const Prompt = () => {
     setSelectAllLabel("Select All");
     setShowAllTracks(false);
     setIsLoading(true);
-    await dispatch(getJSONResponse('songs that fit the following criteria', 10, input, auth.discoverPlaylists));
+    await dispatch(getJSONResponse('songs that fit the following criteria', trackCount, input, auth.discoverPlaylists));
     setIsLoading(false);
     setShowExamplePrompts(false);
     setInput("");
@@ -174,11 +175,36 @@ const playlistNameTest = promptObject.playlistName;
       <div id='pl-container' style={{marginTop: '2rem'}}>
         <div className='pl-thumb' key={auth.id}>
           <div className='pl-thumb-name' id='prompt-input-container'>
-            <form style={{width: '100%'}} onSubmit={submit}>
-              <input className="prompt-input" placeholder="e.g. Playlist for a morning commute"value={input} onChange={(ev) => { setInput(ev.target.value) }}>
-              </input>
-              <button className="create-playlist-button">Create Playlist</button>
-            </form>
+
+              <div className='prompt-input-left'>
+                <div className='prompt-input-left-title'>
+                  Prompt
+                </div>
+                <div className='prompt-input-left-content'>
+                  <input className="prompt-input" placeholder="e.g. Playlist for a morning commute"value={input} onChange={(ev) => { setInput(ev.target.value) }}>
+                  </input>
+                </div>
+              </div>
+
+              <div className='prompt-input-right'>
+                <div className='prompt-input-right-inner'>
+                <div className='prompt-input-right-title'>
+                  Count
+                </div>
+                <div className='prompt-input-right-content'>
+                  <select className='prompt-track-count' value={ trackCount } onChange={ ev => setTrackCount(ev.target.value)}>
+                    <option value={10}>5+ Tracks</option>
+                    <option value={18}>10+ Tracks</option>
+                    <option value={23}>15+ Tracks</option>
+                  </select>
+                </div>
+              </div>
+                <div className='create-playlist-button-container'>
+                <button className="create-playlist-button" onClick={submit}>Create Playlist</button>
+                </div>
+              </div>
+
+
           </div>
 
       {isLoading ? (
@@ -222,21 +248,28 @@ const playlistNameTest = promptObject.playlistName;
                 { editNameToggle ? (
                   
                   <div className='aiplaylist-name-edit'>
-                    <span>
-                      <span style={{fontWeight: '600', marginRight: '.25rem'}}>Playlist Name:</span> 
-                      {playlistNameTest}
-                    </span>
+                    <div className='aiplaylist-name-left'>
+                      <div className='aiplaylist-name-title'>Playlist Name:</div>
+                      <div className='aiplaylist-name-content'>
+                        {playlistNameTest}
+                      </div>
+                    </div>
                     <button className='playlist-new-button' onClick={toggleNameInput}>Edit</button>
                   </div>
                 ) : (
                   <div className='aiplaylist-name-save'>
-                    <span style={{fontWeight: '600'}}>Playlist Name: {}</span> 
-                    <input
-                      className="playlist-header"
-                      type="text"
-                      value={playlistNameTest}
-                      onChange={handlePlaylistNameChange}
-                    />
+                    <div className='aiplaylist-name-left'>
+                      <div className='aiplaylist-name-title'>Playlist Name:</div>
+                      <div className='aiplaylist-name-content'>
+                          <input
+                          className="playlist-header"
+                          type="text"
+                          value={playlistNameTest}
+                          onChange={handlePlaylistNameChange}
+                        />
+                      </div>
+                    </div>
+
                     <button className='playlist-new-button' onClick={saveName}>SAVE</button>
                   </div>
                       
@@ -245,14 +278,20 @@ const playlistNameTest = promptObject.playlistName;
               </div>
 
                 <div className='aitracklist-container'>
-                  <span>
-                    <span style={{fontWeight: '500'}}>Tracklisting</span> 
-                    <span style={{fontSize: '.75rem'}}>(select tracks to include)</span>
-                  </span>
+                  <div className='aitracklist-left'>
+                    <div className='tracklisting-title'>
+                      Tracklisting
+                    </div>
+                    <div className='tracks-to-include'>
+                      (select tracks to include)
+                    </div>
+                  </div>
 
-                  <button className="playlist-new-button"onClick={toggleSelectAll}>
-                      {selectAll ? 'Deselect All' : 'Select All'}
-                  </button>
+                  <div className='aitracklist-right'>
+                    <button className="playlist-new-button"onClick={toggleSelectAll}>
+                        {selectAll ? 'Deselect All' : 'Select All'}
+                    </button>
+                  </div>
 
                 </div>
 
@@ -266,7 +305,7 @@ const playlistNameTest = promptObject.playlistName;
 
                       <div className="playlist-item-info">
                           <div className="playlist-item-row">
-                            <span className='playlist-item-artist'>{response.artist}</span> 
+                            <span className='playlist-item-artist'><span style={{fontWeight: '600', color: 'white', marginRight: '.25rem'}}>{(index + 1)}.</span> {response.artist}</span> 
                             <span className='playlist-item-title'>{response.title}</span>
                           </div>
                       </div>

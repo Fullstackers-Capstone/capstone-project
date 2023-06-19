@@ -18,29 +18,7 @@ body{
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-color: #121212;
-  color: white;.create-playlist-button {
-    display: inline-block;
-    white-space: normal;
-    background-color: var(--spotifyGreen);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    border: none;
-    margin-left: .75rem;
-    margin-right: .75rem;
-    cursor: pointer;
-    width: 26%;
-    word-wrap: break-word;
-  }
-  
-  .create-playlist-button:hover{
-    background-color: gold;
-    color: black;
-  }
-  
-  .create-playlist-button:active{
-    background-color: white;
-  }
+  color: white;
 
 }
 
@@ -572,17 +550,24 @@ header {
   border-top-left-radius: 5px;
   color: var(--spotifyGreen);
   text-shadow: 1px 1px 4px rgb(5, 5, 5);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .pl-thumb-name a{
   color: var(--spotifyGreen);
   /* border-bottom: 1px solid transparent */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.pl-thumb-name a:hover{
+.disc-thumb-name a{
+  color: gold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pl-thumb-name a:hover, .disc-thumb-name a:hover{
   color: white;
   /* border-bottom: 1px dotted var(--spotifyGreen); */
   transition: 0.35s
@@ -715,6 +700,7 @@ header {
 
 .pl-thumb-createdAt{
   font-size: .65rem;
+  color: #a2a2a2;
 }
 
 .pl-thumb-user-name, .disc-thumb-user-name{
@@ -755,6 +741,7 @@ header {
 
 .track-artist{
   color: var(--spotifyGreen);
+  margin-right: .35rem;
 }
 
 .prompt-title{
@@ -934,7 +921,7 @@ header {
   display: flex;
   justify-content: center;
   font-size: 1.5rem;
-  color: var(--spotifyGreen);
+  color: gold;
 }
 
 .example-prompts-title {
@@ -1038,13 +1025,6 @@ header {
   width: 100%;
 }
 
-#prompt-input-container{
-  padding: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 #create-example-prompts-window{
   background-color: #121212;
   border-top-left-radius: 5px;
@@ -1099,6 +1079,21 @@ header {
   background-color: var(--spotifyGreen);
 }
 
+.aitracklist-left, .aiplaylist-name-left{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.tracklisting-title, .aiplaylist-name-title{
+  font-weight: 600;
+  margin-right: .25rem;
+}
+
+.tracks-to-include{
+  font-size: .75rem;
+}
+
 .aiplaylist-name-edit{
   display: flex;
   justify-content: space-between;
@@ -1109,6 +1104,7 @@ header {
 .aiplaylist-name-save{
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding-right: 1.5rem;
 }
 
@@ -1138,31 +1134,69 @@ header {
   border-bottom: 1px dotted var(--spotifyGreen)
 }
 
+/* Prompt input styles */
+
 #prompt-input-container{
   padding: 1.5rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Prompt input styles */
 .prompt-input {
-  width: 70%;
-  flex-grow: 1;
+  width: 100%;
+  /* flex-grow: 1; */
   padding: 10px;
   border-radius: 5px;
-  border: 0;
+  border: 1px solid transparent;
   background-color: #404040;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
+  font-size: .75rem;
 }
 
 .prompt-input:focus {
   outline: none;
   border: 1px solid var(--spotifyGreen);
   /* box-shadow: 0 0 10px var(--spotifyGreen); */
+}
+
+.prompt-input-left{
+  flex: 1.85;
+  margin-right: .75rem;
+  flex-direction: column;
+}
+
+.prompt-input-left-title, .prompt-input-right-title{
+  color: var(--spotifyGreen);
+  font-size: .75rem;
+  margin-bottom: .25rem;
+}
+
+.prompt-input-right-inner{
+  flex-direction: column;
+}
+
+.prompt-input-right{
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prompt-track-count{
+  height: 27px;
+  border: 0;
+  border-radius: 5px;
+  background-color: #404040;
+  color: white;
+  padding-left: .25rem;
+  margin-right: .25rem;
+  font-size: .75rem;
+}
+
+.create-playlist-button-container{
+  padding-top: 1.15rem;
 }
 
 .create-playlist-button {
@@ -1174,9 +1208,7 @@ header {
   border-radius: 8px;
   border: none;
   margin-left: .75rem;
-  margin-right: .75rem;
   cursor: pointer;
-  width: 26%;
   word-wrap: break-word;
   font-family: 'Montserrat', sans-serif;
 }
@@ -1445,8 +1477,15 @@ header {
 }
 
 .loading-text {
-  margin-top: 16px;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: .75rem;
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+  color: #777777;
 }
 
 .bar {
@@ -1496,7 +1535,7 @@ header {
 }
 
 .playlist-header {
-  width: 50%;
+  width: 400px;
   height: 24px;
   margin-left: .26rem;
   margin-right: .5rem;
@@ -1881,13 +1920,13 @@ header {
 
 @media screen and (max-width: 1450px) {
 
-  .pl-thumb-name{
+  .pl-thumb-name, .disc-thumb-name{
     font-size: 2.25rem;
   }
 
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1305px) {
 
   .pl-thumb{
     width: 60%;
@@ -1901,7 +1940,7 @@ header {
     width: 65%
   }
 
-  .pl-thumb-name{
+  .pl-thumb-name, .disc-thumb-name{
     font-size: 2rem;
   }
 
@@ -1939,7 +1978,24 @@ header {
 
 }
 
-@media screen and (max-width: 915px) {
+@media screen and (max-width: 980px) {
+  .prompt-input-left{
+    flex: 1.7
+  }
+}
+
+/* @media screen and (max-width: 935px) {
+  .prompt-input-left{
+    flex: 1.5
+  }
+} */
+
+@media screen and (max-width: 945px) {
+
+  .prompt-input-left{
+    flex: 1.7
+  }
+
   .pl-thumb{
     width: 85%;
   }
@@ -1954,13 +2010,26 @@ header {
   
 }
 
+@media screen and (max-width: 831px) {
+  .try-again{
+    padding-top: 1rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 825px) {
+  .prompt-input-left{
+    flex: 1.5
+  }
+}
+
 @media screen and (max-width: 800px) {
 
   .pro-option {
     font-size: .85rem;
   }
   
-  .pl-thumb-name{
+  .pl-thumb-name, .disc-thumb-name{
     font-size: 2rem;
   }
   
@@ -1971,6 +2040,10 @@ header {
 }
 
 @media screen and (max-width: 770px) {
+
+  .prompt-input-left{
+    flex: 1.4
+  }
   
   .pl-thumb-data-container{
     flex-direction: column;
@@ -1990,20 +2063,63 @@ header {
     display: flex;
   }
 
-  .pl-thumb-name{
+  .pl-thumb-name, .disc-thumb-name{
     font-size: 1.75rem;
   }
   
   .profstats div{
     font-size: .9rem;
   }
+
+  .playlist-header{
+    width: 350px
+  }
+
+}
+
+@media screen and (max-width: 750px) {
+  .prompt-input-left{
+    flex: 1.3
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .prompt-input-left{
+    flex: 1
+  }
+
+  .playlist-header{
+    width: 300px
+  }
 }
 
 @media screen and (max-width: 650px) {
+
+  #prompt-input-container{
+    flex-direction: column;
+  }
+
+  .prompt-input-left, .prompt-input-right{
+    flex: 1;
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .prompt-input-right{
+    margin-top: .75rem;
+    justify-content: center;
+  }
+
+  .create-playlist-button-container{
+    padding-top: .75rem;
+    margin-left: .75rem;
+  }
+
   .title{
     font-size: 3.15rem;
   }
-  .pl-thumb-name{
+
+  .pl-thumb-name, .disc-thumb-name{
     font-size: 1.5rem;
   }
 
@@ -2015,7 +2131,7 @@ header {
     width: 300px;
   }
 
-  .discoverable-title{
+  .discoverable-title, .playlist-header{
     font-size: .9rem;
   }
 
@@ -2034,24 +2150,20 @@ header {
   .options-title{
     font-size: 1.5rem;
   }
+
+  .playlist-header{
+    width: 250px
+  }
   
 }
 
 @media screen and (max-width: 600px) {
 
-.prompt-input {
-  width: 60%;
-}
-
-.create-playlist-button {
-  width: 33%;
-}
-
 }
 
 @media screen and (max-width: 570px) {
 
-  .pl-thumb-name{
+  .pl-thumb-name, .disc-thumb-name{
     font-size: 1.25rem;
   }
 
@@ -2063,7 +2175,7 @@ header {
     font-size: .8rem;
   }
 
-  .discoverable-title{
+  .discoverable-title, .playlist-header{
     font-size: .8rem;
   }
 
@@ -2073,6 +2185,25 @@ header {
 
   .pro-option{
     font-size: .75rem;
+  }
+
+  .tracks-to-include{
+    font-size: .65rem;
+  }
+
+  .playlist-header{
+    width: 200px;
+    margin-left: 0;
+    height: 22px;
+  }
+
+  .aiplaylist-name-left{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .aiplaylist-name-content{
+    margin-top: .25rem;
   }
   
 }
@@ -2099,7 +2230,7 @@ header {
     font-size: .7rem;
   }
 
-  .discoverable-title{
+  .discoverable-title, .playlist-header{
     font-size: .7rem;
   }
 
@@ -2107,6 +2238,27 @@ header {
     font-size: .65rem;
   }
   
+  .prompt-input-right{
+    justify-content: space-between;
+  }
+
+  .create-playlist-button{
+    padding-left: 2.15rem;
+    padding-right: 2.15rem;
+    font-size: .75rem
+  }
+}
+
+@media screen and (max-width: 415px) {
+
+.aitracklist-left, .aiplaylist-name-left{
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* .tracks-to-include{
+  margin-left: 0;
+} */
 }
 
 

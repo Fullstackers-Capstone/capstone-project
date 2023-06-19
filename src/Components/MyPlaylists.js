@@ -124,9 +124,11 @@ const MyPlaylists = () => {
         
                     <div className='pl-thumb-tracks'>
         
-                        {playlist.spotData.data.tracks.items.slice(0, 7).map(_track => {
+                        {playlist.spotData.data.tracks.items.slice(0, 7).map((_track, index) => {
                         return(
-                          <div key={_track.track.duration_ms} className='track-lineitem'><span className='track-artist'>{_track.track.artists[0].name}</span> - {_track.track.name} ({msConversion(_track.track.duration_ms)})</div>
+                          <div key={_track.track.duration_ms} className='track-lineitem'>
+                            <span style={{color: '#777777', fontSize: '.7rem', marginRight: '.25rem'}}>{(index + 1)}. </span><span className='track-artist'>{_track.track.artists[0].name}</span>-
+                            <span style={{fontSize: '.75rem', marginLeft: '.35rem'}}>{_track.track.name} <span style={{fontSize: '.7rem'}}>({msConversion(_track.track.duration_ms)})</span></span></div>
                         )
                         })}
                       </div>
