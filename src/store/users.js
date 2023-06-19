@@ -42,7 +42,7 @@ export const updateUser = (user) => {
       }
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error updating user!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error updating user! Please try your request again."});
     }
   };
 };
@@ -59,7 +59,7 @@ export const upgradeToPro = () => {
       dispatch({ type: 'UPDATE_USER', user: response.data });
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error upgrading user to Pro!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error upgrading user to Pro! Please try your request again."});
     }
   };
 };
@@ -72,7 +72,7 @@ export const fetchUser = (userId) => {
       dispatch(setUser(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error fetching user!"});
+      dispatch({type: 'SERVER_ERROR', payload: "Error fetching user! Please try your request again."});
     }
   };
 };
