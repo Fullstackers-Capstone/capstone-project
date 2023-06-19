@@ -19,6 +19,7 @@ import Playlist from './Playlist';
 import Modal from './Modal';
 import SuccessfulPlaylist from './SuccessfulPlaylist';
 import LandingPage from './LandingPage';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const App = () => {
 
@@ -99,6 +100,8 @@ const handleClickOutside = (event) => {
 
   }, [dispatch]);
 
+  
+
   if (!auth) {
     return null
   }
@@ -147,42 +150,61 @@ const handleClickOutside = (event) => {
           <div className="popup-window" ref={popupRef}>
             <div className="popup-overlay" onClick={handleClickOutside}></div>
             <div className="popup-content">
+            <div className="popup-close" onClick={closeOut}>×</div>
               <div className="main-title-container">
                 <h2 className="main-title">Welcome to Serenade</h2>
                 <div className="title-separator"></div>
               </div>
               {showContent ? (
                 <div className="popup-section-content">
-                  <h3 className="section-title">{activeSection}</h3>
+                  <div className="section-title-container">
+                    <h3 className="section-title">{activeSection}</h3>
+                  </div>
                   {activeSection === 'About' && (
                     <div className="example-line">
-                      Serenade is an innovative app that harnesses the power of AI to create tailor-made playlists based on your mood. Whether you're embarking on a road trip or in need of a calming melody, Serenade enables you to effortlessly curate personalized playlists by simply describing your desired ambiance. Let Serenade be your musical companion, harmonizing your emotions and delivering the perfect playlist for any moment. Immerse yourself in a world of serenades and experience the magic of music like never before.
+                      Serenade is an interactive app that harnesses the power of AI to create tailor-made playlists based on your mood.
+                      <br />
+                      <br />
+                      Whether you're embarking on a road trip or need the right tunes for your Sunday chores, Serenade enables you to effortlessly curate personalized playlists by simply describing your desired ambiance.
                     </div>
                   )}
                   {activeSection === 'How Does It Work?' && (
+                    <>
                     <div className="example-line">
-                      Using Serenade is as simple as typing in the text bar. Whether you have an upcoming road trip, a relaxing evening at home, or any other occasion in mind, you can effortlessly create a playlist that matches your desired mood. Just describe what you're looking for, such as "playlist for a long bike ride," and Serenade's powerful AI will curate a selection of tracks specifically tailored to your request.
+                      Using Serenade is as simple as typing in the text bar. <br/> <br/> Just describe what you're looking for, such as "playlist for a long bike ride," and Serenade's powerful AI will curate a selection of tracks specifically tailored to your request.
+                      <br />
+                      <br />
+                      Don't know where to start? Check out some examples by clicking on the right-pointing arrow below.
                     </div>
+                    </>
                   )}
                   {activeSection === 'Examples' && (
                     <>
-                      <div className="example-line">If looking for a playlist that sounds similar to a specific song? Try something like: "Songs similar to 'Sunday Morning' by Maroon 5"</div>
-                      <div className="example-line">If looking for a playlist with songs from artists similar to those of a specific artist? Try something like: "Songs from artists like JLO. Only include songs by artists that are not JLO."</div>
+                      <div className="example-line">Looking for a playlist with songs that sounds similar to a specific song?  <br /> <br /> Try: "Songs similar to 'Sunday Morning' by Maroon 5"</div>
+                      <div className="example-line">Looking for a playlist with songs from artists similar to those of a specific artist?     <br /><br />Try: "Songs from artists like JLO. Only include songs by artists that are not JLO."</div>
+                      <div className="example-line">Looking for a playlist that helps you get through the work day?    <br /><br /> Try: "Uplifting songs for making it through the work day"</div>
+
                     </>
                   )}
-               {showBackButton && (
-                    <div className="popup-navigation">
-  {activeSection !== 'About' && (
-    <div className="popup-arrow" onClick={prev}>&lt;</div>
-  )}
-                      <div className="popup-back" onClick={back}>
-                        Back
-                      </div>
-                      {activeSection !== 'Examples' && (
-    <div className="popup-arrow" onClick={next}>&gt;</div>
-  )}
-                    </div>
-                  )}
+{showBackButton && (
+  <div className="popup-navigation">
+    {activeSection !== 'About' && (
+      <div className="popup-arrow" onClick={prev}>
+        <FaChevronLeft />
+      </div>
+    )}
+    <div className="popup-back-container">
+      <div className="popup-back" onClick={back}>
+        Back
+      </div>
+    </div>
+    {activeSection !== 'Examples' && (
+      <div className="popup-arrow" onClick={next}>
+        <FaChevronRight />
+      </div>
+    )}
+  </div>
+)}
                 </div>
               ) : (
                 <div>
@@ -195,7 +217,6 @@ const handleClickOutside = (event) => {
                   <div className="section" onClick={() => toggleSection('Examples')}>
                     <h3>Examples</h3>
                   </div>
-                  <button onClick={()=>closeOut()}>Close Out</button>
                 </div>
               )}
             </div>
