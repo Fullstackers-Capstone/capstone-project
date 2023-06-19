@@ -36,6 +36,24 @@ const App = () => {
     dispatch({type: 'FIXED_SERVER_ERROR', payload: false})
 };
 
+const sections = ['About', 'How Does It Work?', 'Examples'];
+
+const prev = () => {
+  const currentIndex = sections.indexOf(activeSection);
+  if (currentIndex > 0) {
+    const previousSection = sections[currentIndex - 1];
+    setActiveSection(previousSection);
+  }
+};
+
+const next = () => {
+  const currentIndex = sections.indexOf(activeSection);
+  if (currentIndex < sections.length - 1) {
+    const nextSection = sections[currentIndex + 1];
+    setActiveSection(nextSection);
+  }
+};
+
 const togglePopup = () => {
   setPopupVisible(!isPopupVisible);
   setActiveSection(null);
@@ -47,11 +65,17 @@ const closeOut = () => {
   setPopupVisible(!isPopupVisible);
 }
 
+const back = () => {
+  setActiveSection(null);
+  setShowContent(false);
+};
+
 const toggleSection = (section) => {
   setActiveSection(activeSection === section ? null : section);
-  setShowContent(true);
+  setShowContent(activeSection !== section);
   setShowBackButton(true);
 };
+
 
 const handleClickOutside = (event) => {
   if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -146,9 +170,17 @@ const handleClickOutside = (event) => {
                       <div className="example-line">If looking for a playlist with songs from artists similar to those of a specific artist? Try something like: "Songs from artists like JLO. Only include songs by artists that are not JLO."</div>
                     </>
                   )}
-                  {showBackButton && (
-                    <div className="popup-back" onClick={() => setShowContent(false)}>
-                      Back
+               {showBackButton && (
+                    <div className="popup-navigation">
+  {activeSection !== 'About' && (
+    <div className="popup-arrow" onClick={prev}>&lt;</div>
+  )}
+                      <div className="popup-back" onClick={back}>
+                        Back
+                      </div>
+                      {activeSection !== 'Examples' && (
+    <div className="popup-arrow" onClick={next}>&gt;</div>
+  )}
                     </div>
                   )}
                 </div>
