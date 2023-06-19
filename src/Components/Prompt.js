@@ -182,7 +182,7 @@ const playlistNameTest = promptObject.playlistName;
                   Prompt
                 </div>
                 <div className='prompt-input-left-content'>
-                  <input className="prompt-input" placeholder="e.g. Playlist for a morning commute"value={input} onChange={(ev) => { setInput(ev.target.value) }}>
+                  <input className="prompt-input" placeholder="e.g. Playlist for a morning commute" value={input} onChange={(ev) => { setInput(ev.target.value) }}>
                   </input>
                 </div>
               </div>
