@@ -1870,6 +1870,20 @@ header {
   display: block; /* Display the <p> element when its section is active */
 }
 
+.popup-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-back {
+  margin: 0 10px;
+}
+
+.popup-arrow {
+  cursor: pointer;
+  font-size: 20px;
+}
 
 
 /* Pop Up window styling end */
