@@ -2314,7 +2314,7 @@ header {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: 50px 0;
+  padding: 40px 0;
 }
 
 .feature {
@@ -2333,7 +2333,7 @@ header {
 
 .about-section {
   text-align: center;
-  padding: 50px;
+  padding: 40px;
   color: white;
   border-radius: 5px;
 }
@@ -2395,7 +2395,7 @@ header {
 /* How It Works Section Styles */
 
 .how-it-works-section {
-  padding: 50px;
+  padding: 40px;
   text-align: center;
   color: white;
 }
