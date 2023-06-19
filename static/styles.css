@@ -2316,8 +2316,13 @@ header {
 }
 
 .feature {
-  flex: 0 0 300px;
-  margin: 20px;
+  background-color: #242424;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  padding: 20px;
+  width:30%;
+  box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 
 .feature h2 {
@@ -2331,6 +2336,37 @@ header {
   border-radius: 5px;
 }
 
+.get-started {
+  background-color: var(--spotifyGreen);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  width: 20vw;
+  text-align: center;
+  height: auto;
+  font-size: 1.3rem;
+  transition: box-shadow 0.3s ease; 
+  box-shadow: 0 0 15px rgba(5, 238, 87, 0.849);
+  font-weight: bold;
+}
+
+.get-started:hover {
+  background-color: #1db954; 
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(245, 246, 245, 0.974);
+}
+
+.feature-header{
+  margin-bottom: 1vh;
+  font-size: 1.7rem;
+}
+
+.p-landing{
+  font-size: 1.1rem;
+}
+
+
 @media (max-width: 768px) {
   .features-section {
     flex-direction: column;
@@ -2341,3 +2377,45 @@ header {
 }
 
 /* Landing Page Styles End */
+
+/* Footer Styling */
+.footer {
+ 
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+ 
+}
+/* Footer Styling End */
+
+
+/* How It Works Section Styles */
+
+.how-it-works-section {
+  padding: 50px;
+  text-align: center;
+  color: white;
+}
+
+.step {
+  background-color: #242424;
+  border-radius: 10px;
+  margin: 5vh auto;
+  padding: 20px;
+  width:100%;
+  box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
+}
+
+.step h3 {
+  color: var(--spotifyGreen);
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .step {
+    width: 100%;
+  }
+}
+
+/* How It Works Section Styles End */
