@@ -42,7 +42,7 @@ app.post('/json', async (req, res, next) => {
       Create a list of ${req.body.length} ${req.body.prompt} "${req.body.spotifyData}". `;
 
     const namePrompt = `You are an assistant that can only responds in JSON
-    Create an extremely unique & quirky playlist name in under 5 words based on the following prompt: ${req.body.prompt}. An example response is
+    Create a unique & cheeky playlist name in under 5 words based on the following prompt: ${req.body.prompt}. An example response is
     '{ "playlistName": "playlist name"}'`
   
 

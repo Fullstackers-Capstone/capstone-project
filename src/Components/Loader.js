@@ -11,10 +11,9 @@ const Loader = () => {
           <div className="bar" style={{ animationDelay: '25ms' }}></div>
           <div className="bar" style={{ animationDelay: '190ms' }}></div>
         </div>
-
-        <span className='please-allow'>
-                  Please allow up to 30 seconds for your playlist to be constructed.
-        </span>
+        <div className="loading-text">
+        <em>Just a sec! We're working on this custom playlist for you...</em>
+      </div>
 
       </div>
       </>

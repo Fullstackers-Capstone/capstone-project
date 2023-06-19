@@ -1418,6 +1418,7 @@ header {
 
 .loader-container {
   display: flex;
+  flex-direction: column; /* Added */
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -1438,6 +1439,12 @@ header {
   position: relative;
   left: 0;
   right: 0;
+  margin-bottom: 10px; /* Added */
+}
+
+.loading-text {
+  margin-top: 16px;
+  position: relative;
 }
 
 .bar {
@@ -1462,7 +1469,6 @@ header {
     height: 100%;
   }
 }
-
 
 /* Loader.js Component end */
 
@@ -1864,6 +1870,8 @@ header {
   display: block; /* Display the <p> element when its section is active */
 }
 
+
+
 /* Pop Up window styling end */
 
 
@@ -2250,9 +2258,21 @@ header {
 }
 
 
-.section p, .example-line {
+.section p {
   text-align: center;
   padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 1rem 0;
+}
+
+.example-line {
+  text-align: justify;
+  text-justify: inter-word;
+  max-width: 600px;
+  line-height: 1.5;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.1);
@@ -2268,3 +2288,56 @@ header {
 .section-content p {
   margin: 1rem 0;
 }
+
+/* Landing Page Styles */
+
+.landing {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 50px;
+}
+
+.landing-header{
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 50px 0;
+}
+
+.feature {
+  flex: 0 0 300px;
+  margin: 20px;
+}
+
+.feature h2 {
+  color: var(--spotifyGreen)
+}
+
+.about-section {
+  text-align: center;
+  padding: 50px;
+  color: white;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .features-section {
+    flex-direction: column;
+  }
+  .feature {
+    margin: 20px auto;
+  }
+}
+
+/* Landing Page Styles End */
