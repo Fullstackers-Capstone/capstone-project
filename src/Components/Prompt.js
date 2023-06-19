@@ -288,7 +288,7 @@ const playlistNameTest = promptObject.playlistName;
                       className="playlist-generate-button" disabled={selectedItems.length === 0}
                       onClick={() => handleGeneratePlaylist()}
                     >
-                      <span className="music-icon" style={{marginRight: '.5rem'}}>&#9835;</span> Generate Playlist <span class="music-icon" style={{marginLeft: '.5rem'}}>&#9835;</span>
+                      <span className="music-icon" style={{marginRight: '.5rem'}}>&#9835;</span> Generate Playlist <span className="music-icon" style={{marginLeft: '.5rem'}}>&#9835;</span>
                     </button>
                   </div>
 
