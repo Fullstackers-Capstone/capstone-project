@@ -29,6 +29,8 @@ const NavBar = () => {
         </div>
         <div className="dropdown-content">
 
+            <span className='dropdown-about'><Link to="/" onClick={handleDropdownToggle}>About</Link></span>
+
             {auth.proUser ? <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile <span style={{color: 'gold', marginLeft: '.15rem'}}><i className="fa-solid fa-circle-check fa-xs"></i></span></Link> : <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link>}
 
             {auth.playlistCount > 0 ? <Link to="/" onClick={handleDropdownToggle}>My Playlists</Link> : ''}
