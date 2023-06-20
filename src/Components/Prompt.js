@@ -233,7 +233,7 @@ const playlistNameTest = promptObject.playlistName;
 
       <>
       <div className='try-again'>
-        <i class="fa-solid fa-triangle-exclamation" style={{color: 'gold', marginRight: '.5rem'}}></i>Playlist not what you expected? Try again with slightly different language to see how you can improve your results.
+        <i className="fa-solid fa-triangle-exclamation" style={{color: 'gold', marginRight: '.5rem'}}></i>Playlist not what you expected? Try again with slightly different language to see how you can improve your results.
       </div>
 
       <div className='prof-prompt-container'>
