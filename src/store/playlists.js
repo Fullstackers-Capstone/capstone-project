@@ -51,12 +51,13 @@ export const createDBPlaylist = (auth, prompt, input, navigate) => {
       const name = JSON.parse(prompt.name)
 
       const newUserId = window.localStorage.getItem('newUserId')
+      const userSpotId = window.localStorage.getItem('spotifyId')
 
       const userInput = prompt.userInput;
 
       const playlist = await createPlaylist({userId: auth.spotifyId, name: name.playlistName, description: input}, prompt, auth.discoverPlaylist)
 
-      const request = {isDiscoverable: auth.discoverPlaylists, prompt: userInput, spotId: playlist.id, name: playlist.name, userId: newUserId}
+      const request = {isDiscoverable: auth.discoverPlaylists, prompt: userInput, userSpotId: userSpotId, spotId: playlist.id, name: playlist.name, userId: newUserId}
 
       const response = await axios.post('/api/playlists', request)
 

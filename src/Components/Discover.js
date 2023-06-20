@@ -31,7 +31,7 @@ const MyPlaylists = () => {
       try{
         const spotIdData = await Promise.all(playlists.map(async (response) => ({
           spotData: await getPlaylistById(response.spotId),
-          userData: await getCurrentUserProfile(response.userId),
+          userData: await getCurrentUserProfile(response.userSpotId),
           prompt: response.prompt,
           createdAt: response.createdAt,
           isDiscoverable: response.isDiscoverable,
