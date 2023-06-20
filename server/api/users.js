@@ -4,7 +4,9 @@ const { User } = require('../db');
 
 app.get('/', async(req, res, next) => {
     try{
-        res.send(await User.findAll());
+        const users = await User.findAll();
+        console.log('list of users', users)
+        res.send(users);
     }
     catch(err){
         next(err);

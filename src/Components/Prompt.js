@@ -28,6 +28,9 @@ const Prompt = () => {
   const [editNameToggle, setEditNameToggle] = useState(true);
   const [trackCount, setTrackCount] = useState(10)
 
+  localStorage.setItem("newUserId",auth.id);
+  localStorage.setItem("authDiscoverable", auth.discoverPlaylists);
+
 
   //creates the prompt when user selects an option, creates prompt no spotifyURIS
   const submit = async (ev) => {
