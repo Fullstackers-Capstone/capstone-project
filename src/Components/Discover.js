@@ -150,7 +150,9 @@ const MyPlaylists = () => {
                           </div>
                           <div className='pl-thumb-user-name-container'>
                             <div className='disc-thumb-user-name'>
-                            <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
+                            <a href={`https://open.spotify.com/user/${playlist.spotData.data.owner.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.owner.display_name.toUpperCase()}</a>
+                            {console.log(playlist.spotData.data.owner.id)}
+                            {console.log(playlist.spotData.data.owner.display_name)}
                             </div>
                           </div>
                       </div>
