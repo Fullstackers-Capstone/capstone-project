@@ -11,7 +11,8 @@
     "test:dev": "DATABASE_URL=postgres://localhost/acme_test_db npm run test -- --watch",
     "test:dev:quiet": "QUIET=true npm run test:dev",
     "start:dev": "JWT=felix nodemon server/index.js --ignore dist/ --ignore src/ & npm run build:dev",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "seed": "node seed.js"
   },
   "keywords": [],
   "author": "",
@@ -52,7 +53,6 @@
     "babel-loader": "^9.1.2",
     "chai": "^4.3.6",
     "dotenv-webpack": "^8.0.1",
-    "install": "^0.13.0",
     "mocha": "^10.1.0",
     "nodemon": "^2.0.20",
     "npm": "^9.6.7",
