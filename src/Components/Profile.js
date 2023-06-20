@@ -72,6 +72,10 @@ const Profile = () => {
         <div id='content-body'>
             <div id='pl-container' style={{marginTop: '2rem'}}>
 
+            <div className='create-header'>
+            User <span style={{color: 'white', marginLeft: '.5rem'}}>Profile</span>
+          </div>
+
             <div className='pl-thumb' key={auth.id}>
             <div className='pl-thumb-name'>
               <a href={`https://open.spotify.com/user/${ auth.spotifyId }`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()} <span className={`${(pro === true) ? 'prof-unlock-pro' : 'prof-free'}`} title={`${(pro === true) ? 'Pro User' : 'Free User'}`}><i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span></a>
