@@ -20,6 +20,9 @@ const Playlist = conn.define('playlist', {
   spotId:{
     type: STRING
   },
+  userSpotId:{
+    type: STRING
+  }
 });
 
 module.exports = Playlist;
