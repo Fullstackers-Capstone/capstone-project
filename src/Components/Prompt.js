@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { getResponse, getJSONResponse, setSpotifyURIs, createDBPlaylist} from '../store';
+import { getResponse, getJSONResponse, setSpotifyURIs, createDBPlaylist, updateAuth} from '../store';
 import Searcher from './Searcher';
 import { getTopTracks, createPlaylist,  } from '../../server/api/spotify';
 import Loader from './Loader';
@@ -65,6 +65,8 @@ const handleGeneratePlaylist = async() => {
 //creates playlist and navigates to the component
 const createPlaylist = async () => {
 await dispatch(createDBPlaylist(auth,currentPrompt, input, navigate))
+auth.playlistCount += 1;
+await dispatch(updateAuth(auth));
 };
 
 const promptObject = JSON.parse(currentPrompt.name || '{}');
