@@ -357,7 +357,7 @@ header {
 .options-title {
   margin-top: 1.75rem;
   margin-bottom: 2rem;
-  font-size: 2rem;
+  font-size: 2.5rem;
   text-shadow: 1px 1px 10px rgb(5, 5, 5);
 }
 
@@ -2652,7 +2652,7 @@ header {
   }
 
   .options-title{
-    font-size: 1.75rem;
+    font-size: 2.25rem;
   }
   
 }
@@ -2782,7 +2782,7 @@ header {
 
   .pl-thumb-tracks{
     flex: 1;
-    padding-left: 1.75rem;
+    padding-left: 2rem;
     padding-bottom: 2rem;
   }
 
@@ -2804,6 +2804,10 @@ header {
 
   .playlist-header{
     width: 350px
+  }
+
+  .options-title{
+    font-size: 2rem;
   }
 
 }
@@ -2887,7 +2891,7 @@ header {
   }
 
   .options-title{
-    font-size: 1.5rem;
+    font-size: 1.85rem;
   }
 
   .playlist-header{
@@ -2967,7 +2971,7 @@ header {
   }
 
   .options-title{
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 
   .pro-option{
@@ -3083,6 +3087,10 @@ header {
 
 .p-landing{
   font-size: .65rem;
+}
+
+.options-title{
+  font-size: 1.25rem;
 }
 
 /* .tracks-to-include{
