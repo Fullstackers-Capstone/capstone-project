@@ -31,7 +31,8 @@ const NavBar = () => {
 
             {auth.proUser ? <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile <span style={{color: 'gold', marginLeft: '.15rem'}}><i className="fa-solid fa-circle-check fa-xs"></i></span></Link> : <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link>}
 
-            <Link to="/" onClick={handleDropdownToggle}>My Playlists</Link>
+            {auth.playlistCount > 0 ? <Link to="/" onClick={handleDropdownToggle}>My Playlists</Link> : ''}
+           
             
             {authPlaylists.length > 4 && (!auth.proUser) ? <Link to="/unlock-pro" onClick={handleDropdownToggle}>Create Playlist</Link> : <Link to="/prompt" onClick={handleDropdownToggle}>Create Playlist</Link>}
             

@@ -132,7 +132,9 @@ const handleClickOutside = (event) => {
         {token && (
           <div>
             <Routes>
-              <Route path="/" element={<Home />} />
+              {
+                auth.playlistCount > 0 ?  <Route path="/" element={<Home />} /> : <Route path="/" element={<Prompt />} />
+              }
               <Route path="/unlock-pro" element={<UnlockPro />} />
               <Route path="/users/:id" element={<Profile />} />
               <Route path="/prompt" element={<Prompt />} />
