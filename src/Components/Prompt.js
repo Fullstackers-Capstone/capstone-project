@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { getResponse, getJSONResponse, setSpotifyURIs, createDBPlaylist, updateAuth} from '../store';
 import Searcher from './Searcher';
-import { getTopTracks, createPlaylist,  } from '../../server/api/spotify';
+import { getTopTracks, createPlaylist, getTopArtists } from '../../server/api/spotify';
 import Loader from './Loader';
 import { FaInfoCircle } from 'react-icons/fa';
 
@@ -84,6 +84,27 @@ const playlistNameTest = promptObject.playlistName;
   const selectPromptOption = (text) => {
     setInput(text);
   };
+
+  const selectTopArtists = async() => {
+      const request = await getTopArtists();
+      const artists = request.data.items.map(artist => artist.name )
+      artists.join(', ');
+
+      const text = `Songs that sound like ${artists}`;
+
+      setInput(text);
+  };
+
+
+  const selectTopTracks = async() => {
+    const request = await getTopTracks();
+    const tracks = request.data.items.map(track => `${track.name} by ${track.artists[0].name}`);
+    tracks.join(', ');
+
+    const text = `Songs that sound like these songs: ${tracks}`;
+
+    setInput(text);
+};
 
   const toggleItemSelection = (index) => {
     setSelectedItems((prevSelectedItems) => {
@@ -382,6 +403,22 @@ const playlistNameTest = promptObject.playlistName;
                 <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Grad Party Playlist!')}>
                   Grad Party Playlist!
                 </div>
+                {
+                  auth. proUser ? <div> 
+                    <div className ='pro-prompts-title-container'>  
+                      <div>Pro Prompts</div> </div>
+                    <div className="prompt-options with-arrow" onClick={() => selectTopArtists()}>
+                     Using your top artists!
+                   </div> 
+
+                   <div className="prompt-options with-arrow" onClick={() => selectTopTracks()}>
+                     Using your top tracks!
+                   </div> 
+
+                   
+                   </div> : ''
+
+                }
               </div>  
             </div>
           </div>
