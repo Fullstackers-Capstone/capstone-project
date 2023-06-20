@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentUserPlaylists, getPlaylistById, getPlaylistTracks } from '../../server/api/spotify';
+import { getCurrentUserPlaylists, getCurrentUserProfile, getPlaylistById, getPlaylistTracks } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
@@ -31,6 +31,7 @@ const MyPlaylists = () => {
       try{
         const spotIdData = await Promise.all(playlists.map(async (response) => ({
           spotData: await getPlaylistById(response.spotId),
+          userData: await getCurrentUserProfile(response.userId),
           prompt: response.prompt,
           createdAt: response.createdAt,
           isDiscoverable: response.isDiscoverable,
@@ -91,6 +92,8 @@ const MyPlaylists = () => {
     return null;
   }
 
+  console.log('we need the photo', discoverablePlaylists);
+
   return(
 
     <>
@@ -146,7 +149,7 @@ const MyPlaylists = () => {
                     <div className='pl-thumb-stats-container'>
                       <div className='pl-thumb-user-container'>
                           <div className='pl-thumb-user-img'>
-                            <img src={auth.image} />
+                            <img src={playlist.userData.data.images[0].url} />
                           </div>
                           <div className='pl-thumb-user-name-container'>
                             <div className='disc-thumb-user-name'>
@@ -158,7 +161,7 @@ const MyPlaylists = () => {
                       </div>
         
 
-                    {playlist.userId === auth.id ? <div className='pl-thumb-ellipsis-container'>
+                    <div className='pl-thumb-ellipsis-container'>
         
                         <ul className='ellipsis-dropdown'>
                             <button>
@@ -177,7 +180,7 @@ const MyPlaylists = () => {
                             
                         </ul>
 
-                    </div> : ''}
+                    </div>
                     
         
                     </div>
