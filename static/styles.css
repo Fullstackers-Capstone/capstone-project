@@ -88,7 +88,7 @@ header {
 }
 
 #spotify-logo{
-  margin-left: .5rem;
+  margin-left: .75rem;
   color: var(--spotifyGreen)
 }
 
@@ -370,6 +370,11 @@ header {
   box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
   font-size: .9rem;
   color: #cecece;
+  border: 1px solid transparent;
+}
+.pro-option:hover{
+  border: 1px solid var(--spotifyGreen);
+  cursor: default;
 }
 
 .option {
@@ -889,6 +894,7 @@ header {
 
 .profstats div{
   margin-bottom: .65rem;
+  font-weight: 300;
 }
 
 #create-subheader{
@@ -975,7 +981,7 @@ header {
   display: flex;
   align-items: center;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 300;
   color: white;
   /* text-shadow: 1px 1px 1px rgb(27, 111, 51); */
 }
@@ -1489,7 +1495,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: .75rem;
+  font-size: .8rem;
   margin-top: 1rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -2040,6 +2046,125 @@ header {
 
 /* Pop Up window styling end */
 
+/* Landing Page Styles */
+
+.landing {
+  /* background-color: black; */
+  color: white;
+  padding: 20px;
+  padding-top: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+}
+
+.landing-left-container{
+  flex: 1;
+}
+
+.landing-right-container{
+  flex: 1;
+}
+
+.hero-section {
+  padding: 3rem;
+  padding-top: 2rem;
+  text-shadow: 1px 1px 10px rgb(5, 5, 5);
+}
+
+.landing-header{
+  font-weight: bold;
+  font-size: 5rem;
+  line-height: .85;
+}
+
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 40px 0;
+}
+
+.feature {
+  background-color: #242424;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  padding: 20px;
+  width:30%;
+  box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border: 1px solid #777777;
+}
+
+.feature h2 {
+  color: var(--spotifyGreen)
+}
+
+.about-section {
+  text-align: center;
+  padding: 40px;
+  color: white;
+  border-radius: 5px;
+}
+
+.get-started {
+  background-color: var(--spotifyGreen);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  width: 20vw;
+  text-align: center;
+  height: auto;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: box-shadow 0.3s ease; 
+  box-shadow: 0 0 15px rgba(5, 238, 87, 0.849);
+  /* font-weight: bold; */
+}
+
+.get-started:hover {
+  background-color: #1db954; 
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(245, 246, 245, 0.974);
+}
+
+.how-it-works{
+  font-size: 2.5rem;
+  text-shadow: 1px 1px 10px rgb(5, 5, 5);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.feature-header{
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1vh;
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-shadow: 1px 1px 5px rgb(5, 5, 5);
+}
+
+.p-landing{
+  text-align: left;
+  font-size: .8rem;
+  /* text-align: justify; */
+  color: #cecece;
+  line-height: 1.35;
+  margin-top: .5rem;
+}
+
+
+@media (max-width: 768px) {
+  .features-section {
+    flex-direction: column;
+  }
+  .feature {
+    margin: 20px auto;
+  }
+}
+
+/* Landing Page Styles End */
+
 
 /* RE-SIZING */
 
@@ -2049,6 +2174,13 @@ header {
     font-size: 2.25rem;
   }
 
+}
+
+@media screen and (max-width: 1350px) {
+
+  .landing-header{
+    font-size: 4.5rem;
+  }
 }
 
 @media screen and (max-width: 1305px) {
@@ -2073,6 +2205,13 @@ header {
     font-size: .8rem;
   }
 
+}
+
+@media screen and (max-width: 1240px) {
+
+  .landing-header{
+    font-size: 4rem;
+  }
 }
 
 @media screen and (max-width: 1225px) {
@@ -2567,124 +2706,7 @@ header {
   margin: 1rem 0;
 }
 
-/* Landing Page Styles */
 
-.landing {
-  /* background-color: black; */
-  color: white;
-  padding: 20px;
-  padding-top: 1rem;
-  font-family: 'Montserrat', sans-serif;
-  display: flex;
-}
-
-.landing-left-container{
-  flex: 1;
-}
-
-.landing-right-container{
-  flex: 1;
-}
-
-.hero-section {
-  padding: 3rem;
-  padding-top: 2rem;
-  text-shadow: 1px 1px 10px rgb(5, 5, 5);
-}
-
-.landing-header{
-  font-weight: bold;
-  font-size: 5rem;
-  line-height: .85;
-}
-
-.features-section {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 40px 0;
-}
-
-.feature {
-  background-color: #242424;
-  border-radius: 10px;
-  margin-bottom: 1.5rem;
-  padding: 20px;
-  width:30%;
-  box-shadow: 0px 8px 16px 10px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  border: 1px solid #777777;
-}
-
-.feature h2 {
-  color: var(--spotifyGreen)
-}
-
-.about-section {
-  text-align: center;
-  padding: 40px;
-  color: white;
-  border-radius: 5px;
-}
-
-.get-started {
-  background-color: var(--spotifyGreen);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: none;
-  width: 20vw;
-  text-align: center;
-  height: auto;
-  font-size: 1.2rem;
-  font-weight: 500;
-  transition: box-shadow 0.3s ease; 
-  box-shadow: 0 0 15px rgba(5, 238, 87, 0.849);
-  /* font-weight: bold; */
-}
-
-.get-started:hover {
-  background-color: #1db954; 
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(245, 246, 245, 0.974);
-}
-
-.how-it-works{
-  font-size: 2.5rem;
-  text-shadow: 1px 1px 10px rgb(5, 5, 5);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.feature-header{
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 1vh;
-  font-size: 1.25rem;
-  font-weight: 500;
-  text-shadow: 1px 1px 5px rgb(5, 5, 5);
-}
-
-.p-landing{
-  text-align: left;
-  font-size: .8rem;
-  /* text-align: justify; */
-  color: #cecece;
-  line-height: 1.35;
-  margin-top: .5rem;
-}
-
-
-@media (max-width: 768px) {
-  .features-section {
-    flex-direction: column;
-  }
-  .feature {
-    margin: 20px auto;
-  }
-}
-
-/* Landing Page Styles End */
 
 /* Footer Styling */
 

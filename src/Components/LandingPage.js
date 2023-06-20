@@ -10,7 +10,7 @@ const LandingPage = () => {
       <div className='landing-left-container'>
 
       <section className="hero-section">
-        <h2 className="landing-header">Create <br></br><span style={{color: 'gold'}}>Amazing</span>, <br></br>AI-Generated Playlists.</h2>
+        <div className="landing-header">Create <br></br><span style={{color: 'gold'}}>Amazing</span>, <br></br>AI-Generated Playlists.</div>
       </section>
 
       <GetStarted />
