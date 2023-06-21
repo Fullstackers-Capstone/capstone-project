@@ -2903,7 +2903,7 @@ header {
     font-size: .9rem;
   }
 
-  .example-prompts-title-container{
+  .example-prompts-title-container, .pro-prompts-title-container{
     font-size: 1.25rem;
   }
 

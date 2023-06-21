@@ -411,11 +411,11 @@ const playlistNameTest = promptObject.playlistName;
                     <div className ='pro-prompts-title-container'>  
                       <div>Pro Prompts</div> </div>
                     <div className="prompt-options with-arrow" onClick={() => selectTopArtists()}>
-                     Using your top artists!
+                     Music Based on Your Top Spotify Artists
                    </div> 
 
                    <div className="prompt-options with-arrow" onClick={() => selectTopTracks()}>
-                     Using your top tracks!
+                     Music Based on Your Top Spotify Tracks
                    </div> 
 
                    
