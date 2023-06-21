@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentUserPlaylists, getCurrentUserProfile, getPlaylistById, getPlaylistTracks } from '../../server/api/spotify';
+import { getCurrentUserPlaylists, getCurrentUserProfile, getPlaylistById, getPlaylistTracks, getAnyUserProfile } from '../../server/api/spotify';
 import { catchErrors } from '../../server/api/utils';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
@@ -31,7 +31,7 @@ const MyPlaylists = () => {
       try{
         const spotIdData = await Promise.all(playlists.map(async (response) => ({
           spotData: await getPlaylistById(response.spotId),
-          userData: await getCurrentUserProfile(response.userSpotId),
+          userData: await getAnyUserProfile(response.userSpotId),
           prompt: response.prompt,
           createdAt: response.createdAt,
           isDiscoverable: response.isDiscoverable,
