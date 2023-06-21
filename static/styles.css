@@ -89,7 +89,8 @@ header {
 
 #spotify-logo{
   margin-left: .75rem;
-  color: var(--spotifyGreen)
+  color: var(--spotifyGreen);
+  width: 55px;
 }
 
 .StyledLoginButton {
