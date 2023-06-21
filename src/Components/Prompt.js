@@ -336,7 +336,7 @@ const playlistNameTest = promptObject.playlistName;
 
                       <div className="playlist-item-info">
                           <div className="playlist-item-row">
-                            <span className='playlist-item-artist'><span style={{fontWeight: '600', color: 'white', marginRight: '.25rem'}}>{(index + 1)}.</span> {response.artist}</span> 
+                            <span className='playlist-item-artist'><span style={{fontWeight: '600', color: 'white', marginRight: '.25rem'}}>{(index + 1)}.</span> <span style={{fontWeight: '500'}}>{response.artist}</span></span> 
                             <span className='playlist-item-title'>{response.title}</span>
                           </div>
                       </div>
@@ -411,11 +411,11 @@ const playlistNameTest = promptObject.playlistName;
                     <div className ='pro-prompts-title-container'>  
                       <div>Pro Prompts</div> </div>
                     <div className="prompt-options with-arrow" onClick={() => selectTopArtists()}>
-                     Music Based on Your Top Spotify Artists
+                     Using Your Top Spotify Artists
                    </div> 
 
                    <div className="prompt-options with-arrow" onClick={() => selectTopTracks()}>
-                     Music Based on Your Top Spotify Tracks
+                     Using on Your Top Spotify Tracks
                    </div> 
 
                    

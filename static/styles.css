@@ -464,7 +464,7 @@ header {
   width: 400px;
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 0;
+  margin-top: 1rem;
 }
 
 .toggle-option {
@@ -896,6 +896,7 @@ header {
   border-left: 4px solid #242424;
   border-right: 4px solid #242424;
   background: #242424;
+
 }
 
 .profstats{
@@ -904,7 +905,7 @@ header {
   border-top-right-radius: 5px;
   background-color: #121212;
   padding: 1rem;
-  padding-bottom: .5rem;
+  padding-bottom: 2.5rem;
 }
 
 .profstats div{
@@ -2907,8 +2908,8 @@ header {
     font-size: 1.25rem;
   }
 
-  .prompt-options{
-    font-size: .8rem;
+  .prompt-options.with-arrow{
+    font-size: .77rem;
   }
 
   .pro-option{
@@ -2989,7 +2990,7 @@ header {
   }
 
   .pl-thumb-prompt-content{
-    font-size: .7rem;
+    font-size: .8rem;
   }
 
   .profstats div{
@@ -3059,11 +3060,11 @@ header {
     font-size: .8rem;
   }
 
-  .profstats div{
+  /* .profstats div{
     font-size: .7rem;
-  }
+  } */
 
-  .discoverable-title, .playlist-header{
+  .playlist-header{
     font-size: .7rem;
   }
 
