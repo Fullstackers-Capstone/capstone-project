@@ -80,7 +80,7 @@ const LandingPage = () => {
           <div className="step">
             <div className="feature-header">
             <div className='step-num-title'>
-              <span className='step-number'>Step 3<span className='step-colon'>:</span></span> <span className='step-title'>Launch & Share Your Playlists
+              <span className='step-number'>Step 3<span className='step-colon'>:</span></span> <span className='step-title'>Launch & Share Playlists
             </span>
             </div>
             </div>
