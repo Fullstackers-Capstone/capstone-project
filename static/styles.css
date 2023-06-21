@@ -2957,11 +2957,11 @@ header {
     font-size: 1.5rem;
   }
 
-  .toggle-button {
+  .toggle-button.MP, .toggle-button.DISC {
     width: 300px;
   }
 
-  .playlist-button {
+  .playlist-button, .playlist-button.DISC {
     width: 300px;
   }
 
@@ -3033,6 +3033,11 @@ header {
     font-size: 2.5rem;
     padding-right: .5rem;
   }
+  
+  .get-started{
+    width: 60%;
+  }
+
 }
 
 @media screen and (max-width: 585px) {
@@ -3161,10 +3166,6 @@ header {
   .create-header{
     font-size: 2rem;
   }
-
-  .get-started{
-    width: 60%;
-  }
 }
 
 @media screen and (max-width: 470px) {
@@ -3187,7 +3188,7 @@ header {
 }
 
 .landing-header{
-  font-size: 2.35rem;
+  font-size: 2.5rem;
 }
 
 .how-it-works{
