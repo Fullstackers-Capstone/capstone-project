@@ -92,8 +92,6 @@ const MyPlaylists = () => {
     return null;
   }
 
-  console.log('we need the photo', discoverablePlaylists);
-
   return(
 
     <>
@@ -125,7 +123,7 @@ const MyPlaylists = () => {
                     {playlist.spotData.data.tracks.items.slice(0, 7).map((_track, index) => {
                         return(
                           <div key={_track.track.duration_ms} className='track-lineitem'>
-                            <span style={{color: '#777777', fontSize: '.7rem', marginRight: '.25rem'}}>{(index + 1)}. </span><span className='track-artist' style={{color: 'gold'}}>{_track.track.artists[0].name}</span>-
+                            <span style={{color: '#777777', fontSize: '.75rem', marginRight: '.25rem'}}>{(index + 1)}. </span><span className='track-artist' style={{color: 'gold'}}>{_track.track.artists[0].name}</span>-
                             <span style={{fontSize: '.75rem', marginLeft: '.35rem'}}>{_track.track.name} <span style={{fontSize: '.7rem'}}>({msConversion(_track.track.duration_ms)})</span></span></div>
                         )
                         })}
@@ -154,8 +152,6 @@ const MyPlaylists = () => {
                           <div className='pl-thumb-user-name-container'>
                             <div className='disc-thumb-user-name'>
                             <a href={`https://open.spotify.com/user/${playlist.spotData.data.owner.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.owner.display_name.toUpperCase()}</a>
-                            {console.log(playlist.spotData.data.owner.id)}
-                            {console.log(playlist.spotData.data.owner.display_name)}
                             </div>
                           </div>
                       </div>

@@ -91,9 +91,9 @@ const LandingPage = () => {
 
       </div>
     </div>
-    <div className='footer-container'>
+    {/* <div className='footer-container'>
       <Footer />
-    </div>
+    </div> */}
     </>
   );
 };

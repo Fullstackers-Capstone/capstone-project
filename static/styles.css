@@ -363,6 +363,7 @@ header {
   margin-top: 1.75rem;
   margin-bottom: 2rem;
   font-size: 2.5rem;
+  font-weight: 500;
   text-shadow: 1px 1px 10px rgb(5, 5, 5);
 }
 
@@ -465,12 +466,37 @@ header {
   border-radius: 10px;
   overflow: hidden;
   margin-top: 1rem;
+  border: 2px solid var(--spotifyGreen);
 }
+
+.toggle-button.MP {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+  border: 2px solid var(--spotifyGreen);
+}
+
+.toggle-button.DISC {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+  border: 2px solid gold;
+}
+
+
+
+
 
 .toggle-option {
   flex-grow: 1;
   padding: 10px 20px;
-  border: 2px solid var(--spotifyGreen);
+  border: 0;
   background-color: #242424;
   color: #B3B3B3;
   cursor: pointer;
@@ -483,6 +509,12 @@ header {
   background-color: #1DB954;
   color: #FFFFFF;
 }
+
+.toggle-option.disc-selected {
+  background-color: gold;
+  color: black;
+}
+
 /* Playlist/Discover Toggle Styling ends here */
 
 /* PLAYLISTS COMPONENT ELEMENTS*/
@@ -1312,6 +1344,7 @@ header {
 
 #subscribe-now{
   margin-top: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .track-list {
@@ -1350,7 +1383,25 @@ header {
 .playlist-button {
   padding: 10px 20px;
   background-color: #1DB954; 
+  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
   color: white;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 10px;
+  /* transition: background-color 0.5s ease; */
+  width: 400px;
+  /* width: 30vw; */
+  text-align: center;
+  border: 0;
+}
+
+.playlist-button.DISC {
+  padding: 10px 20px;
+  background-color: gold; 
+  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
+  color: black;
   text-decoration: none;
   font-size: 20px;
   border-radius: 10px;
@@ -1363,11 +1414,20 @@ header {
 
 .playlist-button:hover {
   background-color: gold;
-  border: 0;
+}
+
+.playlist-button.DISC:hover {
+  background-color: var(--spotifyGreen);
+  color: white;
 }
 
 .playlist-button:active{
   background-color: white;
+}
+
+.playlist-button.DISC:active{
+  background-color: white;
+  color: black;
 }
 
 /* Create Playlist Button end */
@@ -2556,7 +2616,7 @@ header {
   }
 
   .landing-header{
-    line-height: 1.2;
+    line-height: 1;
     margin-bottom: -1rem;
   }
 
@@ -2603,6 +2663,7 @@ header {
     flex: 1;
     margin: 1rem;
     margin-top: 0;
+    height: 34vh;
   }
 
   .step:last-child{
@@ -2836,6 +2897,10 @@ header {
     padding-right: .25rem;
   }
 
+  .pl-thumb-createdAt{
+    font-size: .75rem;
+  }
+
 }
 
 @media screen and (max-width: 750px) {
@@ -3001,8 +3066,18 @@ header {
     font-size: .8rem;
   }
 
+  .options-title-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
   .options-title{
-    font-size: 1.5rem;
+    font-size: 2.25rem;
+  }
+
+  .subscription-only{
+    display: block;
   }
 
   .pro-option{
@@ -3057,7 +3132,7 @@ header {
   }
 
   .pl-thumb-user-name, .disc-thumb-user-name{
-    font-size: .8rem;
+    font-size: .95rem;
   }
 
   /* .profstats div{
@@ -3086,9 +3161,21 @@ header {
   .create-header{
     font-size: 2rem;
   }
+
+  .get-started{
+    width: 60%;
+  }
 }
 
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 470px) {
+
+.landing-header{
+  font-size: 2.65rem;
+}
+
+}
+
+@media screen and (max-width: 435px) {
 
 .aitracklist-left, .aiplaylist-name-left{
   flex-direction: column;
@@ -3099,12 +3186,8 @@ header {
   padding: 2rem;
 }
 
-.get-started{
-  width: 70%;
-}
-
 .landing-header{
-  font-size: 2rem;
+  font-size: 2.35rem;
 }
 
 .how-it-works{
@@ -3126,7 +3209,7 @@ header {
 }
 
 .options-title{
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 
 .title{
@@ -3137,8 +3220,10 @@ header {
   padding-right: .5rem;
 }
 
+}
 
-/* .tracks-to-include{
-  margin-left: 0;
-} */
+@media screen and (max-width: 390px) {
+  .landing-header{
+    font-size: 2.15rem;
+  }
 }
