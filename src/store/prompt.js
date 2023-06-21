@@ -82,10 +82,63 @@ export const getJSONResponse = (prompt, length, data) => {
   };
 };
 
+// export const getSpotifyURIs = (prompt) => {
+//   return async (dispatch) => {
+//     try {
+//       const playlist = JSON.parse(prompt.response);
+//       const newPlaylist = [];
+//       const uniqueArray = [];
+//       const URIResponse = await Promise.all(playlist.map(async(element) => {
+//         const uri = await searchFunctionality(element)
+//         if (await uri){
+//           if (uri !== undefined){
+//              newPlaylist.push({title: uri.name, artist: uri.artists[0].name, album: uri.album.name, uri: uri.uri});
+//               return await uri.uri;
+//           }
+//         }
+//       }));
+
+//       function areObjectsEqual(obj1, obj2) {
+//         return JSON.stringify(obj1) === JSON.stringify(obj2);
+//       }
+
+//       for (let i = 0; i < newPlaylist.length; i++) {
+//         let isDuplicate = false;
+//         for (let j = 0; j < uniqueArray.length; j++) {
+//           if (areObjectsEqual(newPlaylist[i], uniqueArray[j])) {
+//             isDuplicate = true;
+//             break;
+//           }
+//         }
+//         if (!isDuplicate) {
+//           uniqueArray.push(newPlaylist[i]);
+//         }
+//       }
+
+
+//       prompt.uriList = URIResponse;
+//       prompt.response = uniqueArray;
+//       dispatch(savePrompt(prompt));
+//     } catch (error) {
+//       console.error(error);
+//       dispatch({type: 'SERVER_ERROR', payload: "Error getting Spotify URIs! Please try your request again."});
+//     }
+//   }
+// }
+
 export const getSpotifyURIs = (prompt) => {
   return async (dispatch) => {
     try {
-      const playlist = JSON.parse(prompt.response);
+      let playlist;
+      try {
+        // Check if prompt.response is valid JSON
+        playlist = JSON.parse(prompt.response);
+      } catch (error) {
+        // If it's not valid JSON, dispatch a server error
+        dispatch({type: 'SERVER_ERROR', payload: "JSON is not valid! Please try a new prompt."});
+        return;  // terminate execution of the function here
+      }
+      
       const newPlaylist = [];
       const uniqueArray = [];
       const URIResponse = await Promise.all(playlist.map(async(element) => {
@@ -115,7 +168,6 @@ export const getSpotifyURIs = (prompt) => {
         }
       }
 
-
       prompt.uriList = URIResponse;
       prompt.response = uniqueArray;
       dispatch(savePrompt(prompt));
@@ -125,6 +177,7 @@ export const getSpotifyURIs = (prompt) => {
     }
   }
 }
+
 
 export const setSpotifyURIs = (prompt, playlist) => {
   return async (dispatch) => {
