@@ -118,6 +118,8 @@ export const spotifyAxios = axios.create({
 // Get the current user's profile
 export const getCurrentUserProfile = () => spotifyAxios.get('/me');
 
+export const getAnyUserProfile = (user_id) => spotifyAxios.get(`/users/${user_id}`);
+
 // Get the current user's playlists
 export const getCurrentUserPlaylists = (limit = 20) => {
   return spotifyAxios.get(`/me/playlists?limit=${limit}`);
