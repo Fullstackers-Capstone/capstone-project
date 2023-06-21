@@ -464,7 +464,7 @@ header {
   width: 400px;
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 1.75rem;
+  margin-top: 0;
 }
 
 .toggle-option {
@@ -2831,6 +2831,10 @@ header {
     display: inline;
   }
 
+  #create-example-prompts-window{
+    padding-right: .25rem;
+  }
+
 }
 
 @media screen and (max-width: 750px) {
@@ -3072,9 +3076,10 @@ header {
   }
 
   .create-playlist-button{
-    padding-left: 2.15rem;
-    padding-right: 2.15rem;
-    font-size: .75rem
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+    margin-left: 0;
+    font-size: .85rem
   }
 
   .create-header{
@@ -3094,7 +3099,7 @@ header {
 }
 
 .get-started{
-  width: 60%;
+  width: 70%;
 }
 
 .landing-header{
@@ -3126,6 +3131,11 @@ header {
 .title{
   margin-left: .25rem;
 }
+
+#create-example-prompts-window{
+  padding-right: .5rem;
+}
+
 
 /* .tracks-to-include{
   margin-left: 0;
