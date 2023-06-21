@@ -85,7 +85,7 @@ const Profile = () => {
 
             <div className='profstats'>
 
-                <div><span className='prof-title'>Spotify User ID:</span> { auth.spotifyId }</div>
+                <div><span className='prof-title'>Spotify ID:</span> { auth.spotifyId }</div>
                 <div><span className='prof-title'>Email:</span> { auth.email }</div>
 
                 {/* <div className='prof-edit-info'>
