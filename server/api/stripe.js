@@ -2,7 +2,7 @@ const stripe = require('stripe')(process.env.stripe_test);
 const express = require('express');
 const app = express.Router();
 
-const YOUR_DOMAIN = 'http://localhost:3000/#/unlock-pro/';
+const YOUR_DOMAIN = 'https://serenade-ai-playlists.onrender.com/#/unlock-pro/';
 
 app.post('/create-checkout-session', async (req, res, next) => {
     try {
