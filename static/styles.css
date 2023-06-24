@@ -1587,7 +1587,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: .8rem;
+  font-size: .9rem;
   margin-top: 1rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -3250,10 +3250,6 @@ header {
 @media screen and (max-width: 390px) {
   .landing-header{
     font-size: 2.15rem;
-  }
-
-  #create-playlist-get-started{
-    width: 100%;
   }
   
 }
