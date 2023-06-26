@@ -212,7 +212,7 @@ const playlistNameTest = promptObject.playlistName;
                   Prompt
                 </div>
                 <div className='prompt-input-left-content'>
-                  <input className="prompt-input" placeholder="e.g. Playlist for a morning commute" value={input} onChange={(ev) => { setInput(ev.target.value) }}>
+                  <input autoFocus className="prompt-input" placeholder="e.g. Playlist for a morning commute" value={input} onChange={(ev) => { setInput(ev.target.value) }}>
                   </input>
                 </div>
               </div>
@@ -343,6 +343,13 @@ const playlistNameTest = promptObject.playlistName;
 
                     </div>
                   ))}
+
+                  {/* <div className="playlist-item-info">
+                          <div className="playlist-item-row">
+                            <span className='playlist-item-artist'><span style={{fontWeight: '600', color: 'white', marginRight: '.25rem'}}>1.</span> <span style={{fontWeight: '500'}}>Artist Name</span></span> 
+                            <span className='playlist-item-title'>Song Title</span>
+                          </div>
+                      </div> */}
 
 
                   {/* {!showAllTracks && (
