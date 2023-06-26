@@ -20,6 +20,7 @@ import Modal from './Modal';
 import SuccessfulPlaylist from './SuccessfulPlaylist';
 import LandingPage from './LandingPage';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import About from './About';
 
 const App = () => {
 
@@ -61,7 +62,7 @@ const togglePopup = () => {
   setPopupVisible(!isPopupVisible);
   setActiveSection(null);
   setShowContent(false);
-  setShowBackButton(false);
+  // setShowBackButton(false);
 };
 
 const infoNavigate = () => {
@@ -81,7 +82,7 @@ const back = () => {
 const toggleSection = (section) => {
   setActiveSection(activeSection === section ? null : section);
   setShowContent(activeSection !== section);
-  setShowBackButton(true);
+  // setShowBackButton(true);
 };
 
 
@@ -151,6 +152,7 @@ const handleClickOutside = (event) => {
               <Route path="/top-tracks" element={<TopTracks />} />
               <Route path="/playlists/:id" element={<SuccessfulPlaylist />} />
               <Route path="/landing" element={<LandingPage />} />
+              <Route path="/about" element={<About />} />
             </Routes>
             <div>
               {serverError.hasError && (
