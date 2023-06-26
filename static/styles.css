@@ -609,7 +609,7 @@ header {
 }
 
 .create-header{
-  width: 75%;
+  width: 85%;
   display: flex;
   justify-content: flex-end;
   font-size: 3rem;
@@ -1798,7 +1798,7 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1904,6 +1904,7 @@ header {
   height: 80%; /* Adjust the height as needed */
   min-height: 300px; /* Adjust the minimum height as needed */
   background-color: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   flex-direction: column;
@@ -1927,6 +1928,7 @@ header {
   align-items: center;
   width: 100%;
   box-sizing: border-box; /* Include padding in height calculation */
+  border: 1px solid blue;
 }
 
 
@@ -2066,6 +2068,9 @@ header {
   background-color: white;
 }
 
+.popup-section-content{
+  margin: 0;
+}
 
 .popup-section-content .section-title + p {
   display: block; /* Display the <p> element when its section is active */
@@ -2081,15 +2086,19 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
 
 .popup-back {
+  display: flex;
+  justify-content: center;
   padding: 0.5rem 1rem;
   background-color: var(--spotifyGreen);
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  width: 30%;
 }
 
 .popup-back:hover {
@@ -2315,11 +2324,87 @@ header {
   }
 }
 
+.modalOuterContainer{
+  margin: 3rem;
+}
+
+.info-title-container{
+  margin-bottom: .5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#info-close{
+  display: flex;
+  /* border: 1px solid red; */
+  justify-content: center;
+  /* align-items: center; */
+  height: 23px;
+  padding-right: .5rem;
+  cursor: pointer;
+}
+
+#info-close:hover{
+  color: white;
+}
+
+.info-title{
+  font-size: 2.5rem;
+  padding-left: .75rem;
+  text-shadow: 1px 1px 10px rgb(5, 5, 5);
+  color: gold;
+}
+
+#info-outer-container{
+  width: 100%;
+}
+
+.info-inner-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: #242424;
+  /* border: 1px solid #777777; */
+  border-radius: 10px;
+  color: white;
+  font-size: 1.75rem;
+  margin: 1.25rem auto;
+  padding: 1.5rem;
+  width:100%;
+  text-shadow: 1px 1px 4px rgb(5, 5, 5);
+  box-shadow: 0px 8px 16px 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid transparent;
+}
+
+#info-links{
+  align-items: center;
+  cursor: pointer;
+}
+
+#info-links:hover{
+  border: 1px solid var(--spotifyGreen);
+}
+
+#info-header{
+  font-size: 1rem;
+}
+
 .info-icon {
   cursor: pointer;
   margin-left: 0.5rem;
   margin-left: auto;
   font-size: 30px;
+}
+
+.info-container{
+  color: white;
+  font-size: .9rem;
+}
+
+.info-about-serenade{
+  margin-bottom: 1rem;
 }
 
 .popup-window {

@@ -4,7 +4,7 @@ import Login from './Login';
 import { BsSpotify } from 'react-icons/bs';
 import { accessToken, logout } from '/server/api/spotify.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import { fetchUsers, fetchSpotUser,getAllPrompts, fetchPlaylists } from '../store';
 import Profile from './Profile';
 import Contact from './Contact';
@@ -25,36 +25,37 @@ const App = () => {
 
   const [token, setToken] = useState(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
-  //const [activeSection, setActiveSection] = useState('');
   const [activeSection, setActiveSection] = useState(null);
   const [showContent, setShowContent] = useState(false);
-  const [showBackButton, setShowBackButton] = useState(false);
+  // const [showBackButton, setShowBackButton] = useState(false);
   const [hide, setHide] = useState(true);
   const popupRef = useRef(null);
   
   const serverError = useSelector(state => state.serverError);
 
+  const navigate = useNavigate();
+
   const handleCloseModal = () => {
     dispatch({type: 'FIXED_SERVER_ERROR', payload: false})
 };
 
-const sections = ['About', 'How Does It Work?', 'Examples'];
+const sections = ['How It Works', 'Examples'];
 
-const prev = () => {
-  const currentIndex = sections.indexOf(activeSection);
-  if (currentIndex > 0) {
-    const previousSection = sections[currentIndex - 1];
-    setActiveSection(previousSection);
-  }
-};
+// const prev = () => {
+//   const currentIndex = sections.indexOf(activeSection);
+//   if (currentIndex > 0) {
+//     const previousSection = sections[currentIndex - 1];
+//     setActiveSection(previousSection);
+//   }
+// };
 
-const next = () => {
-  const currentIndex = sections.indexOf(activeSection);
-  if (currentIndex < sections.length - 1) {
-    const nextSection = sections[currentIndex + 1];
-    setActiveSection(nextSection);
-  }
-};
+// const next = () => {
+//   const currentIndex = sections.indexOf(activeSection);
+//   if (currentIndex < sections.length - 1) {
+//     const nextSection = sections[currentIndex + 1];
+//     setActiveSection(nextSection);
+//   }
+// };
 
 const togglePopup = () => {
   setPopupVisible(!isPopupVisible);
@@ -62,6 +63,11 @@ const togglePopup = () => {
   setShowContent(false);
   setShowBackButton(false);
 };
+
+const infoNavigate = () => {
+  navigate('/prompt');
+  closeOut();
+}
 
 const closeOut = () => {
   setPopupVisible(!isPopupVisible);
@@ -154,80 +160,131 @@ const handleClickOutside = (event) => {
           </div>
         )}
         {isPopupVisible && (
-          <div className="popup-window" ref={popupRef}>
+          <div className="modalBackground" ref={popupRef}>
             <div className="popup-overlay" onClick={handleClickOutside}></div>
-            <div className="popup-content">
-            <div className="popup-close" onClick={closeOut}>×</div>
-              <div className="main-title-container">
-                <h2 className="main-title">Welcome to Serenade</h2>
-                <div className="title-separator"></div>
-              </div>
-              {showContent ? (
-                <div className="popup-section-content">
-                  <div className="section-title-container">
-                    <h3 className="section-title">{activeSection}</h3>
-                  </div>
-                  {activeSection === 'About' && (
-                    <div className="example-line">
-                      Serenade is an interactive app that harnesses the power of AI to create tailor-made playlists based on your mood.
-                      <br />
-                      <br />
-                      Whether you're embarking on a road trip or need the right tunes for your Sunday chores, Serenade enables you to effortlessly curate personalized playlists by simply describing your desired ambiance.
-                    </div>
-                  )}
-                  {activeSection === 'How Does It Work?' && (
-                    <>
-                    <div className="example-line">
-                      Using Serenade is as simple as typing in the text bar. <br/> <br/> Just describe what you're looking for, such as "playlist for a long bike ride," and Serenade's powerful AI will curate a selection of tracks specifically tailored to your request.
-                      <br />
-                      <br />
-                      Don't know where to start? Check out some examples by clicking on the right-pointing arrow below.
-                    </div>
-                    </>
-                  )}
-                  {activeSection === 'Examples' && (
-                    <>
-                      <div className="example-line">Looking for a playlist with songs that sounds similar to a specific song?  <br /> <br /> Try: "Songs similar to 'Sunday Morning' by Maroon 5"</div>
-                      <div className="example-line">Looking for a playlist with songs from artists similar to those of a specific artist?     <br /><br />Try: "Songs from artists like JLO. Only include songs by artists that are not JLO."</div>
-                      <div className="example-line">Looking for a playlist that helps you get through the work day?    <br /><br /> Try: "Uplifting songs for making it through the work day"</div>
+              <div className='modalOuterContainer'>
+                <div className='info-title-container'>
+                <div className='info-title'>{activeSection || <span>About <span style={{color: 'white'}}>Serenade</span></span>}
+                </div>
+                <div className='info-title' id='info-close'>
+                  <i onClick={closeOut} className="fa-solid fa-circle-xmark fa-xs"></i>
+                </div>
+                </div>
+                <div className="modalContainer" id='info-outer-container'>
 
-                    </>
-                  )}
-{showBackButton && (
-  <div className="popup-navigation">
-    {activeSection !== 'About' && (
-      <div className="popup-arrow" onClick={prev}>
-        <FaChevronLeft />
-      </div>
-    )}
-    <div className="popup-back-container">
-      <div className="popup-back" onClick={back}>
-        Back
-      </div>
-    </div>
-    {activeSection !== 'Examples' && (
-      <div className="popup-arrow" onClick={next}>
-        <FaChevronRight />
-      </div>
-    )}
-  </div>
-)}
+                    {showContent ? (
+                      <div className="popup-section-content">
+
+                        {activeSection === 'How It Works' && (
+                          <>
+                          <div className="steps-container">
+                            <div className="info-inner-container" style={{marginTop: 0}}>
+                              <div className="feature-header" id='info-header'>
+                              <div className='step-num-title'>
+                                <span className='step-number'>Step 1<span className='step-colon'>:</span></span> <span className='step-title'>Click 'Create Playlist' & Enter a Prompt</span>
+                                </div>
+                              </div>
+                              <p className="p-landing">Start by telling us what kind of music you're in the mood for. Want something to get you pumped for a workout, or maybe a calming playlist for studying? Just let us know!</p>
+                            </div>
+                            <div className="info-inner-container">
+                              <div className="feature-header" id='info-header'>
+                                <div className='step-num-title'>
+                                <span className='step-number'>Step 2<span className='step-colon'>:</span></span> <span className='step-title'>Select the Songs You Like
+                              </span>
+                              </div>
+                              </div>
+                              <p className="p-landing">We'll generate a playlist tailored to your prompt. From this selection, you can personally curate your final playlist, choosing the songs that resonate most with you.</p>
+                            </div>
+                            <div className="info-inner-container">
+                              <div className="feature-header" id='info-header'>
+                              <div className='step-num-title'>
+                                <span className='step-number'>Step 3<span className='step-colon'>:</span></span> <span className='step-title'>Launch & Share Playlists
+                              </span>
+                              </div>
+                              </div>
+                              <p className="p-landing">Once you're happy with your playlist, you can save it to your Spotify account with a single click. Share your unique playlists with your friends!</p>
+                            </div>
+
+                            <div className="popup-back-container">
+                            <div className="popup-back" onClick={back}>
+                              Back
+                            </div>
+                            </div>
+                          </div>
+                          </>
+                        )}
+                        {activeSection === 'Examples' && (
+                          <>
+
+<div className="steps-container">
+                            <div className="info-inner-container" style={{marginTop: 0}}>
+                              <div className="feature-header" id='info-header'>
+                              <div className='step-num-title'>
+                                <span className='step-number'>Songs similar to 'Sunday Morning' by Maroon 5</span>
+                                </div>
+                              </div>
+                              <p className="p-landing">Looking for a playlist with music that sounds similar to a specific song? Give the AI clear instructions along with the artist & song name you have in mind.</p>
+                            </div>
+                            <div className="info-inner-container">
+                              <div className="feature-header" id='info-header'>
+                                <div className='step-num-title'>
+                                <span className='step-number'>
+                                Songs from artists like JLO. Only include songs by artists that are not JLO.
+                              </span>
+                              </div>
+                              </div>
+                              <p className="p-landing">Be specific when you want to exclude certain results from your playlist.</p>
+                            </div>
+                            <div className="info-inner-container">
+                              <div className="feature-header" id='info-header'>
+                              <div className='step-num-title'>
+                                <span className='step-number'>
+                                Uplifting songs for making it through the work day
+                                </span>
+                              </div>
+                              </div>
+                              <p className="p-landing">Just want to capture a mood? Try putting it into words and see how Serenade performs.</p>
+                            </div>
+
+                            <div className="popup-back-container">
+                            <div className="popup-back" onClick={back}>
+                              Back
+                            </div>
+                            </div>
+                          </div>
+
+                          </>
+                        )}
+
+                      </div>
+                    ) : (
+                      <div className='info-container'>
+
+                        <div className='info-about-serenade' style={{marginTop: '1rem'}}>
+                        Serenade is an interactive app that harnesses the power of AI to create tailor-made playlists based on your mood.
+                        </div>
+
+                        <div className='info-about-serenade' style={{marginBottom: '2rem'}}>
+                        Whether you're embarking on a road trip or need the right tunes for your Sunday chores, Serenade enables you to effortlessly curate personalized playlists by simply describing your desired ambiance.
+                        </div>
+
+                        <div className="info-inner-container" id='info-links' onClick={() => toggleSection('How It Works')}>
+
+                        <span><i className="fa-solid fa-gears" style={{color: 'gold', marginRight: '.5rem'}}></i>How It Works</span>
+
+                        </div>
+
+                        <div className="info-inner-container" id='info-links' onClick={() => toggleSection('Examples')}>
+
+                        Examples
+
+                        </div>
+
+                      </div>
+                    )}
+                  </div>
                 </div>
-              ) : (
-                <div>
-                  <div className="section" onClick={() => toggleSection('About')}>
-                    <h3>About The App</h3>
-                  </div>
-                  <div className="section" onClick={() => toggleSection('How Does It Work?')}>
-                    <h3>How Does It Work?</h3>
-                  </div>
-                  <div className="section" onClick={() => toggleSection('Examples')}>
-                    <h3>Examples</h3>
-                  </div>
-                </div>
-              )}
             </div>
-          </div>
         )}
       </div>
     </div>
