@@ -216,6 +216,66 @@ header {
   justify-content: space-around;
 }
 
+.prof-spot-user{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.prof-spot-img{
+  flex: .01;
+}
+
+.prof-spot-img img{
+  width: 80px;
+  opacity: 90%;
+  border-radius: 50px;
+  box-shadow: 0 0 .5rem .5rem rgba(0, 0, 0, 0.15);
+}
+
+.prof-spot-userId{
+  flex: 1;
+  margin-left: 1rem;
+  font-size: 2rem;
+  text-shadow: 1px 1px 5px rgb(5, 5, 5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#prof-container-top{
+
+  background-color: #242424;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 0;
+  margin: 0;
+  height: .4rem;
+}
+
+#prof-discoverable-only{
+  border-radius: 5px;
+  /* border: 5px solid #242424; */
+  width: 100%;
+  
+}
+
+#prof-inner-container{
+  padding: 0;
+  margin-bottom: 3rem;
+}
+
+.prof-prompt-outer-container{
+  background-color: #171717;
+  padding: .5rem;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  width: 100%;
+  border-top: 0;
+  padding-top: 0;
+}
+
+
 
 .dropdown {
   position: relative;
@@ -264,23 +324,6 @@ header {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-
-/* .dropdown-content a:nth-child(5){
-  color: gold;
-}
-
-.dropdown-content a:nth-child(5):hover{
-  color: white;
-} */
-
-/* .ellipsis-dropdown-content a{
-  color: red;
-}
-
-.ellipsis-dropdown-content li:last-child:hover{
-  background-color: red;
-  color: black;
-} */
 
 .dropdown-content a:last-child{
   color: white;
@@ -726,6 +769,7 @@ header {
   background-color: #242424;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+
 }
 
 .pl-prompt{
@@ -739,6 +783,9 @@ header {
   flex: 3;
   display: flex;
   justify-content: flex-start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pl-thumb-ellipsis-container{
@@ -779,14 +826,12 @@ header {
   font-size: 1.25rem;
   /* color: var(--spotifyGreen); */
   text-shadow: 1px 1px 3px rgb(0, 0, 0);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .pl-thumb-user-name a, .disc-thumb-user-name a{
   color: white;
   border-bottom: 1px solid transparent
+  
 }
 
 .pl-thumb-user-name a:hover{
@@ -939,26 +984,12 @@ header {
   width: 75%;
 }
 
-.profstats-container{
-  display: flex;
-  border-left: 4px solid #242424;
-  border-right: 4px solid #242424;
-  background: #242424;
-
-}
-
-.profstats{
-  flex: 2;
+.prof-stats{
+  width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-color: #121212;
+  background-color: #171717;
   padding: 1rem;
-  padding-bottom: 2.5rem;
-}
-
-.profstats div{
-  margin-bottom: .65rem;
-  font-weight: 300;
 }
 
 #create-subheader{
@@ -1077,12 +1108,14 @@ header {
   margin-left: .25rem;
   margin-right: .25rem;
   color: gold;
+  display: inline;
 }
 
 .prof-free{
   margin-left: .25rem;
   margin-right: .25rem;
   color: lightgray;
+  display: inline;
 }
 
 .prof-unlock-pro a{
@@ -2403,7 +2436,7 @@ header {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  background-color: #242424;
+  background-color: #171717;
   /* border: 1px solid #777777; */
   border-radius: 10px;
   color: white;
@@ -2730,6 +2763,10 @@ header {
     font-size: 1rem;
   }
 
+  .prof-spot-userId{
+    font-size: 1.75rem;
+  }
+
 }
 
 @media screen and (max-width: 1025px) {
@@ -2839,7 +2876,12 @@ header {
   .prompt-input-left{
     flex: 1.7
   }
+
+  .prof-spot-userId{
+    font-size: 1.5rem;
+  }
 }
+
 
 /* @media screen and (max-width: 935px) {
   .prompt-input-left{
@@ -2917,6 +2959,9 @@ header {
   .step-num-title{
     display: flex;
     justify-content: flex-start;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .step-number{
@@ -3044,6 +3089,10 @@ header {
     width: 50%;
   }
 
+  .prof-spot-img img{
+    width: 60px;
+  }
+
 }
 
 @media screen and (max-width: 750px) {
@@ -3053,6 +3102,10 @@ header {
 
   .playlist-header{
     width: 300px
+  }
+
+  .prof-spot-userId{
+    font-size: 1.25rem;
   }
 }
 
@@ -3345,6 +3398,18 @@ header {
   .step-colon{
     display: none;
   }
+
+  .prof-spot-img img{
+    width: 50px;
+  }
+
+  .discoverable-title{
+    font-size: .9rem;
+  }
+
+  #info-header{
+    font-size: .9rem;
+  }
   
 }
 
@@ -3433,6 +3498,17 @@ header {
     width: 100%;
 }
 
+.prof-spot-userId{
+  font-size: 1rem;
+}
+
+.discoverable-title{
+  font-size: .8rem;
+}
+
+#info-header{
+  font-size: .8rem;
+}
 
 .aitracklist-left, .aiplaylist-name-left{
   flex-direction: column;

@@ -69,71 +69,150 @@ const Profile = () => {
     }
     
     return(
+
         <div id='content-body'>
             <div id='pl-container' style={{marginTop: '2rem'}}>
 
-            <div className='create-header'>
-            User <span style={{color: 'white', marginLeft: '.5rem'}}>Profile</span>
-          </div>
-
-            <div className='pl-thumb' key={auth.id}>
-            <div className='pl-thumb-name'>
-              <a href={`https://open.spotify.com/user/${ auth.spotifyId }`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()} <span className={`${(pro === true) ? 'prof-unlock-pro' : 'prof-free'}`} title={`${(pro === true) ? 'Pro User' : 'Free User'}`}><i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span></a>
-            </div>
-
-            <div className='profstats-container'>
-
-            <div className='profstats'>
-
-                <div><span className='prof-title'>Spotify ID:</span> { auth.spotifyId }</div>
-                <div><span className='prof-title'>Email:</span> { auth.email }</div>
-
-                {/* <div className='prof-edit-info'>
-                    Visit your <a href=''>Spotify Profile <i className="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> to make changes to your user info.
-                </div> */}
-
-                <div><span className='prof-title'>Serenade Playlist Count:</span> { authPlaylists.length }</div>
-
-                <div><span className='prof-title'>Account Status:</span> {(pro) ? <span><span className='prof-unlock-pro'>Pro <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span> <span className='cancelSub' onClick={() => {dispatch(cancelSubscription)}}>(cancel subcription)</span></span> : <span>Free (<span className='prof-unlock-pro'><Link to='/unlock-pro'>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link></span>)</span>}</div>
-
-            </div>
-
-            </div>
-
-            
-
-            <div className='prof-prompt-container'>
-                <div className='prof-prompt'>
-
-                <div className='discoverable-container'>
-                    <div className='discoverable-title'>
-                    Make Playlists Discoverable?
-                    </div>
-                    <div className='discoverable-switch-container'>
-                    <Switch checked={discover} onColor={'#1DB954'} onChange={() => discoverToggle()} className='ios-switch'/>
-                    </div>
+                <div className='create-header' id='about-header'>
+                User <span style={{color: 'white', marginLeft: '.5rem'}}>Profile</span>
                 </div>
-                </div>
-            </div>
+          
 
-            <div className='prof-bottom-container'>
-              
-            </div>
-        </div>
+          <div className="about-steps-container">
+                            <div className="about-inner-container" style={{marginTop: 0}}>
+
+                        <div className='prof-spot-user'>
+                            <div className='prof-spot-img'>
+                            <img src={auth.image} />
+                          </div>
+
+                          <div className='prof-spot-userId'>
+   
+                                    <a href={`https://open.spotify.com/user/${ auth.spotifyId }`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()} 
+                                    </a>
+
+
+                                <div className={`${(pro === true) ? 'prof-unlock-pro' : 'prof-free'}`} title={`${(pro === true) ? 'Pro User' : 'Free User'}`}><i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></div>
+                                </div>
+
+                            </div>
+                            </div>
+
+
+
+                            <div className="info-inner-container" id='prof-inner-container'>
+                                <div className='prof-stats'>
+                              <div className="feature-header" id='info-header'>
+                              <div className='step-num-title'>
+                              <span className='prof-title'>Spotify User ID:</span> <span>{ auth.spotifyId }</span>
+                                </div>
+                              </div>
+
+                              <div className="feature-header" id='info-header'>
+                              <div className='step-num-title'>
+                              <span className='prof-title'>Email:</span> <span>{ auth.email }</span>
+                            </div>
+                            </div>
+
+                            <div className="feature-header" id='info-header'>
+                              <div className='step-num-title'>
+                              <span className='prof-title'>Serenade Playlist Count:</span> <span>{ authPlaylists.length }</span>
+                            </div>
+                            </div>
+
+                            <div className="feature-header" id='info-header' style={{marginBottom: 0}}>
+                              <div className='step-num-title'>
+                              <span className='prof-title'>Account Status:</span> <span>{(pro) ? <span><span className='prof-unlock-pro'>Pro <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span> <span className='cancelSub' onClick={() => {dispatch(cancelSubscription)}}>(cancel subcription)</span></span> : <span>Free (<span className='prof-unlock-pro'><Link to='/unlock-pro'>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link></span>)</span>}</span>
+                            </div>
+                            </div>
+
+
+                              {/* <p className="p-landing">Visit your <a href=''>Spotify Profile <i className="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> to make changes to your user info.</p> */}
+                              </div>
+
+                              <div className='prof-prompt-outer-container'>
+                              <div className='prof-prompt' id='prof-discoverable-only'>
+<div className='discoverable-container'>
+
+    <div className='discoverable-title'>
+    Make Playlists Discoverable?
+    </div>
+    <div className='discoverable-switch-container'>
+    <Switch checked={discover} onColor={'#1DB954'} onChange={() => discoverToggle()} className='ios-switch'/>
+    </div>
+    </div>
+</div>
+
+
+
+</div>
+                              
+                            </div>
+                            </div>
+
+                        
+
+
+
         
         </div>
         </div>
+
+        
+        // <div id='content-body'>
+        //     <div id='pl-container' style={{marginTop: '2rem'}}>
+
+        //     <div className='create-header'>
+        //     User <span style={{color: 'white', marginLeft: '.5rem'}}>Profile</span>
+        //   </div>
+
+        //     <div className='pl-thumb' key={auth.id}>
+        //     <div className='pl-thumb-name'>
+        //       <a href={`https://open.spotify.com/user/${ auth.spotifyId }`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()} <span className={`${(pro === true) ? 'prof-unlock-pro' : 'prof-free'}`} title={`${(pro === true) ? 'Pro User' : 'Free User'}`}><i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span></a>
+        //     </div>
+
+        //     <div className='profstats-container'>
+
+        //     <div className='profstats'>
+
+        //         <div><span className='prof-title'>Spotify ID:</span> { auth.spotifyId }</div>
+        //         <div><span className='prof-title'>Email:</span> { auth.email }</div>
+
+        //         {/* <div className='prof-edit-info'>
+        //             Visit your <a href=''>Spotify Profile <i className="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a> to make changes to your user info.
+        //         </div> */}
+
+        //         <div><span className='prof-title'>Serenade Playlist Count:</span> { authPlaylists.length }</div>
+
+        //         <div><span className='prof-title'>Account Status:</span> {(pro) ? <span><span className='prof-unlock-pro'>Pro <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span> <span className='cancelSub' onClick={() => {dispatch(cancelSubscription)}}>(cancel subcription)</span></span> : <span>Free (<span className='prof-unlock-pro'><Link to='/unlock-pro'>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link></span>)</span>}</div>
+
+        //     </div>
+
+        //     </div>
+
+            
+
+        //     <div className='prof-prompt-container'>
+        //         <div className='prof-prompt'>
+
+        //         <div className='discoverable-container'>
+        //             <div className='discoverable-title'>
+        //             Make Playlists Discoverable?
+        //             </div>
+        //             <div className='discoverable-switch-container'>
+        //             <Switch checked={discover} onColor={'#1DB954'} onChange={() => discoverToggle()} className='ios-switch'/>
+        //             </div>
+        //         </div>
+        //         </div>
+        //     </div>
+
+        //     <div className='prof-bottom-container'>
+              
+        //     </div>
+        // </div>
+        
+        // </div>
+        // </div>
     )
 }
 export default Profile;
-
-{/* <div className='prof-container'>
-            <h1><span className='prof-title'>Profile</span>: ({ auth.display_name.toUpperCase() })</h1>
-            <h1><span className='prof-title'>Spotify User ID</span>: ({ auth.spotifyId.toUpperCase() })</h1>
-            <h1><span className='prof-title'>Email</span>: { auth.email }</h1>
-            <h1><span className='prof-title'>Spotify Follower Count</span>: { auth.followerCount }</h1>
-            <h1><span className='prof-title'>Serenade Playlist Count</span>: { auth.playlistCount }</h1>
-            <h1><span className='prof-title'>Discover Playlists?</span> 
-            <Switch checked={ discover } onClick={() => discoverToggle()}/></h1>
-            <img src={ auth.image }/>
-        </div> */}
