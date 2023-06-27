@@ -12,6 +12,7 @@ const MyPlaylists = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [localPlaylists, setLocalPlaylists] = useState([]);
   const [pro, setPro] = useState();
+  const [isPopupVisible, setPopupVisible] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -57,6 +58,19 @@ const MyPlaylists = () => {
   const destroy = (playlist) => {
     dispatch(destroyPlaylist(playlist))
   }
+
+  const confirmedDestroyPlaylist = (playlist) => {
+    destroy(playlist);
+    setPopupVisible(false);
+  }
+
+  const removeCheck = () => {
+    setPopupVisible(true);
+  }
+
+  const removeCheckClose = () => {
+    setPopupVisible(false);
+};
 
   const navigate = useNavigate();
 
@@ -173,8 +187,8 @@ const MyPlaylists = () => {
                                     </a>
                                 </li>
                                 <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.spotId}`)}>Copy Link</li>
-        
-                                {(pro) ? <li id='remove-pro' onClick={ev => destroy(playlist)} key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li id='remove-pro' key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
+
+                                {(pro) ? <li id='remove-pro' onClick={removeCheck} key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li id='remove-pro' key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
                             </div>
                             
                         </ul>
@@ -182,6 +196,23 @@ const MyPlaylists = () => {
                     </div>
         
                     </div>
+                    {isPopupVisible && (
+  
+                        <div className="modalBackground">
+                            <div className="modalContainer" id='removeCheckContainer'>
+                                <div className="removeCheck-title">
+                                    Remove Playlist
+                                </div>
+                                <p>Are you sure you want to remove this playlist from your Serenade profile?</p>
+                                <div className='userCheck-buttons'>
+                                <button className='removeCheck-confirm-button' onClick={() => confirmedDestroyPlaylist(playlist)}>Confirm</button>
+
+                                <button className='removeCheck-cancel-button' onClick={removeCheckClose}>Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    )}
                 </div>
                 )
               })}

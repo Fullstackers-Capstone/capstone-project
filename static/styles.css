@@ -1133,6 +1133,7 @@ header {
 
 .cancelSub:hover{
   cursor: pointer;
+  color: red;
 }
 
 .prof-prompt{
@@ -1878,6 +1879,16 @@ header {
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.5);
 }
 
+#removeCheckContainer{
+  color: white;
+}
+
+.removeCheck-title{
+  color: red;
+  margin-bottom: .5rem;
+  font-size: 2rem;
+}
+
 .titleBar {
   display: flex;
   justify-content: space-between;
@@ -1904,6 +1915,56 @@ header {
 .modal-button:active{
   background-color: white;
   color: black;
+}
+
+.removeCheck-confirm-button {
+  background: red;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  align-self: center;
+  justify-self: center;
+  margin: .25rem;
+}
+
+.removeCheck-confirm-button:hover{
+  background-color: white;
+  color: red;
+}
+
+.removeCheck-confirm-button:active{
+  color: black;
+}
+
+.removeCheck-cancel-button {
+  background: #999999;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  align-self: center;
+  justify-self: center;
+  margin: .25rem;
+}
+
+.removeCheck-cancel-button:hover{
+  background-color: white;
+  color: black;
+}
+
+.removeCheck-cancel-button:active{
+  background-color: gold;
+}
+
+.userCheck-buttons{
+  display: flex;
+  justify-content: center;
+  margin-top: .75rem;
 }
 
 /* Error modal styling end */
@@ -3262,6 +3323,10 @@ header {
     width: 60%;
   }
 
+  .removeCheck-title{
+    font-size: 1.5rem;
+  }
+
 }
 
 @media screen and (max-width: 585px) {
@@ -3486,8 +3551,11 @@ header {
 }
 
 .step-title{
-
   font-size: .9rem;
+}
+
+.removeCheck-title{
+  font-size: 1.25rem;
 }
 
 }
