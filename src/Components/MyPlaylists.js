@@ -203,7 +203,7 @@ const MyPlaylists = () => {
                                 <div className="removeCheck-title">
                                     Remove Playlist
                                 </div>
-                                <p>Are you sure you want to remove this playlist from your Serenade profile?</p>
+                                <div className='userCheck-content'>Are you sure you want to remove this playlist from your Serenade profile?</div>
                                 <div className='userCheck-buttons'>
                                 <button className='removeCheck-confirm-button' onClick={() => confirmedDestroyPlaylist(playlist)}>Confirm</button>
 

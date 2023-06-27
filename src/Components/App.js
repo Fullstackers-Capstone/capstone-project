@@ -126,7 +126,7 @@ const handleClickOutside = (event) => {
         </div>
         {token && (<div className="info-icon-container">
           <span className="info-icon" onClick={togglePopup}>
-            <i className="fa-solid fa-circle-info"></i>
+            <i className="fa-solid fa-circle-info fa-xs"></i>
           </span>
         </div>)}
       </header>
@@ -162,14 +162,14 @@ const handleClickOutside = (event) => {
           </div>
         )}
         {isPopupVisible && (
-          <div className="modalBackground" ref={popupRef}>
+          <div className="modalBackground" id='info-popup' ref={popupRef}>
             <div className="popup-overlay" onClick={handleClickOutside}></div>
               <div className='modalOuterContainer'>
                 <div className='info-title-container'>
                 <div className='info-title'>{activeSection || <span>About <span style={{color: 'white'}}>Serenade</span></span>}
                 </div>
                 <div className='info-title' id='info-close'>
-                  <i onClick={closeOut} className="fa-solid fa-circle-xmark fa-xs"></i>
+                  <i onClick={closeOut} className="fa-solid fa-circle-xmark fa-2xs"></i>
                 </div>
                 </div>
                 <div className="modalContainer" id='info-outer-container'>
