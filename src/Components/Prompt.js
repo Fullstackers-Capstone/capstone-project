@@ -90,19 +90,18 @@ const playlistNameTest = promptObject.playlistName;
 
   const selectTopArtists = async() => {
       const request = await getTopArtists();
-      const artists = request.data.items.map(artist => artist.name )
-      artists.join(', ');
+      const artists = request.data.items.map(artist => artist.name).join(', ')
 
       const text = `Songs that sound like ${artists}`;
 
       setInput(text);
+      console.log('this is the input', input);
   };
 
 
   const selectTopTracks = async() => {
     const request = await getTopTracks();
-    const tracks = request.data.items.map(track => `${track.name} by ${track.artists[0].name}`);
-    tracks.join(', ');
+    const tracks = request.data.items.map(track => `${track.name} by ${track.artists[0].name}`).join(', ');
 
     const text = `Songs that sound like these songs: ${tracks}`;
 

@@ -222,7 +222,7 @@ const handleClickOutside = (event) => {
                             <div className="info-inner-container" style={{marginTop: 0}}>
                               <div className="feature-header" id='info-header'>
                               <div className='step-num-title'>
-                                <span className='step-number'>Songs similar to 'Sunday Morning' by Maroon 5</span>
+                                <span className='step-number'>"Songs similar to 'Sunday Morning' by Maroon 5"</span>
                                 </div>
                               </div>
                               <p className="p-landing">Looking for a playlist with music that sounds similar to a specific song? Give the AI clear instructions along with the artist & song name you have in mind.</p>
@@ -231,7 +231,7 @@ const handleClickOutside = (event) => {
                               <div className="feature-header" id='info-header'>
                                 <div className='step-num-title'>
                                 <span className='step-number'>
-                                Songs from artists like JLO. Only include songs by artists that are not JLO.
+                                "Songs from artists like JLO. Only include songs by artists that are not JLO."
                               </span>
                               </div>
                               </div>
@@ -241,7 +241,7 @@ const handleClickOutside = (event) => {
                               <div className="feature-header" id='info-header'>
                               <div className='step-num-title'>
                                 <span className='step-number'>
-                                Uplifting songs for making it through the work day
+                                "Uplifting songs for making it through the work day"
                                 </span>
                               </div>
                               </div>
