@@ -69,7 +69,7 @@ header {
 }
 
 
-.title {
+.title, .landing-title {
   font-family: 'Lobster', cursive;
   font-weight: bold;
   font-size: 4rem;
@@ -81,6 +81,10 @@ header {
   width: 100%;
   position: relative;
   z-index: 1;
+}
+
+.landing-title{
+  justify-content: flex-start;
 }
 
 .title svg {
@@ -522,10 +526,6 @@ header {
   align-items: center;
 }
 
-#outer-pl-container{
-  border: 1px solid blue;
-}
-
 #pl-container{
   display: flex;
   flex-direction: column;
@@ -616,6 +616,22 @@ header {
   color: gold;
   text-shadow: 1px 1px 10px rgb(5, 5, 5);
   /* background-color: #171717; */
+}
+
+#about-header{
+  padding-right: 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #555555;
+  margin-bottom: 1.5rem;
+}
+
+.about-inner-container{
+  padding-left: .5rem;
+  padding-right: .5rem;
+  padding-top: 0;
+  margin-top: 0;
+  text-align: justify;
+  /* border: 1px solid red; */
 }
 
 /* .disc-thumb-name{
@@ -2265,6 +2281,16 @@ header {
   margin-bottom: 2rem;
 }
 
+.about-how-it-works{
+  font-size: 2rem;
+  justify-content: flex-start;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  width: 85%;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
 .feature-header{
   display: flex;
   justify-content: flex-start;
@@ -2417,6 +2443,11 @@ header {
 
 .info-about-serenade{
   margin-bottom: 1rem;
+}
+
+.about-steps-container{
+  width: 85%;
+  font-size: .9rem;
 }
 
 .popup-window {
@@ -2632,7 +2663,7 @@ header {
 
 @media screen and (max-width: 1305px) {
 
-  .pl-thumb, .create-header{
+  .pl-thumb, .create-header, .about-steps-container{
     width: 75%;
   }
 
@@ -2671,7 +2702,7 @@ header {
 
 @media screen and (max-width: 1150px) {
 
-  .pl-thumb, .create-header{
+  .pl-thumb, .create-header, .about-steps-container{
     width: 75%;
   }
 
@@ -2757,7 +2788,6 @@ header {
     padding: 2rem;
     padding-top: 0;
     margin-top: .75rem;
-    /* border: 1px solid yellow; */
   }
 
   .step{
@@ -2823,7 +2853,7 @@ header {
     flex: 1.7
   }
 
-  .pl-thumb, .create-header{
+  .pl-thumb, .create-header, .about-steps-container{
     width: 85%;
   }
 
@@ -3038,6 +3068,12 @@ header {
   .how-it-works{
     font-size: 2.5rem;
   }
+
+  .step-title, .step-number{
+    font-size: 1rem;
+  }
+
+
 }
 
 @media screen and (max-width: 670px) {
@@ -3156,7 +3192,6 @@ header {
   }
 
   .steps-container{
-    /* border: 1px solid yellow; */
     padding: 1rem;
     padding-top: 0;
   }
@@ -3180,11 +3215,6 @@ header {
 
   .landing-header{
     font-size: 3.5rem;
-  }
-
-
-  .step-title, .step-number{
-    font-size: 1rem;
   }
 
   .playlist-header{
@@ -3263,6 +3293,58 @@ header {
   .how-it-works{
     font-size: 2.25rem;
   }
+
+  .steps-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    padding-top: 0;
+    margin-top: .75rem;
+  }
+
+  .step{
+    flex: 1;
+    margin: 1rem;
+    margin-top: 0;
+    height: 34vh;
+  }
+
+  .step:last-child{
+    margin-bottom: 3rem;
+  }
+
+  .how-it-works{
+    margin-top: 2.5rem;
+    font-size: 3rem;
+  }
+
+  .feature-header{
+    font-size: .75rem;
+    display: block;
+  }
+
+  .step-num-title{
+    display: block;
+  }
+
+  .step-number{
+    display: block;
+    text-align: left;
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
+  }
+
+  .step-title{
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: .5rem;
+  }
+
+  .step-colon{
+    display: none;
+  }
   
 }
 
@@ -3338,6 +3420,11 @@ header {
   padding-right: .5rem;
 }
 
+.step-title{
+
+  font-size: .9rem;
+}
+
 }
 
 @media screen and (max-width: 435px) {
@@ -3365,13 +3452,13 @@ header {
 }
 
 .step-number{
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .step-title{
   display: flex;
   align-items: center;
-  font-size: .9rem;
+  font-size: .8rem;
 }
 
 .p-landing{
@@ -3392,6 +3479,12 @@ header {
 
 #create-playlist-get-started{
   width: 90%;
+}
+
+.about-how-it-works-title{
+  display: flex;
+  justify-content: center;
+  margin-bottom: .5rem;
 }
 
 }
