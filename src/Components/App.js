@@ -119,7 +119,7 @@ const handleClickOutside = (event) => {
       <header>
         <div className="nav">
           {token && <NavBar />}
-          <div className="title">
+          <div className={token ? 'title' : 'landing-title'}>
             Serenade
             <img id='spotify-logo' src='/static/favicon/android-chrome-512x512.png'/>
           </div>
