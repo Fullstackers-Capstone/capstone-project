@@ -136,7 +136,7 @@ const Profile = () => {
 
                             <div className="feature-header" id='info-header' style={{marginBottom: 0}}>
                               <div className='step-num-title'>
-                              <span className='prof-title'>Account Status:</span> <span>{(pro) ? <span><span className='prof-unlock-pro'>Pro <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span> <span className='cancelSub' onClick={() => {dispatch(cancelSubscription)}}>(cancel subcription)</span></span> : <span>Free (<span className='prof-unlock-pro'><Link to='/unlock-pro'>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link></span>)</span>}</span>
+                              <span className='prof-title'>Account Status:</span> <span>{(pro) ? <span><span className='prof-unlock-pro'>Pro <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></span> <span className='cancelSub' onClick={removeCheck}>(cancel subcription)</span></span> : <span>Free (<span className='prof-unlock-pro'><Link to='/unlock-pro'>Unlock Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i></Link></span>)</span>}</span>
                             </div>
                             </div>
 
