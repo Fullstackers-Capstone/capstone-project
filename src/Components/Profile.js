@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { getCurrentUserProfile } from '../../server/api/spotify';
 import { fetchPlaylists, updateAuth, updatePlaylist } from '../store';
 import Switch from 'react-ios-switch';
 
@@ -10,6 +11,7 @@ const Profile = () => {
     const [discover, setDiscover] = useState(false);
     const [pro, setPro] = useState();
     const [isPopupVisible, setPopupVisible] = useState(false);
+    const [localSpotProf, setLocalSpotProf] = useState(null)
 
     const dispatch = useDispatch();
 
@@ -17,14 +19,22 @@ const Profile = () => {
 
     const authPlaylists = playlists.map(pl => pl).filter(pl => pl.userId === auth.id)
 
-    console.log('authPlaylists: ', authPlaylists);
-
     useEffect(() => {
         if(auth){
             setDiscover(auth.discoverPlaylists);
             setPro(auth.proUser);
         }
     }, [auth])
+
+    useEffect(() => {
+        (async () => {
+
+            const spotUserData = await(getCurrentUserProfile());
+            setLocalSpotProf(spotUserData)
+
+        })()
+      }, [])
+
 
     useEffect(() => {
         if (didMount.current) {  // Avoid running on initial render
@@ -74,13 +84,10 @@ const Profile = () => {
         setPopupVisible(false);
     };
       
-
-    if(!playlists){
-        return null;
-    }
     if(!auth){
         return null;
     }
+
     
     return(
 

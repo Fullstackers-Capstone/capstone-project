@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPlaylistById } from '../../server/api/spotify';
+import { getCurrentUserProfile, getPlaylistById } from '../../server/api/spotify';
 import Loader from './Loader';
 import { fetchPlaylists } from '../store';
 import PlDropdown from './PlDropdown';
@@ -10,6 +10,7 @@ const MyPlaylists = () => {
   const { auth, playlists } = useSelector(state => state);
   const [isLoading, setIsLoading] = useState(false);
   const [localPlaylists, setLocalPlaylists] = useState([]);
+  const [localSpotProf, setLocalSpotProf] = useState(auth)
 
   const dispatch = useDispatch();
 
@@ -32,7 +33,10 @@ const MyPlaylists = () => {
         })
         ));
 
+        const spotUserData = await(getCurrentUserProfile());
+
         setLocalPlaylists(spotIdData);
+        setLocalSpotProf(spotUserData)
 
       }
       catch(error){
@@ -40,7 +44,6 @@ const MyPlaylists = () => {
       }
     })()
   }, [playlists])
-
 
   const authPlaylists = localPlaylists.map(pl => pl)
   .filter(pl => pl.userId === auth.id)
@@ -131,11 +134,11 @@ const MyPlaylists = () => {
                       <div className='pl-thumb-user-container'>
                         <div className='pl-thumb-user-name-container'>
                           <div className='pl-thumb-user-name'>
-                            <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
+                            <a href={`https://open.spotify.com/user/${localSpotProf.data.id}`} target='_blank' title='Open in Spotify'>{localSpotProf.data.display_name.toUpperCase()}</a>
                           </div>
                         </div>
                         <div className='pl-thumb-user-img'>
-                          <img src={auth.image} />
+                          <img src={localSpotProf.data.images[0].url} />
                         </div>
                       </div>
                     </div>

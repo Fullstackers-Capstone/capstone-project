@@ -75,11 +75,11 @@ const PlDropdown = ({pl}) => {
     }
 
     return(
-        <div className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
+        <div ref={mainMenu} className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
         <div className='dropdown-toggle' onClick={handleDropdownToggle}>
           <Hamburger size={20} distance={'sm'} direction={'right'} toggled={hamburgerOpen} toggle={setHamburgerOpen}/>
         </div>
-        <div ref={mainMenu} className="dropdown-content" id='plDropdown-content'>
+        <div className="dropdown-content" id='plDropdown-content'>
 
         <li key='spotOpen' style={{padding: 0}}>
               <a href={`spotify:playlist:${pl.spotId}`} onClick={handleDropdownToggle}>

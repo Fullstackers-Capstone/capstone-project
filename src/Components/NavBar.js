@@ -34,11 +34,11 @@ const NavBar = () => {
     .filter(pl => pl.userId === auth.id)
 
     return(
-        <div className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
+        <div ref={mainMenu} className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
         <div className='dropdown-toggle' onClick={handleDropdownToggle}>
           <Hamburger toggled={hamburgerOpen} toggle={setHamburgerOpen}/>
         </div>
-        <div ref={mainMenu} className="dropdown-content">
+        <div className="dropdown-content">
 
             <div id='dropdown-about'><Link to="/about" onClick={handleDropdownToggle}>About</Link></div>
 

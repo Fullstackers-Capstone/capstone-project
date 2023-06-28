@@ -13,6 +13,7 @@ const MyPlaylists = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [localPlaylists, setLocalPlaylists] = useState([]);
   const [discover, setDiscover] = useState();
+  const [localSpotProf, setLocalSpotProf] = useState(auth)
 
   const dispatch = useDispatch();
 
@@ -42,7 +43,10 @@ const MyPlaylists = () => {
         })
         ));
 
+        const spotUserData = await(getCurrentUserProfile());
+
         setLocalPlaylists(spotIdData);
+        setLocalSpotProf(spotUserData)
 
       }
       catch(error){
@@ -139,12 +143,12 @@ const MyPlaylists = () => {
                       </div>
                       <div className='pl-thumb-user-container'>
                         <div className='pl-thumb-user-name-container'>
-                          <div className='pl-thumb-user-name'>
-                            <a href={`https://open.spotify.com/user/${playlist.spotData.data.owner.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.owner.display_name.toUpperCase()}</a>
+                          <div className='disc-thumb-user-name'>
+                            <a href={`https://open.spotify.com/user/${localSpotProf.data.id}`} target='_blank' title='Open in Spotify'>{localSpotProf.data.display_name.toUpperCase()}</a>
                           </div>
                         </div>
                         <div className='pl-thumb-user-img'>
-                          <img src={playlist.userData.data.images[0].url} />
+                          <img src={localSpotProf.data.images[0].url} />
                         </div>
                       </div>
                     </div>
