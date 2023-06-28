@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentUserPlaylists, getPlaylistById, getPlaylistTracks } from '../../server/api/spotify';
-import { catchErrors } from '../../server/api/utils';
-import { useNavigate } from 'react-router-dom';
+import { getPlaylistById } from '../../server/api/spotify';
 import Loader from './Loader';
-import { fetchPlaylists, destroyPlaylist } from '../store';
+import { fetchPlaylists } from '../store';
 import PlDropdown from './PlDropdown';
 
 const MyPlaylists = () => {
@@ -12,20 +10,12 @@ const MyPlaylists = () => {
   const { auth, playlists } = useSelector(state => state);
   const [isLoading, setIsLoading] = useState(false);
   const [localPlaylists, setLocalPlaylists] = useState([]);
-  const [pro, setPro] = useState();
-  const [isPopupVisible, setPopupVisible] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
       dispatch(fetchPlaylists());
   }, [])
-
-  useEffect(() => {
-    if(auth){
-        setPro(auth.proUser);
-    }
-}, [auth])
 
 
     useEffect(() => {
@@ -56,39 +46,10 @@ const MyPlaylists = () => {
   .filter(pl => pl.userId === auth.id)
   .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));  // sort by playlist creation time
 
-  const destroy = (playlist) => {
-    dispatch(destroyPlaylist(playlist))
-  }
-
-  const confirmedDestroyPlaylist = (playlist) => {
-    destroy(playlist);
-    setPopupVisible(false);
-  }
-
-  const removeCheck = () => {
-    setPopupVisible(true);
-  }
-
-  const removeCheckClose = () => {
-    setPopupVisible(false);
-};
-
-  const navigate = useNavigate();
-
   const msConversion = (millis) => {
     const minutes = Math.floor(millis / 60000);
     const seconds = ((millis % 60000) / 1000).toFixed(0);
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-  }
-
-  const copier = (inp) => {
-    navigator.clipboard.writeText(inp).then(() => {
-        alert("Copied: " + inp);
-    })
-  }
-
-  const unlockPro = () => {
-    navigate('/unlock-pro');
   }
 
   const dateify = (unicode) => {
@@ -164,70 +125,22 @@ const MyPlaylists = () => {
                     </div>
         
                     <div className='pl-thumb-stats-container'>
-                      <div className='pl-thumb-user-container'>
-                          <div className='pl-thumb-user-img'>
-                            <img src={auth.image} />
-                          </div>
-                          <div className='pl-thumb-user-name-container'>
-                            <div className='pl-thumb-user-name'>
-                            <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
-                            </div>
-                          </div>
+                      <div className='pl-thumb-ellipsis-container'>
+                        <PlDropdown pl={playlist}/>
                       </div>
-      
-
-
-
-
-
-                    <div className='pl-thumb-ellipsis-container'>
-
-                      {/* <PlDropdown /> */}
-        
-                        <ul className='ellipsis-dropdown'>
-                            <button>
-                                <i className="fa-solid fa-angle-down"></i>
-                            </button>
-                            <div className='ellipsis-dropdown-content'>
-                                <li key='spotOpen'>
-                                    <a href={`spotify:playlist:${playlist.spotId}`}>
-                                        Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square fa-xs" style={{marginLeft: '.15rem'}}></i>
-                                    </a>
-                                </li>
-                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.spotId}`)}>Copy Link</li>
-
-                                {(pro) ? <li id='remove-pro' onClick={removeCheck} key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li id='remove-pro' key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
-                            </div>
-                            
-                        </ul>
-        
-                    </div>
-        
-
-
-
-
-
-
-                    </div>
-                    {isPopupVisible && (
-  
-                        <div className="modalBackground">
-                            <div className="modalContainer" id='removeCheckContainer'>
-                                <div className="removeCheck-title">
-                                    Remove Playlist
-                                </div>
-                                <div className='userCheck-content'>Are you sure you want to remove this playlist from your Serenade profile?</div>
-                                <div className='userCheck-buttons'>
-                                <button className='removeCheck-confirm-button' onClick={() => confirmedDestroyPlaylist(playlist)}>Confirm</button>
-
-                                <button className='removeCheck-cancel-button' onClick={removeCheckClose}>Cancel</button>
-                                </div>
-                            </div>
+                      <div className='pl-thumb-user-container'>
+                        <div className='pl-thumb-user-name-container'>
+                          <div className='pl-thumb-user-name'>
+                            <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
+                          </div>
                         </div>
-
-                    )}
-                </div>
+                        <div className='pl-thumb-user-img'>
+                          <img src={auth.image} />
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
                 )
               })}
             </div>
