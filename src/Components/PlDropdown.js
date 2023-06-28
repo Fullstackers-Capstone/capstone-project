@@ -1,43 +1,129 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '/server/api/spotify.js';
-import { Pivot as Hamburger } from 'hamburger-react'
-import { fetchPlaylists } from '../store';
+import { useNavigate } from 'react-router-dom';
+import { Turn as Hamburger } from 'hamburger-react'
+import { destroyPlaylist } from '../store';
 
-const NavBar = () => {
+const PlDropdown = ({pl}) => {
 
-  const { auth, playlists } = useSelector(state => state);
+  const { auth } = useSelector(state => state);
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [hamburgerOpen, setHambugerOpen] = useState(false);
+    const [isPopupVisible, setPopupVisible] = useState(false);
+    const [destroyer, setDestroyer] = useState(false);
+    const [copier, setCopier] = useState(false);
+    const [pro, setPro] = useState();
+
+    useEffect(() => {
+      if(auth){
+          setPro(auth.proUser);
+      }
+  }, [auth])
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleDropdownToggle = () => {
         setDropdownVisible(!dropdownVisible);
         setHambugerOpen(!hamburgerOpen);
       };
 
-    // const authPlaylists = playlists.map(pl => pl)
-    // .filter(pl => pl.userId === auth.id)
+    const copyLink = (link) => {
+      navigator.clipboard.writeText(link)
+    }
+
+      const destroy = (pl) => {
+        dispatch(destroyPlaylist(pl))
+      }
+    
+      const confirmedDestroyPlaylist = (pl) => {
+        destroy(pl);
+        setPopupVisible(false);
+      }
+    
+      const removeCheck = (inp, link) => {
+        setPopupVisible(true);
+        if(inp === 'destroyer') setDestroyer(true);
+        if(inp === 'copier') {
+          setCopier(true);
+          copyLink(link);
+        }
+    }
+    
+      const removeCheckClose = () => {
+        setPopupVisible(false);
+        setHambugerOpen(false);
+        setDropdownVisible(false);
+        if(destroyer) setDestroyer(false);
+        if(copier) setCopier(false);
+    };
+
+    const unlockPro = () => {
+      navigate('/unlock-pro');
+    }
 
     return(
         <div className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
         <div className='dropdown-toggle' onClick={handleDropdownToggle}>
-          <Hamburger size={20} direction={'right'} toggled={hamburgerOpen} toggle={setHambugerOpen}/>
+          <Hamburger size={20} distance={'sm'} direction={'right'} toggled={hamburgerOpen} toggle={setHambugerOpen}/>
         </div>
-        <div className="dropdown-content">
+        <div className="dropdown-content" id='plDropdown-content'>
 
-            <Link to="/about" onClick={handleDropdownToggle}>Open in Spotify App</Link>
+        <li key='spotOpen' style={{padding: 0}}>
+              <a href={`spotify:playlist:${pl.spotId}`} onClick={handleDropdownToggle}>
+                  Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square fa-xs" style={{marginLeft: '.15rem'}}></i>
+              </a>
+          </li>
 
-          <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Copy Link</Link>
+          <li key='copyLink' onClick={() => removeCheck('copier', `https://open.spotify.com/playlist/${pl.spotId}`)}>Copy Link <i className="fa-solid fa-link fa-xs" style={{marginLeft: '.15rem'}}></i></li>
 
-            <Link to="/" onClick={handleDropdownToggle}>Remove Playlist</Link>
+          {auth.id === pl.userId && (
+            <>
+            {(pro) ? <li id='remove-pro' onClick={() => removeCheck('destroyer')} key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li id='remove-pro' key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
+            </>
+          )}
+          
+
+          {isPopupVisible && (
+  
+            <div className="modalBackground">
+                <div className="modalContainer" id='removeCheckContainer'>
+                    <div className="removeCheck-title">
+                        {(destroyer) && 'Remove Playlist'}
+                        {(copier) && (<span style={{color: '#1DB954'}}>Copy Link Successful</span>)}
+                    </div>
+                    <div className='userCheck-content'>
+                      {(destroyer) && 'Are you sure you want to remove this playlist from your Serenade profile?'}
+
+                      {(copier) && `https://open.spotify.com/playlist/${pl.spotId}`}
+                      
+                      </div>
+                    <div className='userCheck-buttons'>
+
+                    {(destroyer) && (
+                      <>
+                      <button className='removeCheck-confirm-button' onClick={() => confirmedDestroyPlaylist(pl)}>Confirm</button>
+
+                      <button className='removeCheck-cancel-button' onClick={removeCheckClose}>Cancel</button>
+                      </>
+                    )}  
+
+                    {(copier) && (
+                      <>
+                        <button className='modal-button' onClick={removeCheckClose}>Close</button>
+                      </>
+                    )}
+
+                    </div>
+                </div>
+            </div>
+
+          )}
            
         </div>
       </div>
     )
 }
 
-export default NavBar;
+export default PlDropdown;

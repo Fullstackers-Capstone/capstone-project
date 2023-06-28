@@ -5,6 +5,7 @@ import { catchErrors } from '../../server/api/utils';
 import { useNavigate, useParams } from 'react-router-dom';
 import Loader from './Loader';
 import { fetchPlaylists } from '../store';
+import PlDropdown from './PlDropdown';
 
 const SuccessfulPlaylist = () => {
 
@@ -31,7 +32,8 @@ const SuccessfulPlaylist = () => {
           createdAt: actualPl.createdAt,
           isDiscoverable: actualPl.isDiscoverable,
           userId: actualPl.userId,
-          id: actualPl.spotId
+          id: actualPl.spotId,
+          spotId: actualPl.spotId
         };
         
         if(!spotIdData.spotData.data.images[0]) window.location.reload();
@@ -135,40 +137,29 @@ const SuccessfulPlaylist = () => {
                     
                     </div>
                 </div>
-            
+
+
+
                 <div className='pl-thumb-stats-container'>
-                  <div className='pl-thumb-user-container'>
-                      <div className='pl-thumb-user-img'>
-                        <img src={auth.image} />
+                      <div className='pl-thumb-ellipsis-container'>
+                        <PlDropdown pl={localPlaylists}/>
                       </div>
-                      <div className='pl-thumb-user-name-container'>
-                        <div className='pl-thumb-user-name'>
-                        <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
+                      <div className='pl-thumb-user-container'>
+                        <div className='pl-thumb-user-name-container'>
+                          <div className='pl-thumb-user-name'>
+                            <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
+                          </div>
+                        </div>
+                        <div className='pl-thumb-user-img'>
+                          <img src={auth.image} />
                         </div>
                       </div>
-                  </div>
+                    </div>
+
+
+
             
-                <div className='pl-thumb-ellipsis-container'>
-            
-                    <ul className='ellipsis-dropdown'>
-                        <button>
-                            <i className="fa-solid fa-angle-down"></i>
-                        </button>
-                        <div className='ellipsis-dropdown-content'>
-                            <li key='spotOpen'>
-                                <a href={`spotify:playlist:${localPlaylists.id}`}>
-                                    Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
-                                </a>
-                            </li>
-                            <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${localPlaylists.id}`)}>Copy Link</li>
-            
-                        </div>
-                        
-                    </ul>
-            
-                </div>
-            
-                </div>
+
             </div>
             
             </div>

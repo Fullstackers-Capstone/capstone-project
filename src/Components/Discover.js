@@ -5,6 +5,7 @@ import { catchErrors } from '../../server/api/utils';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 import { fetchPlaylists } from '../store';
+import PlDropdown from './PlDropdown';
 
 const MyPlaylists = () => {
 
@@ -36,7 +37,8 @@ const MyPlaylists = () => {
           createdAt: response.createdAt,
           isDiscoverable: response.isDiscoverable,
           userId: response.userId,
-          id: response.spotId
+          id: response.spotId,
+          spotId: response.spotId //redundancy in place for PlDropdown
         })
         ));
 
@@ -54,22 +56,10 @@ const MyPlaylists = () => {
     .filter(pl => pl.isDiscoverable)
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));  // sort by playlist creation time
 
-  const navigate = useNavigate();
-
   const msConversion = (millis) => {
     const minutes = Math.floor(millis / 60000);
     const seconds = ((millis % 60000) / 1000).toFixed(0);
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-  }
-
-  const copier = (inp) => {
-    navigator.clipboard.writeText(inp).then(() => {
-        alert("Copied: " + inp);
-    })
-  }
-
-  const unlockPro = () => {
-    navigate('/unlock-pro');
   }
 
   const dateify = (unicode) => {
@@ -143,43 +133,22 @@ const MyPlaylists = () => {
                         
                         </div>
                     </div>
-        
                     <div className='pl-thumb-stats-container'>
-                      <div className='pl-thumb-user-container'>
-                          <div className='pl-thumb-user-img'>
-                            <img src={playlist.userData.data.images[0].url} />
-                          </div>
-                          <div className='pl-thumb-user-name-container'>
-                            <div className='disc-thumb-user-name'>
-                            <a href={`https://open.spotify.com/user/${playlist.spotData.data.owner.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.owner.display_name.toUpperCase()}</a>
-                            </div>
-                          </div>
+                      <div className='pl-thumb-ellipsis-container'>
+                        <PlDropdown pl={playlist}/>
                       </div>
-        
-
-                    <div className='pl-thumb-ellipsis-container'>
-        
-                        <ul className='ellipsis-dropdown'>
-                            <button>
-                                <i className="fa-solid fa-angle-down"></i>
-                            </button>
-                            <div className='ellipsis-dropdown-content'>
-                                <li key='spotOpen'>
-                                    <a href={`spotify:playlist:${playlist.id}`}>
-                                        Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square"></i>
-                                    </a>
-                                </li>
-                                <li key='copyLink' onClick={() => copier(`https://open.spotify.com/playlist/${playlist.id}`)}>Copy Link</li>
-
-                                {/* <li key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li> */}
-                            </div>
-                            
-                        </ul>
-
+                      <div className='pl-thumb-user-container'>
+                        <div className='pl-thumb-user-name-container'>
+                          <div className='pl-thumb-user-name'>
+                            <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
+                          </div>
+                        </div>
+                        <div className='pl-thumb-user-img'>
+                          <img src={auth.image} />
+                        </div>
+                      </div>
                     </div>
-                    
-        
-                    </div>
+
                 </div>
                 )
               })}
