@@ -182,9 +182,9 @@ const MyPlaylists = () => {
 
                     <div className='pl-thumb-ellipsis-container'>
 
-                      <PlDropdown />
+                      {/* <PlDropdown /> */}
         
-                        {/* <ul className='ellipsis-dropdown'>
+                        <ul className='ellipsis-dropdown'>
                             <button>
                                 <i className="fa-solid fa-angle-down"></i>
                             </button>
@@ -199,7 +199,7 @@ const MyPlaylists = () => {
                                 {(pro) ? <li id='remove-pro' onClick={removeCheck} key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li id='remove-pro' key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
                             </div>
                             
-                        </ul> */}
+                        </ul>
         
                     </div>
         

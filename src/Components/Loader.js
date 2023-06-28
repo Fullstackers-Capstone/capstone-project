@@ -20,7 +20,7 @@ const Loader = () => {
 
           {trackCount === 18 && '10+ tracks will take some time. Please allow up to 30 seconds for your custom playlist to be created.'}
 
-          {trackCount === 10 && "Just a sec! We're working on this custom playlist for you..."}
+          {trackCount === 10 && "Just a sec! We're working on this custom playlist for you."}
 
         {/* <em>Just a sec! We're working on this custom playlist for you...</em> */}
       </div>

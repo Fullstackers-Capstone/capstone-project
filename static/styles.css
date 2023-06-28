@@ -1746,8 +1746,7 @@ header {
 
 .playlist-item:hover {
   cursor: pointer;
-  border: 1px solid var(--spotifyGreen)
-  /* color: gold */
+  color: gold
 }
 
 .playlist-item-image {
@@ -3535,6 +3534,10 @@ header {
 
   .playlist-header, .aiplaylist-name-content{
     font-size: .85rem;
+  }
+
+  .aiplaylist-name-content{
+    margin-left: 0;
   }
 
   .prompt-options{
