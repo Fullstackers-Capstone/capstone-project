@@ -157,7 +157,7 @@ const Profile = () => {
                                         <div className='userCheck-buttons'>
                                         <button className='removeCheck-confirm-button' onClick={() => confirmedCancelSubscription()}>Confirm</button>
 
-                                        <button className='removeCheck-cancel-button' onClick={removeCheckClose}>Cancel</button>
+                                        <button className='removeCheck-cancel-button' onClick={removeCheckClose}>Nevermind</button>
                                         </div>
                                     </div>
                                 </div>

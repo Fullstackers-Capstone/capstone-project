@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '/server/api/spotify.js';
@@ -10,14 +10,25 @@ const NavBar = () => {
   const { auth, playlists } = useSelector(state => state);
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
-    const [hamburgerOpen, setHambugerOpen] = useState(false);
+    const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
     const dispatch = useDispatch();
 
+    const mainMenu = useRef(null);
+
     const handleDropdownToggle = () => {
         setDropdownVisible(!dropdownVisible);
-        setHambugerOpen(!hamburgerOpen);
+        setHamburgerOpen(!hamburgerOpen);
       };
+
+    const closeMainMenu = (e) => {
+      if(mainMenu.current && hamburgerOpen && !mainMenu.current.contains(e.target)){
+        setHamburgerOpen(false);
+        setDropdownVisible(false);
+      }
+    }
+
+    document.addEventListener('mousedown',closeMainMenu)
 
     const authPlaylists = playlists.map(pl => pl)
     .filter(pl => pl.userId === auth.id)
@@ -25,11 +36,11 @@ const NavBar = () => {
     return(
         <div className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
         <div className='dropdown-toggle' onClick={handleDropdownToggle}>
-          <Hamburger toggled={hamburgerOpen} toggle={setHambugerOpen}/>
+          <Hamburger toggled={hamburgerOpen} toggle={setHamburgerOpen}/>
         </div>
-        <div className="dropdown-content">
+        <div ref={mainMenu} className="dropdown-content">
 
-            <span className='dropdown-about'><Link className='dropdown-about' to="/about" onClick={handleDropdownToggle}>About</Link></span>
+            <div id='dropdown-about'><Link to="/about" onClick={handleDropdownToggle}>About</Link></div>
 
             {auth.proUser ? <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile <span style={{color: 'gold', marginLeft: '.15rem'}}><i className="fa-solid fa-circle-check fa-xs"></i></span></Link> : <Link to={`/users/${auth.id}`} onClick={handleDropdownToggle}>Profile</Link>}
 

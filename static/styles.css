@@ -323,7 +323,7 @@ header {
   margin-top: .75rem;
 }
 
-.dropdown-about{
+#dropdown-about{
   display: none;
 }
 
@@ -946,6 +946,7 @@ header {
 .prompt-content{
   font-family: 'Montserrat Alternates';
   font-style: italic;
+  font-size: .7rem;
 }
 
 .track-lineitem{
@@ -3025,10 +3026,8 @@ header {
     display: none;
   }
 
-  .dropdown-about{
+  #dropdown-about{
     display: inline;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
   }
 
 }

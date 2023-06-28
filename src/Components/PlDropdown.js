@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Turn as Hamburger } from 'hamburger-react'
@@ -9,7 +9,7 @@ const PlDropdown = ({pl}) => {
   const { auth } = useSelector(state => state);
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
-    const [hamburgerOpen, setHambugerOpen] = useState(false);
+    const [hamburgerOpen, setHamburgerOpen] = useState(false);
     const [isPopupVisible, setPopupVisible] = useState(false);
     const [destroyer, setDestroyer] = useState(false);
     const [copier, setCopier] = useState(false);
@@ -21,12 +21,23 @@ const PlDropdown = ({pl}) => {
       }
   }, [auth])
 
+  const mainMenu = useRef(null);
+
+  const closeMainMenu = (e) => {
+    if(mainMenu.current && hamburgerOpen && !mainMenu.current.contains(e.target)){
+      setHamburgerOpen(false);
+      setDropdownVisible(false);
+    }
+  }
+
+  document.addEventListener('mousedown',closeMainMenu)
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleDropdownToggle = () => {
         setDropdownVisible(!dropdownVisible);
-        setHambugerOpen(!hamburgerOpen);
+        setHamburgerOpen(!hamburgerOpen);
       };
 
     const copyLink = (link) => {
@@ -53,7 +64,7 @@ const PlDropdown = ({pl}) => {
     
       const removeCheckClose = () => {
         setPopupVisible(false);
-        setHambugerOpen(false);
+        setHamburgerOpen(false);
         setDropdownVisible(false);
         if(destroyer) setDestroyer(false);
         if(copier) setCopier(false);
@@ -66,9 +77,9 @@ const PlDropdown = ({pl}) => {
     return(
         <div className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
         <div className='dropdown-toggle' onClick={handleDropdownToggle}>
-          <Hamburger size={20} distance={'sm'} direction={'right'} toggled={hamburgerOpen} toggle={setHambugerOpen}/>
+          <Hamburger size={20} distance={'sm'} direction={'right'} toggled={hamburgerOpen} toggle={setHamburgerOpen}/>
         </div>
-        <div className="dropdown-content" id='plDropdown-content'>
+        <div ref={mainMenu} className="dropdown-content" id='plDropdown-content'>
 
         <li key='spotOpen' style={{padding: 0}}>
               <a href={`spotify:playlist:${pl.spotId}`} onClick={handleDropdownToggle}>
