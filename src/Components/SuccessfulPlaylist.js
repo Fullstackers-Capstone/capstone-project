@@ -12,6 +12,7 @@ const SuccessfulPlaylist = () => {
   const { auth, playlists } = useSelector(state => state);
 //   const [isLoading, setIsLoading] = useState(false);
   const [localPlaylists, setLocalPlaylists] = useState(null);
+  const [localSpotProf, setLocalSpotProf] = useState(auth)
 
   const { id } = useParams();
 
@@ -37,6 +38,9 @@ const SuccessfulPlaylist = () => {
         };
         
         if(!spotIdData.spotData.data.images[0]) window.location.reload();
+
+        const spotUserData = await(getCurrentUserProfile());
+        setLocalSpotProf(spotUserData)
 
         setLocalPlaylists(spotIdData);
 
@@ -147,11 +151,11 @@ const SuccessfulPlaylist = () => {
                       <div className='pl-thumb-user-container'>
                         <div className='pl-thumb-user-name-container'>
                           <div className='pl-thumb-user-name'>
-                            <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
+                            <a href={`https://open.spotify.com/user/${localSpotProf.data.id}`} target='_blank' title='Open in Spotify'>{localSpotProf.data.display_name.toUpperCase()}</a>
                           </div>
                         </div>
                         <div className='pl-thumb-user-img'>
-                          <img src={auth.image} />
+                          <img src={localSpotProf.data.images[0].url} />
                         </div>
                       </div>
                     </div>
