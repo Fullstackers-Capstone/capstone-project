@@ -76,6 +76,8 @@ const PlDropdown = ({pl}) => {
               </a>
           </li>
 
+          <li id='remove-pro'>howdy</li>
+
           <li key='copyLink' onClick={() => removeCheck('copier', `https://open.spotify.com/playlist/${pl.spotId}`)}>Copy Link <i className="fa-solid fa-link fa-xs" style={{marginLeft: '.15rem'}}></i></li>
 
           {auth.id === pl.userId && (

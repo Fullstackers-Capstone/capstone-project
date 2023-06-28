@@ -404,12 +404,15 @@ header {
 #plDropdown-content li:hover:last-child {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  background-color: red;
-  color: black;
 }
 
-#plDropdown-content li:last-child{
+#remove-pro{
   color: red;
+}
+
+#remove-pro:hover{
+  background-color: red;
+  color: black;
 }
 
 #prompt-outer-container{
@@ -1008,15 +1011,6 @@ header {
   background-color: red;
   color: black;
 } */
-
-#remove-pro{
-  color: red;
-}
-
-#remove-pro:hover{
-  background-color: red;
-  color: black;
-}
 
 
 .ellipsis-dropdown-content li:hover{
@@ -2039,6 +2033,11 @@ header {
 
 .userCheck-content{
   font-size: 1rem;
+  white-space: pre-wrap; /* CSS3 */    
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */    
+  white-space: -o-pre-wrap; /* Opera 7 */    
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
 /* Error modal styling end */
@@ -2339,6 +2338,9 @@ header {
   color: black;
 }
 
+.popup-overlay{
+}
+
 
 /* Pop Up window styling end */
 
@@ -2585,6 +2587,7 @@ header {
 #info-links{
   align-items: center;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 
 #info-links:hover{
