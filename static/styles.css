@@ -794,14 +794,16 @@ header {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
 }
 
 .pl-thumb-ellipsis-container{
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  flex: 1;
+  flex: .1;
   margin-right: 1.5rem;
+
 }
 
 .pl-thumb-ellipsis-container a{
@@ -2756,6 +2758,16 @@ header {
 
 /* How It Works Section Styles End */
 
+
+/* NEW PL NAV SECTION */
+
+
+
+/* END NEW PL NAV SECTION */
+
+
+
+
 /* RE-SIZING */
 
 @media screen and (max-width: 1350px) {
@@ -2951,6 +2963,8 @@ header {
 
   .dropdown-about{
     display: inline;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
 }
