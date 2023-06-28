@@ -887,6 +887,7 @@ header {
 
 .pl-thumb-prompt-content{
   margin-bottom: .4rem;
+  font-size: .7rem;
 }
 
 .pl-thumb-createdAt{
@@ -3457,10 +3458,6 @@ header {
     font-size: 1.25rem;
   }
 
-  .pl-thumb-prompt-content{
-    font-size: .8rem;
-  }
-
   .profstats div{
     font-size: .8rem;
   }
@@ -3668,10 +3665,6 @@ header {
 
 .nav{
     width: 100%;
-}
-
-.prof-spot-userId{
-  font-size: 1rem;
 }
 
 .discoverable-title{

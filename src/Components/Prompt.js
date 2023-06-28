@@ -409,8 +409,8 @@ const playlistNameTest = promptObject.playlistName;
                 <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Dinner Party Tunes')}>
                   Dinner Party Tunes
                 </div>
-                <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Grad Party Playlist!')}>
-                  Grad Party Playlist!
+                <div className="prompt-options with-arrow" onClick={() => selectPromptOption('Songs to Help Me Focus')}>
+                  Songs to Help Me Focus
                 </div>
                 {
                   auth. proUser ? <div> 
