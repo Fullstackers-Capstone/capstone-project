@@ -5,6 +5,7 @@ import { catchErrors } from '../../server/api/utils';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 import { fetchPlaylists, destroyPlaylist } from '../store';
+import PlDropdown from './PlDropdown';
 
 const MyPlaylists = () => {
 
@@ -173,10 +174,17 @@ const MyPlaylists = () => {
                             </div>
                           </div>
                       </div>
-        
+      
+
+
+
+
+
                     <div className='pl-thumb-ellipsis-container'>
+
+                      <PlDropdown />
         
-                        <ul className='ellipsis-dropdown'>
+                        {/* <ul className='ellipsis-dropdown'>
                             <button>
                                 <i className="fa-solid fa-angle-down"></i>
                             </button>
@@ -191,10 +199,16 @@ const MyPlaylists = () => {
                                 {(pro) ? <li id='remove-pro' onClick={removeCheck} key='remove'>Remove <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i></li> : <li id='remove-pro' key='remove' onClick={unlockPro}>Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>)</li>}
                             </div>
                             
-                        </ul>
+                        </ul> */}
         
                     </div>
         
+
+
+
+
+
+
                     </div>
                     {isPopupVisible && (
   
