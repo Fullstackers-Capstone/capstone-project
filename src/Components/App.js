@@ -30,7 +30,6 @@ const App = () => {
   const [showContent, setShowContent] = useState(false);
   // const [showBackButton, setShowBackButton] = useState(false);
   const [hide, setHide] = useState(true);
-  const popupRef = useRef(null);
   
   const serverError = useSelector(state => state.serverError);
 
@@ -39,6 +38,16 @@ const App = () => {
   const handleCloseModal = () => {
     dispatch({type: 'FIXED_SERVER_ERROR', payload: false})
 };
+
+const infoMenu = useRef(null);
+
+const closeInfoMenu = (e) => {
+  if(infoMenu.current && isPopupVisible && !infoMenu.current.contains(e.target)){
+    setPopupVisible(false);
+  }
+}
+
+document.addEventListener('mousedown',closeInfoMenu)
 
 const sections = ['How It Works', 'Examples'];
 
@@ -83,13 +92,6 @@ const toggleSection = (section) => {
   setActiveSection(activeSection === section ? null : section);
   setShowContent(activeSection !== section);
   // setShowBackButton(true);
-};
-
-
-const handleClickOutside = (event) => {
-  if (popupRef.current && !popupRef.current.contains(event.target)) {
-    setPopupVisible(false);
-  }
 };
 
   const dispatch = useDispatch();
@@ -162,9 +164,8 @@ const handleClickOutside = (event) => {
           </div>
         )}
         {isPopupVisible && (
-          <div className="modalBackground" id='info-popup' ref={popupRef}>
-            <div className="popup-overlay" onClick={handleClickOutside}></div>
-              <div className='modalOuterContainer'>
+          <div className="modalBackground" id='info-popup'>
+              <div ref={infoMenu} className='modalOuterContainer'>
                 <div className='info-title-container'>
                 <div className='info-title'>{activeSection || <span>About <span style={{color: 'white'}}>Serenade</span></span>}
                 </div>
