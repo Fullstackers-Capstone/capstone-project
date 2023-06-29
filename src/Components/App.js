@@ -21,6 +21,7 @@ import SuccessfulPlaylist from './SuccessfulPlaylist';
 import LandingPage from './LandingPage';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import About from './About';
+import { getCurrentUserProfile } from '../../server/api/spotify';
 
 const App = () => {
 
@@ -30,6 +31,7 @@ const App = () => {
   const [showContent, setShowContent] = useState(false);
   // const [showBackButton, setShowBackButton] = useState(false);
   const [hide, setHide] = useState(true);
+  const [localSpotProf, setLocalSpotProf] = useState(null)
   
   const serverError = useSelector(state => state.serverError);
 
@@ -96,6 +98,21 @@ const toggleSection = (section) => {
 
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+
+
+  useEffect(() => {
+    (async () => {
+      try{
+
+        const spotUserData = await(getCurrentUserProfile());
+        setLocalSpotProf(spotUserData)
+        localStorage.setItem("spotifyId", spotUserData.data.id);
+      }
+      catch(error){
+        console.error(error)
+      }
+    })()
+  }, [])
   
   useEffect(() => {
 
@@ -142,17 +159,16 @@ const toggleSection = (section) => {
           <div>
             <Routes>
               {
-                auth.playlistCount > 0 ?  <Route path="/" element={<Home />} /> : <Route path="/" element={<Prompt />} />
+                auth.playlistCount > 0 ?  <Route path="/" element={<Home loc={localSpotProf}/>} /> : <Route path="/" element={<Prompt />} />
               }
               <Route path="/unlock-pro" element={<UnlockPro />} />
-              <Route path="/users/:id" element={<Profile />} />
-              <Route path="/prompt" element={<Prompt />} />
+              <Route path="/users/:id" element={<Profile loc={localSpotProf}/>} />
+              <Route path="/prompt" element={<Prompt loc={localSpotProf}/>} />
               <Route path="/create" element={<PlaylistType />} />
-              <Route path="/playlist" element={<Playlist />} />
               <Route path="/discover" element={<Discover />} />
               <Route path="/top-artists" element={<TopArtists />} />
               <Route path="/top-tracks" element={<TopTracks />} />
-              <Route path="/playlists/:id" element={<SuccessfulPlaylist />} />
+              <Route path="/playlists/:id" element={<SuccessfulPlaylist loc={localSpotProf}/>} />
               <Route path="/landing" element={<LandingPage />} />
               <Route path="/about" element={<About />} />
             </Routes>

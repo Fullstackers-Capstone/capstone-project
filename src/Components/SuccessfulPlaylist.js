@@ -7,12 +7,11 @@ import Loader from './Loader';
 import { fetchPlaylists } from '../store';
 import PlDropdown from './PlDropdown';
 
-const SuccessfulPlaylist = () => {
+const SuccessfulPlaylist = ({loc}) => {
 
   const { auth, playlists } = useSelector(state => state);
 //   const [isLoading, setIsLoading] = useState(false);
   const [localPlaylists, setLocalPlaylists] = useState(null);
-  const [localSpotProf, setLocalSpotProf] = useState(auth)
 
   const { id } = useParams();
 
@@ -33,14 +32,10 @@ const SuccessfulPlaylist = () => {
           createdAt: actualPl.createdAt,
           isDiscoverable: actualPl.isDiscoverable,
           userId: actualPl.userId,
-          id: actualPl.spotId,
-          spotId: actualPl.spotId
+          id: actualPl.id,
         };
         
         if(!spotIdData.spotData.data.images[0]) window.location.reload();
-
-        const spotUserData = await(getCurrentUserProfile());
-        setLocalSpotProf(spotUserData)
 
         setLocalPlaylists(spotIdData);
 
@@ -100,13 +95,14 @@ const SuccessfulPlaylist = () => {
 
             <div className='pl-thumb' id='successful-only' key={localPlaylists.id}>
                 <div className='pl-thumb-name'>
-                    <a href={`https://open.spotify.com/playlist/${localPlaylists.id}`} target='_blank' title='Open in Spotify'>{localPlaylists.spotData.data.name}</a>
+
+                    <a href={`https://open.spotify.com/playlist/${localPlaylists.spotData.data.id}`} target='_blank' title='Open in Spotify'>{localPlaylists.spotData.data.name}</a>
                 </div>
             
                 <div className='pl-thumb-data-container'>
             
                     <div className='pl-thumb-img' title='Open in Spotify'>
-                        <a href={`https://open.spotify.com/playlist/${localPlaylists.id}`} target='_blank'>
+                        <a href={`https://open.spotify.com/playlist/${localPlaylists.spotData.data.id}`} target='_blank'>
                             <img src={localPlaylists.spotData.data.images[0].url || '/static/default.jpeg'}/>
                         </a>
                     </div>
@@ -151,11 +147,11 @@ const SuccessfulPlaylist = () => {
                       <div className='pl-thumb-user-container'>
                         <div className='pl-thumb-user-name-container'>
                           <div className='pl-thumb-user-name'>
-                            <a href={`https://open.spotify.com/user/${localSpotProf.data.id}`} target='_blank' title='Open in Spotify'>{localSpotProf.data.display_name.toUpperCase()}</a>
+                            <a href={`https://open.spotify.com/user/${loc.data.id}`} target='_blank' title='Open in Spotify'>{loc.data.display_name.toUpperCase()}</a>
                           </div>
                         </div>
                         <div className='pl-thumb-user-img'>
-                          <img src={localSpotProf.data.images[0].url} />
+                          <img src={loc.data.images[0].url} />
                         </div>
                       </div>
                     </div>

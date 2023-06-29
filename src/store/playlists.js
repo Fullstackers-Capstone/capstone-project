@@ -45,7 +45,7 @@ export const fetchPlaylists = () => {
   };
 };
 
-export const createDBPlaylist = (auth, prompt, input, navigate) => {
+export const createDBPlaylist = (auth, loc, prompt, input, navigate) => {
   return async (dispatch) => {
     try {
       const name = JSON.parse(prompt.name)
@@ -55,7 +55,9 @@ export const createDBPlaylist = (auth, prompt, input, navigate) => {
 
       const userInput = prompt.userInput;
 
-      const playlist = await createPlaylist({userId: auth.spotifyId, name: name.playlistName, description: input}, prompt, auth.discoverPlaylist)
+      const playlist = await createPlaylist({userId: loc, name: name.playlistName, description: input}, prompt, auth.discoverPlaylist)
+
+      console.log('when Im creating the playlist this the return', playlist)
 
       const request = {isDiscoverable: auth.discoverPlaylists, prompt: userInput, userSpotId: userSpotId, spotId: playlist.id, name: playlist.name, userId: newUserId}
 

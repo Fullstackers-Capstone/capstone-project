@@ -11,22 +11,22 @@ const User = conn.define('user', {
     primaryKey: true,
     defaultValue: UUIDV4
   },
-  spotifyId: {
-    type: STRING,
-    unique: true
-  },
-  display_name: {
-    type: STRING,
-  },
-  email: {
-    type: STRING,
-    validate: {
-      isEmail: true
-    },
-  },
-  image: {
-    type: STRING,
-  },
+  // spotifyId: {
+  //   type: STRING,
+  //   unique: true
+  // },
+  // display_name: {
+  //   type: STRING,
+  // },
+  // email: {
+  //   type: STRING,
+  //   validate: {
+  //     isEmail: true
+  //   },
+  // },
+  // image: {
+  //   type: STRING,
+  // },
   playlistCount: {
     type: INTEGER,
     defaultValue: 0

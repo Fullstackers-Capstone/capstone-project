@@ -15,6 +15,7 @@ const PlDropdown = ({pl}) => {
     const [copier, setCopier] = useState(false);
     const [pro, setPro] = useState();
 
+
     useEffect(() => {
       if(auth){
           setPro(auth.proUser);
@@ -45,7 +46,9 @@ const PlDropdown = ({pl}) => {
     }
 
       const destroy = (pl) => {
+        console.log('this is where the playlist about to get destroyed', pl)
         dispatch(destroyPlaylist(pl))
+        navigate('/');
       }
     
       const confirmedDestroyPlaylist = (pl) => {

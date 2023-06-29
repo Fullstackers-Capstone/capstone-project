@@ -5,7 +5,7 @@ import Discover from './Discover';
 import { Link } from 'react-router-dom';
 import CreatePlaylistButton from './CreatePlaylistButton';
 
-const Home = () => {
+const Home = ({loc}) => {
 
   const { auth, playlists } = useSelector(state => state);
   const [selected, setSelected] = useState(true);
@@ -39,7 +39,7 @@ const Home = () => {
           </button>
         </div>
       </div>
-      {(selected) ? <MyPlaylists/> : <Discover/>}
+      {(selected) ? <MyPlaylists loc={loc}/> : <Discover loc={loc}/>}
       {authPlaylists.length > 4 && (!auth.proUser) ? "" :     
       <div className="playlist-button-container">
         <Link to="/prompt" className={`playlist-button ${(selected) ? '' : 'DISC'}`}>Create New Playlist</Link>
