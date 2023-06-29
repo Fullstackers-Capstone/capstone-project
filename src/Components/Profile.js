@@ -5,7 +5,7 @@ import { getCurrentUserProfile } from '../../server/api/spotify';
 import { fetchPlaylists, updateAuth, updatePlaylist } from '../store';
 import Switch from 'react-ios-switch';
 
-const Profile = ({loc}) => {
+const Profile = () => {
 
     const { auth, playlists } = useSelector(state => state);
     const [discover, setDiscover] = useState(false);
@@ -104,12 +104,12 @@ const Profile = ({loc}) => {
 
                         <div className='prof-spot-user'>
                             <div className='prof-spot-img'>
-                            <img src={loc.data.images[0].url} />
+                            <img src={auth.image} />
                           </div>
 
                           <div className='prof-spot-userId'>
    
-                                    <a href={`https://open.spotify.com/user/${ loc.data.spotifyId }`} target='_blank' title='Open in Spotify'>{loc.data.display_name.toUpperCase()} 
+                                    <a href={`https://open.spotify.com/user/${ auth.spotifyId }`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()} 
                                     </a>
 
 
@@ -125,13 +125,13 @@ const Profile = ({loc}) => {
                                 <div className='prof-stats'>
                               <div className="feature-header" id='info-header'>
                               <div className='step-num-title'>
-                              <span className='prof-title'>Spotify User ID:</span> <span>{ loc.data.id }</span>
+                              <span className='prof-title'>Spotify User ID:</span> <span>{ auth.spotifyId }</span>
                                 </div>
                               </div>
 
                               <div className="feature-header" id='info-header'>
                               <div className='step-num-title'>
-                              <span className='prof-title'>Email:</span> <span>{ loc.data.email }</span>
+                              <span className='prof-title'>Email:</span> <span>{ auth.email }</span>
                             </div>
                             </div>
 

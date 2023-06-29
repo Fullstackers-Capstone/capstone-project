@@ -7,7 +7,7 @@ import { getTopTracks, createPlaylist, getTopArtists } from '../../server/api/sp
 import Loader from './Loader';
 import { FaInfoCircle } from 'react-icons/fa';
 
-const Prompt = ({loc}) => {
+const Prompt = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { prompt, auth, playlists } = useSelector(state => state);
@@ -67,7 +67,7 @@ const handleGeneratePlaylist = async() => {
 
 //creates playlist and navigates to the component
 const createPlaylist = async () => {
-await dispatch(createDBPlaylist(auth, loc.data.id, currentPrompt, input, navigate))
+await dispatch(createDBPlaylist(auth,currentPrompt, input, navigate))
 auth.playlistCount += 1;
 await dispatch(updateAuth(auth));
 };
@@ -95,7 +95,7 @@ const playlistNameTest = promptObject.playlistName;
       const text = `Songs that sound like ${artists}`;
 
       setInput(text);
-
+      console.log('this is the input', input);
   };
 
 
@@ -449,4 +449,3 @@ const playlistNameTest = promptObject.playlistName;
 };
 
 export default Prompt;
-

@@ -15,7 +15,6 @@ const PlDropdown = ({pl}) => {
     const [copier, setCopier] = useState(false);
     const [pro, setPro] = useState();
 
-
     useEffect(() => {
       if(auth){
           setPro(auth.proUser);
@@ -46,7 +45,6 @@ const PlDropdown = ({pl}) => {
     }
 
       const destroy = (pl) => {
-        console.log('this is where the playlist about to get destroyed', pl)
         dispatch(destroyPlaylist(pl))
         navigate('/');
       }
@@ -86,12 +84,12 @@ const PlDropdown = ({pl}) => {
         <div className="dropdown-content" id='plDropdown-content'>
 
         <li key='spotOpen' style={{padding: 0}}>
-              <a href={`spotify:playlist:${pl.spotData.data.id}`} onClick={handleDropdownToggle}>
+              <a href={`spotify:playlist:${pl.spotId}`} onClick={handleDropdownToggle}>
                   Open in Spotify App <i className="fa-solid fa-arrow-up-right-from-square fa-xs" style={{marginLeft: '.15rem'}}></i>
               </a>
           </li>
 
-          <li key='copyLink' onClick={() => removeCheck('copier', `https://open.spotify.com/playlist/${pl.spotData.data.id}`)}>Copy Link <i className="fa-solid fa-link fa-xs" style={{marginLeft: '.15rem'}}></i></li>
+          <li key='copyLink' onClick={() => removeCheck('copier', `https://open.spotify.com/playlist/${pl.spotId}`)}>Copy Link <i className="fa-solid fa-link fa-xs" style={{marginLeft: '.15rem'}}></i></li>
 
           {auth.id === pl.userId && (
             <>
@@ -111,7 +109,7 @@ const PlDropdown = ({pl}) => {
                     <div className='userCheck-content'>
                       {(destroyer) && 'Are you sure you want to remove this playlist from your Serenade profile?'}
 
-                      {(copier) && `https://open.spotify.com/playlist/${pl.spotData.data.id}`}
+                      {(copier) && `https://open.spotify.com/playlist/${pl.spotId}`}
                       
                       </div>
                     <div className='userCheck-buttons'>

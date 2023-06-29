@@ -68,7 +68,6 @@ export const getJSONResponse = (prompt, length, data) => {
     try {
       const request = {prompt: prompt,length: length, spotifyData: data};
       const spotifyId = window.localStorage.getItem('spotifyId');
-
       const response = await axios.post('/api/prompt/json', request, {
         headers: {
           spotifyId: spotifyId

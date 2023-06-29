@@ -10,9 +10,9 @@ const Playlist = conn.define('playlist', {
   prompt:{
     type: TEXT
     },
-  // name: {
-  //   type: STRING
-  // },
+  name: {
+    type: STRING
+  },
   isDiscoverable: {
     type: BOOLEAN,
     defaultValue: true
@@ -20,9 +20,9 @@ const Playlist = conn.define('playlist', {
   spotId:{
     type: STRING
   },
-  // userSpotId:{
-  //   type: STRING
-  // }
+  userSpotId:{
+    type: STRING
+  }
 });
 
 module.exports = Playlist;
