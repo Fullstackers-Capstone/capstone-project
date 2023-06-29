@@ -113,13 +113,13 @@ const Prompt = conn.define('prompt', {
   uriList: {
     type: ARRAY(STRING)  // changed this line
   },
+  userInput: {
+    type: TEXT
+  },
   isCreated: {
     type: BOOLEAN,
     defaultValue: false
   },
-  userInput: {
-    type: TEXT
-  }
 });
 
 Prompt.findAllBySpotifyId = async function(id){
