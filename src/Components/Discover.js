@@ -7,13 +7,12 @@ import Loader from './Loader';
 import { fetchPlaylists } from '../store';
 import PlDropdown from './PlDropdown';
 
-const MyPlaylists = () => {
+const MyPlaylists = ({loc}) => {
 
   const { auth, playlists } = useSelector(state => state);
   const [isLoading, setIsLoading] = useState(false);
   const [localPlaylists, setLocalPlaylists] = useState([]);
   const [discover, setDiscover] = useState();
-  const [localSpotProf, setLocalSpotProf] = useState(auth)
 
   const dispatch = useDispatch();
 
@@ -38,15 +37,11 @@ const MyPlaylists = () => {
           createdAt: response.createdAt,
           isDiscoverable: response.isDiscoverable,
           userId: response.userId,
-          id: response.spotId,
-          spotId: response.spotId //redundancy in place for PlDropdown
+          id: response.id,
         })
         ));
 
-        const spotUserData = await(getCurrentUserProfile());
-
         setLocalPlaylists(spotIdData);
-        setLocalSpotProf(spotUserData)
 
       }
       catch(error){
@@ -97,13 +92,14 @@ const MyPlaylists = () => {
                 return(
                 <div className='pl-thumb' key={playlist.id}>
                     <div className='disc-thumb-name'>
-                        <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
+
+                        <a href={`https://open.spotify.com/playlist/${playlist.spotData.data.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
                     </div>
         
                     <div className='pl-thumb-data-container'>
         
                         <div className='pl-thumb-img' title='Open in Spotify'>
-                            <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank'>
+                            <a href={`https://open.spotify.com/playlist/${playlist.spotData.data.id}`} target='_blank'>
                                 <img src={imageHook(playlist.spotData.data.images[0].url)}/>
                             </a>
                         </div>
@@ -139,16 +135,17 @@ const MyPlaylists = () => {
                     </div>
                     <div className='pl-thumb-stats-container'>
                       <div className='pl-thumb-ellipsis-container'>
+  
                         <PlDropdown pl={playlist}/>
                       </div>
                       <div className='pl-thumb-user-container'>
                         <div className='pl-thumb-user-name-container'>
                           <div className='disc-thumb-user-name'>
-                            <a href={`https://open.spotify.com/user/${localSpotProf.data.id}`} target='_blank' title='Open in Spotify'>{localSpotProf.data.display_name.toUpperCase()}</a>
+                            <a href={`https://open.spotify.com/user/${loc.data.id}`} target='_blank' title='Open in Spotify'>{loc.data.display_name.toUpperCase()}</a>
                           </div>
                         </div>
                         <div className='pl-thumb-user-img'>
-                          <img src={localSpotProf.data.images[0].url} />
+                          <img src={loc.data.images[0].url} />
                         </div>
                       </div>
                     </div>
