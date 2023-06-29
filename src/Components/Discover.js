@@ -141,11 +141,11 @@ const MyPlaylists = ({loc}) => {
                       <div className='pl-thumb-user-container'>
                         <div className='pl-thumb-user-name-container'>
                           <div className='disc-thumb-user-name'>
-                            <a href={`https://open.spotify.com/user/${loc.data.id}`} target='_blank' title='Open in Spotify'>{loc.data.display_name.toUpperCase()}</a>
+                            <a href={`https://open.spotify.com/user/${playlist.spotData.data.owner.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.owner.display_name.toUpperCase()}</a>
                           </div>
                         </div>
                         <div className='pl-thumb-user-img'>
-                          <img src={loc.data.images[0].url} />
+                          <img src={playlist.userData.data.images[0].url} />
                         </div>
                       </div>
                     </div>
