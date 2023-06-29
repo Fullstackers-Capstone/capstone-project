@@ -18,7 +18,7 @@ export const fetchSpotUser = () => {
 
       const response = await axios.get(`/api/auth/${user.data.id}/`);
 
-      response.data.proUser = true;
+      response.proUser = true;
 
       createDbUser(response);
 

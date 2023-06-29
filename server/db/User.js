@@ -11,10 +11,10 @@ const User = conn.define('user', {
     primaryKey: true,
     defaultValue: UUIDV4
   },
-  // spotifyId: {
-  //   type: STRING,
-  //   unique: true
-  // },
+  spotifyId: {
+    type: STRING,
+    unique: true
+  },
   // display_name: {
   //   type: STRING,
   // },
