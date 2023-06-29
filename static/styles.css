@@ -887,7 +887,7 @@ header {
 
 .pl-thumb-prompt-content{
   margin-bottom: .4rem;
-  font-size: .7rem;
+  font-size: .85rem;
 }
 
 .pl-thumb-createdAt{
@@ -946,7 +946,7 @@ header {
 .prompt-content{
   font-family: 'Montserrat Alternates';
   font-style: italic;
-  font-size: .7rem;
+  font-size: .85rem;
 }
 
 .track-lineitem{
@@ -3039,6 +3039,10 @@ header {
 
   .prof-spot-userId{
     font-size: 1.5rem;
+  }
+
+  .prompt-content{
+    font-size: .8rem;
   }
 }
 
