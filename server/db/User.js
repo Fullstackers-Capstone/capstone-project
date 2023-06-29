@@ -15,18 +15,18 @@ const User = conn.define('user', {
     type: STRING,
     unique: true
   },
-  // display_name: {
-  //   type: STRING,
-  // },
-  // email: {
-  //   type: STRING,
-  //   validate: {
-  //     isEmail: true
-  //   },
-  // },
-  // image: {
-  //   type: STRING,
-  // },
+  display_name: {
+    type: STRING,
+  },
+  email: {
+    type: STRING,
+    validate: {
+      isEmail: true
+    },
+  },
+  image: {
+    type: STRING,
+  },
   playlistCount: {
     type: INTEGER,
     defaultValue: 0

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentUserProfile, getPlaylistById } from '../../server/api/spotify';
+import { getPlaylistById } from '../../server/api/spotify';
 import Loader from './Loader';
 import { fetchPlaylists } from '../store';
 import PlDropdown from './PlDropdown';
 
-const MyPlaylists = ({loc}) => {
+const MyPlaylists = () => {
 
   const { auth, playlists } = useSelector(state => state);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,6 +27,7 @@ const MyPlaylists = ({loc}) => {
           createdAt: response.createdAt,
           isDiscoverable: response.isDiscoverable,
           userId: response.userId,
+          spotId: response.spotId,
           id: response.id
         })
         ));
@@ -39,6 +40,7 @@ const MyPlaylists = ({loc}) => {
       }
     })()
   }, [playlists])
+
 
   const authPlaylists = localPlaylists.map(pl => pl)
   .filter(pl => pl.userId === auth.id)
@@ -81,13 +83,13 @@ const MyPlaylists = ({loc}) => {
                 return(
                 <div className='pl-thumb' key={playlist.id}>
                     <div className='pl-thumb-name'>
-                        <a href={`https://open.spotify.com/playlist/${playlist.spotData.data.id}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
+                        <a href={`https://open.spotify.com/playlist/${playlist.spotId}`} target='_blank' title='Open in Spotify'>{playlist.spotData.data.name}</a>
                     </div>
         
                     <div className='pl-thumb-data-container'>
         
                         <div className='pl-thumb-img' title='Open in Spotify'>
-                            <a href={`https://open.spotify.com/playlist/${playlist.spotData.data.id}`} target='_blank'>
+                            <a href={`https://open.spotify.com/playlist/${playlist.spotId}`} target='_blank'>
                                 <img src={imageHook(playlist.spotData.data.images[0].url)}/>
                             </a>
                         </div>
@@ -129,11 +131,11 @@ const MyPlaylists = ({loc}) => {
                       <div className='pl-thumb-user-container'>
                         <div className='pl-thumb-user-name-container'>
                           <div className='pl-thumb-user-name'>
-                            <a href={`https://open.spotify.com/user/${loc.data.id}`} target='_blank' title='Open in Spotify'>{loc.data.display_name.toUpperCase()}</a>
+                            <a href={`https://open.spotify.com/user/${auth.spotifyId}`} target='_blank' title='Open in Spotify'>{auth.display_name.toUpperCase()}</a>
                           </div>
                         </div>
                         <div className='pl-thumb-user-img'>
-                          <img src={loc.data.images[0].url} />
+                          <img src={auth.image} />
                         </div>
                       </div>
                     </div>

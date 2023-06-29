@@ -15,10 +15,9 @@ export const fetchSpotUser = () => {
   return async(dispatch) => {
     try {
       const user = await getCurrentUserProfile();
-
       const response = await axios.get(`/api/auth/${user.data.id}/`);
 
-      response.proUser = true;
+      localStorage.setItem("spotifyId",response.data.spotifyId);
 
       createDbUser(response);
 
