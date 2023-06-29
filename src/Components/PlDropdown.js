@@ -50,6 +50,7 @@ const PlDropdown = ({pl}) => {
     
       const confirmedDestroyPlaylist = (pl) => {
         destroy(pl);
+        auth.playlistCount = auth.playlistCount - 1;
         setPopupVisible(false);
       }
     

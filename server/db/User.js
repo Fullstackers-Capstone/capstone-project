@@ -37,7 +37,7 @@ const User = conn.define('user', {
   },
   proUser: {
     type: BOOLEAN,
-    defaultValue: true
+    defaultValue: false
   }
 });
 
