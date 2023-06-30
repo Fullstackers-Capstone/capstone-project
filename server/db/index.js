@@ -7,10 +7,11 @@ Playlist.belongsTo(User); // sets up the foreign key for UserId
 Prompt.belongsTo(User);
 User.hasMany(Playlist);
 User.hasMany(Prompt);
+
 const syncAndSeed = async()=> {
   await conn.sync({force: true});
-
 };
+
 module.exports = {
   syncAndSeed,
   User,
