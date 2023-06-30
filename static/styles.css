@@ -904,7 +904,7 @@ header {
 
 .pl-thumb-prompt-content{
   margin-bottom: .4rem;
-  font-size: .85rem;
+  font-size: .8rem;
 }
 
 .pl-thumb-createdAt{
@@ -964,7 +964,7 @@ header {
 .prompt-content{
   font-family: 'Montserrat Alternates';
   font-style: italic;
-  font-size: .85rem;
+  font-size: .8rem;
 }
 
 .track-lineitem{
@@ -2934,6 +2934,10 @@ header {
     font-size: 1.75rem;
   }
 
+  .prompt-content, .pl-thumb-prompt-content{
+  font-size: .7rem;
+  }
+
 }
 
 @media screen and (max-width: 1025px) {
@@ -3060,9 +3064,6 @@ header {
     font-size: 1.5rem;
   }
 
-  .prompt-content{
-    font-size: .8rem;
-  }
 }
 
 
