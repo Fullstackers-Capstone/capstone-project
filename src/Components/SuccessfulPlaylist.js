@@ -91,7 +91,7 @@ const SuccessfulPlaylist = () => {
                     { localPlaylists.spotData.data.tracks.items.slice(0, 7).map((_track, index) => {
                     return(
                       <div key={ _track.track.duration_ms } className='track-lineitem'>
-                        <span style={{ color: '#777777', fontSize: '.75rem', marginRight: '.25rem' }}>
+                        <span style={{ color: '#777777', fontSize: '.75rem', marginRight: '.35rem' }}>
                           { (index + 1) }. 
                         </span>
                         <span className='track-artist'>

@@ -24,13 +24,6 @@ const Profile = () => {
         }
     }, [auth])
 
-    useEffect(() => {
-        (async () => {
-            const spotUserData = await(getCurrentUserProfile());
-            setLocalSpotProf(spotUserData)
-        })()
-    }, [])
-
 
     useEffect(() => {
         if (didMount.current) {  // Avoid running on initial render
