@@ -44,7 +44,7 @@ const NavBar = () => {
         { auth.proUser ? (
           <Link to={ `/users/${ auth.id }` } onClick={ handleDropdownToggle }>
             Profile 
-            <span style={{ color: 'gold', marginLeft: '.15rem' }}>
+            <span style={{ color: 'gold', marginLeft: '.5rem' }}>
               <i className="fa-solid fa-circle-check fa-xs"></i>
             </span>
           </Link> 
@@ -74,7 +74,7 @@ const NavBar = () => {
         : (
           <Link to="/unlock-pro" onClick={ handleDropdownToggle }>
             Unlock Pro 
-            <i className="fa-solid fa-lock fa-xs" style={{ marginLeft: '.25rem', color: 'gold' }}></i>
+            <i className="fa-solid fa-lock fa-xs" style={{ marginLeft: '.5rem', color: 'gold' }}></i>
           </Link>
         ) }
 

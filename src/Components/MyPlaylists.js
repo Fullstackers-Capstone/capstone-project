@@ -106,15 +106,15 @@ const MyPlaylists = () => {
                     { playlist.spotData.data.tracks.items.slice(0, 7).map((_track, index) => {
                       return(
                         <div key={ _track.track.duration_ms } className='track-lineitem'>
-                          <span style={{color: '#777777', fontSize: '.75rem', marginRight: '.25rem'}}>
+                          <span style={{ color: '#777777', fontSize: '.75rem', marginRight: '.25rem' }}>
                             { (index + 1) }. 
                           </span>
                           <span className='track-artist'>
                             { _track.track.artists[0].name }
                           </span> -
-                          <span style={{ fontSize: '.75rem', marginLeft: '.35rem' }}>
+                          <span style={{ fontSize: '.75rem', marginLeft: '.5rem' }}>
                             { _track.track.name } 
-                            <span style={{fontSize: '.7rem'}}>
+                            <span style={{ fontSize: '.7rem', marginLeft: '.35rem' }}>
                               ({ msConversion(_track.track.duration_ms) })
                             </span>
                           </span>
