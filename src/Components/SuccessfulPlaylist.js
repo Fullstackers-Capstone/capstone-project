@@ -29,7 +29,7 @@ const SuccessfulPlaylist = () => {
           createdAt: actualPl.createdAt,
           isDiscoverable: actualPl.isDiscoverable,
           userId: actualPl.userId,
-          id: actualPl.spotId,
+          id: actualPl.id,
           spotId: actualPl.spotId
         };
         
@@ -66,10 +66,10 @@ const SuccessfulPlaylist = () => {
         { (localPlaylists) && (
           <div id='content-body'>
             <div id='successfulpl-container'>
-              <div className='pl-thumb' id='successful-only' key={ localPlaylists.id }>
+              <div className='pl-thumb' id='successful-only' key={ localPlaylists.spotId }>
 
                 <div className='pl-thumb-name'>
-                  <a href={ `https://open.spotify.com/playlist/${ localPlaylists.id }` } target='_blank' title='Open in Spotify'>
+                  <a href={ `https://open.spotify.com/playlist/${ localPlaylists.spotId }` } target='_blank' title='Open in Spotify'>
                     { localPlaylists.spotData.data.name }
                   </a>
                 </div>
@@ -77,7 +77,7 @@ const SuccessfulPlaylist = () => {
                 <div className='pl-thumb-data-container'>
           
                   <div className='pl-thumb-img' title='Open in Spotify'>
-                      <a href={ `https://open.spotify.com/playlist/${ localPlaylists.id }` } target='_blank'>
+                      <a href={ `https://open.spotify.com/playlist/${ localPlaylists.spotId }` } target='_blank'>
                           <img src={ localPlaylists.spotData.data.images[0].url || '/static/default.jpeg' } />
                       </a>
                   </div>
