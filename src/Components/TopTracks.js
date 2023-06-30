@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getResponse, getJSONResponse, createPrompt } from '../store';
-import Searcher from './Searcher';
+import { getResponse } from '../store';
 import { getTopTracks, addTracksToPlaylist } from '../../server/api/spotify';
-//import { createPlaylistTest } from '../store';
 
 const TopTracks = () => {
   const dispatch = useDispatch();
