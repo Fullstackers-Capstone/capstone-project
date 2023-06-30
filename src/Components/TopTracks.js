@@ -36,6 +36,7 @@ const TopTracks = () => {
     const regex = /"(.*?)" by (.*?)(?=,|$)/g;
     const tracks = [];
     let match;
+
     while ((match = regex.exec(responseString))) {
       tracks.push({ name: match[1], artists: [{ name: match[2] }], selected: false });
     }
@@ -52,9 +53,6 @@ const TopTracks = () => {
   const createPlaylists = async () => {
     const selectedTracks = topTracks.filter((track) => track.selected);
     const trackURIs = selectedTracks.map((track) => track.uri);
-
-    console.log('Selected Tracks:', selectedTracks);
-    console.log('Track URIs:', trackURIs);
     
     try {
       const playlist = await createPlaylistTest(
@@ -65,8 +63,6 @@ const TopTracks = () => {
       const playlistId = playlist.id;
 
       await addTracksToPlaylist(playlistId, trackURIs);
-
-      console.log('Playlist created and tracks added');
     } catch (error) {
       console.error('Error creating playlist:', error);
     }
@@ -74,40 +70,42 @@ const TopTracks = () => {
 
   return (
     <div className="prompt-container">
-      <form onSubmit={submit}>
-        <input onChange={(ev) => setInput(ev.target.value)}></input>
-        <button className="styled-logout-button">Test</button>
+      <form onSubmit={ submit }>
+        <input onChange={ (ev) => setInput(ev.target.value) } />
+        <button className="styled-logout-button">
+          Test
+        </button>
       </form>
-      <div className="prompt-element">
-        </div>
 
-        <div className="messages">
-          {prompt.map((_prompt) => {
-            return (
-              <div key={_prompt.id} id={_prompt.id}>
-              </div>
-            );
-          })}
-        </div>
-  
-        <ul className="track-list">
-          {topTracks.map((track, index) => (
-            <li key={index} className="track-item">
-              <input
-                type="checkbox"
-                checked={track.selected}
-                onChange={() => handleTrackSelection(index)}
-              />
-              <span>
-                {track.name} by {track.artists[0].name}
-              </span>
-            </li>
-          ))}
-        </ul>
-  
-        <button onClick={createPlaylists}>Create Playlist</button>
+      <div className="messages">
+        { prompt.map((_prompt) => {
+          return (
+            <div key={ _prompt.id }>
+            </div>
+          );
+        }) }
       </div>
-    );
-  };
+  
+      <ul className="track-list">
+        { topTracks.map((track, index) => (
+          <li key={ index } className="track-item">
+            <input
+              type="checkbox"
+              checked={ track.selected }
+              onChange={ () => handleTrackSelection(index) }
+            />
+            <span>
+              { track.name } by { track.artists[0].name }
+            </span>
+          </li>
+        )) }
+      </ul>
+  
+      <button onClick={ createPlaylists }>
+        Create Playlist
+      </button>
+    </div>
+  );
+};
   
   export default TopTracks;
