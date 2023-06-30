@@ -1,39 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { catchErrors } from '/server/api/utils.js';
 import { getTopArtists } from '/server/api/spotify.js';
-//import { SectionWrapper, ArtistsGrid, TimeRangeButtons, Loader } from '../Components';
 
 const TopArtists = () => {
-
   const [topArtists, setTopArtists] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-
       const userTopArtists = await getTopArtists();
       setTopArtists(userTopArtists.data);
-
     };
 
     catchErrors(fetchData());
   }, []);
 
-  console.log(topArtists);
   return (
     <div className="test">
-      {topArtists ? (
+      { topArtists ? (
         <ul className='grid-container'>
-          {topArtists.items.map((item, i) => (
-            <li key={i}>
+          { topArtists.items.map((item, i) => (
+            <li key={ i }>
               <div className='avatar'>
-                <img src={item.images[0].url} alt={item.name} />
+                <img src={ item.images[0].url } alt={ item.name } />
               </div>
             </li>
-          ))}
+          )) }
         </ul>
       ) : (
-        <h1>no artists</h1>
-      )}
+        <h1>
+          no artists
+        </h1>
+      ) }
     </div>
   );
 }
