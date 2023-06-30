@@ -1,13 +1,14 @@
 const conn = require('./conn');
 const { JSON, UUID, UUIDV4, TEXT, STRING, ARRAY, BOOLEAN} = conn.Sequelize;
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { Configuration, OpenAIApi } = require('openai');
+const JWT = process.env.JWT;
 const User = require('./User');
 
-
 const configuration = new Configuration({
-    apiKey: process.env.OPEN_AI_KEY,
+  apiKey: process.env.OPEN_AI_KEY,
 });
-
 
 const Prompt = conn.define('prompt', {
   id: {
@@ -36,22 +37,23 @@ const Prompt = conn.define('prompt', {
   },
 });
 
-
 Prompt.findAllBySpotifyId = async function(id){
   try {
     const user = await User.findbySpotifyId(id);
     if(user){
       return this.findAll({
         where:{
-            userId: user.id
+          userId: user.id
         }
       });
     }
+      
     throw 'Prompt not found.';
   }
   catch(ex){
     const error = new Error('This user has no prompts.');
     error.status = 401;
+
     throw error;
   }
 }
@@ -71,17 +73,18 @@ Prompt.prototype.askChatGPT = async function(){
         presence_penalty: 0.0,
         
     })
-
     this.response = await response.data.choices[0].message.content;
+
     return this;
   }
   catch(ex){
     const error = new Error('An error occurred.');
     error.status = 401;
+
     throw error;
   }
-
 }
+
 Prompt.prototype.generateName = async function(namePrompt){
   try{
     const openai = new OpenAIApi(configuration);
@@ -97,18 +100,17 @@ Prompt.prototype.generateName = async function(namePrompt){
         presence_penalty: 0.0,
         
     })
-
     this.name = await response.data.choices[0].message.content;
+
     return this;
   }
   catch(ex){
-    const error = new Error('An error occurred.);
+    const error = new Error('An error occurred');
     error.status = 401;
+
     throw error;
   }
-
 }
 
 module.exports = Prompt;
-
 
