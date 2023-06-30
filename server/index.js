@@ -6,6 +6,7 @@ catch(ex){
   console.log('deploying? add a client_id and client_secret environment variable');
   console.log(ex);
 }
+
 const app = require('./app');
 
 const init = async()=> {
@@ -17,6 +18,5 @@ const init = async()=> {
     console.log(ex);
   }
 };
-
 
 init();

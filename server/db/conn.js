@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
-const config = {
-};
+const config = {};
 
 if(process.env.QUIET){
   config.logging = false;

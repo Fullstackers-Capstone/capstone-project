@@ -1,5 +1,5 @@
 const conn = require("./conn");
-const { STRING, UUID, UUIDV4, TEXT, JSON, BOOLEAN, ARRAY } = conn.Sequelize;
+const { STRING, UUID, UUIDV4, TEXT, BOOLEAN } = conn.Sequelize;
 
 const Playlist = conn.define('playlist', {
   id: {

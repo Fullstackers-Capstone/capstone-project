@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { STRING, UUID, UUIDV4, TEXT, BOOLEAN, INTEGER } = conn.Sequelize;
+const { STRING, UUID, UUIDV4, BOOLEAN, INTEGER } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const JWT = process.env.JWT;
@@ -42,13 +42,6 @@ const User = conn.define('user', {
 });
 
 
-
-User.addHook('beforeSave', async(user)=> {
-  if(user.changed('password')){
-    user.password = await bcrypt.hash(user.password, 5);
-  }
-});
-
 User.findByToken = async function(token){
   try {
     const { id } = jwt.verify(token, process.env.JWT);
@@ -56,7 +49,7 @@ User.findByToken = async function(token){
     if(user){
       return user;
     }
-    throw 'user not found';
+    throw 'User not found.';
   }
   catch(ex){
     const error = new Error('bad credentials');
@@ -76,10 +69,10 @@ User.findBySpotifyId = async function(id){
     if(user){
       return user;
     }
-    throw 'user not found';
+    throw 'User not found.';
   }
   catch(ex){
-    const error = new Error('bad credentials');
+    const error = new Error('Bad credentials.');
     error.status = 401;
     throw error;
   }
@@ -102,8 +95,6 @@ User.authenticate = async function({ username, password }){
   error.status = 401;
   throw error;
 }
-
-//6/1 MAURICIO
 
 User.prototype.getPlaylist =  async function(){
   const getPlaylist = await conn.models.playlist.findAll({
