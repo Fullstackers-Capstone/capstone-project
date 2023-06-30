@@ -56,7 +56,7 @@ const NavBar = () => {
 
         { auth.playlistCount > 0 ? (
           <Link to="/" onClick={ handleDropdownToggle }>
-            My Playlists
+            Playlists
           </Link>
         ) : '' }
         
