@@ -15,16 +15,16 @@ export const fetchSpotUser = () => {
   return async(dispatch) => {
     try {
       const user = await getCurrentUserProfile();
-      const response = await axios.get(`/api/auth/${user.data.id}/`);
+      const response = await axios.get(`/api/auth/${ user.data.id }/`);
 
       localStorage.setItem("spotifyId",response.data.spotifyId);
 
       createDbUser(response);
 
-      dispatch({ type: 'SET_AUTH', auth: response.data});
+      dispatch({ type: 'SET_AUTH', auth: response.data });
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error fetching Spotify user! Please try your request again."});
+      dispatch({ type: 'SERVER_ERROR', payload: "Error fetching Spotify user! Please try your request again." });
     }
   }
 }
@@ -40,7 +40,7 @@ export const createDbUser = (response) => {
       })
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error creating user in the database! Please try your request again."});
+      dispatch({ type: 'SERVER_ERROR', payload: "Error creating user in the database! Please try your request again." });
     }
   }
 }
@@ -48,11 +48,11 @@ export const createDbUser = (response) => {
 export const updateAuth = (user)=> {
   return async(dispatch)=> {
     try {
-      const response = await axios.put(`/api/users/${user.id}`, user);
+      const response = await axios.put(`/api/users/${ user.id }`, user);
       dispatch({ type: 'SET_AUTH', auth: response.data });
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error updating auth! Please try your request again."});
+      dispatch({ type: 'SERVER_ERROR', payload: "Error updating auth! Please try your request again." });
     }
   }
 }
@@ -60,12 +60,12 @@ export const updateAuth = (user)=> {
 export const upgradeToPro = (user) => {
   return async (dispatch) => {
     try {
-      const request = {spotifyId: user}
+      const request = { spotifyId: user }
       const response = await axios.put('/api/users/upgradeToPro', request);
       dispatch({ type: 'SET_AUTH', auth: response.data });
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error upgrading to pro! Please try your request again."});
+      dispatch({ type: 'SERVER_ERROR', payload: "Error upgrading to pro! Please try your request again." });
     }
   };
 };

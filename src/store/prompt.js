@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import { searchFunctionality, createPlaylist } from '../../server/api/spotify';
+import { searchFunctionality } from '../../server/api/spotify';
 const SET_PROMPT = 'SET_PROMPT';
 const CREATE_PROMPT = 'CREATE_PROMPT';
 const UPDATE_PROMPT = 'UPDATE_PROMPT';
@@ -16,19 +16,17 @@ const promptReducer = (state = initialState, action) => {
       return [...state, action.prompt];
     case UPDATE_PROMPT:
       const prompt= state.map(_prompt => {
-       if ( _prompt.id === action.prompt.id){
+        if ( _prompt.id === action.prompt.id){
           return action.prompt;
-       }
-       else{
-        return _prompt;
-       }
+        } else {
+          return _prompt;
+        }
       });
       return prompt;
     default:
       return state;
   }
 };
-
 
 export const setPrompt = (prompt) => ({
   type: SET_PROMPT,
@@ -58,7 +56,7 @@ export const getResponse = (prompt) => {
       dispatch(setPrompt(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: SERVER_ERROR, payload: "Error getting response! Please try your request again."});
+      dispatch({ type: SERVER_ERROR, payload: "Error getting response! Please try your request again." });
     }
   };
 };
@@ -66,65 +64,20 @@ export const getResponse = (prompt) => {
 export const getJSONResponse = (prompt, length, data) => {
   return async (dispatch) => {
     try {
-      const request = {prompt: prompt,length: length, spotifyData: data};
+      const request = { prompt: prompt,length: length, spotifyData: data };
       const spotifyId = window.localStorage.getItem('spotifyId');
       const response = await axios.post('/api/prompt/json', request, {
         headers: {
           spotifyId: spotifyId
         }
       });
-      // dispatch(savePrompt(response.data));
       dispatch(getSpotifyURIs(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error getting JSON response! Please try your request again."});
+      dispatch({ type: 'SERVER_ERROR', payload: "Error getting JSON response! Please try your request again." });
     }
   };
 };
-
-// export const getSpotifyURIs = (prompt) => {
-//   return async (dispatch) => {
-//     try {
-//       const playlist = JSON.parse(prompt.response);
-//       const newPlaylist = [];
-//       const uniqueArray = [];
-//       const URIResponse = await Promise.all(playlist.map(async(element) => {
-//         const uri = await searchFunctionality(element)
-//         if (await uri){
-//           if (uri !== undefined){
-//              newPlaylist.push({title: uri.name, artist: uri.artists[0].name, album: uri.album.name, uri: uri.uri});
-//               return await uri.uri;
-//           }
-//         }
-//       }));
-
-//       function areObjectsEqual(obj1, obj2) {
-//         return JSON.stringify(obj1) === JSON.stringify(obj2);
-//       }
-
-//       for (let i = 0; i < newPlaylist.length; i++) {
-//         let isDuplicate = false;
-//         for (let j = 0; j < uniqueArray.length; j++) {
-//           if (areObjectsEqual(newPlaylist[i], uniqueArray[j])) {
-//             isDuplicate = true;
-//             break;
-//           }
-//         }
-//         if (!isDuplicate) {
-//           uniqueArray.push(newPlaylist[i]);
-//         }
-//       }
-
-
-//       prompt.uriList = URIResponse;
-//       prompt.response = uniqueArray;
-//       dispatch(savePrompt(prompt));
-//     } catch (error) {
-//       console.error(error);
-//       dispatch({type: 'SERVER_ERROR', payload: "Error getting Spotify URIs! Please try your request again."});
-//     }
-//   }
-// }
 
 export const getSpotifyURIs = (prompt) => {
   return async (dispatch) => {
@@ -145,8 +98,8 @@ export const getSpotifyURIs = (prompt) => {
         const uri = await searchFunctionality(element)
         if (await uri){
           if (uri !== undefined){
-             newPlaylist.push({title: uri.name, artist: uri.artists[0].name, album: uri.album.name, uri: uri.uri});
-              return await uri.uri;
+            newPlaylist.push({title: uri.name, artist: uri.artists[0].name, album: uri.album.name, uri: uri.uri});
+            return await uri.uri;
           }
         }
       }));
@@ -155,10 +108,11 @@ export const getSpotifyURIs = (prompt) => {
         return JSON.stringify(obj1) === JSON.stringify(obj2);
       }
 
-      for (let i = 0; i < newPlaylist.length; i++) {
+      for (let i = 0; i < newPlaylist.length; i++){
         let isDuplicate = false;
-        for (let j = 0; j < uniqueArray.length; j++) {
-          if (areObjectsEqual(newPlaylist[i], uniqueArray[j])) {
+
+        for (let j = 0; j < uniqueArray.length; j++){
+          if (areObjectsEqual(newPlaylist[i], uniqueArray[j])){
             isDuplicate = true;
             break;
           }
@@ -173,28 +127,23 @@ export const getSpotifyURIs = (prompt) => {
       dispatch(savePrompt(prompt));
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error getting Spotify URIs! Please try your request again."});
+      dispatch({ type: 'SERVER_ERROR', payload: "Error getting Spotify URIs! Please try your request again." });
     }
   }
 }
-
 
 export const setSpotifyURIs = (prompt, playlist) => {
   return async (dispatch) => {
     try {
       const uriList = playlist.map(track => track.uri);
-
       prompt.uriList = uriList;
       dispatch(updatePrompt(prompt));
     } catch (error) {
       console.error(error);
-      dispatch({type: 'SERVER_ERROR', payload: "Error getting Spotify URIs! Please try your request again."});
+      dispatch({ type: 'SERVER_ERROR', payload: "Error getting Spotify URIs! Please try your request again." });
     }
   }
 }
-
-
-
 
 export const savePrompt = (prompt) => {
   return async (dispatch) => {
@@ -209,7 +158,7 @@ export const savePrompt = (prompt) => {
       dispatch(createPrompt(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: SERVER_ERROR, payload: "Error saving prompt! Please try your request again."});
+      dispatch({ type: SERVER_ERROR, payload: "Error saving prompt! Please try your request again." });
     }
   };
 };
@@ -222,7 +171,7 @@ export const update = (prompt) => {
       dispatch(updatePrompt(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: SERVER_ERROR, payload: "Error updating prompt! Please try your request again."});
+      dispatch({ type: SERVER_ERROR, payload: "Error updating prompt! Please try your request again." });
     }
   };
 };
@@ -239,7 +188,7 @@ export const getAllPrompts = () => {
       dispatch(setPrompt(response.data));
     } catch (error) {
       console.error(error);
-      dispatch({type: SERVER_ERROR, payload: "Error fetching all prompts! Please try your request again."});
+      dispatch({ type: SERVER_ERROR, payload: "Error fetching all prompts! Please try your request again." });
     }
   };
 };
