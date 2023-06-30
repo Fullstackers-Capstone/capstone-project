@@ -104,9 +104,9 @@ const PlDropdown = ({ pl }) => {
               <i className="fa-solid fa-circle-check fa-xs" style={{ marginLeft: '.15rem' }}></i>
             </li>
           ) : (
-            <li id='remove-pro' key='remove' onClick={ unlockPro }>
+            <div id='remove-pro' onClick={ unlockPro }>
               Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{ marginLeft: '.25rem' }}></i>)
-            </li>
+            </div>
           ) }
           </>
         )}

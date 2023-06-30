@@ -38,7 +38,7 @@ const NavBar = () => {
       <div className="dropdown-content">
 
         <div id='dropdown-about'>
-          <Link to="/about" onClick={ handleDropdownToggle }>About</Link>
+          <Link style={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }} to="/about" onClick={ handleDropdownToggle }>About</Link>
         </div>
 
         { auth.proUser ? (
