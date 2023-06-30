@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Turn as Hamburger } from 'hamburger-react'
-import { destroyPlaylist } from '../store';
+import { destroyPlaylist, fetchPlaylists } from '../store';
 
 const PlDropdown = ({ pl }) => {
 
@@ -46,6 +46,7 @@ const PlDropdown = ({ pl }) => {
 
   const destroy = (pl) => {
     dispatch(destroyPlaylist(pl))
+    dispatch(fetchPlaylists());
     navigate('/');
   }
     

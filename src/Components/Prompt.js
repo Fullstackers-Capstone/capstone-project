@@ -304,12 +304,12 @@ const Prompt = () => {
                                   <div className="playlist-item-info">
                                     <div className="playlist-item-row">
                                       <span className='playlist-item-artist'>
-                                        <span style={{ fontWeight: '600', color: 'white', marginRight: '.25rem' }}>
+                                        <span style={{ fontWeight: '600', color: 'white', marginRight: '.35rem' }}>
                                           { (index + 1) }.
-                                        </span> 
-                                        <span style={{ fontWeight: '500' }}>
-                                          { response.artist }
                                         </span>
+                                        <span style={{ fontWeight: '500', marginRight: '.25rem' }}>
+                                          { response.artist }
+                                        </span> -
                                       </span> 
                                       <span className='playlist-item-title'>
                                         { response.title }

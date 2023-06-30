@@ -1858,6 +1858,7 @@ header {
 .playlist-item-title {
   font-weight: 500;
   font-size: 12px;
+  margin-left: .15rem;
 }
 
 .playlist-item-artist {
