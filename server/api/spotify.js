@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
+
 
 // Map for localStorage keys. Helps us refer to keys for key/value pair of localstorage
 const LOCALSTORAGE_KEYS = {
@@ -9,6 +9,7 @@ const LOCALSTORAGE_KEYS = {
   timestamp: 'spotify_token_timestamp',
 };
 
+
 // Map to retrieve localStorage values
 const LOCALSTORAGE_VALUES = {
   accessToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.accessToken),
@@ -17,19 +18,25 @@ const LOCALSTORAGE_VALUES = {
   timestamp: window.localStorage.getItem(LOCALSTORAGE_KEYS.timestamp),
 };
 
+
 // Clear out all localStorage items we've set and reload the page
 export const logout = () => {
+
   // Clear all localStorage items
   for (const property in LOCALSTORAGE_KEYS) {
     window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
   }
+
   // Navigate to login page
   window.location = window.location.origin;
 };
 
+
 // Use the refresh token in localStorage to hit the /refresh_token endpoint in our Node app, then update values in localStorage with data from response.
+
 const refreshToken = async () => {
   try {
+
     // Logout if there's no refresh token stored or we've managed to get into a reload infinite loop
     if (
       !LOCALSTORAGE_VALUES.refreshToken ||
@@ -54,14 +61,17 @@ const refreshToken = async () => {
   }
 };
 
+
 // Checks if the amount of time that has elapsed between the timestamp in localStorage
 const hasTokenExpired = () => {
   const { accessToken, timestamp, expireTime } = LOCALSTORAGE_VALUES;
   if (!accessToken || !timestamp) {
     return false;
   }
+
   // and now is greater than the expiration time of 3600 seconds (1 hour).
   const millisecondsElapsed = Date.now() - Number(timestamp);
+
   // returns boolean Whether or not the access token in localStorage has expired
   return millisecondsElapsed / 1000 > Number(expireTime);
 };
@@ -90,12 +100,15 @@ const getAccessToken = () => {
 
   // If there is a token in the URL query params, the user is logging in for the first time
   if (queryParams[LOCALSTORAGE_KEYS.accessToken]) {
+
     // Store the query params in localStorage
     for (const property in queryParams) {
       window.localStorage.setItem(property, queryParams[property]);
     }
+
     // Set timestamp
     window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
+
     // Return access token from query params
     return queryParams[LOCALSTORAGE_KEYS.accessToken];
   }
@@ -104,8 +117,11 @@ const getAccessToken = () => {
   return false;
 };
 
+
 export const accessToken = getAccessToken();
 
+
+// Define headers associated with Spotify axios calls
 export const spotifyAxios = axios.create({
   baseURL: 'https://api.spotify.com/v1',
   timeout: 1000,
@@ -115,22 +131,28 @@ export const spotifyAxios = axios.create({
   },
 });
 
-// Get the current user's profile
+
+// Get current user's profile
 export const getCurrentUserProfile = () => spotifyAxios.get('/me');
 
+
+// Get any Spotify user's profile
 export const getAnyUserProfile = (user_id) => spotifyAxios.get(`/users/${user_id}`);
 
-// Get the current user's playlists
+
+// Get current user's playlists
 export const getCurrentUserPlaylists = (limit = 20) => {
   return spotifyAxios.get(`/me/playlists?limit=${limit}`);
 };
 
-// Get the user's top artists
+
+// Get user's top artists
 export const getTopArtists = (time_range = 'short_term') => {
   return spotifyAxios.get(`/me/top/artists?time_range=${time_range}`);
 };
 
 
+// Get user's top tracks
 export const getTopTracks = (time_range = 'short_term') => {
   return spotifyAxios.get(`/me/top/tracks?time_range=${time_range}`);
 };
@@ -147,6 +169,7 @@ export const searchFunctionality = async (searchKey) => {
         type: 'track',
       },
     });
+
     // https://api.spotify.com/v1/search?q=name:${encodeURIComponent(song.title)}album:${encodeURIComponent(song.album)}artist:${encodeURIComponent(song.artist)}&type=track`,
     //response is all the songs from spotify
 
@@ -164,8 +187,6 @@ export const searchFunctionality = async (searchKey) => {
 };
 
 
-
-
 // Get artist information
 export const getArtistInfo = async (artistID) => {
   try {
@@ -177,15 +198,18 @@ export const getArtistInfo = async (artistID) => {
   }
 };
 
+
 // Get a playlist by its ID
 export const getPlaylistById = (playlist_id) => {
   return spotifyAxios.get(`/playlists/${playlist_id}/`);
 };
 
+
 // Get tracks in a playlist
 export const getPlaylistTracks = (playlist_id) => {
   return spotifyAxios.get(`/playlists/${playlist_id}/tracks?limit=7`);
 };
+
 
 // Get audio features for tracks
 export const getAudioFeaturesForTracks = (ids) => {
@@ -193,40 +217,28 @@ export const getAudioFeaturesForTracks = (ids) => {
 };
 
 
-  export const createPlaylist = async ({userId, name, description}, prompt, discoverPlaylists) => {
-  try {
+export const createPlaylist = async ({userId, name, description}, prompt, discoverPlaylists) => {
+try {
+  const playlist = await spotifyAxios.post(`/users/${userId}/playlists`, {
+    name,
+    description
+  });
 
-    const playlist = await spotifyAxios.post(`/users/${userId}/playlists`, {
-      name,
-      description
-    });
- 
-    addTracksToPlaylist(playlist.data.id, prompt.uriList, description, discoverPlaylists)
+  addTracksToPlaylist(playlist.data.id, prompt.uriList, description, discoverPlaylists)
 
-
-
-
-    return playlist.data;
+  return playlist.data;
   } catch (error) {
     console.error(error);
     throw error;
   }
 };
 
+
 export const addTracksToPlaylist = async (playlistId, track_uris, description, discoverPlaylists) => {
   try {
     const response = await spotifyAxios.post(`/playlists/${playlistId}/tracks`, {
       uris: track_uris,
     });
-
-    // const newUserId = window.localStorage.getItem('newUserId');
-
-    // await axios.post('/api/playlists', {
-    //   spotId: playlistId,
-    //   prompt: description,
-    //   userId: newUserId,
-    //   isDiscoverable: discoverPlaylists
-    // });
 
     return response.data;
 
