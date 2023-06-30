@@ -84,11 +84,11 @@ const Profile = () => {
     return(
         <div id='content-body'>
 
-            <div id='pl-container' style={{marginTop: '2rem'}}>
+            <div id='pl-container' style={{ marginTop: '2rem' }}>
 
                 <div className='create-header' id='about-header'>
                     User 
-                    <span style={{color: 'white', marginLeft: '.5rem'}}>
+                    <span style={{ color: 'white', marginLeft: '.5rem' }}>
                         Profile
                     </span>
                 </div>
@@ -96,17 +96,17 @@ const Profile = () => {
 
                 <div className="about-steps-container">
 
-                    <div className="about-inner-container" style={{marginTop: 0}}>
+                    <div className="about-inner-container" style={{ marginTop: 0 }}>
                         <div className='prof-spot-user'>
                             <div className='prof-spot-img'>
-                                <img src={auth.image} />
+                                <img src={ auth.image } />
                             </div>
                             <div className='prof-spot-userId'>
                                 <a href={ `https://open.spotify.com/user/${ auth.spotifyId }` } target='_blank' title='Open in Spotify'>
                                     { auth.display_name.toUpperCase() } 
                                 </a>
                                 <div className={ `${ (pro === true) ? 'prof-unlock-pro' : 'prof-free' }` } title={ `${ (pro === true) ? 'Pro User' : 'Free User' }` }>
-                                    <i className="fa-solid fa-circle-check fa-xs" style={{marginLeft: '.15rem'}}></i>
+                                    <i className="fa-solid fa-circle-check fa-xs" style={{ marginLeft: '.25rem' }}></i>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@ const Profile = () => {
                                 </div>
                             </div>
 
-                            <div className="feature-header" id='info-header' style={{marginBottom: 0}}>
+                            <div className="feature-header" id='info-header' style={{ marginBottom: 0 }}>
                               <div className='step-num-title'>
                                 <span className='prof-title'>
                                     Account Status:
@@ -160,7 +160,7 @@ const Profile = () => {
                                         <span>
                                             <span className='prof-unlock-pro'>
                                                 Pro 
-                                                <i className="fa-solid fa-circle-check fa-xs" style={{ marginLeft: '.15rem' }}></i>
+                                                <i className="fa-solid fa-circle-check fa-xs" style={{ marginLeft: '.5rem' }}></i>
                                             </span> 
                                             <span className='cancelSub' onClick={ removeCheck }>
                                                 (cancel subcription)
@@ -172,7 +172,7 @@ const Profile = () => {
                                             (<span className='prof-unlock-pro'>
                                                 <Link to='/unlock-pro'>
                                                     Unlock Pro 
-                                                    <i className="fa-solid fa-lock fa-xs" style={{marginLeft: '.25rem'}}></i>
+                                                    <i className="fa-solid fa-lock fa-xs" style={{ marginLeft: '.5rem' }}></i>
                                                 </Link>
                                             </span>)
                                         </span> 

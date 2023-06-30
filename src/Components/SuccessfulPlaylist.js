@@ -96,10 +96,10 @@ const SuccessfulPlaylist = () => {
                         </span>
                         <span className='track-artist'>
                           { _track.track.artists[0].name }
-                        </span>-
-                        <span style={{ fontSize: '.75rem', marginLeft: '.35rem' }}>
+                        </span> -
+                        <span style={{ fontSize: '.75rem', marginLeft: '.5rem' }}>
                           { _track.track.name } 
-                          <span style={{ fontSize: '.7rem' }}>
+                          <span style={{ fontSize: '.7rem', marginLeft: '.35rem' }}>
                             ({ msConversion(_track.track.duration_ms) })
                           </span>
                         </span>

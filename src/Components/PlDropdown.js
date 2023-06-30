@@ -87,24 +87,24 @@ const PlDropdown = ({ pl }) => {
         <li key='spotOpen' style={{ padding: 0 }}>
           <a href={ `spotify:playlist:${ pl.spotId }` } onClick={ handleDropdownToggle }>
             Open in Spotify App 
-            <i className="fa-solid fa-arrow-up-right-from-square fa-xs" style={{ marginLeft: '.15rem' }}></i>
+            <i className="fa-solid fa-arrow-up-right-from-square fa-xs" style={{ marginLeft: '.5rem' }}></i>
           </a>
         </li>
 
         <li key='copyLink' onClick={ () => removeCheck('copier', `https://open.spotify.com/playlist/${ pl.spotId }`) }>
           Copy Link 
-          <i className="fa-solid fa-link fa-xs" style={{ marginLeft: '.15rem' }}></i>
+          <i className="fa-solid fa-link fa-xs" style={{ marginLeft: '.5rem' }}></i>
         </li>
 
         { auth.id === pl.userId && (
           <>
           { (pro) ? (
-            <li id='remove-pro' onClick={ () => removeCheck('destroyer') } key='remove'>
+            <div id='remove-pro' onClick={ () => removeCheck('destroyer') } key='remove'>
               Remove 
-              <i className="fa-solid fa-circle-check fa-xs" style={{ marginLeft: '.15rem' }}></i>
-            </li>
+              <i className="fa-solid fa-circle-check fa-xs" style={{ marginLeft: '.25rem' }}></i>
+            </div>
           ) : (
-            <div id='remove-pro' onClick={ unlockPro }>
+            <div id='remove-pro' onClick={ unlockPro } key='remove'>
               Remove (Pro <i className="fa-solid fa-lock fa-xs" style={{ marginLeft: '.25rem' }}></i>)
             </div>
           ) }
