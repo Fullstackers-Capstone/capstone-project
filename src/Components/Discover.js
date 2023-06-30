@@ -24,7 +24,6 @@ const MyPlaylists = () => {
     }
   }, [auth]);
 
-
   useEffect(() => {
     (async () => {
       try{
@@ -35,8 +34,8 @@ const MyPlaylists = () => {
           createdAt: response.createdAt,
           isDiscoverable: response.isDiscoverable,
           userId: response.userId,
-          id: response.spotId,
-          spotId: response.spotId //redundancy in place for PlDropdown
+          id: response.id,
+          spotId: response.spotId 
         })
         ));
 
@@ -92,9 +91,9 @@ const MyPlaylists = () => {
             { discoverablePlaylists.map(playlist => {
               return(
 
-                <div className='pl-thumb' key={ playlist.id }>
+                <div className='pl-thumb' key={ playlist.spotId }>
                   <div className='disc-thumb-name'>
-                      <a href={ `https://open.spotify.com/playlist/${ playlist.id }` } target='_blank' title='Open in Spotify'>
+                      <a href={ `https://open.spotify.com/playlist/${ playlist.spotId }` } target='_blank' title='Open in Spotify'>
                         { playlist.spotData.data.name }
                       </a>
                   </div>
@@ -102,7 +101,7 @@ const MyPlaylists = () => {
                   <div className='pl-thumb-data-container'>
 
                     <div className='pl-thumb-img' title='Open in Spotify'>
-                      <a href={ `https://open.spotify.com/playlist/${ playlist.id }` } target='_blank'>
+                      <a href={ `https://open.spotify.com/playlist/${ playlist.spotId }` } target='_blank'>
                         <img src={ imageHook(playlist.spotData.data.images[0].url) }/>
                       </a>
                     </div>
