@@ -104,6 +104,16 @@ header {
   margin-left: 0.5rem;
 }
 
+.requires-spotify{
+  display: block;
+  font-size: .65rem;
+  margin-top: 1rem;
+}
+
+.requires-spotify a:hover{
+  color: gold;
+}
+
 #spotify-logo{
   margin-left: .75rem;
   color: var(--spotifyGreen);
@@ -142,6 +152,7 @@ header {
 .login-container {
   bottom: -50;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
