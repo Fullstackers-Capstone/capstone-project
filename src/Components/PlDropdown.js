@@ -128,7 +128,7 @@ const PlDropdown = ({ pl }) => {
 
               <div className='userCheck-content'>
                 { (destroyer) && 'Are you sure you want to remove this playlist from your Serenade profile?' }
-                { (copier) && `https://open.spotify.com/playlist/${ pl.spotId }`};
+                { (copier) && `https://open.spotify.com/playlist/${ pl.spotId }`}
               </div>
 
               <div className='userCheck-buttons'> 

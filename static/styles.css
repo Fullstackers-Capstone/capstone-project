@@ -231,7 +231,7 @@ header {
 .prof-title{
   font-weight: 500;
   color: var(--spotifyGreen);
-  margin-right: .25rem;
+  margin-right: .4rem;
 }
 
 
@@ -251,7 +251,7 @@ header {
 }
 
 .prof-spot-img img{
-  width: 80px;
+  width: 64px;
   opacity: 90%;
   border-radius: 50px;
   box-shadow: 0 0 .5rem .5rem rgba(0, 0, 0, 0.15);
@@ -259,7 +259,7 @@ header {
 
 .prof-spot-userId{
   flex: 1;
-  margin-left: 1rem;
+  margin-left: 1.25rem;
   font-size: 2rem;
   text-shadow: 1px 1px 5px rgb(5, 5, 5);
   white-space: nowrap;
@@ -952,7 +952,7 @@ header {
 
 .track-artist{
   color: var(--spotifyGreen);
-  margin-right: .35rem;
+  margin-right: .15rem;
 }
 
 .prompt-title{
