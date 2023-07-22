@@ -115,7 +115,7 @@ const Profile = () => {
                                     <span className='prof-title'>
                                         Spotify User ID:
                                     </span> 
-                                    <span>
+                                    <span style={{ fontWeight: 300 }}>
                                         { auth.spotifyId }
                                     </span>
                                 </div>
@@ -126,7 +126,7 @@ const Profile = () => {
                                     <span className='prof-title'>
                                         Email:
                                     </span> 
-                                    <span>
+                                    <span style={{ fontWeight: 300 }}>
                                         { auth.email }
                                     </span>
                                 </div>
@@ -137,7 +137,7 @@ const Profile = () => {
                                     <span className='prof-title'>
                                         Serenade Playlist Count:
                                     </span> 
-                                    <span>
+                                    <span style={{ fontWeight: 300 }}>
                                         { authPlaylists.length }
                                     </span>
                                 </div>
@@ -151,7 +151,7 @@ const Profile = () => {
                                 <span>
                                     { (pro) ? 
                                         <span>
-                                            <span className='prof-unlock-pro'>
+                                            <span className='prof-unlock-pro' style={{ fontWeight: 300 }}>
                                                 Pro 
                                                 <i className="fa-solid fa-circle-check fa-xs" style={{ marginLeft: '.5rem' }}></i>
                                             </span> 
@@ -160,7 +160,7 @@ const Profile = () => {
                                             </span>
                                         </span> 
                                     : 
-                                        <span>
+                                        <span style={{ fontWeight: 300 }}>
                                             Free 
                                             (<span className='prof-unlock-pro'>
                                                 <Link to='/unlock-pro'>
