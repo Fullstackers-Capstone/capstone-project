@@ -36,7 +36,7 @@ export const createDbUser = (response) => {
         spotifyId: response.data.id,
         display_name: response.data.display_name,
         email: response.data.email,
-        image: response.data.images[0].url
+        image: response.data.images.at(-1).url
       })
     } catch (error) {
       console.error(error);
