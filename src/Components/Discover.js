@@ -80,6 +80,8 @@ const MyPlaylists = () => {
     return null;
   }
 
+  console.log('these are discoverable', discoverablePlaylists);
+
   return(
     <>
 
