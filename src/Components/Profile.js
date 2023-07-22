@@ -74,6 +74,8 @@ const Profile = () => {
         return null;
     }
 
+    console.log('authy image', auth.image)
+
     return(
         <div id='content-body'>
 
