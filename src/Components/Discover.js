@@ -159,7 +159,7 @@ const MyPlaylists = () => {
                         </div>
                       </div>
                       <div className='pl-thumb-user-img'>
-                        <img src={ playlist.userData.data.images[0].url } />
+                        <img src={ playlist.userData.data.images.at(-1).url } />
                       </div>
                     </div>
                   </div>
