@@ -1214,6 +1214,7 @@ header {
 
 .cancelSub{
   font-size: .65rem;
+  height: 100%;
 }
 
 .cancelSub:hover{
@@ -1988,8 +1989,10 @@ header {
   padding: 10px 20px;
   border-radius: 50px;
   cursor: pointer;
-  font-weight: bold;
-  margin-top: 20px;
+  font-weight: 600;
+  align-self: center;
+  justify-self: center;
+  margin: .25rem;
 }
 
 .modal-button:hover{
@@ -2059,6 +2062,23 @@ header {
   white-space: -pre-wrap; /* Opera 4-6 */    
   white-space: -o-pre-wrap; /* Opera 7 */    
   word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+.loginCheck-content{
+  margin-bottom: 1rem;
+  font-size: .9rem;
+}
+
+.loginCheck-copied {
+  background: #999999;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  align-self: center;
+  justify-self: center;
+  margin: .25rem;
 }
 
 /* Error modal styling end */
@@ -2617,6 +2637,7 @@ header {
 
 #info-header{
   font-size: 1rem;
+  align-items: center;
 }
 
 .info-icon {
@@ -2824,10 +2845,10 @@ header {
   margin-bottom: 10px;
 }
 
-.step:hover{
+/* .step:hover{
   border: 1px solid var(--spotifyGreen);
   cursor: default;
-}
+} */
 
 .step-number{
   color: var(--spotifyGreen);
@@ -3133,11 +3154,6 @@ header {
   .step h3 {
     color: var(--spotifyGreen);
     margin-bottom: 10px;
-  }
-  
-  .step:hover{
-    border: 1px solid var(--spotifyGreen);
-    cursor: default;
   }
   
   .step-num-title{
@@ -3591,6 +3607,11 @@ header {
   #info-header{
     font-size: .9rem;
   }
+
+  .loginCheck-content{
+    margin-bottom: 1rem;
+    font-size: .8rem;
+  }
   
 }
 
@@ -3771,6 +3792,14 @@ header {
 
   .playlist-header{
     width: 150px;
+  }
+  
+}
+
+@media screen and (max-width: 370px) {
+
+  .modal-button, .removeCheck-cancel-button, .loginCheck-content{
+    font-size: .7rem;
   }
   
 }
