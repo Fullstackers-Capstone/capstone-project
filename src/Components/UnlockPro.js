@@ -92,7 +92,7 @@ const UnlockPro = () => {
             </h3>
             <span className='pl-type-desc'>
               Break out from Dark Mode. 
-              <span style={{color: '#777777', fontSize: '.75rem'}}>
+              <span style={{color: '#777777', fontSize: '.75rem', fontStyle: 'italic', marginLeft: '.35rem'}}>
                 (Future Development)
               </span>
             </span>
@@ -104,7 +104,7 @@ const UnlockPro = () => {
             </h3>
             <span className='pl-type-desc'>
               pecially developed to improve AI model accuracy. 
-              <span style={{color: '#777777', fontSize: '.75rem'}}>
+              <span style={{color: '#777777', fontSize: '.75rem', fontStyle: 'italic', marginLeft: '.35rem'}}>
                 (Future Development)
               </span>
             </span>
