@@ -2,6 +2,7 @@ import React from "react";
 import GetStarted from "./GetStarted";
 
 const LandingPage = () => {
+
   return (
     <>
 
@@ -14,7 +15,7 @@ const LandingPage = () => {
                 Create
               </span>
               <span className='amazing-only'>
-                Amazing <span style={{ color: 'white' }}>,</span>
+                Amazing<span style={{ color: 'white' }}>,</span>
               </span>
               <span className='ai-generated-playlists'>
                 <span className='ai-generated-only'>
@@ -39,7 +40,7 @@ const LandingPage = () => {
 
           <section className="how-it-works-section">
             <div className="how-it-works"> 
-              <i className="fa-solid fa-gears" style={{ color: 'gold' }}></i> 
+              <i className="fa-solid fa-gears" style={{ color: 'gold', marginRight: '.75rem' }}></i> 
               How It Works
             </div>
 
