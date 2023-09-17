@@ -56,7 +56,7 @@ const GetStarted = () => {
 
                 <div className='loginCheck-content' style={{ marginBottom: '.15rem'}}><span style={{ fontWeight: 600, color: 'gold'}}>Email:</span> serenader@fastmail.com</div>
 
-                <div className='loginCheck-content' style={{ marginBottom: '1.5rem' }}><span style={{ fontWeight: 600, color: 'gold' }}>Password:</span> serenade</div>
+                <div className='loginCheck-content' style={{ marginBottom: '1.5rem' }}><span style={{ fontWeight: 600, color: 'gold' }}>Password:</span> serenader</div>
             </div>
 
             <div className='userCheck-buttons'> 
